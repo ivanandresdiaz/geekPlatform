@@ -4,7 +4,7 @@ const initialState = {
   'users': [
     {
       'name': 'administrador',
-      'password': 'administrador1',
+      'password': '1',
     },
   ],
   'activeUser': { 'name': '', 'password': '', 'active': false },
