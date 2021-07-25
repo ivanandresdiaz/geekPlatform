@@ -6,7 +6,7 @@ const LandingPage = () => {
     <div>
       <h1>LandingPage</h1>
       <p>Proximante estara disponible</p>
-      <Link to='/login'>
+      <Link to='/auth/login'>
         <button type='button'>Iniciar sesion</button>
       </Link>
 

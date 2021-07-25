@@ -5,8 +5,8 @@ import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
 import { firebase } from '../firebase/firebaseConfig';
 import { login } from '../actions/authActions';
 import { AuthRouter } from './AuthRouter';
-import { PrivateRoute } from './PrivateRouter';
-import { PublicRoute } from './PublicRouter';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 import PanelAdministrador from '../containers/PanelAdministrador/PanelAdministrador';
 import bancoRecursosAcademicos from '../containers/BancoRecursosAcademicos/BancoRecursosAcademicos';
 import Login from '../containers/Login/Login';
@@ -17,14 +17,14 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      if (user?.uid) {
+      if (user) {
         console.log(user.displayName);
         dispatch(login(user.uid, user.displayName));
         console.log('si hay usuarios');
         setIsLoggedIn(true);
-        console.log('logged', isLoggedIn);
+        console.log('logged de si hay', isLoggedIn);
       } else {
-        console.log('logged', isLoggedIn);
+        console.log('logged no hay', isLoggedIn);
         setIsLoggedIn(false);
 
       }
@@ -35,7 +35,18 @@ const App = () => {
     <BrowserRouter>
       <div>
         <Switch>
+          {/* <Route
+            exact
+            path='/auth/landingPage'
+            component={LandingPage}
+          />
+          <Route
+            exact
+            path='/auth/login'
+            component={Login}
+          />
 
+          <Redirect to='/auth/landingPage' /> */}
           <PublicRoute
             path='/auth'
             component={AuthRouter}
