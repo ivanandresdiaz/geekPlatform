@@ -4,7 +4,6 @@ import { types } from '../types';
 const initialState = {
   uid: '',
   name: '',
-
 };
 
 export const loggedReducer = (state = initialState, action) => {
