@@ -14,6 +14,7 @@ export const getActionBancoRecursos = () => (dispatch) => {
 
 export const addRecursoAction = (category, description, url) => async (dispatch, getState) => {
   try {
+    const recommendedBy = getState().logged.name;
     const nuevoRecurso = {
       category,
       description,
@@ -22,7 +23,7 @@ export const addRecursoAction = (category, description, url) => async (dispatch,
       recommendedBy,
       fecha: firebase.firestore.FieldValue.serverTimestamp(),
     };
-    const recommendedBy = getState().logged.name;
+
     const agregado = await db.collection('bancoRecursosAcademicos').add(nuevoRecurso);
     if (agregado) {
       alert('se ha agregado con exito');

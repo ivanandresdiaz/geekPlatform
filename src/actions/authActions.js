@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { types } from '../types';
-import { firebase, googleAuthProvider } from '../firebase/firebaseConfig';
+import { firebase, googleAuthProvider, db } from '../firebase/firebaseConfig';
 
 export const login = (uid, displayName) => {
   return {
@@ -50,17 +50,51 @@ export const singOutAuth = () => async (dispatch) => {
   dispatch(logout());
 };
 
-export const registerWithEmailPassword = (email, password, name) => async (dispatch) => {
-  try {
-    const autenticando = await firebase.auth().createUserWithEmailAndPassword(email, password);
-    const { user } = autenticando;
-    await user.updateProfile({ displayName: name });
-    dispatch(login(user.uid, user.displayName));
-    alert('te has registrado con exito');
-  } catch (error) {
-    if (error.code === 'auth/email-already-in-use') {
-      alert('este correo ya esta registrado, vuelve al login o solicita cambio de contraseña');
+export const registerWithEmailPasswordTeacher = (username, email, name, password) => async (dispatch) => {
+  const userCredentials = {
+    username,
+    email,
+    name,
+    password,
+    imageUrl: '',
+    bio: 'escriba su presentacion',
+    website: '',
+    location: '',
+    whatsapp: '',
+    skills: [],
+    github: '',
+    facebook: '',
+    twitter: '',
+    instagram: '',
+    linkedin: '',
+    personalizedTutorials: [],
+    sprintsToScore: [],
+    codelingoChallegencesToScore: [],
+    academicResourcesToScore: [],
+    role: 'teacher',
+    active: 'true',
+  };
+  db.doc(`/teachers/${username}`).get().then((doc) => {
+    if (doc.exists) {
+      alert(`este usuario ${username} ya existe, intentente de con otro `);
+    } else {
+      return firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
     }
-    console.log('error con correo registro', error);
-  }
+  }).then(() => {
+    return db.doc(`/teachers/${username}`).set(userCredentials);
+  })
+    .then(() => {
+      return user.updateProfile({ displayName: name });
+    })
+    .then(() => {
+      alert('te has registrado con exito');
+    })
+    .catch((error) => {
+      if (error.code === 'auth/email-already-in-use') {
+        alert('este correo ya esta registrado');
+      }
+      console.log('error con correo registro', error.message);
+    });
 };

@@ -8,6 +8,7 @@ import { AuthRouter } from './AuthRouter';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import bancoRecursos from '../containers/BancoRecursos/BancoRecursos';
+import Home from '../containers/Home/Home';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const App = () => {
           <PrivateRoute
             exact
             path='/'
-            component={bancoRecursos}
+            component={Home}
             isAuthenticated={isLoggedIn}
           />
           <Redirect to='/auth/landingPage' />

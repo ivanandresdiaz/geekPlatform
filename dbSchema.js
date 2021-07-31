@@ -43,6 +43,7 @@ const db = {
       graduated: 'false',
       tutorialsRequired: [],
       codelingoChallengesDone: [],
+      role: 'student',
       corteId: 'asdffadsf', // Tipo de cortes
     },
   ],
@@ -93,6 +94,7 @@ const db = {
       sprintsToScore: [], //
       codelingoChallegencesToScore: [],
       academicResourcesToScore: [],
+      role: 'teacher',
       active: 'true', // activo o desertado
     },
   ],
@@ -220,19 +222,24 @@ const db = {
   academicResourcesBank: [
     //las funciones del banco de recursos academicos son:
     {
-      postId: 'asdfasdf', //poder eliminar, agregar y sugerir que se elimine determinado comentario
-      category: 'api', //clasificar por categoria
-      title: 'title', //titulo el cual debe ser especifico para el buscador
-      link: '', //link
-      format: 'video', //para clasificar y saber de antemano que tipo de link, y utilizar en el buscador
-      level: 'basic|| intermediate|| advanced', //Permite tener recursos para todo tipo estudiante y clasificar en su busqueda
-      english: 'false', //permite clasificar por idioma
-      description: 'This is a sample scream', //permite espeficar un poco mas el link
-      recommendedBy: 'user3', //permite mostrar el nombre de quien recomendo
-      userId: 'useradsfasd23', //permite sumar geekypuntos al ponente
-      createdAt: '2019-03-15T10:59:52.798Z', //permite clasificar recursos por mas nuevos
-      score: 5, //votar y calificar el recursos.votar mejores recursos por medio de estrellas de 1 a 5
-      active: true, //leer solo los recursos autorizados y ver cuales estan pendientes
+      categoryId: 'asdfasdf',
+      resources: [
+        {
+          postId: 'asdfasdf', //poder eliminar, agregar y sugerir que se elimine determinado comentario
+          category: 'api', //clasificar por categoria
+          title: 'title', //titulo el cual debe ser especifico para el buscador
+          link: '', //link
+          format: 'video', //para clasificar y saber de antemano que tipo de link, y utilizar en el buscador
+          level: 'basic|| intermediate|| advanced', //Permite tener recursos para todo tipo estudiante y clasificar en su busqueda
+          english: 'false', //permite clasificar por idioma
+          description: 'This is a sample scream', //permite espeficar un poco mas el link
+          recommendedBy: 'user3', //permite mostrar el nombre de quien recomendo
+          userId: 'useradsfasd23', //permite sumar geekypuntos al ponente
+          createdAt: '2019-03-15T10:59:52.798Z', //permite clasificar recursos por mas nuevos
+          score: 5, //votar y calificar el recursos.votar mejores recursos por medio de estrellas de 1 a 5
+          active: true, //leer solo los recursos autorizados y ver cuales estan pendientes
+        },
+      ],
     },
 
   ],
@@ -247,6 +254,7 @@ const db = {
       bio: 'Hello, my name is user, nice to meet you', // breve presentacion no mayor a 150 caracteres
       whatsapp: '3214866178', // opcional
       linkedin: '', //opcional
+      role: 'admin',
     },
   ],
 };
