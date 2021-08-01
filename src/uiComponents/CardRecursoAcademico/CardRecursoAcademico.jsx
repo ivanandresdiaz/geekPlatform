@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteRecursoAction } from '../../actions/storageBancoRecursosActions';
+import { deleteRecursoAction } from '../../actions/bancoRecursosActions';
 import { DivContainerCardRecurso } from './styledCardRecursoAcademico';
 
 const CardRecursoAcademico = (props) => {

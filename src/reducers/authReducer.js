@@ -6,7 +6,7 @@ const initialState = {
   name: '',
 };
 
-export const loggedReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.login:
       return {
@@ -21,4 +21,4 @@ export const loggedReducer = (state = initialState, action) => {
   }
 };
 
-export const getName = (state) => state.logged.name;
+export const getName = (state) => state.auth.name;

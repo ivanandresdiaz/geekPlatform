@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { listarTeachers } from '../../actions/listarActions';
-import { getListTeachers } from '../../reducers/storageTeachersReducer';
+import { listarTeachers } from '../../actions/teachersActions';
+import { getTeachers } from '../../reducers/teachersReducer';
 
 const ListarTeachers = () => {
   const dispatch = useDispatch();
-  const listTeachers = useSelector(getListTeachers);
+  const teachers = useSelector(getTeachers);
   useEffect(() => {
-    if (listTeachers.length > 0) {
+    if (teachers.length > 0) {
     } else {
       dispatch(listarTeachers());
     }
@@ -16,7 +16,7 @@ const ListarTeachers = () => {
     <div>
       <h1>Profesores</h1>
       <div>
-        {listTeachers.length > 0 && listTeachers.map((teacher) => <p key={teacher.username}>{teacher.name}</p>)}
+        {teachers.length > 0 && teachers.map((teacher) => <p key={teacher.username}>{teacher.name}</p>)}
       </div>
 
     </div>

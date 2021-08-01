@@ -2,10 +2,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
-import { getName } from '../../reducers/loggeReducer';
+import { getName } from '../../reducers/authReducer';
 import { singOutAuth } from '../../actions/authActions';
-import { getActionBancoRecursos, addRecursoAction } from '../../actions/storageBancoRecursosActions';
-import { getBancoRecursos } from '../../reducers/storageBancoRecursosReducer';
+import { getActionBancoRecursos, addRecursoAction } from '../../actions/bancoRecursosActions';
+import { getBancoRecursos } from '../../reducers/bancoRecursosReducer';
 import CardRecursoAcademico from '../../uiComponents/CardRecursoAcademico/CardRecursoAcademico';
 import { DivContainerRecursos } from './styledBancoRecursos';
 

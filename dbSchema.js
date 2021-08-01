@@ -43,6 +43,7 @@ const db = {
       graduated: 'false',
       tutorialsRequired: [],
       codelingoChallengesDone: [],
+      wakatime: [],
       role: 'student',
       corteId: 'asdffadsf', // Tipo de cortes
     },
@@ -126,7 +127,7 @@ const db = {
     },
   ],
   //Salones
-  salones: [
+  classrooms: [
     // las funciones como
     {
       salonId: '',
