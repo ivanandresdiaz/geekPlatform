@@ -42,7 +42,7 @@ service cloud.firestore{
        &&isAdminUser(request.resource.data))
        || (getRoleForUser(request.auth.uid)== 'admin'
        && request.auth.uid =! userId
-       && isUser(request.resource)
+       && isUser(request.resource.data)
        )
        )
       }

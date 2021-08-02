@@ -72,7 +72,7 @@ export const registerWithEmailPasswordTeacher = (username, email, name, password
     codelingoChallegencesToScore: [],
     academicResourcesToScore: [],
     role: 'teacher',
-    active: 'true',
+    active: false,
   };
   db.doc(`/teachers/${username}`).get().then((doc) => {
     if (doc.exists) {
@@ -82,11 +82,12 @@ export const registerWithEmailPasswordTeacher = (username, email, name, password
         .auth()
         .createUserWithEmailAndPassword(email, password);
     }
-  }).then(() => {
-    return db.doc(`/teachers/${username}`).set(userCredentials);
   })
+    .then((result) => {
+      result.user.updateProfile({ displayName: name });
+    })
     .then(() => {
-      return user.updateProfile({ displayName: name });
+      db.doc(`/teachers/${username}`).set(userCredentials);
     })
     .then(() => {
       alert('te has registrado con exito');
