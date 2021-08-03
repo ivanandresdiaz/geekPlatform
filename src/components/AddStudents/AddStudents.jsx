@@ -60,7 +60,7 @@ const AddStudents = () => {
           onChange={handleInputChange}
           required
         />
-        <button type='submit'>Añadir nuevo Administradorr</button>
+        <button type='submit'>Añadir Nuevo Administradorr</button>
       </form>
 
     </div>
