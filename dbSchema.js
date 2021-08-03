@@ -4,7 +4,7 @@ const db = {
     {
       userId: 'dh23ggj5h32g543j5gf43', // muchas cosas
       email: 'user@email.com', //login
-      username: 'user', //muchas cosas
+      fullName: 'user', //muchas cosas
       password: '', //
       imageUrl: 'image/dsfsdkfghskdfgs/dgfdhfgdh', // foto de perfil
       bio: 'Hello, my name is user, nice to meet you', // breve presentacion no mayor a 150 caracteres
@@ -55,7 +55,7 @@ const db = {
       imageUrl: '', // opcional si el recursos lo permite
       category: 'memes', // clasificar el newsFeed
       description: 'Mira esta libreria fantastica para manejar el estado', //
-      username: 'user', // mostrar quien lo hizo
+      fullName: 'user', // mostrar quien lo hizo
       userId: 'user123', //poder adicionar geekypuntos
       link: '', //opcional
       createdAt: '2019-03-15T10:59:52.798Z', // es mejor tenerlo
@@ -65,7 +65,7 @@ const db = {
   ],
   comments: [
     {
-      username: 'user',
+      fullName: 'user',
       userId: 'usesdfr',
       postId: 'kdjsfgdksuufhgkdsufky', //poder asignar el comentario al post correcto
       comment: 'nice one mate!', //comentario
@@ -78,7 +78,7 @@ const db = {
     {
       userId: 'dh23ggj5h32g543j5gf43', // muchas cosas
       email: 'user@email.com', //login
-      username: 'user', //muchas cosas
+      fullName: 'user', //muchas cosas
       password: '', //
       imageUrl: 'image/dsfsdkfghskdfgs/dgfdhfgdh', // foto de perfil
       bio: 'Hello, my name is user, nice to meet you', // breve presentacion no mayor a 150 caracteres
@@ -136,7 +136,7 @@ const db = {
         {
           userId: 'dh23ggj5h32g543j5gf43', // muchas cosas
           email: 'user@email.com', //login
-          username: 'user', //muchas cosas
+          fullName: 'user', //muchas cosas
           imageUrl: 'image/dsfsdkfghskdfgs/dgfdhfgdh', // foto de perfil
           whatsapp: '3214866178', // opcional
           active: 'true', // activo o desertado
@@ -249,7 +249,7 @@ const db = {
     {
       userId: 'dh23ggj5h32g543j5gf43', // muchas cosas
       email: 'user@email.com', //login
-      username: 'user', //muchas cosas
+      fullName: 'user', //muchas cosas
       password: '', //
       imageUrl: 'image/dsfsdkfghskdfgs/dgfdhfgdh', // foto de perfil
       bio: 'Hello, my name is user, nice to meet you', // breve presentacion no mayor a 150 caracteres

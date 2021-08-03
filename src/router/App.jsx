@@ -17,6 +17,9 @@ const App = () => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log(user.displayName);
+        user.getIdTokenResult().then((idTokenResult) => {
+          console.log(idTokenResult.claims);
+        });
         dispatch(login(user.uid, user.displayName));
         setIsLoggedIn(true);
       } else {

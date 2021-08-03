@@ -3,21 +3,25 @@ import { useDispatch } from 'react-redux';
 import { registerNewAdmin } from '../../actions/authActions';
 import useForm from '../../hooks/useForm';
 
-const AddTeachers = () => {
+const AddAdmin = () => {
   const dispatch = useDispatch();
   const [formValues, handleInputChange, reset] = useForm({
     email: '',
-    username: '',
-    name: '',
+    fullName: '',
     password: '',
     confirmPassword: '',
   });
-  const { username, email, name, password, confirmPassword } = formValues;
+  const { email, fullName, password, confirmPassword } = formValues;
   const handleSubmit = (evento) => {
     evento.preventDefault();
     if (formValues.password === formValues.confirmPassword) {
-      console.log(formValues);
-      dispatch(registerNewAdmin(username, email, name, password));
+      const newAdmin = {
+        email: formValues.email,
+        fullName: formValues.fullName,
+        password: formValues.password,
+      };
+      dispatch(registerNewAdmin(email, password, fullName));
+      reset();
     }
 
   };
@@ -26,17 +30,9 @@ const AddTeachers = () => {
       <form onSubmit={handleSubmit}>
         <input
           type='text'
-          placeholder='nombre de usuario unico'
-          name='username'
-          value={username}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          type='text'
-          placeholder='nombre completo del docente'
-          name='name'
-          value={name}
+          placeholder='nombre completo'
+          name='fullName'
+          value={fullName}
           onChange={handleInputChange}
           required
         />
@@ -64,11 +60,11 @@ const AddTeachers = () => {
           onChange={handleInputChange}
           required
         />
-        <button type='submit'>Añadir nuevo Profesor</button>
+        <button type='submit'>Añadir nuevo Administradorr</button>
       </form>
 
     </div>
   );
 };
 
-export default AddTeachers;
+export default AddAdmin;

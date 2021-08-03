@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import AddTeachers from '../../components/AddTeachers/AddTeachers';
 import ListarTeachers from '../../uiComponents/ListarTeachers/ListarTeachers';
 import Header from '../../uiComponents/Header/Header';
 import { singOutAuth } from '../../actions/authActions';
+import AddAdmin from '../../components/AddAdmin/AddAdmin';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const Home = () => {
     <div>
       <Header />
       <button type='button' onClick={handleCerrarSesion}>Cerrar Sesion</button>
-      <AddTeachers />
+      <AddAdmin />
       <ListarTeachers />
     </div>
   );

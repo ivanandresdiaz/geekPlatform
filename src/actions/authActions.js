@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { types } from '../types';
-import { firebase, googleAuthProvider, db } from '../firebase/firebaseConfig';
+import { firebase, googleAuthProvider, db, functions } from '../firebase/firebaseConfig';
 
 export const login = (uid, displayName) => {
   return {
@@ -98,4 +98,14 @@ export const registerWithEmailPasswordTeacher = (username, email, name, password
       }
       console.log('error con correo registro', error.message);
     });
+};
+
+export const registerNewAdmin = (email, password, fullName) => async (dispatch) => {
+  console.log('entro a nuevo register Admin');
+  const addAdminRole = functions.httpsCallable('addAdminRole');
+  addAdminRole({ email, password, fullName })
+    .then((res) => {
+      console.log('exito', res);
+    }).catch((err) => console.log(err));
+
 };

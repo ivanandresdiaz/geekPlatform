@@ -43,16 +43,6 @@ const Login = (props) => {
           </label>
           <button type='submit'>Ingresar</button>
         </form>
-        <div onClick={handleLoginGoogle}>
-          <FcGoogle size='4rem' />
-          {' '}
-          Ingresa con Google
-        </div>
-
-        <Link to='/auth/register'>
-          Registrate con Correo
-          <FcInvite size='4rem' />
-        </Link>
       </ContainerLogin>
     </DivContainerLogin>
 
