@@ -1,3 +1,4 @@
+//aqui se manejan todos los actions que tenga que ver con el banco de recursos
 import { db, firebase } from '../firebase/firebaseConfig';
 import { types } from '../types';
 

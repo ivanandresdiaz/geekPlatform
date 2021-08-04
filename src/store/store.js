@@ -3,6 +3,8 @@ import reduxThunk from 'redux-thunk';
 import { authReducer } from '../reducers/authReducer';
 import { teachersReducer } from '../reducers/teachersReducer';
 import { bancoRecursosReducer } from '../reducers/bancoRecursosReducer';
+import { adminReducer } from '../reducers/adminReducer';
+import { studentsReducer } from '../reducers/studentsReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -10,6 +12,8 @@ const reducers = combineReducers({
   auth: authReducer,
   bancoRecursos: bancoRecursosReducer,
   teachers: teachersReducer,
+  admin: adminReducer,
+  students: studentsReducer,
 });
 
 const store = createStore(

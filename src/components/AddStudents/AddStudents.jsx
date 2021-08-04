@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { registerNewAdmin } from '../../actions/authActions';
+import { registerNewStudent } from '../../actions/authActions';
 import useForm from '../../hooks/useForm';
 
-const AddStudents = () => {
+const AddStudents = (props) => {
+  const { corteId } = props;
   const dispatch = useDispatch();
   const [formValues, handleInputChange, reset] = useForm({
     email: '',
@@ -15,15 +16,9 @@ const AddStudents = () => {
   const handleSubmit = (evento) => {
     evento.preventDefault();
     if (formValues.password === formValues.confirmPassword) {
-      const newAdmin = {
-        email: formValues.email,
-        fullName: formValues.fullName,
-        password: formValues.password,
-      };
-      dispatch(registerNewAdmin(email, password, fullName));
+      dispatch(registerNewStudent(email, password, fullName, corteId));
       reset();
     }
-
   };
   return (
     <div>
@@ -60,7 +55,7 @@ const AddStudents = () => {
           onChange={handleInputChange}
           required
         />
-        <button type='submit'>Añadir Nuevo Administradorr</button>
+        <button type='submit'>Añadir Nuevo Estudiante</button>
       </form>
 
     </div>

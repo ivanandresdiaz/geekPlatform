@@ -15,11 +15,6 @@ const AddAdmin = () => {
   const handleSubmit = (evento) => {
     evento.preventDefault();
     if (formValues.password === formValues.confirmPassword) {
-      const newAdmin = {
-        email: formValues.email,
-        fullName: formValues.fullName,
-        password: formValues.password,
-      };
       dispatch(registerNewAdmin(email, password, fullName));
       reset();
     }

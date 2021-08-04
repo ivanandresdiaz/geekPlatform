@@ -126,6 +126,18 @@ const db = {
       ],
     },
   ],
+  //cortes
+  cortes: [],
+  //Corte
+  corte: {
+    corteId: '',
+    corteName: 'siglo XXl',
+    createBy: '',
+    students: [],
+    assignedTeachers: [],
+    active: true,
+  },
+  //Corte
   //Salones
   classrooms: [
     // las funciones como

@@ -12,11 +12,12 @@ const ListarTeachers = () => {
       dispatch(listarTeachers());
     }
   }, []);
+  console.log(teachers);
   return (
     <div>
       <h1>Profesores</h1>
       <div>
-        {teachers.length > 0 && teachers.map((teacher) => <p key={teacher.username}>{teacher.name}</p>)}
+        {teachers.length > 0 && teachers.map((teacher) => <p key={teacher.uid}>{teacher.fullName}</p>)}
       </div>
 
     </div>
