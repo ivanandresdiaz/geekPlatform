@@ -69,7 +69,7 @@ const ListAliance = styled.ul`
   padding: 0px 20px;
 `;
 
-const ListItem = styled.a`
+const ListItem = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 14px;

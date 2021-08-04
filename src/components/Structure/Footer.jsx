@@ -60,12 +60,12 @@ const Footer = () => {
                         <FooterSubText>
                             Acerca de
                             <List>
-                                <ListItem href='https://academiageek.co/inicio/' target="blank" aria-label="Compañia">Compañia</ListItem>
-                                <ListItem href='https://academiageek.co/admisiones/' target="blank" aria-label="Admisiones">Admisiones</ListItem>
-                                <ListItem href='https://academiageek.co/becas/' target="blank" aria-label="Becas">Becas</ListItem>
-                                <ListItem href='https://academiageek.co/para-empresas/' target="blank" aria-label="Para empresas">Para empresas</ListItem>
-                                <ListItem href='https://academiageek.co/contacto/' target="blank" aria-label="Compañia">Contacto</ListItem>
-                                <ListItem href='https://academiageek.co/entrenamientos/' target="blank" aria-label="Compañia">Entrenamientos</ListItem>
+                                <ListItem> <a href='https://academiageek.co/inicio/' target="blank" aria-label="Compañia">Compañia</a></ListItem>
+                                <ListItem> <a href='https://academiageek.co/admisiones/' target="blank" aria-label="Admisiones">Admisiones</a></ListItem>
+                                <ListItem> <a href='https://academiageek.co/becas/' target="blank" aria-label="Becas">Becas</a></ListItem>
+                                <ListItem> <a href='https://academiageek.co/para-empresas/' target="blank" aria-label="Para empresas">Para empresas</a></ListItem>
+                                <ListItem> <a href='https://academiageek.co/contacto/' target="blank" aria-label="Compañia">Contacto</a></ListItem>
+                                <ListItem> <a href='https://academiageek.co/entrenamientos/' target="blank" aria-label="Compañia">Entrenamientos</a></ListItem>
                             </List>
                         </FooterSubText>
                     </FooterSubHeading>
@@ -109,7 +109,7 @@ const Footer = () => {
                 <SocialMedia>
                     <WebsiteRights>Copyright @ 2021, Equipo Dinamita, todos los derechos reservados. </WebsiteRights>
                 </SocialMedia>
-            </FooterContainer>
+            </FooterContainer >
         </>
     )
 }
