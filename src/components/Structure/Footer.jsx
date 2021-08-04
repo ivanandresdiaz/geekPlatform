@@ -59,12 +59,30 @@ const Footer = () => {
             <FooterSubText>
               Acerca de
               <List>
-                <ListItem href='https://academiageek.co/inicio/' target='blank' aria-label='Compañia'>Compañia</ListItem>
-                <ListItem href='https://academiageek.co/admisiones/' target='blank' aria-label='Admisiones'>Admisiones</ListItem>
-                <ListItem href='https://academiageek.co/becas/' target='blank' aria-label='Becas'>Becas</ListItem>
-                <ListItem href='https://academiageek.co/para-empresas/' target='blank' aria-label='Para empresas'>Para empresas</ListItem>
-                <ListItem href='https://academiageek.co/contacto/' target='blank' aria-label='Compañia'>Contacto</ListItem>
-                <ListItem href='https://academiageek.co/entrenamientos/' target='blank' aria-label='Compañia'>Entrenamientos</ListItem>
+                <ListItem>
+                  {' '}
+                  <a href='https://academiageek.co/inicio/' target='blank' aria-label='Compañia'>Compañia</a>
+                </ListItem>
+                <ListItem>
+                  {' '}
+                  <a href='https://academiageek.co/admisiones/' target='blank' aria-label='Admisiones'>Admisiones</a>
+                </ListItem>
+                <ListItem>
+                  {' '}
+                  <a href='https://academiageek.co/becas/' target='blank' aria-label='Becas'>Becas</a>
+                </ListItem>
+                <ListItem>
+                  {' '}
+                  <a href='https://academiageek.co/para-empresas/' target='blank' aria-label='Para empresas'>Para empresas</a>
+                </ListItem>
+                <ListItem>
+                  {' '}
+                  <a href='https://academiageek.co/contacto/' target='blank' aria-label='Compañia'>Contacto</a>
+                </ListItem>
+                <ListItem>
+                  {' '}
+                  <a href='https://academiageek.co/entrenamientos/' target='blank' aria-label='Compañia'>Entrenamientos</a>
+                </ListItem>
               </List>
             </FooterSubText>
           </FooterSubHeading>
@@ -83,24 +101,24 @@ const Footer = () => {
               Nuestros socios
               <ListAliance>
                 <ListItem>
-                  <div href='https://agileinnova.org/' target='blank' aria-label='AgileInnova'>
-                    <img src={aliance1} alt='' />
-                  </div>
+                  <a href='https://agileinnova.org/' target='blank' aria-label='AgileInnova'>
+                    <img src={aliance1} />
+                  </a>
                 </ListItem>
                 <ListItem>
-                  <div href='https://academiageek.co/' target='blank' aria-label='Academia Geek'>
-                    <img src={aliance2} alt='' />
-                  </div>
+                  <a href='https://academiageek.co/' target='blank' aria-label='Academia Geek'>
+                    <img src={aliance2} />
+                  </a>
                 </ListItem>
                 <ListItem>
-                  <div href='https://e-volution.co/es/' target='blank' aria-label='E_volution'>
-                    <img src={aliance3} alt='' />
-                  </div>
+                  <a href='https://e-volution.co/es/' target='blank' aria-label='E_volution'>
+                    <img src={aliance3} />
+                  </a>
                 </ListItem>
                 <ListItem>
-                  <div href='https://makaia.org/' target='blank' aria-label='Makaia'>
-                    <img src={aliance4} alt='' />
-                  </div>
+                  <a href='https://makaia.org/' target='blank' aria-label='Makaia'>
+                    <img src={aliance4} />
+                  </a>
                 </ListItem>
               </ListAliance>
             </FooterSubText>
