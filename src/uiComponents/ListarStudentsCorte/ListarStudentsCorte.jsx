@@ -8,12 +8,8 @@ const ListarStudentsCorte = (props) => {
   const dispatch = useDispatch();
   const studentsCorte = useSelector(getStudentsCorte);
   useEffect(() => {
-    if (studentsCorte.length > 0) {
-    } else {
-      dispatch(getFirestoreStudentsCorte(corteId));
-    }
+    dispatch(getFirestoreStudentsCorte(corteId));
   }, []);
-  console.log(studentsCorte);
   return (
     <div>
       <h1>Estudiante</h1>

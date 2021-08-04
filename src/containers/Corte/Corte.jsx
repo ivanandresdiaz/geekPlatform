@@ -4,6 +4,7 @@ import AddStudents from '../../components/AddStudents/AddStudents';
 
 const Corte = (props) => {
   const { match: { params: { corteId } } } = props;
+
   return (
     <div>
       <h1>

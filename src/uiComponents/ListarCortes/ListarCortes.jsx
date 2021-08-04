@@ -14,7 +14,6 @@ const ListarCortes = () => {
     }
   }, []);
 
-  console.log(cortes);
   return (
     <div>
       <h1>Cortes</h1>
@@ -24,7 +23,6 @@ const ListarCortes = () => {
             <div key={corte.corteId}>
               <Link to={`/corte/${corte.corteId}`}>
                 <p>{corte.corteId}</p>
-                )
               </Link>
             </div>
           );

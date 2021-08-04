@@ -12,6 +12,11 @@ export const studentsReducer = (state = initialState, action) => {
         ...state,
         studentsCorte: [...action.payload],
       };
+    case 'addNewStudent':
+      return {
+        ...state,
+        studentsCorte: [...state.studentsCorte, action.payload],
+      };
     default:
       return state;
   }

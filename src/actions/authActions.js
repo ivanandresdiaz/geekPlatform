@@ -3,12 +3,13 @@
 import { types } from '../types';
 import { firebase, googleAuthProvider, db, functions } from '../firebase/firebaseConfig';
 
-export const login = (uid, displayName) => {
+export const login = (uid, displayName, role) => {
   return {
     type: types.login,
     payload: {
       uid,
       displayName,
+      role,
     },
   };
 };
@@ -160,7 +161,7 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
   addStudentRole({ email, password, fullName })
     .then((doc) => {
       const user = doc.data;
-      db.collection('students').doc(user.uid).set({
+      const data = {
         uid: user.uid,
         email,
         fullName,
@@ -184,6 +185,7 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
         codelingoChallengesDone: [],
         wakatime: [],
         active: true,
-      }).then(() => console.log('exito'));
-    }).catch((err) => console.log(err));
+      };
+      db.collection('students').doc(user.uid).set(data).then(() => dispatch({ type: 'addNewStudent', payload: data }));
+    }).catch((err) => alert(err));
 };

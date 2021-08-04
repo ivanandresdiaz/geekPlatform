@@ -27,21 +27,22 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: [
-          { loader: 'html-loader' },
-        ],
+        use: [{ loader: 'html-loader' }],
       },
       {
         test: /\.s[ac]ss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(png|svg|jpg)$/,
-        type: 'asset/resource',
+        test: /\.(png|jpg|gif|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
       },
     ],
   },
@@ -57,9 +58,6 @@ module.exports = {
   ],
   optimization: {
     minimize: true,
-    minimizer: [
-      new CssMinimizerPlugin(),
-      new TerserPlugin(),
-    ],
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
   },
 };

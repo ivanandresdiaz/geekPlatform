@@ -11,6 +11,7 @@ import bancoRecursos from '../containers/BancoRecursos/BancoRecursos';
 import Home from '../containers/Home/Home';
 import Corte from '../containers/Corte/Corte';
 import GlobalStyle from '../globalStyles';
+import '../images/other/landing-5.png';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,9 +21,17 @@ const App = () => {
       if (user) {
         console.log(user.displayName);
         user.getIdTokenResult().then((idTokenResult) => {
-          console.log(idTokenResult.claims);
+          if (idTokenResult.claims.admin) {
+            dispatch(login(user.uid, user.displayName, 'admin'));
+          }
+          if (idTokenResult.claims.teacher) {
+            dispatch(login(user.uid, user.displayName, 'teacher'));
+          }
+          if (idTokenResult.claims.student) {
+            dispatch(login(user.uid, user.displayName, 'student'));
+          }
         });
-        dispatch(login(user.uid, user.displayName));
+
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);

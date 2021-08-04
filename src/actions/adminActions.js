@@ -2,7 +2,6 @@
 import { firebase, googleAuthProvider, db, functions } from '../firebase/firebaseConfig';
 
 export const createNewCorte = (nuevaCorte) => (dispatch, getState) => {
-  console.log('inicio de crear nueva corte');
   db.doc(`cortes/${nuevaCorte}`).get()
     .then((doc) => {
       if (doc.exists) {
@@ -29,5 +28,16 @@ export const getFirestoreCortes = () => (dispatch, getState) => {
         return { ...dataDocument };
       });
       dispatch({ type: 'getCortes', payload: data });
+    });
+};
+
+export const listarAdmin = () => (dispatch) => {
+  db.collection('admin').get()
+    .then((snapshot) => {
+      const data = snapshot.docs.map((doc) => {
+        const dataDocument = doc.data();
+        return { ...dataDocument, id: doc.id };
+      });
+      dispatch({ type: 'listarAdmin', payload: data });
     });
 };

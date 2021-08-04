@@ -29,6 +29,7 @@ const Navbar = () => {
       setButton(true);
     }
   };
+
   useEffect(() => {
     showButton();
     return () => {
@@ -60,10 +61,8 @@ const Navbar = () => {
                   </Link>
                 ) : (
                   <Link to='/auth/login'>
-                    <NavBtnLink>
-
-                      <Button onClick={closeMobileMenu} fontBig primary>Curriculum</Button>
-
+                    <NavBtnLink to='/auth/login'>
+                      <Button onClick={closeMobileMenu} fontBig primary>Entrar</Button>
                     </NavBtnLink>
                   </Link>
                 )}
