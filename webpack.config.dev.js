@@ -42,20 +42,6 @@ module.exports = {
         test: /\.(png|svg|jpg)$/,
         type: 'asset/resource',
       },
-      {
-        test: /\.(woff|woff2)$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            mimetype: 'application/font-woff',
-            name: '[name].[ext]',
-            outputPath: './assets/fonts/',
-            publicPath: './assets/fonts/',
-            esModule: false,
-          },
-        },
-      },
     ],
   },
   plugins: [

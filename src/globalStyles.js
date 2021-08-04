@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -33,12 +33,12 @@ export const Container = styled.div`
 
 export const Button = styled.button`
   border-radius: 4px;
-  background: ${({ primary }) => (primary ? "#FF3B53" : "#9C1D2D")};
+  background: ${({ primary }) => (primary ? '#FF3B53' : '#9C1D2D')};
   white-space: nowrap;
-  padding: ${({ big }) => (big ? "12px 64px" : "10px 20px")};
+  padding: ${({ big }) => (big ? '12px 64px' : '10px 20px')};
   color: #fff;
   font-family: 'Montserrat', sans-serif;
-  font-size: ${({ fontBig }) => (fontBig ? "18px" : "14px")};
+  font-size: ${({ fontBig }) => (fontBig ? '18px' : '14px')};
   outline: none;
   border: none;
   cursor: pointer;
@@ -46,7 +46,7 @@ export const Button = styled.button`
   &:hover {
     transition: all 0.3 ease-out;
     background: #fff;
-    background: ${({ primary }) => (primary ? "#9C1D2D" : "#FF3B53")};
+    background: ${({ primary }) => (primary ? '#9C1D2D' : '#FF3B53')};
   }
 
   @media screen and (max-width: 960px) {
