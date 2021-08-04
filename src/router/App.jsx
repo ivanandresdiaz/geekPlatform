@@ -10,6 +10,7 @@ import { PublicRoute } from './PublicRoute';
 import bancoRecursos from '../containers/BancoRecursos/BancoRecursos';
 import Home from '../containers/Home/Home';
 import Corte from '../containers/Corte/Corte';
+import GlobalStyle from '../globalStyles';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      <GlobalStyle />
       <div>
         <Switch>
           <PublicRoute

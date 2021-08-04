@@ -12,7 +12,7 @@ import CreateCorte from '../../components/CreateCorte/CreateCorte';
 import { getCortes } from '../../reducers/adminReducer';
 
 const Home = () => {
-
+  const dispatch = useDispatch();
   const handleCerrarSesion = () => {
     dispatch(singOutAuth());
   };
