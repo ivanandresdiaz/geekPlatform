@@ -15,8 +15,6 @@ import {
 import { Button } from "../../globalStyles";
 import logo from "../../images/brand/logo.png";
 
-
-
 const Navbar = () => {
     const [click, setClick] = useState(false)
     const [button, setButton] = useState(true);
@@ -31,13 +29,13 @@ const Navbar = () => {
             setButton(true)
         }
     }
-  };
-  useEffect(() => {
-    showButton();
-    return () => {
-      window.removeEventListener('resize', showButton);
-    };
-  }, []);
+
+    useEffect(() => {
+        showButton();
+        return () => {
+            window.removeEventListener('resize', showButton);
+        };
+    }, []);
 
     window.addEventListener('resize', showButton);
 
@@ -75,8 +73,6 @@ const Navbar = () => {
             </IconContext.Provider>
         </>
     )
-}
-
-
+};
 
 export default Navbar;
