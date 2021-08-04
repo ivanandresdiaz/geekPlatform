@@ -1,20 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Footer from '../../components/Structure/Footer';
+import Navbar from '../../components/Structure/Navbar';
+
 
 const LandingPage = () => {
   return (
-    <div>
-      <h1>LandingPage</h1>
-      <p>Proximante estara disponible</p>
-      <Link to='/auth/login'>
-        <button type='button'>Iniciar sesion</button>
-      </Link>
-      <p>Rutas publicas y privadas</p>
-      <p>
-        Componente funcional de Banco de recursos academicos
-        conectado con el Backend
-      </p>
-    </div>
+    <>
+      <Navbar />
+      <Footer/>
+    </>
   );
 };
 
