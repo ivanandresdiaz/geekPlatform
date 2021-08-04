@@ -56,7 +56,7 @@ const Navbar = () => {
                                     </NavBtnLink>
                                 ) : (
                                     <NavBtnLink to="/auth/login">
-                                        <Button onClick={closeMobileMenu} fontBig primary>Curriculum</Button>
+                                        <Button onClick={closeMobileMenu} fontBig primary>Entrar</Button>
                                     </NavBtnLink>
                                 )}
                             </NavItemBtn>
