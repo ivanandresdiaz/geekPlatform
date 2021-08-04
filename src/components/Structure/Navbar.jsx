@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
 import {
@@ -51,13 +52,17 @@ const Navbar = () => {
                         <NavMenu onClick={handleClick} click={click}>
                             <NavItemBtn>
                                 {button ? (
-                                    <NavBtnLink to="/auth/login">
-                                        <Button primary>Entrar</Button>
-                                    </NavBtnLink>
+                                    <Link to='/auth/login'>
+                                        <NavBtnLink to="/auth/login">
+                                            <Button primary>Entrar</Button>
+                                        </NavBtnLink>
+                                    </Link>
                                 ) : (
-                                    <NavBtnLink to="/auth/login">
-                                        <Button onClick={closeMobileMenu} fontBig primary>Curriculum</Button>
-                                    </NavBtnLink>
+                                    <Link to='/auth/login'>
+                                        <NavBtnLink to="/auth/login">
+                                            <Button onClick={closeMobileMenu} fontBig primary>Entrar</Button>
+                                        </NavBtnLink>
+                                    </Link>
                                 )}
                             </NavItemBtn>
                         </NavMenu>

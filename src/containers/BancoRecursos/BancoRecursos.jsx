@@ -32,7 +32,7 @@ const BancoRecursos = () => {
     reset();
   };
   return (
-    <div>
+    <>
       <h1>Banco de Recursos academicos</h1>
       <p>
         Bienvenido
@@ -77,7 +77,7 @@ const BancoRecursos = () => {
         ) :
           <p>No hay recursos Disponibles en este momento</p>}
       </DivContainerRecursos>
-    </div>
+    </>
   );
 };
 

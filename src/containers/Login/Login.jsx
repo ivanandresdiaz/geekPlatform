@@ -7,7 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FcGoogle, FcInvite } from 'react-icons/fc';
 import { ImFacebook2 } from 'react-icons/im';
 import { loginGoogle, loginFacebook, loginEmailPassword } from '../../actions/authActions';
-import { DivContainerLogin, ContainerLogin } from './styledLogin';
+import { DivContainerLogin, ContainerLogin, TitleLogin, FormInput, LabelLogin, FormLogin, SubtitleLogin, ResetPassword } from '../../styles/styledLogin';
+import Navbar from '../../components/Structure/Navbar';
+import { Button2 } from '../../globalStyles';
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -29,23 +31,29 @@ const Login = (props) => {
     dispatch(loginFacebook());
   };
   return (
-    <DivContainerLogin>
-      <ContainerLogin>
-        <h1>Iniciar sesion</h1>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Correo
-            <input type='email' name='name' onChange={handleChange} />
-          </label>
-          <label>
-            Contraseña
-            <input type='password' name='password' onChange={handleChange} />
-          </label>
-          <button type='submit'>Ingresar</button>
-        </form>
-      </ContainerLogin>
-    </DivContainerLogin>
-
+    <>
+      <Navbar />
+      <DivContainerLogin>
+        <ContainerLogin>
+          <TitleLogin>Inicia sesión en GeekPlatform</TitleLogin>
+          <FormLogin onSubmit={handleSubmit}>
+            <LabelLogin>
+              Correo
+              <FormInput type='email' name='name' onChange={handleChange} />
+            </LabelLogin>
+            <LabelLogin>
+              Contraseña
+              <FormInput type='password' name='password' onChange={handleChange} />
+            </LabelLogin>
+            <Button2 type='submit'>Ingresar</Button2>
+            <ResetPassword>¿Olvidaste tu contraseña?</ResetPassword>
+          </FormLogin>
+          <hr/>
+          <SubtitleLogin>¿Aún no tienes cuenta en GeekPlatform?</SubtitleLogin>
+          <Button2><a href='https://academiageek.co/admisiones/' target='blank' aria-label='Compañia'>Póstulate</a></Button2>
+        </ContainerLogin>
+      </DivContainerLogin>
+    </>
   );
 };
 

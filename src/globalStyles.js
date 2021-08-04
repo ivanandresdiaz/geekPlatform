@@ -54,4 +54,30 @@ export const Button = styled.button`
   }
 `;
 
+export const Button2 = styled.button`
+  border-radius: 4px;
+  background: ${({ primary }) => (primary ? "#B25327" : "#FFC43B")};
+  white-space: nowrap;
+  padding: ${({ big }) => (big ? "12px 64px" : "15px 70px")};
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: ${({ fontBig }) => (fontBig ? "16px" : "14px")};
+  font-weight: 700;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.3 ease-out;
+    background: #fff;
+    background: ${({ primary }) => (primary ? "#FFC43B" : "#B25327")};
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
+`;
+
+
+
 export default GlobalStyle;

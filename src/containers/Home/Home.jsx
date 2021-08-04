@@ -10,6 +10,7 @@ import AddAdmin from '../../components/AddAdmin/AddAdmin';
 import AddTeachers from '../../components/AddTeachers/AddTeachers';
 import CreateCorte from '../../components/CreateCorte/CreateCorte';
 import { getCortes } from '../../reducers/adminReducer';
+import Footer from '../../components/Structure/Footer';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Home = () => {
       <AddTeachers />
       <CreateCorte />
       <ListarCortes />
+      <Footer />
     </div>
   );
 };
