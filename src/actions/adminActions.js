@@ -41,3 +41,38 @@ export const listarAdmin = () => (dispatch) => {
       dispatch({ type: 'listarAdmin', payload: data });
     });
 };
+
+export const createClassroom = (salonName, corteId) => async (dispatch, getState) => {
+  const currentAdmin = getState().auth.fullName;
+  try {
+    const referenciaDocumento = await db.collection('classrooms').add({
+      salonId: '',
+      salonName,
+      students: [],
+      corteId,
+      agendaTutorials: [],
+      groups: [],
+      sprints: [],
+      createdBy: currentAdmin,
+      fecha: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    await db.collection('classrooms').doc(referenciaDocumento.id).update({ salonId: referenciaDocumento.id });
+    alert('se ha creado con exito un nuevo salon');
+  } catch (error) {
+    alert(`algo salio mal, ${error.message}`);
+  }
+
+};
+export const getFirestoreSalones = (corteId) => (dispatch, getState) => {
+  console.log(corteId);
+  db.collection('classrooms').where('corteId', '==', corteId).get()
+    .then((querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        const dataDocument = doc.data();
+        data.push(dataDocument);
+      });
+      dispatch({ type: 'getFirestoreSalones', payload: data });
+    });
+};
+

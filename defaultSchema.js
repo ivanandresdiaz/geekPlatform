@@ -62,3 +62,14 @@ const userDetails = {
     }
   ]
 };
+
+
+  {
+      salonId: '',
+      salonName: '',
+      students: [],
+      corteId: '',
+      agendaTutorials: [],
+      groups: [],
+      sprints: [],
+  }

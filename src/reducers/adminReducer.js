@@ -3,6 +3,7 @@ import { types } from '../types';
 const initialState = {
   cortes: [],
   admin: [],
+  salones: [],
 };
 
 export const adminReducer = (state = initialState, action) => {
@@ -17,6 +18,12 @@ export const adminReducer = (state = initialState, action) => {
         ...state,
         admin: [...action.payload],
       };
+
+    case 'getFirestoreSalones':
+      return {
+        ...state,
+        salones: [...action.payload],
+      };
     default:
       return state;
   }
@@ -24,3 +31,4 @@ export const adminReducer = (state = initialState, action) => {
 
 export const getCortes = (state) => state.admin.cortes;
 export const getAdmin = (state) => state.admin.admin;
+export const getSalones = (state) => state.admin.salones;
