@@ -43,7 +43,9 @@ exports.addAdminRole = functions.https.onCall((data, context)=> {
             admin: true,
           });
         }).then(() => {
-          return {success: "se ha creado un nuevo administrador"};
+          return admin.auth().getUserByEmail(data.email).then((user) => {
+            return user;
+          });
         });
       }
       ).catch((error) => {
@@ -53,7 +55,53 @@ exports.addAdminRole = functions.https.onCall((data, context)=> {
       });
 });
 
-// return
-// .then((newRole) => {
-//   return newRole;
-// });
+exports.addStudentRole = functions.https.onCall((data, context)=> {
+  // crear usuario
+  return admin
+      .auth()
+      .createUser({
+        email: data.email,
+        password: data.password,
+        displayName: data.fullName,
+      })
+      .then(() => {
+        return admin.auth().getUserByEmail(data.email).then((user) => {
+          return admin.auth().setCustomUserClaims(user.uid, {
+            student: true,
+          });
+        }).then(() => {
+          return admin.auth().getUserByEmail(data.email).then((user) => {
+            return user;
+          });
+        });
+      }
+      ).catch((error) => {
+        return {message: error};
+      });
+});
+exports.addTeacherRole = functions.https.onCall((data, context)=> {
+  // crear usuario
+  return admin
+      .auth()
+      .createUser({
+        email: data.email,
+        password: data.password,
+        displayName: data.fullName,
+      })
+      .then(() => {
+        return admin.auth().getUserByEmail(data.email).then((user) => {
+          return admin.auth().setCustomUserClaims(user.uid, {
+            teacher: true,
+          });
+        }).then(() => {
+          return admin.auth().getUserByEmail(data.email).then((user) => {
+            return user;
+          });
+        });
+      }
+      ).catch((error) => {
+        return {
+          message: error,
+        };
+      });
+});

@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
-import { getName } from '../../reducers/authReducer';
+import { getFullName } from '../../reducers/authReducer';
 import { singOutAuth } from '../../actions/authActions';
 import { getActionBancoRecursos, addRecursoAction } from '../../actions/bancoRecursosActions';
 import { getBancoRecursos } from '../../reducers/bancoRecursosReducer';
@@ -12,7 +12,7 @@ import { DivContainerRecursos } from './styledBancoRecursos';
 const BancoRecursos = () => {
   const dispatch = useDispatch();
   const bancoRecursos = useSelector(getBancoRecursos);
-  const name = useSelector(getName);
+  const name = useSelector(getFullName);
   const [values, handleInputChange, reset] = useForm({
     category: '',
     description: '',

@@ -1,23 +1,23 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { registerNewAdmin } from '../../actions/authActions';
+import { registerNewTeacher } from '../../actions/authActions';
 import useForm from '../../hooks/useForm';
 
 const AddTeachers = () => {
   const dispatch = useDispatch();
   const [formValues, handleInputChange, reset] = useForm({
     email: '',
-    username: '',
-    name: '',
+    fullName: '',
     password: '',
     confirmPassword: '',
   });
-  const { username, email, name, password, confirmPassword } = formValues;
+  const { email, fullName, password, confirmPassword } = formValues;
   const handleSubmit = (evento) => {
     evento.preventDefault();
     if (formValues.password === formValues.confirmPassword) {
       console.log(formValues);
-      dispatch(registerNewAdmin(username, email, name, password));
+      dispatch(registerNewTeacher(email, password, fullName));
+      reset();
     }
 
   };
@@ -26,17 +26,9 @@ const AddTeachers = () => {
       <form onSubmit={handleSubmit}>
         <input
           type='text'
-          placeholder='nombre de usuario unico'
-          name='username'
-          value={username}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          type='text'
           placeholder='nombre completo del docente'
-          name='name'
-          value={name}
+          name='fullName'
+          value={fullName}
           onChange={handleInputChange}
           required
         />

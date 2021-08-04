@@ -1,4 +1,5 @@
 /* eslint-disable import/prefer-default-export */
+// aqui van todo lo relacionado a autenticacion
 import { types } from '../types';
 import { firebase, googleAuthProvider, db, functions } from '../firebase/firebaseConfig';
 
@@ -101,11 +102,88 @@ export const registerWithEmailPasswordTeacher = (username, email, name, password
 };
 
 export const registerNewAdmin = (email, password, fullName) => async (dispatch) => {
-  console.log('entro a nuevo register Admin');
   const addAdminRole = functions.httpsCallable('addAdminRole');
   addAdminRole({ email, password, fullName })
-    .then((res) => {
-      console.log('exito', res);
+    .then((doc) => {
+      const user = doc.data;
+      db.collection('admin').doc(user.uid).set({
+        uid: user.uid,
+        email,
+        fullName,
+        password,
+        imageUrl: '',
+        bio: '',
+        whatsapp: '',
+        linkedin: '',
+      });
+    }).then(() => console.log('exito'))
+    .catch((err) => console.log(err));
+};
+export const registerNewTeacher = (email, password, fullName) => async (dispatch, getState) => {
+  const estadoProfesores = getState().teachers.teachers;
+
+  const addTeacherRole = functions.httpsCallable('addTeacherRole');
+  addTeacherRole({ email, password, fullName })
+    .then((doc) => {
+      const user = doc.data;
+      const nuevoProfesor = { email, password, fullName, uid: user.uid };
+      const data = [...estadoProfesores, nuevoProfesor];
+      dispatch({ type: 'listarTeachers', payload: data });
+      db.collection('teachers').doc(user.uid).set({
+        uid: user.uid,
+        email,
+        fullName,
+        password,
+        imageUrl: '',
+        bio: 'escribe tu presentacion',
+        website: '',
+        location: '',
+        whatsapp: '',
+        skills: [],
+        github: '',
+        facebook: '',
+        twitter: '',
+        instagram: '',
+        linkedin: '',
+        personalizedTutorials: [],
+        sprintsToScore: [], //
+        codelingoChallegencesToScore: [],
+        academicResourcesToScore: [],
+        active: true,
+      }).then(() => console.log('exito'));
     }).catch((err) => console.log(err));
 
+};
+
+export const registerNewStudent = (email, password, fullName, corteId) => async (dispatch) => {
+  const addStudentRole = functions.httpsCallable('addStudentRole');
+  addStudentRole({ email, password, fullName })
+    .then((doc) => {
+      const user = doc.data;
+      db.collection('students').doc(user.uid).set({
+        uid: user.uid,
+        email,
+        fullName,
+        password,
+        corteId,
+        imageUrl: '',
+        bio: '',
+        website: '',
+        location: '',
+        whatsapp: '',
+        skills: [],
+        github: '',
+        facebook: '',
+        twitter: '',
+        instagram: '',
+        linkedin: '',
+        geekyPuntos: '',
+        sprintsAssigned: [],
+        graduated: false,
+        tutorialsRequired: [],
+        codelingoChallengesDone: [],
+        wakatime: [],
+        active: true,
+      }).then(() => console.log('exito'));
+    }).catch((err) => console.log(err));
 };

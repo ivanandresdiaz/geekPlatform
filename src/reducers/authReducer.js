@@ -3,7 +3,7 @@ import { types } from '../types';
 
 const initialState = {
   uid: '',
-  name: '',
+  fullName: '',
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -12,13 +12,13 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         uid: action.payload.uid,
-        name: action.payload.displayName,
+        fullName: action.payload.displayName,
       };
     case types.logout: {
-      return { ...state, uid: '', name: '' }; }
+      return { ...state, uid: '', fullName: '' }; }
     default:
       return state;
   }
 };
 
-export const getName = (state) => state.auth.name;
+export const getFullName = (state) => state.auth.fullName;
