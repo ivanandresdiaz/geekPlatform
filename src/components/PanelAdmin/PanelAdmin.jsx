@@ -9,11 +9,13 @@ import AddTeachers from '../AddTeachers/AddTeachers';
 import CreateCorte from '../CreateCorte/CreateCorte';
 import { getCortes } from '../../reducers/adminReducer';
 import { getRole } from '../../reducers/authReducer';
+import NavbarAdmin from '../Structure/NavbarAdmin';
 
 const PanelAdmin = () => {
   const role = useSelector(getRole);
   return (
-    <div>
+    <>
+      <NavbarAdmin />
       <p>
         Role :
         {role}
@@ -26,7 +28,7 @@ const PanelAdmin = () => {
       <ListarTeachers />
       <CreateCorte />
       <ListarCortes />
-    </div>
+    </>
   );
 };
 

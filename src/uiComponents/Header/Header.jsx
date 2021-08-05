@@ -8,7 +8,7 @@ const Header = () => {
   const fullName = useSelector(getFullName);
   return (
     <>
-      <Navbar />
+      
       <h1>
         Bienvenido
         {' '}
