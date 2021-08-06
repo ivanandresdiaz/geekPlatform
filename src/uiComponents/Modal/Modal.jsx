@@ -10,11 +10,12 @@ export const Modal = ({ showModal, setShowModal }) => {
                     <ContainerModal showModal={showModal}>
                         <ModalContent>
                             <AddAdmin />
+                            <CloseModalButton aria-label='Close modal' onClick={() => setShowModal(prev => !prev)} />
                         </ModalContent>
-                        <CloseModalButton aria-label='Close modal' onClick={() => setShowModal(prev => !prev)} />
                     </ContainerModal>
                 </Background>
-            ) : null}
+            ) : null
+            }
         </>
     )
 };

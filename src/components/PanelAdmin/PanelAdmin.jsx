@@ -32,11 +32,9 @@ const PanelAdmin = () => {
         <h2>Administradores</h2>
         <ButtonAdd onClick={OpenModal}>
           <ButtonImgAdd />
-          <Modal showModal={showModal} setShowModal={setShowModal} />
-          <GlobalStyle />
         </ButtonAdd>
       </ContainerTitle>
-
+      <Modal showModal={showModal} setShowModal={setShowModal} />
       <ContainerList>
         <ListarAdmin />
       </ContainerList>

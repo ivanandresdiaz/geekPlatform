@@ -102,4 +102,28 @@ export const Button3 = styled.button`
   }
 `;
 
+export const Button4 = styled.button`
+  border-radius: 4px;
+  background: ${({ primary }) => (primary ? '#FF3B53' : '#9C1D2D')};
+  white-space: nowrap;
+  padding: ${({ big }) => (big ? '12px 64px' : '10px 20px')};
+  margin-top: 20px;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: ${({ fontBig }) => (fontBig ? '18px' : '14px')};
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.3 ease-out;
+    background: #fff;
+    background: ${({ primary }) => (primary ? '#9C1D2D' : '#FF3B53')};
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
+`;
+
 export default GlobalStyle;
