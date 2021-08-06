@@ -9,44 +9,63 @@ import CreateCorte from '../CreateCorte/CreateCorte';
 import { getCortes } from '../../reducers/adminReducer';
 import { getRole } from '../../reducers/authReducer';
 import NavbarAdmin from '../Structure/NavbarAdmin';
-import { ButtonAdd, ButtonImgAdd, ContainerList, ContainerTitle } from './PanelAdminStyles';
-import { Modal } from '../../uiComponents/Modal/Modal';
-import GlobalStyle from '../../globalStyles';
-import { Background } from '../../uiComponents/Modal/ModalStyles';
-
+import { ButtonAdd, ButtonImgAdd, ButtonImgAddCortes, ContainerMain, ContainerTitle } from './PanelAdminStyles';
+import { Modal, ModalCortes, ModalTeacher } from '../../uiComponents/Modal/Modal';
 
 const PanelAdmin = () => {
 
   const role = useSelector(getRole);
   const [showModal, setShowModal] = useState(false)
+  const [showModalT, setShowModalT] = useState(false)
+  const [showModalC, setShowModalC] = useState(false)
   const OpenModal = () => { setShowModal(prev => !prev) }
+  const OpenModalT = () => { setShowModalT(prevT => !prevT) }
+  const OpenModalC = () => { setShowModalC(prevC => !prevC) }
 
   return (
     <>
       <NavbarAdmin />
-      <p>
+      {/* <p>
         Role :
         {role}
-      </p>
-      <ContainerTitle>
-        <h2>Administradores</h2>
-        <ButtonAdd onClick={OpenModal}>
-          <ButtonImgAdd />
-        </ButtonAdd>
-      </ContainerTitle>
-      <Modal showModal={showModal} setShowModal={setShowModal} />
-      <ContainerList>
+      </p> */}
+
+      {/* Sección agregar administradores */}
+      <ContainerMain>
+        <ContainerTitle>
+          <h2>Administradores</h2>
+          <ButtonAdd onClick={OpenModal}>
+            <ButtonImgAdd />
+          </ButtonAdd>
+        </ContainerTitle>
         <ListarAdmin />
-      </ContainerList>
-      <h2>Profesores</h2>
-      <AddTeachers />
-      <ContainerList>
+      </ContainerMain>
+      <Modal showModal={showModal} setShowModal={setShowModal} />
+
+      {/* Sección agregar profesores */}
+      <ContainerMain>
+        <ContainerTitle>
+          <h2>Profesores</h2>
+          <ButtonAdd onClick={OpenModalT}>
+            <ButtonImgAdd />
+          </ButtonAdd>
+        </ContainerTitle>
         <ListarTeachers />
-      </ContainerList>
-      <CreateCorte />
-      <ContainerList>
+      </ContainerMain>
+      <ModalTeacher showModalT={showModalT} setShowModalT={setShowModalT} />
+
+      {/* Sección agregar cortes */}
+
+      <ContainerMain>
+        <ContainerTitle>
+          <h2>Cortes</h2>
+          <ButtonAdd onClick={OpenModalC}>
+            <ButtonImgAddCortes />
+          </ButtonAdd>
+        </ContainerTitle>
         <ListarCortes />
-      </ContainerList>
+      </ContainerMain>
+      <ModalCortes showModalC={showModalC} setShowModalC={setShowModalC} />
 
     </>
   );
