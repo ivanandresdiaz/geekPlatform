@@ -77,6 +77,10 @@ const ListItem = styled.div`
   padding: 10px 0px;
   text-decoration: none;
   color: #fff;
+
+  a{
+    color: #fff;
+  }
 `;
 
 const SocialMedia = styled.section`

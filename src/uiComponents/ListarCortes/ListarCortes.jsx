@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFirestoreCortes } from '../../actions/adminActions';
 import { getCortes } from '../../reducers/adminReducer';
+import { ContainerContent, LinkCortes } from '../../components/PanelAdmin/PanelAdminStyles';
 
 const ListarCortes = () => {
   const cortes = useSelector(getCortes);
@@ -15,21 +15,20 @@ const ListarCortes = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Cortes</h1>
-      <div>
+    <>
+      <ContainerContent>
         {cortes.length > 0 && cortes.map((corte) => {
           return (
-            <div key={corte.corteId}>
-              <Link to={`/corte/${corte.corteId}`}>
+            <ContainerContent key={corte.corteId}>
+              <LinkCortes to={`/corte/${corte.corteId}`}>
                 <p>{corte.corteId}</p>
-              </Link>
-            </div>
+              </LinkCortes>
+            </ContainerContent>
           );
         })}
-      </div>
+      </ContainerContent>
 
-    </div>
+    </>
   );
 };
 

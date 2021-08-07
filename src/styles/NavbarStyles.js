@@ -75,10 +75,6 @@ const NavItem = styled.div`
   height: 80px;
   padding-bottom: 8px;
 
-  &:hover {
-    border-bottom: 2px solid #f2ad60;
-  }
-
   @media (max-width: 960px) {
     width: 100%;
 
@@ -89,23 +85,24 @@ const NavItem = styled.div`
 `;
 
 const NavLinks = styled(Link)`
-  color: #fff;
+  color: #ff3b53;
   display: flex;
   align-items: center;
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 1rem 6rem;
   height: 100%;
+
+  &:hover {
+    color: #9C1D2D;
+  }
 
   @media (max-width: 960px) {
     text-align: center;
     padding: 2rem;
     width: 100%;
     display: table;
-
-    &:hover {
-      color: #f2ad60;
-      transition: all 0.3s ease;
-    }
   }
 `;
 

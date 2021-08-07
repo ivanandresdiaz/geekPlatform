@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { listarAdmin } from '../../actions/adminActions';
+import { ContainerContent } from '../../components/PanelAdmin/PanelAdminStyles';
 import { getAdmin } from '../../reducers/adminReducer';
 
 const ListarAdmin = () => {
@@ -13,16 +14,15 @@ const ListarAdmin = () => {
     }
   }, []);
   return (
-    <div>
-      <h1>Listar Admin</h1>
-      <div>
+    <>
+      <ContainerContent>
         {admin.length > 0 && admin.map((admin) => (
-          <div key={admin.uid}>
+          <ContainerContent key={admin.uid}>
             <p>{admin.fullName}</p>
-          </div>
+          </ContainerContent>
         ))}
-      </div>
-    </div>
+      </ContainerContent>
+    </>
   );
 };
 

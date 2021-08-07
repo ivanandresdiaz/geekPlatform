@@ -1,12 +1,15 @@
 import React from 'react';
+import NavbarStudent from '../Structure/NavbarStudent';
+
 
 const PanelStudent = () => {
   return (
-    <div>
+    <>
+    <NavbarStudent />
       <h1>Panel estudiante</h1>
       <p>Salones</p>
       <p>social Geek</p>
-    </div>
+    </>
   );
 };
 
