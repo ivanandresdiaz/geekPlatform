@@ -20,7 +20,7 @@ export const createNewSprint = (corteId, salonId, title,
   supportLink4) => async (dispatch, getState) => {
   try {
     const createSprint = functions.httpsCallable('createSprint');
-    await createSprint({ corteId,
+    const data = { corteId,
       salonId,
       title,
       description,
@@ -30,8 +30,10 @@ export const createNewSprint = (corteId, salonId, title,
       supportLink1,
       supportLink2,
       supportLink3,
-      supportLink4 });
+      supportLink4 };
+    await createSprint(data);
     alert('sprint agregado');
+    dispatch({ type: 'newSprintCreated', payload: { ...data, id: title } });
   } catch (error) {
     alert('algo salio mal');
     console.log(error);
@@ -41,13 +43,16 @@ export const createNewSprint = (corteId, salonId, title,
   // db.collection('cortes').doc(corteId).collection('classrooms').doc(salonId)
   //   .collection('sprints')
 export const getFirestoreSprints = (corteId, salonId) => async (dispatch, getState) => {
-  db.collection('/cortes/Frontend4/classrooms/sigloxxl/sprints')
+  console.log('corteId', corteId);
+  console.log('salonId', salonId);
+  db.collection(`/cortes/${corteId}/classrooms/${salonId}/sprints`)
     .get()
     .then((snapshot) => {
       const data = snapshot.docs.map((doc) => {
         const dataDocument = doc.data();
         return { ...dataDocument, id: doc.id };
       });
+      console.log('data', data);
       dispatch({ type: 'getFirestoreSprints', payload: data });
     })
     .catch((err) => console.log(err));

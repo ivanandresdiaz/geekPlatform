@@ -16,6 +16,11 @@ export const salonReducer = (state = initialState, action) => {
         ...state,
         sprints: action.payload,
       };
+    case 'newSprintCreated':
+      return {
+        ...state,
+        sprints: [...state.sprints, action.payload],
+      };
     default:
       return state;
   }

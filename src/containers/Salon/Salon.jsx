@@ -23,8 +23,11 @@ const Salon = (props) => {
         {' '}
         {salonData.salonName}
       </h1>
-      <CreateSprints corteId={corteId} salonId={salonData.salonId} />
-      <ListarSprints />
+
+      <CreateSprints corteId={corteId} salonId={salon} />
+      <ListarSprints corteId={corteId} salonId={salon} />
+      <h1>AQUI VA LA AGENDA DE TUTORIAS EXTRAS</h1>
+      <h1>AQUI VA LA CREACION DE GRUPOS CON DRAG AND DROP</h1>
     </div>
   );
 };

@@ -8,22 +8,9 @@ const ListarSprints = (props) => {
   const dispatch = useDispatch();
   const sprints = useSelector(getSprints);
   useEffect(() => {
+    console.log('salonId', salonId);
     dispatch(getFirestoreSprints(corteId, salonId));
   }, []);
-  const variables = {
-    deadline: '2021-08-16',
-    deliveryLink: 'wwww',
-    description: 'sprint de siglo 21',
-    id: 'xYsYXLIlhLPQ6UX2IRCU',
-    startDate: '2021-08-12',
-    supportLink1: 'wwww',
-    supportLink2: '',
-    supportLink3: '',
-    supportLink4: '',
-    title: 'sprint de siglo 21',
-  };
-  console.log('sprints disponibles', sprints);
-
   return (
     <div>
       <h1>ListarSprinrs</h1>

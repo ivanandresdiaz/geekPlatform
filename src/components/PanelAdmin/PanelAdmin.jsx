@@ -15,12 +15,12 @@ import { Modal, ModalCortes, ModalTeacher } from '../../uiComponents/Modal/Modal
 const PanelAdmin = () => {
 
   const role = useSelector(getRole);
-  const [showModal, setShowModal] = useState(false)
-  const [showModalT, setShowModalT] = useState(false)
-  const [showModalC, setShowModalC] = useState(false)
-  const OpenModal = () => { setShowModal(prev => !prev) }
-  const OpenModalT = () => { setShowModalT(prevT => !prevT) }
-  const OpenModalC = () => { setShowModalC(prevC => !prevC) }
+  const [showModal, setShowModal] = useState(false);
+  const [showModalT, setShowModalT] = useState(false);
+  const [showModalC, setShowModalC] = useState(false);
+  const OpenModal = () => { setShowModal((prev) => !prev); };
+  const OpenModalT = () => { setShowModalT((prevT) => !prevT); };
+  const OpenModalC = () => { setShowModalC((prevC) => !prevC); };
 
   return (
     <>

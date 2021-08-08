@@ -142,8 +142,8 @@ const db = {
   classrooms: [
     // las funciones como
     {
-      salonId: '',
-      salonName: '',
+      classroomId: '',
+      classroomName: '',
       students: [
         {
           userId: 'dh23ggj5h32g543j5gf43', // muchas cosas

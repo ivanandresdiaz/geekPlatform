@@ -20,8 +20,8 @@ const Corte = (props) => {
         <ListarSalones corteId={corteId} />
         <h3>Añadir estudiantes</h3>
         <AddStudents corteId={corteId} />
-        <h1>Aqui va el calendario grupal</h1>
-        <h1>Aqui va el calendario de clases</h1>
+        <h1>Aqui va el calendario grupal(proximamente)</h1>
+        <h1>Aqui va el calendario de clases (proximamente)</h1>
         <ListarStudentsCorte corteId={corteId} />
         <h3>Salones</h3>
       </div>
