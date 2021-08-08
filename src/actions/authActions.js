@@ -196,6 +196,9 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
       db.collection('cortes').doc(corteId)
         .collection('students').doc(user.uid)
         .set(data)
-        .then(() => dispatch({ type: 'addNewStudent', payload: data }));
+        .then(() => {
+          alert(`estudiante ${data.fullName} ha sido creado`);
+          dispatch({ type: 'addNewStudent', payload: data });
+        });
     }).catch((err) => alert(err));
 };

@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSalonData } from '../../reducers/salonReducer';
 import { getFirestoreSalon } from '../../actions/classroomActions';
 import CreateSprints from '../../components/CreateSprints/CreateSprints';
 import ListarSprints from '../../uiComponents/ListarSprints/ListarSprints';
-import CreateGroups from '../../components/CreateGroups/CreateGroups';
+import Group from '../../components/Group/Group';
+import ListarWorkGroups from '../../uiComponents/ListarWorkGroups/ListarWorkGroups';
 
 const Salon = (props) => {
   const { match: { params: { salon, corteId } } } = props;
@@ -28,7 +30,10 @@ const Salon = (props) => {
       <CreateSprints corteId={corteId} salonId={salon} />
       <ListarSprints corteId={corteId} salonId={salon} />
       <h1>AQUI VA LA AGENDA DE TUTORIAS EXTRAS</h1>
-      <CreateGroups />
+      <Link to={`/corte/${corteId}/${salon}/createGroups`}>
+        Crear Nuevos grupos de trabajo
+      </Link>
+      <ListarWorkGroups corteId={corteId} salonId={salon} />
     </div>
   );
 };
