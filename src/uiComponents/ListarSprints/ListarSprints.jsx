@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFirestoreSprints } from '../../actions/classroomActions';
+import { deleteSprint, getFirestoreSprints } from '../../actions/classroomActions';
 import { getSprints } from '../../reducers/salonReducer';
 
 const ListarSprints = (props) => {
@@ -11,6 +11,9 @@ const ListarSprints = (props) => {
     console.log('salonId', salonId);
     dispatch(getFirestoreSprints(corteId, salonId));
   }, []);
+  const handleDeleteSprint = (id) => {
+    dispatch(deleteSprint(id, corteId));
+  };
   return (
     <div>
       <h1>ListarSprinrs</h1>
@@ -34,6 +37,7 @@ const ListarSprints = (props) => {
             <a href={sprint.supportLink2}>{sprint.supportLink2}</a>
             <a href={sprint.supportLink3}>{sprint.supportLink3}</a>
             <a href={sprint.supportLink4}>{sprint.supportLink4}</a>
+            <button type='button' onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</button>
           </div>
         ))}
       </div>

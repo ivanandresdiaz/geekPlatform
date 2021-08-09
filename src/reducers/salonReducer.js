@@ -59,6 +59,16 @@ export const salonReducer = (state = initialState, action) => {
         sprints: [...state.sprints, action.payload],
         allSprints: [...state.allSprints, action.payload],
       };
+    case 'deleteSprint': {
+      const updatedSprints = state.sprints.filter((sprint) => sprint.id !== action.payload);
+      const updatedAllSprints = state.allSprints.filter((sprint) => sprint.id !== action.payload);
+      return {
+        ...state,
+        sprints: [...updatedSprints],
+        allSprints: [...updatedAllSprints],
+      };
+    }
+
     case 'getFirestoreWorkGroups':
       return {
         ...state,

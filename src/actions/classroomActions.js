@@ -52,7 +52,20 @@ export const getFirestoreSprints = (corteId, salonId) => async (dispatch, getSta
     })
     .catch((err) => console.log(err));
 };
-export const getFirestoreAllSprints = (corteId, salonId) => async (dispatch, getState) => {
+
+export const deleteSprint = (id, corteId) => async (dispatch) => {
+  try {
+    await db.collection(`/cortes/${corteId}/sprints`).doc(id).delete();
+    alert('sprint eliminado');
+    dispatch({ type: 'deleteSprint', payload: id });
+  } catch (error) {
+    alert('ha habido un error');
+    console.log(error);
+  }
+
+};
+
+export const getFirestoreAllSprints = (corteId) => async (dispatch, getState) => {
   db.collection('cortes').doc(corteId).collection('sprints').get()
     .then((snapshot) => {
       const data = snapshot.docs.map((doc) => {
