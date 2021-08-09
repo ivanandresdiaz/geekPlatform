@@ -57,6 +57,7 @@ export const salonReducer = (state = initialState, action) => {
       return {
         ...state,
         sprints: [...state.sprints, action.payload],
+        allSprints: [...state.allSprints, action.payload],
       };
     case 'getFirestoreWorkGroups':
       return {
