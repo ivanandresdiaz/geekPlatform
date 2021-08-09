@@ -235,11 +235,12 @@ const db = {
   academicResourcesBank: [
     //las funciones del banco de recursos academicos son:
     {
-      categoryId: 'asdfasdf',
+
       resources: [
         {
           postId: 'asdfasdf', //poder eliminar, agregar y sugerir que se elimine determinado comentario
-          category: 'api', //clasificar por categoria
+          category: 'asdfasdf',
+          subCategory: 'api', //clasificar por categoria
           title: 'title', //titulo el cual debe ser especifico para el buscador
           link: '', //link
           format: 'video', //para clasificar y saber de antemano que tipo de link, y utilizar en el buscador

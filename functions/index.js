@@ -152,10 +152,12 @@ exports.createCorte = functions.https.onCall((data, context)=> {
 
 exports.createSprint = functions.https.onCall((data, context)=> {
   const newSprint ={
+    corteId: data.corteId,
+    salonId: data.salonId,
     title: data.title,
     description: data.description,
-    startDate: data.startDate,
-    deadline: data.deadline,
+    date: data.date,
+    dateEnd: data.dateEnd,
     deliveryLink: data.deliveryLink,
     supportLink1: data.supportLink1,
     supportLink2: data.supportLink2,
@@ -164,7 +166,6 @@ exports.createSprint = functions.https.onCall((data, context)=> {
   };
   return db
       .collection("cortes").doc(data.corteId)
-      .collection("classrooms").doc(data.salonId)
       .collection("sprints").add(newSprint)
       .then(() => {
         return {message: "exito"};

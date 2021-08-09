@@ -29,6 +29,6 @@ const initialData = {
 const numberColumns = Object.entries(initialData.columns);
 const filtro = numberColumns.filter((column) => column[0] !== 'column-0');
 const newGroup = Object.fromEntries(filtro);
-console.log(filtro);
+console.log(newGroup);
 
 export default initialData;

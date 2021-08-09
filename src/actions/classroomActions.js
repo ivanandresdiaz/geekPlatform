@@ -10,23 +10,28 @@ export const getFirestoreSalon = (corteId, salonId) => (dispatch, getState) => {
     .catch((err) => console.log(err));
 };
 
-export const createNewSprint = (corteId, salonId, title, description, startDate, deadline, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4) => async (dispatch, getState) => {
+export const createNewSprint = (corteId, salonId, title, description, date, dateEnd, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4) => async (dispatch, getState) => {
   try {
-    const createSprint = functions.httpsCallable('createSprint');
-    const data = { corteId,
-      salonId,
-      title,
-      description,
-      startDate,
-      deadline,
-      deliveryLink,
-      supportLink1,
-      supportLink2,
-      supportLink3,
-      supportLink4 };
-    await createSprint(data);
-    alert('sprint agregado');
-    dispatch({ type: 'newSprintCreated', payload: { ...data, id: title } });
+    if (Date.parse(date) > Date.parse(dateEnd)) {
+      alert('la fecha de entrega no puede ser menor a la fechan inicial');
+    } else {
+      const createSprint = functions.httpsCallable('createSprint');
+      const data = { corteId,
+        salonId,
+        title,
+        description,
+        date,
+        dateEnd,
+        deliveryLink,
+        supportLink1,
+        supportLink2,
+        supportLink3,
+        supportLink4 };
+      await createSprint(data);
+      alert('sprint agregado');
+      dispatch({ type: 'newSprintCreated', payload: { ...data, id: title } });
+    }
+
   } catch (error) {
     alert('algo salio mal');
     console.log(error);
@@ -36,8 +41,7 @@ export const createNewSprint = (corteId, salonId, title, description, startDate,
   // db.collection('cortes').doc(corteId).collection('classrooms').doc(salonId)
   //   .collection('sprints')
 export const getFirestoreSprints = (corteId, salonId) => async (dispatch, getState) => {
-  db.collection(`/cortes/${corteId}/classrooms/${salonId}/sprints`)
-    .get()
+  db.collection(`/cortes/${corteId}/sprints`).where('salonId', '==', salonId).get()
     .then((snapshot) => {
       const data = snapshot.docs.map((doc) => {
         const dataDocument = doc.data();
@@ -48,19 +52,29 @@ export const getFirestoreSprints = (corteId, salonId) => async (dispatch, getSta
     })
     .catch((err) => console.log(err));
 };
+export const getFirestoreAllSprints = (corteId, salonId) => async (dispatch, getState) => {
+  db.collection('cortes').doc(corteId).collection('sprints').get()
+    .then((snapshot) => {
+      const data = snapshot.docs.map((doc) => {
+        const dataDocument = doc.data();
+        return { ...dataDocument, id: doc.id };
+      });
+      console.log('data', data);
+      dispatch({ type: 'getFirestoreAllSprints', payload: data });
+    })
+    .catch((err) => console.log(err));
+};
 
 // Crear grupos
 
 export const createWorkGroups = (corteId, salonId, title, newGroup) => async (dispatch, getState) => {
   try {
-
     const initialData = {
       ...newGroup,
       title,
+      salonId,
     };
-    await db.collection('cortes').doc(corteId).collection('classrooms').doc(salonId)
-      .collection('groups')
-      .add(initialData);
+    await db.collection('cortes').doc(corteId).collection('groups').add(initialData);
     alert('se ha creado los nuevos grupos');
     const plantillaCreatingGroups = {
       title: 'Default plantilla grupos',
@@ -149,7 +163,7 @@ export const generateTemplateGroups = (title, cantidad) => async (dispatch, getS
 };
 
 export const getFirestoreWorkGroups = (corteId, salonId) => async (dispatch, getState) => {
-  db.collection(`/cortes/${corteId}/classrooms/${salonId}/groups`)
+  db.collection(`/cortes/${corteId}/groups`).where('salonId', '==', salonId)
     .get()
     .then((snapshot) => {
       const data = snapshot.docs.map((doc) => {

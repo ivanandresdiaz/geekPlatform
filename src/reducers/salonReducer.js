@@ -2,6 +2,7 @@
 const initialState = {
   salonData: [],
   sprints: [],
+  allSprints: [],
   workGroups: [],
   plantillaCreatingGroups: {
     title: 'Default plantilla grupos',
@@ -47,6 +48,11 @@ export const salonReducer = (state = initialState, action) => {
         sprints: action.payload,
       };
 
+    case 'getFirestoreAllSprints':
+      return {
+        ...state,
+        allSprints: action.payload,
+      };
     case 'newSprintCreated':
       return {
         ...state,
@@ -57,6 +63,7 @@ export const salonReducer = (state = initialState, action) => {
         ...state,
         workGroups: action.payload,
       };
+
     case 'deleteFirestoreGroups': {
       const newWorkGroups = state.workGroups.filter((workGroup) => workGroup.id !== action.payload);
       return {
@@ -76,5 +83,6 @@ export const salonReducer = (state = initialState, action) => {
 
 export const getSalonData = (state) => state.salon.salonData;
 export const getSprints = (state) => state.salon.sprints;
+export const getAllSprints = (state) => state.salon.allSprints;
 export const getWorkGroups = (state) => state.salon.workGroups;
 export const getPlantillaCreatingGroups = (state) => state.salon.plantillaCreatingGroups;

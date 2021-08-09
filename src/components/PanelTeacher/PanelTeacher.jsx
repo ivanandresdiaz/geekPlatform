@@ -10,13 +10,14 @@ const PanelTeacher = () => {
   const role = useSelector(getRole);
   return (
     <>
-    <NavbarTeacher />
+      <NavbarTeacher />
       <p>
         Role :
         {role}
       </p>
-      <h1>Panel Teacher</h1>
+      <h1>Colegas</h1>
       <ListarTeachers />
+      <h1>Cortes</h1>
       <ListarCortes />
     </>
   );
