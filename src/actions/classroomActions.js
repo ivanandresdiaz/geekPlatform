@@ -183,7 +183,6 @@ export const getFirestoreWorkGroups = (corteId, salonId) => async (dispatch, get
         const dataDocument = doc.data();
         return { ...dataDocument, id: doc.id };
       });
-      console.log('data', data);
       dispatch({ type: 'getFirestoreWorkGroups', payload: data });
     })
     .catch((err) => console.log(err));

@@ -13,7 +13,6 @@ const ListarWorkGroups = (props) => {
     dispatch(getFirestoreWorkGroups(corteId, salonId));
   }, []);
 
-  console.log('listo para listar grupos', workGroups);
   return (
     <div>
       <h3>Listar grupos de estudio</h3>

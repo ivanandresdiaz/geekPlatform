@@ -2,65 +2,30 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
-import { getFullName } from '../../reducers/authReducer';
+import { getFullName, getUserId } from '../../reducers/authReducer';
 import { singOutAuth } from '../../actions/authActions';
-import { getActionBancoRecursos, addRecursoAction } from '../../actions/bancoRecursosActions';
+import { getActionBancoRecursos } from '../../actions/bancoRecursosActions';
 import { getBancoRecursos } from '../../reducers/bancoRecursosReducer';
 import CardRecursoAcademico from '../../uiComponents/CardRecursoAcademico/CardRecursoAcademico';
 import { DivContainerRecursos } from './styledBancoRecursos';
+import AddNewAcademicResource from '../../components/AddNewAcademicResource/AddNewAcademicResource';
+import CreateNewCategory from '../../components/CreateNewCategory/CreateNewCategory';
 
 const BancoRecursos = () => {
-  const dispatch = useDispatch();
   const bancoRecursos = useSelector(getBancoRecursos);
-  const name = useSelector(getFullName);
-  const [values, handleInputChange, reset] = useForm({
-    category: '',
-    description: '',
-    url: '',
-  });
-  const { category, description, url } = values;
-  const handleCerrarSesion = () => {
-    dispatch(singOutAuth());
-  };
-  useEffect(() => {
-    dispatch(getActionBancoRecursos());
-  }, []);
-  const handleSubmit = (evento) => {
-    evento.preventDefault();
-    dispatch(addRecursoAction(category, description, url));
-    reset();
-  };
+  const userId = useSelector(getUserId);
+  const loggedUser = useSelector(getFullName);
+  const categories = ['Frontend', 'Backend', 'Nuevas Tecnologias', 'Javascript', 'Node', 'React'];
   return (
     <>
       <h1>Banco de Recursos academicos</h1>
+      <h3>
+        Crear nueva Categoria
+      </h3>
+      <CreateNewCategory categories={categories} />
       <div>
-        <form>
-          <input
-            type='text'
-            placeholder='Categoria'
-            name='category'
-            value={category}
-            onChange={handleInputChange}
-          />
-          <input
-            type='text'
-            placeholder='url'
-            name='url'
-            value={url}
-            onChange={handleInputChange}
-          />
-
-          <textarea
-            placeholder='Descripcion del Recurso'
-            name='description'
-            value={description}
-            onChange={handleInputChange}
-            required
-          />
-          <button type='submit' onClick={handleSubmit}>Agregar recurso academico</button>
-        </form>
+        <AddNewAcademicResource loggedUser={loggedUser} categories={categories} userId={userId} />
       </div>
-
       <DivContainerRecursos>
         {bancoRecursos.length > 0 ? (
           <>

@@ -2,6 +2,18 @@
 import { db, firebase } from '../firebase/firebaseConfig';
 import { types } from '../types';
 
+export const getFirestoreSubcategories = () => (dispatch) => {
+  const data = ['redux', 'firebase', 'React', 'Javascript'];
+  // db.collection('bancoRecursosAcademicos').get()
+  //   .then((snapshot) => {
+  //     const data = snapshot.docs.map((doc) => {
+  //       const dataDocument = doc.data();
+  //       return { ...dataDocument, id: doc.id };
+  //     });
+  dispatch({ type: 'getFirestoreSubcategories', payload: data });
+  // });
+};
+
 export const getActionBancoRecursos = () => (dispatch) => {
   db.collection('bancoRecursosAcademicos').get()
     .then((snapshot) => {
@@ -13,22 +25,34 @@ export const getActionBancoRecursos = () => (dispatch) => {
     });
 };
 
-export const addRecursoAction = (category, description, url) => async (dispatch, getState) => {
+export const addFirestoreNewCategoryAcademicResource = (category, categories) => async (dispatch, getState) => {
   try {
-    const recommendedBy = getState().logged.name;
-    const nuevoRecurso = {
-      category,
-      description,
-      url,
-      score: 4,
-      recommendedBy,
-      fecha: firebase.firestore.FieldValue.serverTimestamp(),
-    };
+    const newCategories = [
+      ...categories, category,
+    ];
 
-    const agregado = await db.collection('bancoRecursosAcademicos').add(nuevoRecurso);
+    const agregado = await db.collection('bancos').doc('recursosAcademicos').update({
+      categories: newCategories,
+    });
+    dispatch({ type: 'addFirestoreNewCategoryAcademicResource', payload: newCategories });
+    if (agregado) {
+      alert('se ha agregado nueva Categoria con exito');
+    }
+  } catch (error) {
+    console.log(error.message);
+    alert('no se puedo agregar a favoritos, intente de nuevo.');
+  };
+};
+
+export const addFirestoreNewAcademicResource = (values) => async (dispatch, getState) => {
+  try {
+    const nuevoRecurso = {
+      ...values,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    };
+    const agregado = await db.collection('bancos').doc('recursosAcademicos').collection('resources').add(nuevoRecurso);
     if (agregado) {
       alert('se ha agregado con exito');
-      dispatch({ type: types.addRecursoAcademico, payload: nuevoRecurso });
     }
   } catch (error) {
     console.log(error.message);

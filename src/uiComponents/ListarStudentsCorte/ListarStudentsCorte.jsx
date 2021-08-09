@@ -10,7 +10,6 @@ const ListarStudentsCorte = (props) => {
   useEffect(() => {
     dispatch(getFirestoreStudentsCorte(corteId));
   }, []);
-  console.log(studentsCorte);
   return (
     <div>
       <h1>Estudiante</h1>

@@ -8,7 +8,6 @@ import Calendar from '../../components/Calendar/Calendar';
 
 const Corte = (props) => {
   const { match: { params: { corteId } } } = props;
-
   return (
     <div>
       <h1>
@@ -19,7 +18,7 @@ const Corte = (props) => {
       <div>
         <h3>Crear salon</h3>
         <Link to='/bancoRecursosAcademicos'>
-          Banco de recursos Academicos
+          Banco de recursos Academicos LINKKK!!!
         </Link>
         <p>Listado de salones</p>
         <ListarSalones corteId={corteId} />

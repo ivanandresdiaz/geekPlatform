@@ -8,7 +8,6 @@ const ListarSprints = (props) => {
   const dispatch = useDispatch();
   const sprints = useSelector(getSprints);
   useEffect(() => {
-    console.log('salonId', salonId);
     dispatch(getFirestoreSprints(corteId, salonId));
   }, []);
   const handleDeleteSprint = (id) => {
