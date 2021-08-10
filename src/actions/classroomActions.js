@@ -47,7 +47,6 @@ export const getFirestoreSprints = (corteId, salonId) => async (dispatch, getSta
         const dataDocument = doc.data();
         return { ...dataDocument, id: doc.id };
       });
-      console.log('data', data);
       dispatch({ type: 'getFirestoreSprints', payload: data });
     })
     .catch((err) => console.log(err));

@@ -1,39 +1,46 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import useForm from '../../hooks/useForm';
+import { getFirestoreCategoryData } from '../../actions/bancoRecursosActions';
+import { getCategories, getSubCategories, getCategoryData } from '../../reducers/bancoRecursosReducer';
 import { getFullName, getUserId } from '../../reducers/authReducer';
-import { singOutAuth } from '../../actions/authActions';
-import { getActionBancoRecursos } from '../../actions/bancoRecursosActions';
-import { getBancoRecursos } from '../../reducers/bancoRecursosReducer';
 import CardRecursoAcademico from '../../uiComponents/CardRecursoAcademico/CardRecursoAcademico';
 import { DivContainerRecursos } from './styledBancoRecursos';
 import AddNewAcademicResource from '../../components/AddNewAcademicResource/AddNewAcademicResource';
 import CreateNewCategory from '../../components/CreateNewCategory/CreateNewCategory';
+import ListarRecursosAcademicos from '../../uiComponents/ListarRecursosAcademicos/ListarRecursosAcademicos';
 
 const BancoRecursos = () => {
-  const bancoRecursos = useSelector(getBancoRecursos);
+  const dispatch = useDispatch();
+  const categoryData = useSelector(getCategoryData);
+  const categories = useSelector(getCategories);
+  const subCategories = useSelector(getSubCategories);
   const userId = useSelector(getUserId);
   const loggedUser = useSelector(getFullName);
-  const categories = ['Frontend', 'Backend', 'Nuevas Tecnologias', 'Javascript', 'Node', 'React'];
+  useEffect(() => {
+    dispatch(getFirestoreCategoryData('Frontend'));
+  }, []);
+  const handleGetCategory = (category) => {
+    console.log(category);
+    dispatch(getFirestoreCategoryData(category));
+  };
+  console.log('categories', categories);
   return (
     <>
       <h1>Banco de Recursos academicos</h1>
-      <h3>
-        Crear nueva Categoria
-      </h3>
+      <h3>Categorias</h3>
+      <div>
+        {categories.length > 0 && categories.map((category) => (<button key={category} type='button' onClick={() => handleGetCategory(category)}>{category}</button>
+        ))}
+      </div>
       <CreateNewCategory categories={categories} />
       <div>
-        <AddNewAcademicResource loggedUser={loggedUser} categories={categories} userId={userId} />
+        <AddNewAcademicResource loggedUser={loggedUser} categories={categories} userId={userId} subCategories={subCategories} />
       </div>
-      <DivContainerRecursos>
-        {bancoRecursos.length > 0 ? (
-          <>
-            {bancoRecursos.map((recurso) => <CardRecursoAcademico key={recurso.id} {...recurso} />)}
-          </>
-        ) :
-          <p>No hay recursos Disponibles en este momento</p>}
-      </DivContainerRecursos>
+      {categoryData.length > 0 ? (
+        <ListarRecursosAcademicos categoryData={categoryData} />
+      ) :
+        <p>No hay recursos Disponibles en este momento</p>}
     </>
   );
 };
