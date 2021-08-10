@@ -6,27 +6,8 @@ const functions = require("firebase-functions");
 //
 
 admin.initializeApp();
-
-// exports.addAdminRole = functions.https.onCall((data, context) => {
-//   admin
-//       .auth()
-//       .createUser({
-//         email: "user@example.com",
-//         emailVerified: false,
-//         phoneNumber: "+11234567890",
-//         password: "secretPassword",
-//         displayName: "John Doe",
-//         photoURL: "http://www.example.com/12345678/photo.png",
-//         disabled: false,
-//       })
-//       .then((userRecord) => {
-//         // See the UserRecord reference doc for the contents of userRecord.
-//         console.log("Successfully created new user:", userRecord.uid);
-//       })
-//       .catch((error) => {
-//         console.log("Error creating new user:", error);
-//       });
-// });
+const db = admin.firestore();
+// crear usuaarios
 
 exports.addAdminRole = functions.https.onCall((data, context)=> {
   // crear usuario
@@ -55,7 +36,7 @@ exports.addAdminRole = functions.https.onCall((data, context)=> {
       });
 });
 
-exports.addStudentRole = functions.https.onCall((data, context)=> {
+exports.addStudentCorte = functions.https.onCall((data, context)=> {
   // crear usuario
   return admin
       .auth()
@@ -68,6 +49,7 @@ exports.addStudentRole = functions.https.onCall((data, context)=> {
         return admin.auth().getUserByEmail(data.email).then((user) => {
           return admin.auth().setCustomUserClaims(user.uid, {
             student: true,
+            corteId: data.corteId,
           });
         }).then(() => {
           return admin.auth().getUserByEmail(data.email).then((user) => {
@@ -103,5 +85,92 @@ exports.addTeacherRole = functions.https.onCall((data, context)=> {
         return {
           message: error,
         };
+      });
+});
+
+// crear Corte
+
+exports.createCorte = functions.https.onCall((data, context)=> {
+  return db.doc(`cortes/${data.nuevaCorte}`).get()
+      .then((doc) => {
+        if (doc.exists) {
+          throw new functions.https.HttpsError(
+              "Este nombre ya existe"
+          );
+        } else {
+          db.collection("cortes").doc(data.nuevaCorte).set({
+            corteId: data.nuevaCorte,
+            createBy: data.currentUser,
+            students: [],
+            assignedTeachers: [],
+            active: true,
+          }).then(() =>{
+            db.collection("cortes").doc(data.nuevaCorte)
+                .collection("classrooms").doc("sigloxxl").set({
+                  salonId: "sigloxxl",
+                  salonName: "Siglo XXI",
+                  corteId: data.nuevaCorte,
+                  agendaTutorials: [],
+                  groups: [],
+                  sprints: [],
+                });
+            db.collection("cortes").doc(data.nuevaCorte)
+                .collection("classrooms").doc("tecnico").set({
+                  salonId: "tecnico",
+                  salonName: "Tecnico",
+                  corteId: data.nuevaCorte,
+                  agendaTutorials: [],
+                  groups: [],
+                  sprints: [],
+                });
+            db.collection("cortes").doc(data.nuevaCorte)
+                .collection("classrooms").doc("designThinking").set({
+                  salonId: "designThinking",
+                  salonName: "Design Thinking",
+                  corteId: data.nuevaCorte,
+                  agendaTutorials: [],
+                  groups: [],
+                  sprints: [],
+                });
+            db.collection("cortes").doc(data.nuevaCorte)
+                .collection("classrooms").doc("empleabilidad").set({
+                  salonId: "empleabilidad",
+                  salonName: "Empleabilidad",
+                  students: [],
+                  corteId: data.nuevaCorte,
+                  agendaTutorials: [],
+                  groups: [],
+                  sprints: [],
+                });
+          }).then(() => {
+            return {message: "La corte ha sido creada"};
+          })
+          ;
+        }
+      });
+});
+
+exports.createSprint = functions.https.onCall((data, context)=> {
+  const newSprint ={
+    corteId: data.corteId,
+    salonId: data.salonId,
+    title: data.title,
+    description: data.description,
+    date: data.date,
+    dateEnd: data.dateEnd,
+    deliveryLink: data.deliveryLink,
+    supportLink1: data.supportLink1,
+    supportLink2: data.supportLink2,
+    supportLink3: data.supportLink3,
+    supportLink4: data.supportLink4,
+  };
+  return db
+      .collection("cortes").doc(data.corteId)
+      .collection("sprints").add(newSprint)
+      .then(() => {
+        return {message: "exito"};
+      })
+      .catch(()=> {
+        return {message: "ha ocurrido un error"};
       });
 });

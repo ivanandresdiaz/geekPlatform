@@ -17,10 +17,19 @@ const ListarTeachers = () => {
     <>
       <ContainerContent>
         <ContainerContent>
-          {teachers.length > 0 && teachers.map((teacher) => <p style={{
-            fontWeight: "500", color: "#C2C2C2", marginTop: "8px",
-            marginbottom: "8px"
-          }} key={teacher.uid}>{teacher.fullName}</p>)}
+          {teachers.length > 0 && teachers.map((teacher) => (
+            <p
+              style={{
+                fontWeight: '500',
+                color: '#C2C2C2',
+                marginTop: '8px',
+                marginbottom: '8px',
+              }}
+              key={teacher.uid}
+            >
+              {teacher.fullName}
+            </p>
+          ))}
         </ContainerContent>
       </ContainerContent>
     </>

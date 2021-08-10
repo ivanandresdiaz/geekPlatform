@@ -3,24 +3,26 @@ import { types } from '../types';
 
 const initialState = {
   bancoRecursos: [],
+  subCategories: [],
+  categories: [],
 };
 
 export const bancoRecursosReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.loadBancoRecursos:
+    case 'getFirestoreSubcategories':
       return {
         ...state,
-        bancoRecursos: [...action.payload],
+        subCategories: action.payload,
       };
-    case types.addRecursoAcademico:
+    case 'addFirestoreNewCategoryAcademicResource':
       return {
-        ...state, bancoRecursos: [...state.bancoRecursos, ...action.payload],
+        ...state,
+        categories: action.payload,
       };
-    case types.deleteRecurso:
-      return { ...state, bancoRecursos: state.bancoRecursos.filter((recurso) => recurso.id !== action.payload) };
     default:
       return state;
   }
 };
 
 export const getBancoRecursos = (state) => state.bancoRecursos.bancoRecursos;
+export const getSubCategories = (state) => state.bancoRecursos.subCategories;

@@ -13,12 +13,21 @@ export const adminReducer = (state = initialState, action) => {
         ...state,
         cortes: [...action.payload],
       };
+    case 'updateCortes':
+      return {
+        ...state,
+        cortes: [...state.cortes, action.payload],
+      };
     case 'listarAdmin':
       return {
         ...state,
         admin: [...action.payload],
       };
-
+    case 'updateListarAdmin':
+      return {
+        ...state,
+        admin: [...state.admin, action.payload],
+      };
     case 'getFirestoreSalones':
       return {
         ...state,

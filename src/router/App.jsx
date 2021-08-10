@@ -12,6 +12,9 @@ import Home from '../containers/Home/Home';
 import Corte from '../containers/Corte/Corte';
 import GlobalStyle from '../globalStyles';
 import '../images/other/landing-5.png';
+import Salon from '../containers/Salon/Salon';
+import CreateGroups from '../containers/CreateGroups/CreateGroups';
+import BancoRecursos from '../containers/BancoRecursos/BancoRecursos';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -60,6 +63,24 @@ const App = () => {
             exact
             path='/corte/:corteId'
             component={Corte}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path='/corte/:corteId/:salon'
+            component={Salon}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path='/corte/:corteId/:salon/createGroups'
+            component={CreateGroups}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path='/bancoRecursosAcademicos'
+            component={BancoRecursos}
             isAuthenticated={isLoggedIn}
           />
           <Redirect to='/auth/landingPage' />

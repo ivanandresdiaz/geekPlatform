@@ -104,10 +104,11 @@ export const registerWithEmailPasswordTeacher = (username, email, name, password
 
 export const registerNewAdmin = (email, password, fullName) => async (dispatch) => {
   const addAdminRole = functions.httpsCallable('addAdminRole');
+  let newAdmin;
   addAdminRole({ email, password, fullName })
     .then((doc) => {
       const user = doc.data;
-      db.collection('admin').doc(user.uid).set({
+      newAdmin = {
         uid: user.uid,
         email,
         fullName,
@@ -116,9 +117,15 @@ export const registerNewAdmin = (email, password, fullName) => async (dispatch) 
         bio: '',
         whatsapp: '',
         linkedin: '',
-      });
-    }).then(() => console.log('exito'))
-    .catch((err) => console.log(err));
+      };
+      return db.collection('admin').doc(user.uid).set(newAdmin);
+    }).then(() => {
+      dispatch({ type: 'updateListarAdmin', payload: newAdmin });
+    })
+    .catch((err) => {
+      alert('algo salio mal');
+      console.log(err);
+    });
 };
 export const registerNewTeacher = (email, password, fullName) => async (dispatch, getState) => {
   const estadoProfesores = getState().teachers.teachers;
@@ -157,8 +164,8 @@ export const registerNewTeacher = (email, password, fullName) => async (dispatch
 };
 
 export const registerNewStudent = (email, password, fullName, corteId) => async (dispatch) => {
-  const addStudentRole = functions.httpsCallable('addStudentRole');
-  addStudentRole({ email, password, fullName })
+  const addStudentCorte = functions.httpsCallable('addStudentCorte');
+  addStudentCorte({ corteId, email, password, fullName })
     .then((doc) => {
       const user = doc.data;
       const data = {
@@ -186,6 +193,12 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
         wakatime: [],
         active: true,
       };
-      db.collection('students').doc(user.uid).set(data).then(() => dispatch({ type: 'addNewStudent', payload: data }));
+      db.collection('cortes').doc(corteId)
+        .collection('students').doc(user.uid)
+        .set(data)
+        .then(() => {
+          alert(`estudiante ${data.fullName} ha sido creado`);
+          dispatch({ type: 'addNewStudent', payload: data });
+        });
     }).catch((err) => alert(err));
 };
