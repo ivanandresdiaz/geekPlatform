@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -29,7 +30,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Button = styled.button`
+export const Button = styled(motion.button)`
   border-radius: 4px;
   background: ${({ primary }) => (primary ? "#FF3B53" : "#9C1D2D")};
   white-space: nowrap;

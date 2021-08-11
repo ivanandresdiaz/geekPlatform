@@ -16,24 +16,16 @@ const ListarTeachers = () => {
   return (
     <>
       <ContainerContent>
-        <ContainerContent>
-          {teachers.length > 0 && teachers.map((teacher) => (
-            <p
-              style={{
-                fontWeight: '500',
-                color: '#FFFFFE !important',
-                marginTop: '8px',
-                marginbottom: '8px',
-              }}
-              key={teacher.uid}
-            >
+        {teachers.length > 0 && teachers.map((teacher) => (
+          <ContainerContent key={teacher.uid}>
+            <p>
               {teacher.fullName}
             </p>
-          ))}
-        </ContainerContent>
-      </ContainerContent>
+            </ContainerContent>
+        ))}
+          </ContainerContent>
     </>
-  );
+      );
 };
 
-export default ListarTeachers;
+      export default ListarTeachers;

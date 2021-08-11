@@ -32,7 +32,9 @@ export const ModalTeacher = ({ showModalT, setShowModalT }) => {
           <ContainerModal showModalT={showModalT}>
             <ModalContent>
               <AddTeachers />
-              <CloseModalButton aria-label='Close modal' onClick={() => setShowModalT((prevT) => !prevT)} />
+              <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModalT((prevT) => !prevT)} >
+                <MdClose style={{ alignItems: 'center' }} />
+              </CloseModalButton>
             </ModalContent>
           </ContainerModal>
         </Background>
@@ -49,7 +51,9 @@ export const ModalCortes = ({ showModalC, setShowModalC }) => {
           <ContainerModal showModalC={showModalC}>
             <ModalContent>
               <CreateCorte />
-              <CloseModalButton aria-label='Close modal' onClick={() => setShowModalC((prevC) => !prevC)} />
+              <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModalC((prevC) => !prevC)}>
+                <MdClose style={{ alignItems: 'center' }} />
+              </CloseModalButton>
             </ModalContent>
           </ContainerModal>
         </Background>

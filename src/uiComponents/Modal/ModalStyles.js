@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { MdClose } from "react-icons/md";
 import { motion } from "framer-motion";
 
 export const Background = styled.div`
@@ -11,11 +10,11 @@ export const Background = styled.div`
   background: rgba(0, 0, 0, 0.6);
 `;
 
-export const ContainerModal = styled.div`
+export const ContainerModal = styled(motion.div)`
   position: fixed;
   background: white;
   width: 730px;
-  height: 361px;
+  height: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

@@ -24,6 +24,8 @@ const AddAdmin = () => {
   };
   return (
     <>
+      <h2>Agregar un nuevo Administrador</h2>
+      <p>Digite correctamente los campos</p>
       <FormModal onSubmit={handleSubmit}>
         <FormInput
           type='text'
@@ -57,7 +59,7 @@ const AddAdmin = () => {
           onChange={handleInputChange}
           required
         />
-        <Button4 type='submit'>Añadir nuevo Administrador</Button4>
+        <Button4 type='submit'>Añadir</Button4>
       </FormModal>
 
     </>

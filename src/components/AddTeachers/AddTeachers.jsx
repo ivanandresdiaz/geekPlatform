@@ -1,7 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { registerNewTeacher } from '../../actions/authActions';
+import { Button4 } from '../../globalStyles';
 import useForm from '../../hooks/useForm';
+import { FormInput, FormModal } from '../../uiComponents/Modal/ModalStyles';
 
 const AddTeachers = () => {
   const dispatch = useDispatch();
@@ -22,44 +24,46 @@ const AddTeachers = () => {
 
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
+    <>
+      <h2>Agregar un nuevo Profesor</h2>
+      <p>Digite correctamente los campos</p>
+      <FormModal onSubmit={handleSubmit}>
+        <FormInput
           type='text'
-          placeholder='nombre completo del docente'
+          placeholder='Nombre completo'
           name='fullName'
           value={fullName}
           onChange={handleInputChange}
           required
         />
-        <input
+        <FormInput
           type='email'
-          placeholder='correo electronico'
+          placeholder='Correo electrónico'
           name='email'
           value={email}
           onChange={handleInputChange}
           required
         />
-        <input
+        <FormInput
           type='text'
-          placeholder='contraseña'
+          placeholder='Contraseña'
           name='password'
           value={password}
           onChange={handleInputChange}
           required
         />
-        <input
+        <FormInput
           type='text'
-          placeholder='confirmacion de contraseña'
+          placeholder='Confirmación de contraseña'
           name='confirmPassword'
           value={confirmPassword}
           onChange={handleInputChange}
           required
         />
-        <button type='submit'>Añadir nuevo Profesor</button>
-      </form>
+        <Button4 type='submit'>Añadir nuevo Profesor</Button4>
+      </FormModal>
 
-    </div>
+    </>
   );
 };
 

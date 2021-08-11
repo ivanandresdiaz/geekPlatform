@@ -56,7 +56,7 @@ const Navbar = () => {
                 {button ? (
                   <Link to='/auth/login'>
                     <NavBtnLink to='/auth/login'>
-                      <Button primary>Entrar</Button>
+                      <Button whileHover={{ scale: 1.1 }} primary>Entrar</Button>
                     </NavBtnLink>
                   </Link>
                 ) : (

@@ -23,9 +23,9 @@ export const ContainerMain = styled.div`
   display: flex;
   flex-direction: column;
   z-index: 1;
-  
+
   height: auto;
-  margin: 50px 100px 50px 100px;
+  margin: 50px 100px 90px 100px;
   padding-left: 50px;
   padding-right: 50px;
 
@@ -45,16 +45,15 @@ export const ContainerTitle = styled.div`
   flex-direction: row;
   place-content: space-between;
   border-radius: 10px 10px 0px 0px;
-  background: #9c2d3b;
+  background: #992332;
   padding-left: 5px;
 `;
 
 export const TitleAdd = styled.h2`
-  color: #EEEEEE;
+  color: #eeeeee;
   padding-left: 10px;
   font-weight: 600;
   font-size: 25px !important;
-
 `;
 
 export const ContainerContent = styled.div`
@@ -70,7 +69,7 @@ export const ContainerContent = styled.div`
 
   p {
     font-weight: 500;
-    color: #FFFFFE;
+    color: #fffffe;
     padding-bottom: 10px;
   }
 `;
@@ -92,7 +91,7 @@ export const ContainerContentLoading = styled.div`
 export const LinkCortes = styled(Link)`
   p {
     font-weight: 500;
-    color: #FFFFFE;
+    color: #fffffe;
   }
 `;
 
