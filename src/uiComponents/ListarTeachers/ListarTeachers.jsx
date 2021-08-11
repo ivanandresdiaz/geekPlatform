@@ -21,7 +21,7 @@ const ListarTeachers = () => {
             <p
               style={{
                 fontWeight: '500',
-                color: '#C2C2C2',
+                color: '#FFFFFE !important',
                 marginTop: '8px',
                 marginbottom: '8px',
               }}

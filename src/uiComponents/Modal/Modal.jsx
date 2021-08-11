@@ -1,8 +1,9 @@
 import React from 'react';
+import { MdClose } from 'react-icons/md';
 import AddAdmin from '../../components/AddAdmin/AddAdmin';
 import AddTeachers from '../../components/AddTeachers/AddTeachers';
 import CreateCorte from '../../components/CreateCorte/CreateCorte';
-import { Background, CloseModalButton, ContainerModal, ModalContent } from './ModalStyles';
+import { Background, CloseModalButton, ContainerClose, ContainerModal, ModalContent } from './ModalStyles';
 
 export const Modal = ({ showModal, setShowModal }) => {
   return (
@@ -12,7 +13,9 @@ export const Modal = ({ showModal, setShowModal }) => {
           <ContainerModal showModal={showModal}>
             <ModalContent>
               <AddAdmin />
-              <CloseModalButton aria-label='Close modal' onClick={() => setShowModal((prev) => !prev)} />
+              <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModal((prev) => !prev)} >
+                <MdClose style={{ alignItems: 'center' }} />
+              </CloseModalButton>
             </ModalContent>
           </ContainerModal>
         </Background>

@@ -105,7 +105,7 @@ export const Button4 = styled.button`
   background: ${({ primary }) => (primary ? "#FF3B53" : "#9C1D2D")};
   white-space: nowrap;
   padding: ${({ big }) => (big ? "12px 64px" : "10px 20px")};
-  margin-top: 20px;
+  margin-top: 10px;
   color: #fff;
   font-family: "Montserrat", sans-serif;
   font-size: ${({ fontBig }) => (fontBig ? "18px" : "14px")};

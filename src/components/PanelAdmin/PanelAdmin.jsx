@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Suspense, lazy, useState } from 'react';
+import { useSelector } from 'react-redux';
 import ListarAdmin from '../../uiComponents/ListarAdmin/ListarAdmin';
 import ListarTeachers from '../../uiComponents/ListarTeachers/ListarTeachers';
 import ListarCortes from '../../uiComponents/ListarCortes/ListarCortes';
-import AddTeachers from '../AddTeachers/AddTeachers';
-import CreateCorte from '../CreateCorte/CreateCorte';
-import { getCortes } from '../../reducers/adminReducer';
 import { getRole } from '../../reducers/authReducer';
 import NavbarAdmin from '../Structure/NavbarAdmin';
-import { ButtonAdd, ButtonImgAdd, ButtonImgAddCortes, ContainerMain, ContainerTitle } from './PanelAdminStyles';
+import { ButtonAdd, ButtonImgAdd, ButtonImgAddCortes, ContainerContentLoading, ContainerMain, ContainerTitle, TitleAdd } from './PanelAdminStyles';
 import { Modal, ModalCortes, ModalTeacher } from '../../uiComponents/Modal/Modal';
+import { motion } from 'framer-motion';
 
 const PanelAdmin = () => {
 
@@ -33,8 +30,8 @@ const PanelAdmin = () => {
       {/* Sección agregar administradores */}
       <ContainerMain>
         <ContainerTitle>
-          <h2>Administradores</h2>
-          <ButtonAdd onClick={OpenModal}>
+          <TitleAdd>Administradores</TitleAdd>
+          <ButtonAdd animate={{}} onClick={OpenModal}>
             <ButtonImgAdd />
           </ButtonAdd>
         </ContainerTitle>
@@ -45,7 +42,7 @@ const PanelAdmin = () => {
       {/* Sección agregar profesores */}
       <ContainerMain>
         <ContainerTitle>
-          <h2>Profesores</h2>
+          <TitleAdd>Profesores</TitleAdd>
           <ButtonAdd onClick={OpenModalT}>
             <ButtonImgAdd />
           </ButtonAdd>
@@ -58,7 +55,7 @@ const PanelAdmin = () => {
 
       <ContainerMain>
         <ContainerTitle>
-          <h2>Cortes</h2>
+          <TitleAdd>Cortes</TitleAdd>
           <ButtonAdd onClick={OpenModalC}>
             <ButtonImgAddCortes />
           </ButtonAdd>

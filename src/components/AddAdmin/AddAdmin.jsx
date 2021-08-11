@@ -42,7 +42,7 @@ const AddAdmin = () => {
           required
         />
         <FormInput
-          type='text'
+          type='password'
           placeholder='Contraseña'
           name='password'
           value={password}
@@ -50,7 +50,7 @@ const AddAdmin = () => {
           required
         />
         <FormInput
-          type='text'
+          type='password'
           placeholder='Confirmación de contraseña'
           name='confirmPassword'
           value={confirmPassword}
