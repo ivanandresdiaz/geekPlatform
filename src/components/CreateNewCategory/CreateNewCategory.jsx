@@ -17,10 +17,7 @@ const CreateNewCategory = (props) => {
   };
   return (
     <div>
-      <h3>Lista de categorias</h3>
-      <div>
-        {categories.length > 0 && categories.map((category) => <p key={category}>{category}</p>)}
-      </div>
+      <h3>Crear nuevas categorias</h3>
       <p>Las categorias deben tener un nombre diferente</p>
       <form>
         <input

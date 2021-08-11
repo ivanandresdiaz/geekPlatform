@@ -1,31 +1,20 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFirestoreSubcategories, addFirestoreNewAcademicResource } from '../../actions/bancoRecursosActions';
-import { getSubCategories } from '../../reducers/bancoRecursosReducer';
+import { getLoadedURL } from '../../reducers/bancoRecursosReducer';
+import { getPhotoURL, getFullName, getUserId, getRole } from '../../reducers/authReducer';
+import useForm from '../../hooks/useForm';
+import { addFirestoreNewAcademicResource, uploadImgResource } from '../../actions/bancoRecursosActions';
 
 const AddNewAcademicResource = (props) => {
-  const { loggedUser, userId, categories } = props;
+  const { loggedUser, userId, categories, subCategories } = props;
+  const [loaded, setLoaded] = useState(true);
+  const cover = useSelector(getLoadedURL);
+  const recommendedByPhotoURL = useSelector(getPhotoURL);
   const dispatch = useDispatch();
-  const subCategories = useSelector(getSubCategories);
-  const useForm = (initialState = {}) => {
-    const [values, setValues] = useState(initialState);
-    const reset = (newStateForm = initialState) => {
-      setValues(newStateForm);
-    };
-    const handleInputChange = ({ target }) => {
-      if (target.name === 'category') {
-        dispatch(getFirestoreSubcategories(target.value));
-      }
-      setValues({
-        ...values,
-        [target.name]: target.value,
-      });
-    };
-
-    return [values, handleInputChange, reset];
-  };
   const [values, handleInputChange, reset] = useForm({
+    recommendedByPhotoURL,
+    cover,
     category: '',
     subCategory: '',
     title: '',
@@ -44,11 +33,23 @@ const AddNewAcademicResource = (props) => {
   const { category, subCategory, title, link, format, level, english, description, recommendedBy, createdAt, score, active, aceppted } = values;
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addFirestoreNewAcademicResource(values));
+    dispatch(addFirestoreNewAcademicResource(values, subCategories));
     reset();
   };
+  const handleUploadImage = (event) => {
+    dispatch(uploadImgResource(event.target.files[0]));
+  };
+  useEffect(() => {
+    if (cover.length > 0) {
+      setLoaded(false);
+    } else {
+      setLoaded(true);
+    }
+  }, [cover]);
+
   return (
     <div>
+      <h3>Añadir nuevos recursos</h3>
       <form>
         <select value={category} placeholder='categorias' name='category' onChange={handleInputChange} required>
           <option value=''> Seleccione categoria</option>
@@ -97,12 +98,17 @@ const AddNewAcademicResource = (props) => {
           onChange={handleInputChange}
           required
         />
-        <input list='subCategories' placeholder='subCategorias' name='subCategory' required value={subCategory} onChange={handleInputChange} />
+        <input list='subCategories' placeholder='palabra clave' name='subCategory' required value={subCategory} onChange={handleInputChange} required />
         <datalist id='subCategories'>
           {subCategories.length > 0 && subCategories.map((itemCategory, index) => <option key={index} value={itemCategory}>{itemCategory}</option>)}
         </datalist>
-
-        <button type='submit' onClick={handleSubmit}>Agregar recurso Academico</button>
+        <div>
+          <p>
+            Sube un archivo:
+            <input type='file' name='archivosubido' onChange={handleUploadImage} required />
+          </p>
+        </div>
+        <button type='submit' onClick={handleSubmit} disabled={loaded}>Agregar recurso Academico</button>
       </form>
     </div>
   );

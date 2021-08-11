@@ -8,7 +8,7 @@ import PanelTeacher from '../../components/PanelTeacher/PanelTeacher';
 import Error from '../../uiComponents/Error/Error';
 
 const Home = () => {
-   
+
   const role = useSelector(getRole);
   const handleRender = () => {
     switch (role) {
@@ -22,7 +22,6 @@ const Home = () => {
         return <Error />;
     }
   };
-  console.log('role activo', role);
   return (
     <div>
       {handleRender()}
