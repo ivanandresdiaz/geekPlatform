@@ -31,12 +31,10 @@ export const AdminDropdown = () => {
   const AdminDropdownItem = (props) => {
     return (
       <>
-        <Link to='/bancoRecursosAcademicos'>
-          <MenuItems>
-            <IconButton>{props.leftIcon}</IconButton>
-            {props.children}
-          </MenuItems>
-        </Link>
+        <MenuItems>
+          <IconButton>{props.leftIcon}</IconButton>
+          {props.children}
+        </MenuItems>
       </>
     );
 
@@ -50,10 +48,14 @@ export const AdminDropdown = () => {
         {fullName}
       </Welcome>
       <AdminDropdownItem leftIcon={<FaUserCircle />}>Mi perfil</AdminDropdownItem>
-      <AdminDropdownItem leftIcon={<FaShieldAlt />}>Panel Admin</AdminDropdownItem>
+      <Link to='/'>
+        <AdminDropdownItem leftIcon={<FaShieldAlt />}>Panel Admin</AdminDropdownItem>
+      </Link>
       <AdminDropdownItem leftIcon={<FaWrench />}>Configuración</AdminDropdownItem>
       <AdminDropdownItem leftIcon={<VscColorMode />}>Darkmode</AdminDropdownItem>
-      <AdminDropdownItem leftIcon={<FaFolder />}>Recursos</AdminDropdownItem>
+      <Link to='/bancoRecursosAcademicos'>
+        <AdminDropdownItem leftIcon={<FaFolder />}>Recursos</AdminDropdownItem>
+      </Link>
 
       <Button3 type='button' onClick={handleCerrarSesion} primary>Cerrar sesión</Button3>
     </Dropdown>
