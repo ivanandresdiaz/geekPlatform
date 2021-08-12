@@ -101,6 +101,7 @@ exports.createCorte = functions.https.onCall((data, context)=> {
           db.collection("cortes").doc(data.nuevaCorte).set({
             corteId: data.nuevaCorte,
             createBy: data.currentUser,
+            description: data.description,
             students: [],
             assignedTeachers: [],
             active: true,
@@ -154,6 +155,7 @@ exports.createSprint = functions.https.onCall((data, context)=> {
   const newSprint ={
     corteId: data.corteId,
     salonId: data.salonId,
+    resourcePDF: data.resourcePDF,
     title: data.title,
     description: data.description,
     date: data.date,

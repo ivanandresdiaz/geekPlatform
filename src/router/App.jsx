@@ -15,6 +15,8 @@ import '../images/other/landing-5.png';
 import Salon from '../containers/Salon/Salon';
 import CreateGroups from '../containers/CreateGroups/CreateGroups';
 import BancoRecursos from '../containers/BancoRecursos/BancoRecursos';
+import SocialGeek from '../containers/SocialGeek/SocialGeek';
+import EditProfileSocialGeek from '../components/EditProfileSocialGeek/EditProfileSocialGeek';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -81,6 +83,18 @@ const App = () => {
             exact
             path='/bancoRecursosAcademicos'
             component={BancoRecursos}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path='/socialGeek/:profileUid'
+            component={SocialGeek}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path='/socialGeek/:profileUid/edit'
+            component={EditProfileSocialGeek}
             isAuthenticated={isLoggedIn}
           />
           <Redirect to='/auth/landingPage' />

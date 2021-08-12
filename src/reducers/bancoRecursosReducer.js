@@ -53,3 +53,4 @@ export const getCategoryData = (state) => state.bancoRecursos.categoryData;
 export const getCategories = (state) => state.bancoRecursos.categories;
 export const getSubCategories = (state) => state.bancoRecursos.subCategories;
 export const getLoadedURL = (state) => state.bancoRecursos.loadedURLImage;
+

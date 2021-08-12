@@ -1,14 +1,14 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import CorteStudent from '../../containers/CorteStudent/CorteStudent';
 import NavbarStudent from '../Structure/NavbarStudent';
 
-
 const PanelStudent = () => {
+
   return (
     <>
-    <NavbarStudent />
-      <h1>Panel estudiante</h1>
-      <p>Salones</p>
-      <p>social Geek</p>
+      <NavbarStudent />
+      <CorteStudent />
     </>
   );
 };

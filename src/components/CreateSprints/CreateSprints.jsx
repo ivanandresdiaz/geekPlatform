@@ -1,11 +1,23 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
-import { createNewSprint } from '../../actions/classroomActions';
+import { createNewSprint, uploadSprintPDF } from '../../actions/classroomActions';
+import { getLoadedSprintPDF } from '../../reducers/salonReducer';
 
 const CreateSprints = (props) => {
   const { corteId, salonId } = props;
+  const loadedSprintPDF = useSelector(getLoadedSprintPDF);
+  const [loadedPDF, setLoadedPDF] = useState(true);
   const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(loadedSprintPDF);
+    if (loadedSprintPDF.length > 0) {
+      console.log('se cargo el PDF');
+      setLoadedPDF(false);
+    } else {
+      setLoadedPDF(true);
+    }
+  }, [loadedSprintPDF]);
   const [formValues, handleInputChange, reset] = useForm({
     title: '',
     description: '',
@@ -41,6 +53,10 @@ const CreateSprints = (props) => {
       supportLink3,
       supportLink4));
     reset();
+  };
+
+  const handleUploadSprintPDF = (event) => {
+    dispatch(uploadSprintPDF(event.target.files[0]));
   };
   return (
     <div>
@@ -105,7 +121,8 @@ const CreateSprints = (props) => {
           value={supportLink4}
           onChange={handleInputChange}
         />
-        <button type='submit'>Añadir Nuevo Sprint</button>
+        <input type='file' name='archivosubido' onChange={handleUploadSprintPDF} required />
+        <button type='submit' disabled={loadedPDF}>Añadir Nuevo Sprint</button>
       </form>
     </div>
   );
