@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { registerNewStudent } from '../../actions/authActions';
+import { Button4 } from '../../globalStyles';
 import useForm from '../../hooks/useForm';
 import { FormInput, FormModal } from '../../uiComponents/Modal/ModalStyles';
 
@@ -26,7 +27,7 @@ const AddStudents = (props) => {
       <FormModal onSubmit={handleSubmit}>
         <FormInput
           type='text'
-          placeholder='nombre completo'
+          placeholder='Nombre completo'
           name='fullName'
           value={fullName}
           onChange={handleInputChange}
@@ -34,29 +35,29 @@ const AddStudents = (props) => {
         />
         <FormInput
           type='email'
-          placeholder='correo electronico'
+          placeholder='Correo electrónico'
           name='email'
           value={email}
           onChange={handleInputChange}
           required
         />
         <FormInput
-          type='text'
-          placeholder='contraseña'
+          type='password'
+          placeholder='Contraseña'
           name='password'
           value={password}
           onChange={handleInputChange}
           required
         />
         <FormInput
-          type='text'
-          placeholder='confirmacion de contraseña'
+          type='password'
+          placeholder='Confirmación de contraseña'
           name='confirmPassword'
           value={confirmPassword}
           onChange={handleInputChange}
           required
         />
-        <button type='submit'>Añadir Nuevo Estudiante</button>
+        <Button4 type='submit'>Añadir Nuevo Estudiante</Button4>
       </FormModal>
 
     </div>
