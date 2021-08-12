@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "@fullcalendar/core": "^5.9.0",
     "@fullcalendar/daygrid": "^5.9.0",
+    "@fullcalendar/interaction": "^5.9.0",
     "@fullcalendar/react": "^5.9.0",
     "firebase": "^8.8.0",
     "framer-motion": "^4.1.17",
