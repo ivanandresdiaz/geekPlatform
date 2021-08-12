@@ -19,6 +19,7 @@ export const ContainerModal = styled(motion.div)`
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 5px;
+  z-index: 10;
 `;
 
 export const ContainerClose = styled(motion.div)`
@@ -49,6 +50,7 @@ export const ModalContent = styled.div`
   align-items: center;
   line-height: 1.8;
   color: #141414;
+  z-index: 9;
   p {
     margin-bottom: 1rem;
   }

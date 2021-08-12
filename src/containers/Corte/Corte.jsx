@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ListarStudentsCorte from '../../uiComponents/ListarStudentsCorte/ListarStudentsCorte';
 import AddStudents from '../../components/AddStudents/AddStudents';
@@ -7,12 +7,16 @@ import ListarSalones from '../../uiComponents/ListarSalones/ListarSalones';
 import Calendar from '../../components/Calendar/Calendar';
 import NavbarAdmin from '../../components/Structure/NavbarAdmin';
 import Footer from '../../components/Structure/Footer';
-import { ContainerMainClass, ContainerMainCorte, ContainerSub1Corte, ContainerTitleCorte } from './CorteStyles';
+import { ContainerAddStudentCorte, ContainerMainClass, ContainerMainCorte, ContainerSub1Corte, ContainerSub2Corte, ContainerTitleCorte } from './CorteStyles';
 import { Img } from '../../styles/PresentationStyles';
 import imgcorte from '../../images/other/corte.png'
+import { ModalEstudiantes } from '../../uiComponents/Modal/Modal';
+import { ButtonAdd, ButtonImgAdd } from '../../components/PanelAdmin/PanelAdminStyles';
 
 const Corte = (props) => {
   const { match: { params: { corteId } } } = props;
+  const [showModalE, setShowModalE] = useState(false);
+  const OpenModalE = () => { setShowModalE((prevE) => !prevE); };
   return (
     <>
       <NavbarAdmin />
@@ -28,25 +32,19 @@ const Corte = (props) => {
           <ContainerMainClass>
             <ListarSalones corteId={corteId} />
           </ContainerMainClass>
+          <ContainerAddStudentCorte>
+            <h1>Añadir estudiantes</h1>
+            <ButtonAdd animate={{}} onClick={OpenModalE}>
+              <ButtonImgAdd />
+            </ButtonAdd>
+          </ContainerAddStudentCorte>
         </ContainerSub1Corte>
-        <ContainerSub1Corte>
+        <ContainerSub2Corte>
           <Calendar corteId={corteId} />
-        </ContainerSub1Corte>
-
+        </ContainerSub2Corte>
       </ContainerMainCorte>
-
-      <div>
-        <Link to='/bancoRecursosAcademicos'>
-          Banco de recursos Academicos LINKKK!!!
-        </Link>
-
-        <h3>Añadir estudiantes</h3>
-        <AddStudents corteId={corteId} />
-        {/* <h1>Aqui va el calendario grupal(proximamente)</h1>
-
-        <h1>Aqui va el calendario de clases (proximamente)</h1> */}
-        <ListarStudentsCorte corteId={corteId} />
-      </div>
+      <ModalEstudiantes corteId={corteId} showModalE={showModalE} setShowModalE={setShowModalE} />
+      {/* <ListarStudentsCorte corteId={corteId} /> */}
       <Footer />
     </>
   );

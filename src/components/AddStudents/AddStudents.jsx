@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { registerNewStudent } from '../../actions/authActions';
 import useForm from '../../hooks/useForm';
+import { FormInput, FormModal } from '../../uiComponents/Modal/ModalStyles';
 
 const AddStudents = (props) => {
   const { corteId } = props;
@@ -22,8 +23,8 @@ const AddStudents = (props) => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
+      <FormModal onSubmit={handleSubmit}>
+        <FormInput
           type='text'
           placeholder='nombre completo'
           name='fullName'
@@ -31,7 +32,7 @@ const AddStudents = (props) => {
           onChange={handleInputChange}
           required
         />
-        <input
+        <FormInput
           type='email'
           placeholder='correo electronico'
           name='email'
@@ -39,7 +40,7 @@ const AddStudents = (props) => {
           onChange={handleInputChange}
           required
         />
-        <input
+        <FormInput
           type='text'
           placeholder='contraseña'
           name='password'
@@ -47,7 +48,7 @@ const AddStudents = (props) => {
           onChange={handleInputChange}
           required
         />
-        <input
+        <FormInput
           type='text'
           placeholder='confirmacion de contraseña'
           name='confirmPassword'
@@ -56,7 +57,7 @@ const AddStudents = (props) => {
           required
         />
         <button type='submit'>Añadir Nuevo Estudiante</button>
-      </form>
+      </FormModal>
 
     </div>
   );

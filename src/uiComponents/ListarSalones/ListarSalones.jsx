@@ -13,13 +13,20 @@ const ListarSalones = (props) => {
     dispatch(getFirestoreSalones(corteId));
   }, []);
 
+  // const color={
+  //   background: ;
+  // }
+
   return (
     <>
       <>
         {salones.length > 0 && salones.map((salon) => (
           <ContainerClasses key={salon.salonId}>
             <Link to={`/corte/${corteId}/${salon.salonId}`}>
-              <p>{salon.salonName}</p>
+              <>
+                <p>{salon.salonName}</p>
+                <img src={salon.salonImg} />
+              </>
             </Link>
           </ContainerClasses>
 
