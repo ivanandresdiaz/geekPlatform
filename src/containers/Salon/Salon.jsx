@@ -7,6 +7,8 @@ import { getFirestoreSalon } from '../../actions/classroomActions';
 import CreateSprints from '../../components/CreateSprints/CreateSprints';
 import ListarSprints from '../../uiComponents/ListarSprints/ListarSprints';
 import ListarWorkGroups from '../../uiComponents/ListarWorkGroups/ListarWorkGroups';
+import NavbarAdmin from '../../components/Structure/NavbarAdmin';
+import Footer from '../../components/Structure/Footer';
 
 const Salon = (props) => {
   const role = useSelector(getRole);
@@ -21,7 +23,8 @@ const Salon = (props) => {
     console.log(sprintsArray);
   }
   return (
-    <div>
+    <>
+      <NavbarAdmin />
       <h1>
         Bienvenido al salon
         {' '}
@@ -38,7 +41,8 @@ const Salon = (props) => {
       )}
 
       <ListarWorkGroups corteId={corteId} salonId={salon} />
-    </div>
+      <Footer />
+    </>
   );
 };
 

@@ -1,17 +1,11 @@
 import React, { useEffect } from 'react';
-import FullCalendar from '@fullcalendar/react'; // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import FullCalendar from '@fullcalendar/react'; // Componente
+import dayGridPlugin from '@fullcalendar/daygrid';  // plugins de dias...
+import interactionPlugin from "@fullcalendar/interaction" // Plugin de interacion
+import esLocale from '@fullcalendar/core/locales/es'; // idioma
 import { useDispatch, useSelector } from 'react-redux';
 import { getFirestoreAllSprints } from '../../actions/classroomActions';
 import { getAllSprints } from '../../reducers/salonReducer';
-
-const prueba = [
-  { title: 'event 1', date: '2021-08-07' },
-  { title: 'event 1', date: '2021-08-09' },
-  { title: 'event 1', date: '2021-08-12' },
-  { title: 'event 1', date: '2021-08-17' },
-  { title: 'event 2', date: '2021-08-08' },
-];
 
 const Calendar = (props) => {
   const { corteId } = props;
@@ -23,14 +17,25 @@ const Calendar = (props) => {
     }
   }, []);
 
+  const handleEvent = (el) =>{
+    el.event.url === "" 
+    ?alert("Evento sin establecer")
+    : alert("Deseas ir el evento") // logica para hacer si existe una url
+  }
+
   return (
     <div>
       <h1>Calendar GeekPlatform</h1>
       <FullCalendar
-        plugins={[dayGridPlugin]}
-        initialView='dayGridMonth'
-        weekends={true}
-        events={allSprints}
+            plugins={[dayGridPlugin,interactionPlugin]} // plugins
+            weekends={true} // para mostrar los dias de fines de semana
+            events={allSprints} // todos los eventos registrados
+            eventClick = {handleEvent} // darle click a un evento hacer una accion 
+            editable={true} //para moverlo
+            locales = {esLocale} //idioma pack
+            locale= 'es' // agregar idioma 
+            selectable={true}  // nos servira para calcular y dibujar un conjunto de fechas
+            unselectAuto={true}
       />
     </div>
   );

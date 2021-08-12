@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container } from "../globalStyles";
+import { motion } from "framer-motion";
 
 const Nav = styled.nav`
   background: #ffffff;
@@ -116,7 +117,7 @@ const NavItemBtn = styled.div`
   }
 `;
 
-const NavBtnLink = styled.div`
+const NavBtnLink = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;

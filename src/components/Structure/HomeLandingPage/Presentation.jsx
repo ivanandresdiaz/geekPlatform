@@ -35,8 +35,10 @@ const Presentation = ({
                     <InfoRow imgStart={imgStart}>
                         <InfoColumn>
                             <TextWrapper>
-                                <Heading lightText={lightText}>{headline}</Heading>
-                                <Subtitle lightTextDesc={lightTextDesc}>{description}</Subtitle>
+                                <Heading initial={{ x: -300 }} animate={{ x: 0 }}
+                                    transition={{ delay: 0.1, type: 'spring', stiffness: 40 }} lightText={lightText}>{headline}</Heading>
+                                <Subtitle initial={{ x: -300 }} animate={{ x: 0 }}
+                                    transition={{ delay: 0.08, type: 'spring', stiffness: 40 }} lightTextDesc={lightTextDesc}>{description}</Subtitle>
                                 <Link to='/auth/login'>
                                     <FooterBtnLink to="/auth/login">
                                         <Button2 fontBig primary>¡Entra ahora!</Button2>
@@ -46,7 +48,8 @@ const Presentation = ({
                             </TextWrapper>
                         </InfoColumn>
                         <InfoColumn>
-                            <ImgWrapper start={start}>
+                            <ImgWrapper initial={{ x: 300 }} animate={{ x: 0 }}
+                                transition={{ delay: 0.1, type: 'spring', stiffness: 40 }} start={start}>
                                 <Img src={img} alt={alt} />
                             </ImgWrapper>
                         </InfoColumn>

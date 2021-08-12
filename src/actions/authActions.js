@@ -6,9 +6,11 @@ import { firebase, googleAuthProvider, db, functions } from '../firebase/firebas
 export const login = (uid, displayName, role) => async (dispatch, getState) => {
   switch (role) {
     case 'student': {
+      console.log('entra estudiatne');
       db.collection('students').doc(uid).get()
         .then((doc) => {
           const data = { ...doc.data(), id: doc.id };
+          console.log(data);
           dispatch({ type: types.login, payload: { ...data, displayName, role } });
         })
         .catch((err) => {

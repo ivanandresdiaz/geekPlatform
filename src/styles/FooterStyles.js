@@ -8,6 +8,7 @@ const FooterContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: start;
+  margin-top: 60px;
 `;
 
 const FooterSubscription = styled.section`

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { MdClose } from "react-icons/md";
+import { motion } from "framer-motion";
 
 export const Background = styled.div`
   position: fixed;
@@ -10,22 +10,34 @@ export const Background = styled.div`
   background: rgba(0, 0, 0, 0.6);
 `;
 
-export const ContainerModal = styled.div`
+export const ContainerModal = styled(motion.div)`
   position: fixed;
   background: white;
   width: 730px;
-  height: 361px;
+  height: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 5px;
+  z-index: 10;
 `;
 
-export const CloseModalButton = styled(MdClose)`
+export const ContainerClose = styled(motion.div)`
   cursor: pointer;
   position: fixed;
   top: 20px;
   right: 20px;
   width: 32px;
+  height: 32px;
+  padding: 0;
+  z-index: 10;
+`;
+export const CloseModalButton = styled(motion.button)`
+  cursor: pointer;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 60px;
   height: 32px;
   padding: 0;
   z-index: 10;
@@ -38,6 +50,7 @@ export const ModalContent = styled.div`
   align-items: center;
   line-height: 1.8;
   color: #141414;
+  z-index: 9;
   p {
     margin-bottom: 1rem;
   }
@@ -88,17 +101,20 @@ export const LabelModal = styled.label`
 export const FormInput = styled.input`
   padding: 10px 20px;
   border-radius: 5px;
-  margin-right: 10px;
   outline: none;
-  width: 300px;
+  width: 250px;
   margin-bottom: 20px;
-  margin-top: 10px;
+  margin-top: 8px;
   border: none;
   font-size: 14px;
-  border: 1px solid #0E172C;
+  border: 1px solid #f0f0f0;
+
+  &:focus {
+    color: #ff3b53;
+  }
 
   &::placeholder {
-    color: #242424;
+    color: #525151;
   }
 
   @media screen and (max-width: 820px) {
@@ -127,4 +143,3 @@ export const FormTextArea = styled.textarea`
     margin: 0 0 16px 0;
   }
 `;
-

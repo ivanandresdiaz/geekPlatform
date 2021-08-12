@@ -4,6 +4,8 @@ import { listarAdmin } from '../../actions/adminActions';
 import { ContainerContent } from '../../components/PanelAdmin/PanelAdminStyles';
 import { getAdmin } from '../../reducers/adminReducer';
 
+
+
 const ListarAdmin = () => {
   const dispatch = useDispatch();
   const admin = useSelector(getAdmin);
