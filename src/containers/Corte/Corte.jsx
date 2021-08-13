@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ListarStudentsCorte from '../../uiComponents/ListarStudentsCorte/ListarStudentsCorte';
 import AddStudents from '../../components/AddStudents/AddStudents';
 import CreateClassroom from '../../components/CreateClassroom/CreateClassroom';
@@ -9,14 +10,22 @@ import NavbarAdmin from '../../components/Structure/NavbarAdmin';
 import Footer from '../../components/Structure/Footer';
 import { ContainerAddStudentCorte, ContainerMainClass, ContainerMainCorte, ContainerSub1Corte, ContainerSub2Corte, ContainerTitleCorte } from './CorteStyles';
 import { Img } from '../../styles/PresentationStyles';
-import imgcorte from '../../images/other/corte.png'
+import imgcorte from '../../images/other/corte.png';
 import { ModalEstudiantes } from '../../uiComponents/Modal/Modal';
 import { ButtonAdd, ButtonImgAdd } from '../../components/PanelAdmin/PanelAdminStyles';
+import { requestWeekStudent, cancelRequestWeekStudent } from '../../actions/geekyPuntos';
 
 const Corte = (props) => {
+  const dispatch = useDispatch();
   const { match: { params: { corteId } } } = props;
   const [showModalE, setShowModalE] = useState(false);
   const OpenModalE = () => { setShowModalE((prevE) => !prevE); };
+  const handleRequestWeekStudent = () => {
+    dispatch(requestWeekStudent(corteId));
+  };
+  const handleCancelRequestWeekStudent = () => {
+    dispatch(cancelRequestWeekStudent(corteId));
+  };
   return (
     <>
       <NavbarAdmin />
@@ -27,7 +36,7 @@ const Corte = (props) => {
               {' '}
               {corteId}
             </h1>
-            <img src={imgcorte} />
+            <img src={imgcorte} alt='corte Imagen' />
           </ContainerTitleCorte>
           <ContainerMainClass>
             <ListarSalones corteId={corteId} />
@@ -43,8 +52,10 @@ const Corte = (props) => {
           <Calendar corteId={corteId} />
         </ContainerSub2Corte>
       </ContainerMainCorte>
+      <button type='button' onClick={handleRequestWeekStudent}>activar Eleccion del estudiante de la semana</button>
+      <button type='button' onClick={handleCancelRequestWeekStudent}>desactivar del estudiante de la semana</button>
       <ModalEstudiantes corteId={corteId} showModalE={showModalE} setShowModalE={setShowModalE} />
-      {/* <ListarStudentsCorte corteId={corteId} /> */}
+      <ListarStudentsCorte corteId={corteId} />
       <Footer />
     </>
   );

@@ -5,10 +5,13 @@ import ListarStudentsCorte from '../../uiComponents/ListarStudentsCorte/ListarSt
 import ListarSalones from '../../uiComponents/ListarSalones/ListarSalones';
 import Calendar from '../../components/Calendar/Calendar';
 import { getCorteId, getUserId } from '../../reducers/authReducer';
+import ListarStudentsToVote from '../../uiComponents/ListarStudentsToVote/ListarStudentsToVote';
 
 const CorteStudent = (props) => {
   const corteId = useSelector(getCorteId);
   const loggedUserId = useSelector(getUserId);
+  const loggedUserVoted = useSelector((state) => state.auth.voted);
+  console.log('loggedUserVoted', loggedUserVoted);
   return (
     <div>
       <h1>
@@ -33,6 +36,7 @@ const CorteStudent = (props) => {
         <Calendar corteId={corteId} />
         <h1>Aqui va el calendario de clases (proximamente)</h1>
         <ListarStudentsCorte corteId={corteId} />
+        {loggedUserVoted && <ListarStudentsToVote />}
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ export const Modal = ({ showModal, setShowModal }) => {
           <ContainerModal showModal={showModal}>
             <ModalContent>
               <AddAdmin />
-              <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModal((prev) => !prev)} >
+              <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModal((prev) => !prev)}>
                 <MdClose style={{ alignItems: 'center' }} />
               </CloseModalButton>
             </ModalContent>
@@ -33,7 +33,7 @@ export const ModalTeacher = ({ showModalT, setShowModalT }) => {
           <ContainerModal showModalT={showModalT}>
             <ModalContent>
               <AddTeachers />
-              <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModalT((prevT) => !prevT)} >
+              <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModalT((prevT) => !prevT)}>
                 <MdClose style={{ alignItems: 'center' }} />
               </CloseModalButton>
             </ModalContent>
@@ -63,14 +63,14 @@ export const ModalCortes = ({ showModalC, setShowModalC }) => {
   );
 };
 
-export const ModalEstudiantes = ({ showModalE, setShowModalE }) => {
+export const ModalEstudiantes = ({ showModalE, setShowModalE, corteId }) => {
   return (
     <>
       {showModalE ? (
         <Background>
           <ContainerModal showModalE={showModalE}>
             <ModalContent>
-              <AddStudents />
+              <AddStudents corteId={corteId} />
               <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModalE((prevE) => !prevE)}>
                 <MdClose style={{ alignItems: 'center' }} />
               </CloseModalButton>

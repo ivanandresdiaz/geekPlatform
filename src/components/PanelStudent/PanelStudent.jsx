@@ -6,7 +6,6 @@ import NavbarStudent from '../Structure/NavbarStudent';
 
 const PanelStudent = () => {
   const corteId = useSelector(getCorteId);
-  console.log('Corte id', corteId);
   return (
     <>
       <NavbarStudent />

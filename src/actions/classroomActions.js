@@ -10,10 +10,10 @@ export const getFirestoreSalon = (corteId, salonId) => (dispatch, getState) => {
     .catch((err) => console.log(err));
 };
 
-export const createNewSprint = (corteId, salonId, title, description, date, dateEnd, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4) => async (dispatch, getState) => {
+export const createNewSprint = (corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4) => async (dispatch, getState) => {
   try {
     const resourcePDF = getState().salon.loadedSprintPDF;
-    if (Date.parse(date) > Date.parse(dateEnd)) {
+    if (Date.parse(start) > Date.parse(end)) {
       alert('la fecha de entrega no puede ser menor a la fechan inicial');
     } else {
       const createSprint = functions.httpsCallable('createSprint');
@@ -22,8 +22,8 @@ export const createNewSprint = (corteId, salonId, title, description, date, date
         title,
         resourcePDF,
         description,
-        date,
-        dateEnd,
+        start,
+        end,
         deliveryLink,
         supportLink1,
         supportLink2,
@@ -40,8 +40,6 @@ export const createNewSprint = (corteId, salonId, title, description, date, date
   }
 
 };
-  // db.collection('cortes').doc(corteId).collection('classrooms').doc(salonId)
-  //   .collection('sprints')
 export const getFirestoreSprints = (corteId, salonId) => async (dispatch, getState) => {
   db.collection(`/cortes/${corteId}/sprints`).where('salonId', '==', salonId).get()
     .then((snapshot) => {

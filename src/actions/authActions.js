@@ -6,11 +6,9 @@ import { firebase, googleAuthProvider, db, functions } from '../firebase/firebas
 export const login = (uid, displayName, role) => async (dispatch, getState) => {
   switch (role) {
     case 'student': {
-      console.log('entra estudiatne');
       db.collection('students').doc(uid).get()
         .then((doc) => {
           const data = { ...doc.data(), id: doc.id };
-          console.log(data);
           dispatch({ type: types.login, payload: { ...data, displayName, role } });
         })
         .catch((err) => {
@@ -177,10 +175,12 @@ export const registerNewTeacher = (email, password, fullName) => async (dispatch
 };
 
 export const registerNewStudent = (email, password, fullName, corteId) => async (dispatch) => {
+  console.log(email, password, fullName, corteId);
   const addStudentCorte = functions.httpsCallable('addStudentCorte');
   addStudentCorte({ corteId, email, password, fullName })
     .then((doc) => {
       const user = doc.data;
+      console.log(user);
       const data = {
         uid: user.uid,
         email,
@@ -193,6 +193,7 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
         website: '',
         city: '',
         whatsapp: '',
+        voted: true,
         skills: [],
         github: '',
         facebook: '',
@@ -213,7 +214,7 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
           alert(`estudiante ${data.fullName} ha sido creado`);
           dispatch({ type: 'addNewStudent', payload: data });
         });
-    }).catch((err) => alert(err));
+    }).catch((err) => alert('error en el registro estudiante', err));
 };
 
 export const updateFirestoreUser = (uid, newDataStudent) => async () => {

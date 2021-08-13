@@ -1,0 +1,42 @@
+/* eslint-disable import/prefer-default-export */
+import { firebase, googleAuthProvider, db, functions } from '../firebase/firebaseConfig';
+
+export const requestWeekStudent = (corteId) => (dispatch, getState) => {
+  const { studentsCorte } = getState().students;
+  const batch = db.batch();
+  studentsCorte.forEach((student) => {
+    batch.update(db.collection('students').doc(student.uid), { voted: true });
+  });
+  batch
+    .commit()
+    .then(() => {
+      alert('activada votacion del estudiante de la semana');
+    })
+    .catch((error) => console.error(error));
+};
+export const cancelRequestWeekStudent = (corteId) => (dispatch, getState) => {
+  const { studentsCorte } = getState().students;
+  const batch = db.batch();
+  studentsCorte.forEach((student) => {
+    batch.update(db.collection('students').doc(student.uid), { voted: false });
+  });
+  batch
+    .commit()
+    .then(() => {
+      alert('desactivada votacion del estudiante de la semana');
+    })
+    .catch((error) => console.error(error));
+};
+
+export const choseWeekStudent = (uid, fullName) => async (dispatch, getState) => {
+  const loggedUser = getState().auth.uid;
+  if (uid === loggedUser) {
+    alert('no puedes seleccionarte a ti mismo');
+  } else {
+    const addGeekyPunto = functions.httpsCallable('addGeekyPunto');
+    addGeekyPunto({ uid }).then((result) => {
+      alert(`has votado por ${fullName}`);
+    });
+  }
+
+};
