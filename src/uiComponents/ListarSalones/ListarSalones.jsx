@@ -21,7 +21,8 @@ const ListarSalones = (props) => {
     <>
       <>
         {salones.length > 0 && salones.map((salon) => (
-          <ContainerClasses key={salon.salonId}>
+          // Aqui tiene que llegar el color!!!!!!!!!!!!!!!!!!!!!!!
+          <ContainerClasses key={salon.salonId}> 
             <Link to={`/corte/${corteId}/${salon.salonId}`}>
               <>
                 <p>{salon.salonName}</p>
@@ -29,7 +30,6 @@ const ListarSalones = (props) => {
               </>
             </Link>
           </ContainerClasses>
-
         ))}
       </>
 
