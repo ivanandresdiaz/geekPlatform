@@ -10,18 +10,20 @@ export const getFirestoreSalon = (corteId, salonId) => (dispatch, getState) => {
     .catch((err) => console.log(err));
 };
 
-export const createNewSprint = (corteId, salonId, title, description, date, dateEnd, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4) => async (dispatch, getState) => {
+export const createNewSprint = (corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4) => async (dispatch, getState) => {
   try {
-    if (Date.parse(date) > Date.parse(dateEnd)) {
+    const resourcePDF = getState().salon.loadedSprintPDF;
+    if (Date.parse(start) > Date.parse(end)) {
       alert('la fecha de entrega no puede ser menor a la fechan inicial');
     } else {
       const createSprint = functions.httpsCallable('createSprint');
       const data = { corteId,
         salonId,
         title,
+        resourcePDF,
         description,
-        date,
-        dateEnd,
+        start,
+        end,
         deliveryLink,
         supportLink1,
         supportLink2,
@@ -38,8 +40,6 @@ export const createNewSprint = (corteId, salonId, title, description, date, date
   }
 
 };
-  // db.collection('cortes').doc(corteId).collection('classrooms').doc(salonId)
-  //   .collection('sprints')
 export const getFirestoreSprints = (corteId, salonId) => async (dispatch, getState) => {
   db.collection(`/cortes/${corteId}/sprints`).where('salonId', '==', salonId).get()
     .then((snapshot) => {
@@ -191,4 +191,33 @@ export const deleteFirestoreGroups = (corteId, salonId, id) => async (dispatch) 
   await db.collection(`/cortes/${corteId}/classrooms/${salonId}/groups`).doc(id).delete();
   alert('se ha eliminado el grupo');
   dispatch({ type: 'deleteFirestoreGroups', payload: id });
+};
+
+export const uploadSprintPDF = (file) => async (dispatch, getState) => {
+  console.log(file.name);
+  const refStorage = firebase.storage().ref(`sprintDocs/${file.name}`);
+  const task = refStorage.put(file);
+
+  task.on(
+    'state_changed',
+    (snapshot) => {
+      const porcentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log(`porcentaje de carga ${porcentaje}`);
+      // $('.determinate').attr('style', `width: ${porcentaje}%`);
+    },
+    (err) => {
+      console.log(`Error subiendo archivo = > ${err.message}`);
+    },
+    () => {
+      task.snapshot.ref
+        .getDownloadURL()
+        .then((url) => {
+          dispatch({ type: 'uploadSprintPDF', payload: url });
+          // sessionStorage.setItem('imgNewPost', url);
+        })
+        .catch((err) => {
+          console.log(`Error obteniendo downloadURL = > ${err}`);
+        });
+    },
+  );
 };

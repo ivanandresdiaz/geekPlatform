@@ -101,6 +101,7 @@ exports.createCorte = functions.https.onCall((data, context)=> {
           db.collection("cortes").doc(data.nuevaCorte).set({
             corteId: data.nuevaCorte,
             createBy: data.currentUser,
+            description: data.description,
             students: [],
             assignedTeachers: [],
             active: true,
@@ -110,6 +111,7 @@ exports.createCorte = functions.https.onCall((data, context)=> {
                   salonId: "sigloxxl",
                   salonName: "Siglo XXI",
                   corteId: data.nuevaCorte,
+                  salonImg: "https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/XXI.png?alt=media&token=f1c0d3e7-103d-40b4-bb35-65c357449240",
                   agendaTutorials: [],
                   groups: [],
                   sprints: [],
@@ -118,6 +120,7 @@ exports.createCorte = functions.https.onCall((data, context)=> {
                 .collection("classrooms").doc("tecnico").set({
                   salonId: "tecnico",
                   salonName: "Tecnico",
+                  salonImg: "https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/ST.png?alt=media&token=57f16ce5-a5d5-4d01-a50c-0526224263f5",
                   corteId: data.nuevaCorte,
                   agendaTutorials: [],
                   groups: [],
@@ -128,6 +131,7 @@ exports.createCorte = functions.https.onCall((data, context)=> {
                   salonId: "designThinking",
                   salonName: "Design Thinking",
                   corteId: data.nuevaCorte,
+                  salonImg: "https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/DT.png?alt=media&token=bb4d47cf-1c9e-4319-8b3b-ebdb0b25cd5f",
                   agendaTutorials: [],
                   groups: [],
                   sprints: [],
@@ -139,6 +143,7 @@ exports.createCorte = functions.https.onCall((data, context)=> {
                   students: [],
                   corteId: data.nuevaCorte,
                   agendaTutorials: [],
+                  salonImg: "https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/EMPL.png?alt=media&token=bb3ea435-e151-4306-aba0-98b7200e86e8",
                   groups: [],
                   sprints: [],
                 });
@@ -154,10 +159,11 @@ exports.createSprint = functions.https.onCall((data, context)=> {
   const newSprint ={
     corteId: data.corteId,
     salonId: data.salonId,
+    resourcePDF: data.resourcePDF,
     title: data.title,
     description: data.description,
-    date: data.date,
-    dateEnd: data.dateEnd,
+    start: data.start,
+    end: data.end,
     deliveryLink: data.deliveryLink,
     supportLink1: data.supportLink1,
     supportLink2: data.supportLink2,
@@ -173,4 +179,22 @@ exports.createSprint = functions.https.onCall((data, context)=> {
       .catch(()=> {
         return {message: "ha ocurrido un error"};
       });
+});
+
+exports.addGeekyPunto = functions.https.onCall((data, context)=> {
+  if (!context.auth) {
+    throw new functions.https.HttpsError(
+        "solo usuarios autenticados puede votar"
+    );
+  }
+  const user = admin.firestore().collection("students").doc(data.uid);
+  return user.get().then((doc) => {
+    return user.update({
+      geekyPuntos: doc.data().geekyPuntos+1,
+    }).then((result) => {
+      admin.firestore().collection("students").doc(context.auth.uid)
+          .update({voted: false});
+      return result;
+    });
+  });
 });

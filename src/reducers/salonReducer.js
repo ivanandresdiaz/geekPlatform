@@ -4,6 +4,7 @@ const initialState = {
   sprints: [],
   allSprints: [],
   workGroups: [],
+  loadedSprintPDF: '',
   plantillaCreatingGroups: {
     title: 'Default plantilla grupos',
     id: 'defaultPlantillaGrupos',
@@ -59,6 +60,12 @@ export const salonReducer = (state = initialState, action) => {
         sprints: [...state.sprints, action.payload],
         allSprints: [...state.allSprints, action.payload],
       };
+
+    case 'uploadSprintPDF':
+      return {
+        ...state,
+        loadedSprintPDF: action.payload,
+      };
     case 'deleteSprint': {
       const updatedSprints = state.sprints.filter((sprint) => sprint.id !== action.payload);
       const updatedAllSprints = state.allSprints.filter((sprint) => sprint.id !== action.payload);
@@ -97,3 +104,4 @@ export const getSprints = (state) => state.salon.sprints;
 export const getAllSprints = (state) => state.salon.allSprints;
 export const getWorkGroups = (state) => state.salon.workGroups;
 export const getPlantillaCreatingGroups = (state) => state.salon.plantillaCreatingGroups;
+export const getLoadedSprintPDF = (state) => state.salon.loadedSprintPDF;

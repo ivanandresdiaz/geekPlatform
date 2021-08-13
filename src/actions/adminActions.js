@@ -1,11 +1,11 @@
 // aqui van todas las acciones del Administrador
 import { firebase, googleAuthProvider, db, functions } from '../firebase/firebaseConfig';
 
-export const createNewCorte = (nuevaCorte) => async (dispatch, getState) => {
+export const createNewCorte = (nuevaCorte, description) => async (dispatch, getState) => {
   try {
     const currentUser = getState().auth.fullName;
     const createNewCorte = functions.httpsCallable('createCorte');
-    await createNewCorte({ nuevaCorte, currentUser });
+    await createNewCorte({ nuevaCorte, currentUser, description });
     alert('nueva corte creada');
   } catch (error) {
     alert(error.message);

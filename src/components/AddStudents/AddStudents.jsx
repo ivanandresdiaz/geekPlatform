@@ -20,6 +20,8 @@ const AddStudents = (props) => {
     if (formValues.password === formValues.confirmPassword) {
       dispatch(registerNewStudent(email, password, fullName, corteId));
       reset();
+    } else {
+      alert('las contraseñas no coinciden');
     }
   };
   return (

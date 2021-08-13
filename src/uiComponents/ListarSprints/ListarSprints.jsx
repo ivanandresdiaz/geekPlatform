@@ -36,6 +36,7 @@ const ListarSprints = (props) => {
             <a href={sprint.supportLink2}>{sprint.supportLink2}</a>
             <a href={sprint.supportLink3}>{sprint.supportLink3}</a>
             <a href={sprint.supportLink4}>{sprint.supportLink4}</a>
+            <button type='button'> Descargar PDF (Aun no disponible)</button>
             <button type='button' onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</button>
           </div>
         ))}

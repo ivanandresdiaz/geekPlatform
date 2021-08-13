@@ -3,8 +3,8 @@
 import { firebase, googleAuthProvider, db, functions } from '../firebase/firebaseConfig';
 
 export const getFirestoreStudentsCorte = (corteId) => (dispatch, getState) => {
-  
-  db.collection(`cortes/${corteId}/students`).get()
+
+  db.collection('students').where('corteId', '==', corteId).get()
     .then((querySnapshot) => {
       const data = [];
       querySnapshot.forEach((doc) => {

@@ -13,19 +13,34 @@ const Home = () => {
   const handleRender = () => {
     switch (role) {
       case 'admin':
-        return <PanelAdmin />;
+        return (
+          <div>
+            <PanelAdmin />
+            <Footer />
+          </div>
+        );
       case 'student':
-        return <PanelStudent />;
+        return (
+          <div>
+            <PanelStudent />
+            <Footer />
+          </div>
+        );
       case 'teacher':
-        return <PanelTeacher />;
+        return (
+          <div>
+            <PanelTeacher />
+            <Footer />
+          </div>
+        );;
       default:
         return <Error />;
     }
   };
   return (
     <div>
-      {handleRender()}
-      <Footer />
+      {role && handleRender()}
+
     </div>
   );
 };

@@ -10,9 +10,10 @@ const CreateCorte = () => {
   const [formValues, handleInputChange, reset] = useForm(
     {
       corteName: '',
+      description: '',
     },
   );
-  const { corteName } = formValues;
+  const { corteName, description } = formValues;
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(createNewCorte(corteName));
@@ -31,6 +32,7 @@ const CreateCorte = () => {
           onChange={handleInputChange}
           required
         />
+        <textarea name='description' cols='30' rows='10' value={description} placeholder='breve presentacion' onChange={handleInputChange} required />
         <Button4 type='submit'>Crear</Button4>
       </FormModal>
 

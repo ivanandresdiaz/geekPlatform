@@ -3,15 +3,26 @@
 import { types } from '../types';
 import { firebase, googleAuthProvider, db, functions } from '../firebase/firebaseConfig';
 
-export const login = (uid, displayName, role) => {
-  return {
-    type: types.login,
-    payload: {
-      uid,
-      displayName,
-      role,
-    },
-  };
+export const login = (uid, displayName, role) => async (dispatch, getState) => {
+  switch (role) {
+    case 'student': {
+      db.collection('students').doc(uid).get()
+        .then((doc) => {
+          const data = { ...doc.data(), id: doc.id };
+          dispatch({ type: types.login, payload: { ...data, displayName, role } });
+        })
+        .catch((err) => {
+          alert(`algo salio mal en el Login Error: ${err.message}`);
+        }); }
+      break;
+
+    default: {
+      dispatch({
+        type: types.login,
+        payload: { uid, displayName, role } }); }
+      break;
+  }
+
 };
 export const logout = () => {
   return { type: types.logout };
@@ -164,10 +175,12 @@ export const registerNewTeacher = (email, password, fullName) => async (dispatch
 };
 
 export const registerNewStudent = (email, password, fullName, corteId) => async (dispatch) => {
+  console.log(email, password, fullName, corteId);
   const addStudentCorte = functions.httpsCallable('addStudentCorte');
   addStudentCorte({ corteId, email, password, fullName })
     .then((doc) => {
       const user = doc.data;
+      console.log(user);
       const data = {
         uid: user.uid,
         email,
@@ -175,17 +188,19 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
         password,
         corteId,
         photoURL: '',
+        cover: '',
         bio: '',
         website: '',
-        location: '',
+        city: '',
         whatsapp: '',
+        voted: true,
         skills: [],
         github: '',
         facebook: '',
         twitter: '',
         instagram: '',
         linkedin: '',
-        geekyPuntos: '',
+        geekyPuntos: 100,
         sprintsAssigned: [],
         graduated: false,
         tutorialsRequired: [],
@@ -193,12 +208,21 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
         wakatime: [],
         active: true,
       };
-      db.collection('cortes').doc(corteId)
-        .collection('students').doc(user.uid)
+      db.collection('students').doc(user.uid)
         .set(data)
         .then(() => {
           alert(`estudiante ${data.fullName} ha sido creado`);
           dispatch({ type: 'addNewStudent', payload: data });
         });
-    }).catch((err) => alert(err));
+    }).catch((err) => alert('error en el registro estudiante', err));
+};
+
+export const updateFirestoreUser = (uid, newDataStudent) => async () => {
+  try {
+    await db.collection('students').doc(uid).update(newDataStudent);
+    alert('actualizacion exitosa');
+  } catch (error) {
+    alert('algo salio mal con la actualizacion');
+  }
+
 };

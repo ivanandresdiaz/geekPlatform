@@ -98,16 +98,12 @@ const AddNewAcademicResource = (props) => {
           onChange={handleInputChange}
           required
         />
-        <input list='subCategories' placeholder='palabra clave' name='subCategory' required value={subCategory} onChange={handleInputChange} required />
+        <input list='subCategories' placeholder='palabra clave' name='subCategory' value={subCategory} onChange={handleInputChange} required />
         <datalist id='subCategories'>
           {subCategories.length > 0 && subCategories.map((itemCategory, index) => <option key={index} value={itemCategory}>{itemCategory}</option>)}
         </datalist>
-        <div>
-          <p>
-            Sube un archivo:
-            <input type='file' name='archivosubido' onChange={handleUploadImage} required />
-          </p>
-        </div>
+        <p>sube una imagen relacionada con el recurso</p>
+        <input type='file' name='archivosubido' onChange={handleUploadImage} required />
         <button type='submit' onClick={handleSubmit} disabled={loaded}>Agregar recurso Academico</button>
       </form>
     </div>

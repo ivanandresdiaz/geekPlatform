@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
 import ListarAdmin from '../../uiComponents/ListarAdmin/ListarAdmin';
 import ListarTeachers from '../../uiComponents/ListarTeachers/ListarTeachers';
 import ListarCortes from '../../uiComponents/ListarCortes/ListarCortes';
@@ -7,7 +8,6 @@ import { getRole } from '../../reducers/authReducer';
 import NavbarAdmin from '../Structure/NavbarAdmin';
 import { ButtonAdd, ButtonImgAdd, ButtonImgAddCortes, ContainerContentLoading, ContainerMain, ContainerTitle, TitleAdd } from './PanelAdminStyles';
 import { Modal, ModalCortes, ModalTeacher } from '../../uiComponents/Modal/Modal';
-import { motion } from 'framer-motion';
 
 const PanelAdmin = () => {
 
