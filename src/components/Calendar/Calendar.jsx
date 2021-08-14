@@ -23,8 +23,8 @@ const Calendar = (props) => {
       alert('Deseas ir el evento'); // logica para hacer si existe una url
   };
   return (
-    <div>
-      <h1>Calendar GeekPlatform</h1>
+    <div style={{ backgroundColor: 'ffffff', width: 550 }}>
+      <h1 style={{ color: '#333333' }}>Calendario GeekPlatform</h1>
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]} // plugins
         weekends={true} // para mostrar los dias de fines de semana
