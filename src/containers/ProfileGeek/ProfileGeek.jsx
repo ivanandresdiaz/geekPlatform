@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { db } from '../../firebase/firebaseConfig';
 import ProfileSocialGeek from '../../uiComponents/ProfileSocialGeek/ProfileSocialGeek';
 import { getUserId } from '../../reducers/authReducer';
 import NewsFeedCategories from '../../components/NewsFeedCategories/NewsFeedCategories';
@@ -15,11 +16,12 @@ const ProfileGeek = (props) => {
   const [profileSocialGeek, setProfileSocialGeek] = useState('');
   const [isUserAuth, setIsUserAuth] = useState(false);
   useEffect(() => {
+    console.log(loggedUidUser, profileUid);
     if (loggedUidUser === profileUid) {
       setProfileSocialGeek(userDataLogged);
       setIsUserAuth(true);
       const { corteId } = userDataLogged;
-      dispatch(getFirestoreNewsCategory(corteId, category));
+      dispatch(getFirestoreNewsCategory(corteId, 'blogs'));
     } else {
       db.collection('students').doc(profileUid).get()
         .then((doc) => {
@@ -50,8 +52,10 @@ const ProfileGeek = (props) => {
         (
           <div>
             <ProfileSocialGeek profileSocialGeek={profileSocialGeek} isUserAuth={isUserAuth} />
+            <p>Mis noticias</p>
             <NewsFeedCategories handleGetNews={handleGetNews} />
             <CreateNewsSocialGeek corteId={profileSocialGeek.corteId} />
+            <h5>Listar mis publicaciones</h5>
             <ListarNews news={[]} />
           </div>
 

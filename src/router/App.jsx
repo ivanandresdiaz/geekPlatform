@@ -17,6 +17,7 @@ import CreateGroups from '../containers/CreateGroups/CreateGroups';
 import BancoRecursos from '../containers/BancoRecursos/BancoRecursos';
 import SocialGeek from '../containers/SocialGeek/SocialGeek';
 import EditProfileSocialGeek from '../components/EditProfileSocialGeek/EditProfileSocialGeek';
+import ProfileGeek from '../containers/ProfileGeek/ProfileGeek';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -93,10 +94,17 @@ const App = () => {
           />
           <PrivateRoute
             exact
+            path='/socialGeek/:profileUid'
+            component={ProfileGeek}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
             path='/socialGeek/:profileUid/edit'
             component={EditProfileSocialGeek}
             isAuthenticated={isLoggedIn}
           />
+
           <Redirect to='/auth/landingPage' />
         </Switch>
       </div>

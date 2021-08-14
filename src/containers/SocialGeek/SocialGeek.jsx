@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import CreateNewsSocialGeek from '../../components/CreateNewsSocialGeek/CreateNewsSocialGeek';
 import NewsFeedCategories from '../../components/NewsFeedCategories/NewsFeedCategories';
@@ -32,6 +33,11 @@ const SocialGeek = (props) => {
   return (
     <div>
       <h1>Bienvenido a social geek</h1>
+      <Link to={`/socialGeek/${userDataLogged.uid}`}>
+        Ir a mi perfil
+        {' '}
+        {userDataLogged.fullName}
+      </Link>
       <RankingGeekyPuntos corteId={userDataLogged.corteId} />
       <ListarStudentsCorte corteId={userDataLogged.corteId} />
       <CreateNewsSocialGeek corteId={userDataLogged.corteId} uid={userDataLogged.uid} />

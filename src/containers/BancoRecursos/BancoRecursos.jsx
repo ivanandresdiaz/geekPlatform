@@ -21,10 +21,8 @@ const BancoRecursos = () => {
     dispatch(getFirestoreCategoryData('Frontend'));
   }, []);
   const handleGetCategory = (category) => {
-    console.log(category);
-    dispatch(getFirestoreCategoryData(category));
+    ispatch(getFirestoreCategoryData(category));
   };
-  console.log('categories', categories);
   return (
     <>
       <h1>Banco de Recursos academicos</h1>
