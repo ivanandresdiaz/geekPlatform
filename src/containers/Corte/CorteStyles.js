@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerMainCorte = styled.div`
- margin: 30px 30px 0px 160px;
+  margin: 30px 30px 0px 160px;
 
   /* @media screen and (max-width: 991px) {
     padding-left: 30px;
@@ -9,11 +9,15 @@ export const ContainerMainCorte = styled.div`
   } */
 `;
 
-
 export const ContainerWrapCorte = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 0px -15px;
+`;
+
+export const ContainerStudentCorte = styled.div`
+  width: 50%;
+  padding: 0 15px;
 `;
 
 export const ContainerClassrooms = styled.div`
@@ -30,7 +34,7 @@ export const ClassroomContent = styled.div`
   border-radius: 15px;
   position: relative;
   overflow: hidden;
-  z-index: 1;
+ 
   transition: color 0.5s ease 0s;
   margin-bottom: 30px;
 `;
@@ -42,13 +46,13 @@ export const ContentImg = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+ 
 `;
 
 export const ContentTitle = styled.div`
   flex-grow: 1;
   text-align: center;
-  z-index: 1;
+ 
   text-transform: capitalize;
 
   h2 {

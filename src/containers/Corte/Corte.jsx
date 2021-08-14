@@ -5,13 +5,14 @@ import ListarSalones from '../../uiComponents/ListarSalones/ListarSalones';
 import Calendar from '../../components/Calendar/Calendar';
 import NavbarAdmin from '../../components/Structure/NavbarAdmin';
 import Footer from '../../components/Structure/Footer';
-import { ContainerAddStudentCorte, ContainerMainCorte, ContainerMainTitleCorte, ContainerWrapCorte, ContainerWrap2Corte, ContainerTitleCorte, ContainerImgCorte, ContainerIconsCorte, ContainerClassrooms } from './CorteStyles';
+import { ContainerAddStudentCorte, ContainerMainCorte, ContainerMainTitleCorte, ContainerWrapCorte, ContainerWrap2Corte, ContainerTitleCorte, ContainerImgCorte, ContainerIconsCorte, ContainerClassrooms, ContainerStudentCorte } from './CorteStyles';
 import { Img } from '../../styles/PresentationStyles';
 import imgcorte from '../../images/other/corte.png';
 import ico from '../../images/other/icon.png'
 import ico1 from '../../images/other/icon-1.png'
 import ico2 from '../../images/other/icon-2.png'
 import ico3 from '../../images/other/icon-3.png'
+import student from '../../images/other/student.png'
 import { ModalEstudiantes } from '../../uiComponents/Modal/Modal';
 import { ButtonAdd, ButtonImgAdd } from '../../components/PanelAdmin/PanelAdminStyles';
 import { requestWeekStudent, cancelRequestWeekStudent } from '../../actions/geekyPuntos';
@@ -81,10 +82,23 @@ const Corte = (props) => {
           </ContainerMainTitleCorte>
           <ContainerMainCorte>
             <ContainerWrapCorte>
+
               <ContainerClassrooms>
-                <ContainerWrapCorte>
-                  <ListarSalones corteId={corteId} />
-                </ContainerWrapCorte>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <ContainerWrapCorte>
+                    <ListarSalones corteId={corteId} />
+                  </ContainerWrapCorte>
+                  <ContainerStudentCorte>
+                    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                      <div>
+                        <h2>Estudiante de la semana</h2>
+                      </div>
+                      <div>
+                        <img src={student} alt="" />
+                      </div>
+                    </div>
+                  </ContainerStudentCorte>
+                </div>
               </ContainerClassrooms>
               <ContainerWrap2Corte>
                 <Calendar corteId={corteId} />
