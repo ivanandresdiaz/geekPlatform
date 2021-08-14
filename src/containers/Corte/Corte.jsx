@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ListarStudentsCorte from '../../uiComponents/ListarStudentsCorte/ListarStudentsCorte';
-import AddStudents from '../../components/AddStudents/AddStudents';
-import CreateClassroom from '../../components/CreateClassroom/CreateClassroom';
 import ListarSalones from '../../uiComponents/ListarSalones/ListarSalones';
 import Calendar from '../../components/Calendar/Calendar';
 import NavbarAdmin from '../../components/Structure/NavbarAdmin';
@@ -14,12 +11,18 @@ import imgcorte from '../../images/other/corte.png';
 import { ModalEstudiantes } from '../../uiComponents/Modal/Modal';
 import { ButtonAdd, ButtonImgAdd } from '../../components/PanelAdmin/PanelAdminStyles';
 import { requestWeekStudent, cancelRequestWeekStudent } from '../../actions/geekyPuntos';
+import { getFirestoreCorteDataDetails } from '../../actions/adminActions';
+import { getCorteDataDetails } from '../../reducers/salonReducer';
 
 const Corte = (props) => {
   const dispatch = useDispatch();
+  const corteDataDetails = useSelector(getCorteDataDetails);
   const { match: { params: { corteId } } } = props;
   const [showModalE, setShowModalE] = useState(false);
   const OpenModalE = () => { setShowModalE((prevE) => !prevE); };
+  useEffect(() => {
+    dispatch(getFirestoreCorteDataDetails(corteId));
+  }, []);
   const handleRequestWeekStudent = () => {
     dispatch(requestWeekStudent(corteId));
   };
@@ -52,8 +55,12 @@ const Corte = (props) => {
           <Calendar corteId={corteId} />
         </ContainerSub2Corte>
       </ContainerMainCorte>
-      <button type='button' onClick={handleRequestWeekStudent}>activar Eleccion del estudiante de la semana</button>
-      <button type='button' onClick={handleCancelRequestWeekStudent}>desactivar del estudiante de la semana</button>
+      <div>
+        <p>{corteDataDetails.choosingWeekStudent ? 'Esta activa la eleccion de Estudiante de la semana' : 'No esta activa la eleccion de Estudiante de la semana'}</p>
+        <button type='button' onClick={handleRequestWeekStudent}>activar Eleccion del estudiante de la semana</button>
+        <button type='button' onClick={handleCancelRequestWeekStudent}>desactivar del estudiante de la semana</button>
+      </div>
+
       <ModalEstudiantes corteId={corteId} showModalE={showModalE} setShowModalE={setShowModalE} />
       <ListarStudentsCorte corteId={corteId} />
       <Footer />

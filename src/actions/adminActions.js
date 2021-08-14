@@ -34,27 +34,27 @@ export const listarAdmin = () => (dispatch) => {
     });
 };
 
-export const createClassroom = (salonName, corteId) => async (dispatch, getState) => {
-  const currentAdmin = getState().auth.fullName;
-  try {
-    const referenciaDocumento = await db.collection('classrooms').add({
-      salonId: '',
-      salonName,
-      students: [],
-      corteId,
-      agendaTutorials: [],
-      groups: [],
-      sprints: [],
-      createdBy: currentAdmin,
-      fecha: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-    await db.collection('classrooms').doc(referenciaDocumento.id).update({ salonId: referenciaDocumento.id });
-    alert('se ha creado con exito un nuevo salon');
-  } catch (error) {
-    alert(`algo salio mal, ${error.message}`);
-  }
+// export const createClassroom = (salonName, corteId) => async (dispatch, getState) => {
+//   const currentAdmin = getState().auth.fullName;
+//   try {
+//     const referenciaDocumento = await db.collection('classrooms').add({
+//       salonId: '',
+//       salonName,
+//       students: [],
+//       corteId,
+//       agendaTutorials: [],
+//       groups: [],
+//       sprints: [],
+//       createdBy: currentAdmin,
+//       fecha: firebase.firestore.FieldValue.serverTimestamp(),
+//     });
+//     await db.collection('classrooms').doc(referenciaDocumento.id).update({ salonId: referenciaDocumento.id });
+//     alert('se ha creado con exito un nuevo salon');
+//   } catch (error) {
+//     alert(`algo salio mal, ${error.message}`);
+//   }
 
-};
+// };
 export const getFirestoreSalones = (corteId) => (dispatch, getState) => {
   db.collection(`cortes/${corteId}/classrooms`).get()
     .then((querySnapshot) => {
@@ -67,3 +67,14 @@ export const getFirestoreSalones = (corteId) => (dispatch, getState) => {
     });
 };
 
+export const getFirestoreCorteDataDetails = (corteId) => (dispatch) => {
+  console.log('llamado a firetose dtalles');
+  db.collection('cortes').doc(corteId).get()
+    .then((doc) => {
+      const data = { ...doc.data(), id: doc.id };
+      dispatch({ type: 'getFirestoreCorteDataDetails', payload: data });
+    })
+    .catch((err) => {
+      alert(`algo salio mal al cargar los detalles de la corte, puedes ignorarlo y continuar trabajando: ${err.message}`);
+    });
+};

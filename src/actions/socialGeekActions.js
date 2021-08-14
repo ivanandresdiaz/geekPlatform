@@ -9,7 +9,6 @@ export const getFirestoreNewsCategory = (corteId, categoryNews) => (dispatch, ge
         const dataDocument = doc.data();
         return { ...dataDocument, id: doc.id };
       });
-      console.log('data categoria noticia', data);
       dispatch({ type: 'getFirestoreNewsCategory', payload: data });
     })
     .catch((err) => {

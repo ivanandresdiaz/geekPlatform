@@ -105,6 +105,7 @@ exports.createCorte = functions.https.onCall((data, context)=> {
             students: [],
             assignedTeachers: [],
             active: true,
+            choosingWeekStudent: false,
           }).then(() =>{
             db.collection("cortes").doc(data.nuevaCorte)
                 .collection("classrooms").doc("sigloxxl").set({
