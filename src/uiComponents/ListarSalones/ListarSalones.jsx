@@ -23,7 +23,6 @@ const ListarSalones = (props) => {
       <>
         {salones.length > 0 && salones.map((salon) => (
           // Aqui tiene que llegar el color!!!!!!!!!!!!!!!!!!!!!!!
-
           <ContainerClassrooms>
             <motion.div whileHover={{ scale: 1.070 }}>
               <Link to={`/corte/${corteId}/${salon.salonId}`}>
@@ -38,10 +37,8 @@ const ListarSalones = (props) => {
               </Link>
             </motion.div>
           </ContainerClassrooms>
-
         ))}
       </>
-
     </>
   );
 };

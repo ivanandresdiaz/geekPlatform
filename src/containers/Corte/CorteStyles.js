@@ -16,8 +16,16 @@ export const ContainerWrapCorte = styled.div`
 `;
 
 export const ContainerStudentCorte = styled.div`
-  width: 50%;
-  padding: 0 15px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff; //agregar luego dark theme.
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px;
+  place-self: center;
 `;
 
 export const ContainerClassrooms = styled.div`
@@ -34,8 +42,6 @@ export const ClassroomContent = styled.div`
   border-radius: 15px;
   position: relative;
   overflow: hidden;
- 
-  transition: color 0.5s ease 0s;
   margin-bottom: 30px;
 `;
 
@@ -46,17 +52,16 @@ export const ContentImg = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
- 
 `;
 
 export const ContentTitle = styled.div`
   flex-grow: 1;
   text-align: center;
  
-  text-transform: capitalize;
 
   h2 {
     color: #333333;
+    font-size: 20px;
   }
 `;
 
@@ -182,13 +187,27 @@ export const ContainerAddStudentCorte = styled.div`
     padding-right: 25px;
     font-size: 25px;
   }
+`;
+
+export const ContainerStudentTextCorte = styled.div`
+  flex-grow: 1;
+  text-align: center;
+  text-transform: ;
+
+  h2 {
+    color: #333333;
+    font-size: 20px;
+  }
+`;
+
+export const ContainerStudentImgCorte = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  align-self: center;
 
   img {
-    padding-right: 10px;
-    border: 10px;
-    max-width: 100%;
-    vertical-align: middle;
-    display: inline-block;
-    max-height: 100%;
+    padding: 10px 25px 10px 10px;
+    width: 80px;
   }
 `;

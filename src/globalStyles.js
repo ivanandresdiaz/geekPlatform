@@ -77,7 +77,7 @@ export const Button2 = styled.button`
   }
 `;
 
-export const Button3 = styled.button`
+export const Button3 = styled(motion.button)`
   border-radius: 4px;
   background: ${({ primary }) => (primary ? "#FF3B53" : "#9C1D2D")};
   white-space: nowrap;
@@ -118,6 +118,31 @@ export const Button4 = styled.button`
     transition: all 0.3 ease-out;
     background: #fff;
     background: ${({ primary }) => (primary ? "#9C1D2D" : "#FF3B53")};
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
+`;
+
+export const Button5 = styled(motion.button)`
+  border-radius: 4px;
+  background: ${({ primary }) => (primary ? "#FF3B53" : "#1BE282")};
+  white-space: nowrap;
+  padding: ${({ big }) => (big ? "12px 64px" : "10px 20px")};
+  margin-top: 20px;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: ${({ fontBig }) => (fontBig ? "18px" : "14px")};
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 8px;
+
+  &:hover {
+    transition: all 0.3 ease-out;
+    background: #fff;
+    background: ${({ primary }) => (primary ? "#9C1D2D" : "#16b568")};
   }
 
   @media screen and (max-width: 960px) {

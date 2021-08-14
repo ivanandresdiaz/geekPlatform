@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import toast, { Toaster } from 'react-hot-toast';
 import ListarStudentsCorte from '../../uiComponents/ListarStudentsCorte/ListarStudentsCorte';
 import ListarSalones from '../../uiComponents/ListarSalones/ListarSalones';
 import Calendar from '../../components/Calendar/Calendar';
 import NavbarAdmin from '../../components/Structure/NavbarAdmin';
 import Footer from '../../components/Structure/Footer';
-import { ContainerAddStudentCorte, ContainerMainCorte, ContainerMainTitleCorte, ContainerWrapCorte, ContainerWrap2Corte, ContainerTitleCorte, ContainerImgCorte, ContainerIconsCorte, ContainerClassrooms, ContainerStudentCorte } from './CorteStyles';
+import { ContainerAddStudentCorte, ContainerMainCorte, ContainerMainTitleCorte, ContainerWrapCorte, ContainerWrap2Corte, ContainerTitleCorte, ContainerImgCorte, ContainerIconsCorte, ContainerClassrooms, ContainerStudentCorte, ContainerStudentImgCorte, ContainerStudentTextCorte } from './CorteStyles';
 import { Img } from '../../styles/PresentationStyles';
 import imgcorte from '../../images/other/corte.png';
 import ico from '../../images/other/icon.png'
@@ -20,8 +21,11 @@ import { motion } from 'framer-motion';
 
 import { getFirestoreCorteDataDetails } from '../../actions/adminActions';
 import { getCorteDataDetails } from '../../reducers/salonReducer';
+import { Button3, Button5 } from '../../globalStyles';
+import Alert from '../../uiComponents/Alerts/Alert';
 
 const Corte = (props) => {
+
   const dispatch = useDispatch();
   const corteDataDetails = useSelector(getCorteDataDetails);
   const { match: { params: { corteId } } } = props;
@@ -90,12 +94,16 @@ const Corte = (props) => {
                   </ContainerWrapCorte>
                   <ContainerStudentCorte>
                     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                      <div>
-                        <h2>Estudiante de la semana</h2>
-                      </div>
-                      <div>
+                      <ContainerStudentImgCorte>
                         <img src={student} alt="" />
-                      </div>
+                      </ContainerStudentImgCorte>
+                      <ContainerStudentTextCorte>
+                        <h2>Estudiante de la semana</h2>
+                        <p style={{ textTransform: 'none' }}>{corteDataDetails.choosingWeekStudent ? 'Esta activa la eleccion de Estudiante de la semana' : 'No esta activa la eleccion de Estudiante de la semana'}</p>
+                        <Button5 whileHover={{ scale: 1.050 }} type='button' onClick={handleRequestWeekStudent}>Activar</Button5>
+                        <Button5 whileHover={{ scale: 1.050 }} type='button' onClick={handleCancelRequestWeekStudent} primary>Desactivar</Button5>
+                        <Toaster />
+                      </ContainerStudentTextCorte>
                     </div>
                   </ContainerStudentCorte>
                 </div>
@@ -105,9 +113,7 @@ const Corte = (props) => {
               </ContainerWrap2Corte>
             </ContainerWrapCorte>
           </ContainerMainCorte>
-          <p>{corteDataDetails.choosingWeekStudent ? 'Esta activa la eleccion de Estudiante de la semana' : 'No esta activa la eleccion de Estudiante de la semana'}</p>
-          <button type='button' onClick={handleRequestWeekStudent}>activar Eleccion del estudiante de la semana</button>
-          <button type='button' onClick={handleCancelRequestWeekStudent}>desactivar del estudiante de la semana</button>
+
           <ListarStudentsCorte corteId={corteId} />
           <ModalEstudiantes corteId={corteId} showModalE={showModalE} setShowModalE={setShowModalE} />
           <ContainerAddStudentCorte>
@@ -116,8 +122,8 @@ const Corte = (props) => {
               <ButtonImgAdd />
             </ButtonAdd>
           </ContainerAddStudentCorte>
+          <Alert />
         </div>
-
         <Footer />
       </div>
     </>
