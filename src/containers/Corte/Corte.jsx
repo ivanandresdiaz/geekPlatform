@@ -91,11 +91,11 @@ const Corte = (props) => {
               </ContainerWrap2Corte>
             </ContainerWrapCorte>
           </ContainerMainCorte>
-
+          <p>{corteDataDetails.choosingWeekStudent ? 'Esta activa la eleccion de Estudiante de la semana' : 'No esta activa la eleccion de Estudiante de la semana'}</p>
           <button type='button' onClick={handleRequestWeekStudent}>activar Eleccion del estudiante de la semana</button>
           <button type='button' onClick={handleCancelRequestWeekStudent}>desactivar del estudiante de la semana</button>
-          <ModalEstudiantes corteId={corteId} showModalE={showModalE} setShowModalE={setShowModalE} />
           <ListarStudentsCorte corteId={corteId} />
+          <ModalEstudiantes corteId={corteId} showModalE={showModalE} setShowModalE={setShowModalE} />
           <ContainerAddStudentCorte>
             <h1>Añadir estudiantes</h1>
             <ButtonAdd animate={{}} onClick={OpenModalE}>
@@ -106,17 +106,6 @@ const Corte = (props) => {
 
         <Footer />
       </div>
-
-
-      <div>
-        <p>{corteDataDetails.choosingWeekStudent ? 'Esta activa la eleccion de Estudiante de la semana' : 'No esta activa la eleccion de Estudiante de la semana'}</p>
-        <button type='button' onClick={handleRequestWeekStudent}>activar Eleccion del estudiante de la semana</button>
-        <button type='button' onClick={handleCancelRequestWeekStudent}>desactivar del estudiante de la semana</button>
-      </div>
-
-      <ModalEstudiantes corteId={corteId} showModalE={showModalE} setShowModalE={setShowModalE} />
-      <ListarStudentsCorte corteId={corteId} />
-      <Footer />
     </>
   );
 };
