@@ -6,6 +6,8 @@ import esLocale from '@fullcalendar/core/locales/es'; // idioma
 import { useDispatch, useSelector } from 'react-redux';
 import { getFirestoreAllSprints } from '../../actions/classroomActions';
 import { getAllSprints } from '../../reducers/salonReducer';
+import { ContainerModal, ModalContent } from '../../uiComponents/Modal/ModalStyles';
+import { MdClose } from 'react-icons/md';
 
 
 
@@ -15,9 +17,9 @@ const Calendar = (props) => {
   const ModalCalendario = ({ showModalCalendar, setShowModalCalendar }) => {
     return (
       <>
-        {showModalE ? (
+        {showModalCalendar ? (
           <Background>
-            <ContainerModal showModalE={showModalE}>
+            <ContainerModal showModalCalendar={showModalCalendar}>
               <ModalContent>
                 <h4>Corte: ${el.event._def.extendedProps.corteId} </h4>
                 <h4>Salon: ${el.event._def.extendedProps.salonId}</h4>
@@ -61,7 +63,7 @@ const Calendar = (props) => {
   const handleEvent = (el) => {
     // `Corte: ${el.event._def.extendedProps.corteId}`)
 
-    //<ModalCalendario showModalCalendar={showModalCalendar} setShowModalCalendar={setShowModalCalendar} />
+    <ModalCalendario showModalCalendar={showModalCalendar} setShowModalCalendar={setShowModalCalendar} />
   };
   return (
     <div style={{ backgroundColor: 'ffffff', width: 550 }}>
