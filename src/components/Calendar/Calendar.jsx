@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react'; // Componente
 import dayGridPlugin from '@fullcalendar/daygrid'; // plugins de dias...
 import interactionPlugin from '@fullcalendar/interaction'; // Plugin de interacion
@@ -8,7 +8,38 @@ import { getFirestoreAllSprints } from '../../actions/classroomActions';
 import { getAllSprints } from '../../reducers/salonReducer';
 
 
+
+
+
 const Calendar = (props) => {
+  const ModalCalendario = ({ showModalCalendar, setShowModalCalendar }) => {
+    return (
+      <>
+        {showModalE ? (
+          <Background>
+            <ContainerModal showModalE={showModalE}>
+              <ModalContent>
+                <h4>Corte: ${el.event._def.extendedProps.corteId} </h4>
+                <h4>Salon: ${el.event._def.extendedProps.salonId}</h4>
+                <h4>Titulo: ${el.event.title}</h4>
+                <h4> Descripcion: ${el.event._def.extendedProps.description}</h4>
+                <h4> Link de Apoyo : ${el.event._def.extendedProps.supportLink1}</h4>
+                <h4>Link de Entrega : ${el.event._def.extendedProps.deliveryLink}</h4>
+                <h4>Corte: ${el.event._def.extendedProps.corteId}</h4>
+                <h4>PDF:${el.event._def.extendedProps.resourcePDF}</h4>
+                <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModalCalendar((prevCalendar) => !prevCalendar)}>
+                  <MdClose style={{ alignItems: 'center' }} />
+                </CloseModalButton>
+              </ModalContent>
+            </ContainerModal>
+          </Background>
+        ) : null}
+      </>
+    );
+  };
+  const [showModalCalendar, setShowModalCalendar] = useState(false);
+  const OpenModalCalendar = () => { setShowModalCalendar((prevCalendar) => !prevCalendar); };
+
   const { corteId } = props;
   const allSprints = useSelector(getAllSprints);
   const dispatch = useDispatch();
@@ -28,18 +59,9 @@ const Calendar = (props) => {
    el.event._def.extendedProps.supportLink1 -> link de soporte
    */
   const handleEvent = (el) => {
-      alert(`
-    Corte: ${el.event._def.extendedProps.corteId}
-    Salon: ${el.event._def.extendedProps.salonId}
-    Titulo: ${el.event.title}
-    Descripcion: ${el.event._def.extendedProps.description}
+    // `Corte: ${el.event._def.extendedProps.corteId}`)
 
-    Link de Apoyo : ${el.event._def.extendedProps.supportLink1}
-    Link de Entrega : ${el.event._def.extendedProps.deliveryLink}
-
-    PDF:${el.event._def.extendedProps.resourcePDF}
-    
-      `)
+    //<ModalCalendario showModalCalendar={showModalCalendar} setShowModalCalendar={setShowModalCalendar} />
   };
   return (
     <div style={{ backgroundColor: 'ffffff', width: 550 }}>
@@ -48,7 +70,7 @@ const Calendar = (props) => {
         plugins={[dayGridPlugin, interactionPlugin]} // plugins
         weekends={true} // para mostrar los dias de fines de semana
         events={allSprints} // todos los eventos registrados
-        eventClick={handleEvent} // darle click a un evento hacer una accion
+        eventClick={OpenModalCalendar, handleEvent} // darle click a un evento hacer una accion
         editable={true} //para moverlo
         locales={esLocale} //idioma pack
         locale='es' // agregar idioma

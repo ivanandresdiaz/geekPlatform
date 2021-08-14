@@ -192,7 +192,7 @@ export const ContainerAddStudentCorte = styled.div`
 export const ContainerStudentTextCorte = styled.div`
   flex-grow: 1;
   text-align: center;
-  text-transform: ;
+
 
   h2 {
     color: #333333;

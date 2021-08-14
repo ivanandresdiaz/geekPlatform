@@ -18,11 +18,10 @@ import { ModalEstudiantes } from '../../uiComponents/Modal/Modal';
 import { ButtonAdd, ButtonImgAdd } from '../../components/PanelAdmin/PanelAdminStyles';
 import { requestWeekStudent, cancelRequestWeekStudent } from '../../actions/geekyPuntos';
 import { motion } from 'framer-motion';
-
 import { getFirestoreCorteDataDetails } from '../../actions/adminActions';
 import { getCorteDataDetails } from '../../reducers/salonReducer';
 import { Button3, Button5 } from '../../globalStyles';
-import Alert from '../../uiComponents/Alerts/Alert';
+
 
 const Corte = (props) => {
 
@@ -102,7 +101,8 @@ const Corte = (props) => {
                         <p style={{ textTransform: 'none' }}>{corteDataDetails.choosingWeekStudent ? 'Esta activa la eleccion de Estudiante de la semana' : 'No esta activa la eleccion de Estudiante de la semana'}</p>
                         <Button5 whileHover={{ scale: 1.050 }} type='button' onClick={handleRequestWeekStudent}>Activar</Button5>
                         <Button5 whileHover={{ scale: 1.050 }} type='button' onClick={handleCancelRequestWeekStudent} primary>Desactivar</Button5>
-                        <Toaster />
+                        <Toaster position="bottom-center"
+                          reverseOrder={false} />
                       </ContainerStudentTextCorte>
                     </div>
                   </ContainerStudentCorte>
@@ -122,7 +122,6 @@ const Corte = (props) => {
               <ButtonImgAdd />
             </ButtonAdd>
           </ContainerAddStudentCorte>
-          <Alert />
         </div>
         <Footer />
       </div>
