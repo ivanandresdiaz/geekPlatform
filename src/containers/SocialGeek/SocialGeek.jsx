@@ -1,12 +1,12 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import CreateNewsSocialGeek from '../../components/CreateNewsSocialGeek/CreateNewsSocialGeek';
 import NewsFeedCategories from '../../components/NewsFeedCategories/NewsFeedCategories';
 import ListarNews from '../../uiComponents/ListarNews/ListarNews';
 import { getFirestoreNewsCategory } from '../../actions/socialGeekActions';
 import { getNewsCategory } from '../../reducers/socialGeekReducer';
 import RankingGeekyPuntos from '../../uiComponents/RankingGeekyPuntos/RankingGeekyPuntos';
+import ListarStudentsCorte from '../../uiComponents/ListarStudentsCorte/ListarStudentsCorte';
 
 const SocialGeek = (props) => {
   const userDataLogged = useSelector((state) => state.auth);
@@ -33,6 +33,7 @@ const SocialGeek = (props) => {
     <div>
       <h1>Bienvenido a social geek</h1>
       <RankingGeekyPuntos corteId={userDataLogged.corteId} />
+      <ListarStudentsCorte corteId={userDataLogged.corteId} />
       <CreateNewsSocialGeek corteId={userDataLogged.corteId} uid={userDataLogged.uid} />
       <NewsFeedCategories handleGetNews={handleGetNews} />
       <ListarNews news={news} corteId={userDataLogged.corteId} uid={userDataLogged.uid} />

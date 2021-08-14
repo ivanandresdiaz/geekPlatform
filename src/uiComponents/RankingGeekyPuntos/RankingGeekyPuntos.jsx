@@ -8,7 +8,10 @@ const RankingGeekyPuntos = (props) => {
   const dispatch = useDispatch();
   const rankingStudentsGeekyPuntos = useSelector(getRankingStudentsGeekyPuntos);
   useEffect(() => {
-    dispatch(getFirestoreRankingStudentsGeekyPuntos(corteId));
+    if (!(rankingStudentsGeekyPuntos.length > 0)) {
+      dispatch(getFirestoreRankingStudentsGeekyPuntos(corteId));
+    }
+
   }, []);
   return (
     <div>
