@@ -117,7 +117,6 @@ const Corte = (props) => {
             </ButtonAdd>
           </ContainerAddStudentCorte>
         </div>
-
         <Footer />
       </div>
     </>
