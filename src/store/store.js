@@ -6,6 +6,7 @@ import { bancoRecursosReducer } from '../reducers/bancoRecursosReducer';
 import { adminReducer } from '../reducers/adminReducer';
 import { studentsReducer } from '../reducers/studentsReducer';
 import { salonReducer } from '../reducers/salonReducer';
+import { socialGeekReducer } from '../reducers/socialGeekReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   admin: adminReducer,
   students: studentsReducer,
   salon: salonReducer,
+  socialGeek: socialGeekReducer,
 });
 
 const store = createStore(

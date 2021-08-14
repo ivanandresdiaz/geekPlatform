@@ -105,6 +105,7 @@ exports.createCorte = functions.https.onCall((data, context)=> {
             students: [],
             assignedTeachers: [],
             active: true,
+            choosingWeekStudent: false,
           }).then(() =>{
             db.collection("cortes").doc(data.nuevaCorte)
                 .collection("classrooms").doc("sigloxxl").set({
@@ -196,5 +197,52 @@ exports.addGeekyPunto = functions.https.onCall((data, context)=> {
           .update({voted: false});
       return result;
     });
+  });
+});
+
+exports.addLike = functions.https.onCall((data, context)=> {
+  // id , uid, corteId
+  if (!context.auth) {
+    throw new functions.https.HttpsError(
+        "solo usuarios autenticados pueden dar me gusta"
+    );
+  }
+
+  const resource = admin.firestore().collection("cortes").doc(data.corteId)
+      .collection("news").doc(data.id);
+  return resource.get().then((doc) => {
+    if (doc.data().likes.includes(context.auth.uid)) {
+      throw new functions.https.HttpsError(
+          "ya esta registrado tu like"
+      );
+    }
+    return resource.update({
+      likes: [...doc.data().likes, context.auth.uid],
+    });
+  });
+});
+
+exports.subtractLike = functions.https.onCall((data, context)=> {
+  // id , uid, corteId
+  if (!context.auth) {
+    throw new functions.https.HttpsError(
+        "no estas autenticado"
+    );
+  }
+
+  const resource = admin.firestore().collection("cortes").doc(data.corteId)
+      .collection("news").doc(data.id);
+  return resource.get().then((doc) => {
+    if (doc.data().likes.includes(context.auth.uid)) {
+      const newLikes= doc.data()
+          .likes.filter((user) => user !==context.auth.uid);
+      return resource.update({
+        likes: [...newLikes],
+      });
+    } else {
+      throw new functions.https.HttpsError(
+          "no has dado like aun, al parecer hay un error. Informanos"
+      );
+    }
   });
 });

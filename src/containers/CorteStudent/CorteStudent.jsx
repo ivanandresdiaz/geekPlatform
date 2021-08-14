@@ -11,7 +11,6 @@ const CorteStudent = (props) => {
   const corteId = useSelector(getCorteId);
   const loggedUserId = useSelector(getUserId);
   const loggedUserVoted = useSelector((state) => state.auth.voted);
-  console.log('loggedUserVoted', loggedUserVoted);
   return (
     <div>
       <h1>
@@ -25,7 +24,7 @@ const CorteStudent = (props) => {
           Banco de recursos Academicos LINKKK!!!
         </Link>
         <div>
-          <Link to={`/socialGeek/${loggedUserId}`}>
+          <Link to='/socialGeek'>
             Social Geek LINKK!!
           </Link>
         </div>

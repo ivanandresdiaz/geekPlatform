@@ -11,6 +11,7 @@ export const requestWeekStudent = (corteId) => (dispatch, getState) => {
     .commit()
     .then(() => {
       alert('activada votacion del estudiante de la semana');
+      dispatch({ type: 'requestWeekStudent' });
     })
     .catch((error) => console.error(error));
 };
@@ -24,6 +25,7 @@ export const cancelRequestWeekStudent = (corteId) => (dispatch, getState) => {
     .commit()
     .then(() => {
       alert('desactivada votacion del estudiante de la semana');
+      dispatch({ type: 'cancelRequestWeekStudent' });
     })
     .catch((error) => console.error(error));
 };
@@ -39,4 +41,21 @@ export const choseWeekStudent = (uid, fullName) => async (dispatch, getState) =>
     });
   }
 
+};
+
+export const getFirestoreRankingStudentsGeekyPuntos = (corteId) => (dispatch, getState) => {
+
+  db.collection('students')
+    .where('corteId', '==', corteId)
+    .orderBy('geekyPuntos', 'desc')
+    .limit(5)
+    .get()
+    .then((querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        const dataDocument = doc.data();
+        data.push(dataDocument);
+      });
+      dispatch({ type: 'getFirestoreRankingStudentsGeekyPuntos', payload: data });
+    });
 };

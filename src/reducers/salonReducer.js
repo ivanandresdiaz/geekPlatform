@@ -1,6 +1,7 @@
 
 const initialState = {
   salonData: [],
+  corteDataDetails: [],
   sprints: [],
   allSprints: [],
   workGroups: [],
@@ -34,6 +35,7 @@ const initialState = {
     // Facilitate reordering of the columns
     columnOrder: ['column1', 'column2', 'column3'],
   },
+
 };
 
 export const salonReducer = (state = initialState, action) => {
@@ -93,6 +95,27 @@ export const salonReducer = (state = initialState, action) => {
         ...state,
         plantillaCreatingGroups: action.payload,
       };
+    case 'getFirestoreCorteDataDetails':
+      return {
+        ...state,
+        corteDataDetails: action.payload,
+      };
+    case 'cancelRequestWeekStudent':
+      return {
+        ...state,
+        corteDataDetails: {
+          ...state.corteDataDetails,
+          choosingWeekStudent: false,
+        },
+      };
+    case 'requestWeekStudent':
+      return {
+        ...state,
+        corteDataDetails: {
+          ...state.corteDataDetails,
+          choosingWeekStudent: true,
+        },
+      };
 
     default:
       return state;
@@ -105,3 +128,5 @@ export const getAllSprints = (state) => state.salon.allSprints;
 export const getWorkGroups = (state) => state.salon.workGroups;
 export const getPlantillaCreatingGroups = (state) => state.salon.plantillaCreatingGroups;
 export const getLoadedSprintPDF = (state) => state.salon.loadedSprintPDF;
+export const getCorteDataDetails = (state) => state.salon.corteDataDetails;
+

@@ -87,7 +87,7 @@ const App = () => {
           />
           <PrivateRoute
             exact
-            path='/socialGeek/:profileUid'
+            path='/socialGeek'
             component={SocialGeek}
             isAuthenticated={isLoggedIn}
           />
