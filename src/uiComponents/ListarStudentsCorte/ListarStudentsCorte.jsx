@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { forEach } from 'lodash';
 import { getFirestoreStudentsCorte } from '../../actions/studentsActions';
 import { getStudentsCorte } from '../../reducers/studentsReducer';
-import { DivContainerList, DivRowList, ImgStudent, ContainerPorcentajeAsistencia, PorcentajeAsistencia, ContainerPActivo, ContainerPInactivo, DivFullName, DivContainerInputCheckBox } from './styledListarStudentsCorte.js';
+import { DivContainerList, DivRowList, ImgStudent, ContainerPorcentajeAsistencia, PorcentajeAsistencia, ContainerPActivo, ContainerPInactivo, DivFullName, DivContainerInputCheckBox, ContainerGeekyPuntos } from './styledListarStudentsCorte.js';
 import { enviarFirestoreLista } from '../../actions/classroomActions';
 
 const ListarStudentsCorte = (props) => {
@@ -18,6 +18,7 @@ const ListarStudentsCorte = (props) => {
       [student.uid]: {
         assistance: [...student.assistance, 0],
         uid: student.uid,
+        geekyPuntos: student.geekyPuntos,
       } };
   });
   const [state, setState] = useState({});
@@ -26,13 +27,14 @@ const ListarStudentsCorte = (props) => {
       dispatch(getFirestoreStudentsCorte(corteId));
     }
   }, []);
-  const handleInputChangeCheckbox = (evento, uid, assistance) => {
+  const handleInputChangeCheckbox = (evento, uid, assistance, geekyPuntos) => {
     if (evento.target.checked) {
       setState({
         ...state,
         [uid]: {
           [evento.target.name]: [...assistance, 1],
           uid,
+          geekyPuntos,
         },
       });
     } else {
@@ -41,6 +43,7 @@ const ListarStudentsCorte = (props) => {
         [uid]: {
           [evento.target.name]: [...assistance, 0],
           uid,
+          geekyPuntos,
         },
       });
     }
@@ -65,6 +68,10 @@ const ListarStudentsCorte = (props) => {
           <div>
             <p>Nombre Completo</p>
           </div>
+          <ContainerGeekyPuntos>
+            <p>GeekyPuntos</p>
+          </ContainerGeekyPuntos>
+
           <p>Estado</p>
           <p>Voto</p>
           <p>Porcentaje de asistencia</p>
@@ -79,7 +86,7 @@ const ListarStudentsCorte = (props) => {
           return (
             <DivRowList key={student.uid}>
               <DivContainerInputCheckBox>
-                <input type='checkbox' name='assistance' onChange={(evento) => handleInputChangeCheckbox(evento, student.uid, student.assistance)} />
+                <input type='checkbox' name='assistance' onChange={(evento) => handleInputChangeCheckbox(evento, student.uid, student.assistance, student.geekyPuntos)} />
               </DivContainerInputCheckBox>
 
               <DivFullName>
@@ -89,6 +96,9 @@ const ListarStudentsCorte = (props) => {
                   {student.fullName}
                 </p>
               </DivFullName>
+              <ContainerGeekyPuntos>
+                <p>{student.geekyPuntos}</p>
+              </ContainerGeekyPuntos>
               {student.active ? (<ContainerPActivo><p>Activo</p></ContainerPActivo>) : <ContainerPInactivo><p>Inactivo</p></ContainerPInactivo>}
               {student.voted ? <p>Votó</p> : <p>No ha votado</p>}
               {porcentajeAsistencia && (

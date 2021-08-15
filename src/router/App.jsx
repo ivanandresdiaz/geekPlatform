@@ -18,6 +18,7 @@ import BancoRecursos from '../containers/BancoRecursos/BancoRecursos';
 import SocialGeek from '../containers/SocialGeek/SocialGeek';
 import EditProfileSocialGeek from '../components/EditProfileSocialGeek/EditProfileSocialGeek';
 import ProfileGeek from '../containers/ProfileGeek/ProfileGeek';
+import ScoreSprints from '../containers/ScoreSprints/ScoreSprints';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -102,6 +103,12 @@ const App = () => {
             exact
             path='/socialGeek/:profileUid/edit'
             component={EditProfileSocialGeek}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path='/scoreSprints'
+            component={ScoreSprints}
             isAuthenticated={isLoggedIn}
           />
 

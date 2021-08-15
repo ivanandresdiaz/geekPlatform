@@ -21,6 +21,7 @@ import { requestWeekStudent, cancelRequestWeekStudent } from '../../actions/geek
 import { getFirestoreCorteDataDetails } from '../../actions/adminActions';
 import { getCorteDataDetails } from '../../reducers/salonReducer';
 import { Button3, Button5 } from '../../globalStyles';
+import InputRange from '../../uiComponents/InputRange/InputRange';
 
 const Corte = (props) => {
 
@@ -151,6 +152,7 @@ const Corte = (props) => {
             </ButtonAdd>
           </ContainerAddStudentCorte>
         </div>
+        <InputRange />
         <Footer />
       </div>
     </>

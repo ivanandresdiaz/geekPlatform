@@ -10,7 +10,7 @@ margin: 0 auto;
 
 export const DivRowList = styled.div`
 display:grid;
-grid-template-columns: 10% 30% 10% 20% 30%;
+grid-template-columns: 10% 20% 13% 13% 20% 24%;
 align-items: center;
 :hover{
   background-color:#2f33a7;
@@ -41,7 +41,7 @@ export const PorcentajeAsistencia = styled.div`
     padding-right: 3px;
   }
   background-color:${(props) => {
-    if (props.porcentajeAsistencia > 70) {
+    if (props.porcentajeAsistencia > 75) {
       return '#3CD4A0';
     } if (props.porcentajeAsistencia > 60) {
       return '#FFC260';
@@ -53,6 +53,10 @@ export const PorcentajeAsistencia = styled.div`
   }};
   border-radius:5px;
   
+`;
+export const ContainerGeekyPuntos = styled.div`
+display: flex;
+justify-content: center;
 `;
 
 export const ContainerPActivo = styled.div`

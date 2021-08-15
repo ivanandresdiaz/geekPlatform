@@ -45,7 +45,11 @@ const Salon = (props) => {
           Crear Nuevos grupos de trabajo LINK !!! SOLO PROFESOR
         </Link>
       )}
-
+      {role === 'teacher' && (
+        <Link to='/scoreSprints'>
+          Calificar sprints
+        </Link>
+      )}
       <ListarWorkGroups corteId={corteId} salonId={salon} />
       <Footer />
     </>

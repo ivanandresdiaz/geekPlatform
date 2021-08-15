@@ -272,7 +272,7 @@ export const uploadSprintPDF = (file) => async (dispatch, getState) => {
 export const enviarFirestoreLista = (corteId, listaEnviar) => (dispatch, getState) => {
   const batch = db.batch();
   listaEnviar.forEach((student) => {
-    batch.update(db.collection('students').doc(student.uid), { assistance: student.assistance });
+    batch.update(db.collection('students').doc(student.uid), { assistance: student.assistance, geekyPuntos: student.geekyPuntos + 1 });
   });
   batch
     .commit()
