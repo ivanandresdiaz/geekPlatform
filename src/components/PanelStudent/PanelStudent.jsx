@@ -8,8 +8,10 @@ const PanelStudent = () => {
   const corteId = useSelector(getCorteId);
   return (
     <>
-      <NavbarStudent />
-      {corteId && <CorteStudent />}
+      <div style={{ backgroundColor: '#F2F2F2' }}>
+        <NavbarStudent />
+        {corteId && <CorteStudent />}
+      </div>
     </>
   );
 };

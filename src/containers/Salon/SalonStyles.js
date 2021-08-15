@@ -13,6 +13,15 @@ export const ContainerTitleGreet = styled.div`
     margin-bottom: 0.5rem;
     text-align: center;
   }
+
+  p {
+    font-size: 16px;
+    line-height: 2.25rem;
+    color: #333333;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
 `;
 
 export const ContainerRowSprint = styled.div`

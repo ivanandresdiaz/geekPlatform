@@ -7,28 +7,23 @@ import ListarSalones from '../../uiComponents/ListarSalones/ListarSalones';
 import Calendar from '../../components/Calendar/Calendar';
 import NavbarAdmin from '../../components/Structure/NavbarAdmin';
 import Footer from '../../components/Structure/Footer';
-import { ContainerAddStudentCorte, ContainerMainCorte, ContainerMainTitleCorte, ContainerWrapCorte, ContainerWrap2Corte, ContainerTitleCorte, ContainerImgCorte, ContainerIconsCorte, ContainerClassrooms, ContainerStudentCorte, ContainerStudentImgCorte, ContainerStudentTextCorte } from './CorteStyles';
-import { Img } from '../../styles/PresentationStyles';
+import { ContainerMainCorte, ContainerMainTitleCorte, ContainerWrapCorte, ContainerWrap2Corte, ContainerTitleCorte, ContainerImgCorte, ContainerIconsCorte, ContainerClassrooms, ContainerStudentCorte, ContainerStudentImgCorte, ContainerStudentTextCorte, ContainerStudentLista } from './CorteStyles';
 import imgcorte from '../../images/other/corte.png';
 import ico from '../../images/other/icon.png';
 import ico1 from '../../images/other/icon-1.png';
 import ico2 from '../../images/other/icon-2.png';
 import ico3 from '../../images/other/icon-3.png';
 import student from '../../images/other/student.png';
-import { ModalEstudiantes } from '../../uiComponents/Modal/Modal';
-import { ButtonAdd, ButtonImgAdd } from '../../components/PanelAdmin/PanelAdminStyles';
 import { requestWeekStudent, cancelRequestWeekStudent } from '../../actions/geekyPuntos';
 import { getFirestoreCorteDataDetails } from '../../actions/adminActions';
 import { getCorteDataDetails } from '../../reducers/salonReducer';
-import { Button3, Button5 } from '../../globalStyles';
+import { Button5 } from '../../globalStyles';
 
 const Corte = (props) => {
 
   const dispatch = useDispatch();
   const corteDataDetails = useSelector(getCorteDataDetails);
   const { match: { params: { corteId } } } = props;
-  const [showModalE, setShowModalE] = useState(false);
-  const OpenModalE = () => { setShowModalE((prevE) => !prevE); };
   useEffect(() => {
     dispatch(getFirestoreCorteDataDetails(corteId));
   }, []);
@@ -42,7 +37,6 @@ const Corte = (props) => {
     <>
       <div style={{ backgroundColor: '#F2F2F2' }}>
         <NavbarAdmin />
-
         <div>
           <ContainerMainTitleCorte>
             <ContainerTitleCorte>
@@ -111,13 +105,12 @@ const Corte = (props) => {
           </ContainerMainTitleCorte>
           <ContainerMainCorte>
             <ContainerWrapCorte>
-
               <ContainerClassrooms>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <ContainerWrapCorte>
                     <ListarSalones corteId={corteId} />
                   </ContainerWrapCorte>
-                  <ContainerStudentCorte>
+                  <ContainerStudentCorte style={{ width: '100%', placeContent: 'center', height: '220px' }}>
                     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                       <ContainerStudentImgCorte>
                         <img src={student} alt='' />
@@ -140,16 +133,14 @@ const Corte = (props) => {
                 <Calendar corteId={corteId} />
               </ContainerWrap2Corte>
             </ContainerWrapCorte>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={{ width: '100%' }}>
+                <ContainerStudentLista>
+                  <ListarStudentsCorte corteId={corteId} />
+                </ContainerStudentLista>
+              </div>
+            </div>
           </ContainerMainCorte>
-
-          <ListarStudentsCorte corteId={corteId} />
-          <ModalEstudiantes corteId={corteId} showModalE={showModalE} setShowModalE={setShowModalE} />
-          <ContainerAddStudentCorte>
-            <h1>Añadir estudiantes</h1>
-            <ButtonAdd animate={{}} onClick={OpenModalE}>
-              <ButtonImgAdd />
-            </ButtonAdd>
-          </ContainerAddStudentCorte>
         </div>
         <Footer />
       </div>
