@@ -5,20 +5,31 @@ import ListarTeachers from '../../uiComponents/ListarTeachers/ListarTeachers';
 import ListarCortes from '../../uiComponents/ListarCortes/ListarCortes';
 import { getRole } from '../../reducers/authReducer';
 import NavbarTeacher from '../Structure/NavbarTeacher';
+import { ContainerMain, ContainerTitle, TitleAdd } from '../PanelAdmin/PanelAdminStyles';
 
 const PanelTeacher = () => {
   const role = useSelector(getRole);
   return (
     <>
       <NavbarTeacher />
-      <p>
+      {/* <p>
         Role :
         {role}
-      </p>
-      <h1>Colegas</h1>
-      <ListarTeachers />
-      <h1>Cortes</h1>
-      <ListarCortes />
+      </p> */}
+
+      <ContainerMain>
+        <ContainerTitle>
+          <TitleAdd>Colegas</TitleAdd>
+        </ContainerTitle>
+        <ListarTeachers />
+      </ContainerMain>
+    
+      <ContainerMain>
+        <ContainerTitle>
+          <TitleAdd>Cortes</TitleAdd>
+        </ContainerTitle>
+        <ListarCortes />
+      </ContainerMain>   
     </>
   );
 };

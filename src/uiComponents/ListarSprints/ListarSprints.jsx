@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteSprint, getFirestoreSprints } from '../../actions/classroomActions';
+import { ContainerContentSprint, ContainerRowSprint, ContainerSprints } from '../../containers/Salon/SalonStyles';
 import { getSprints } from '../../reducers/salonReducer';
+
 
 const ListarSprints = (props) => {
   const { corteId, salonId } = props;
@@ -14,35 +16,36 @@ const ListarSprints = (props) => {
     dispatch(deleteSprint(id, corteId));
   };
   return (
-    <div>
-      <h1>ListarSprinrs</h1>
-      <div>
+    <>
+      <ContainerRowSprint>
         {sprints.length > 0 && sprints.map((sprint) => (
-          <div key={sprint.id}>
-            <h4>
-              nombre sprint :
-              {sprint.title}
-            </h4>
-            <p>Descripcion</p>
-            <p>{sprint.description}</p>
-            <p>link de entrega</p>
-            <a href={sprint.deliveryLink}>{sprint.deliveryLink}</a>
-            <p>fecha de inicio</p>
-            <p>{sprint.startDate}</p>
-            <p>fecha de maxima de entrega</p>
-            <p>{sprint.deadline}</p>
-            <p>Links de apoyo</p>
-            <a href={sprint.supportLink1}>{sprint.supportLink1}</a>
-            <a href={sprint.supportLink2}>{sprint.supportLink2}</a>
-            <a href={sprint.supportLink3}>{sprint.supportLink3}</a>
-            <a href={sprint.supportLink4}>{sprint.supportLink4}</a>
-            <button type='button'> Descargar PDF (Aun no disponible)</button>
-            <button type='button' onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</button>
-          </div>
-        ))}
-      </div>
+          <ContainerSprints>
+            <div key={sprint.id}>
+              <ContainerContentSprint>
+                <h4>
+                  {sprint.title}
+                </h4>
+                <p>{sprint.description}</p>
+                {/* <p>link de entrega</p>
+                <a href={sprint.deliveryLink}>{sprint.deliveryLink}</a>
+                <p>fecha de inicio</p>
+                <p>{sprint.startDate}</p>
+                <p>fecha de maxima de entrega</p>
+                <p>{sprint.deadline}</p>
+                <p>Links de apoyo</p>
+                <a href={sprint.supportLink1}>{sprint.supportLink1}</a>
+                <a href={sprint.supportLink2}>{sprint.supportLink2}</a>
+                <a href={sprint.supportLink3}>{sprint.supportLink3}</a>
+                <a href={sprint.supportLink4}>{sprint.supportLink4}</a>
+                <button type='button'> Descargar PDF (Aun no disponible)</button>
+                <button type='button' onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</button> */}
+              </ContainerContentSprint>
+            </div>
 
-    </div>
+          </ContainerSprints>
+        ))}
+      </ContainerRowSprint>
+    </>
   );
 };
 

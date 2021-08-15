@@ -52,7 +52,6 @@ const PanelAdmin = () => {
       <ModalTeacher showModalT={showModalT} setShowModalT={setShowModalT} />
 
       {/* Sección agregar cortes */}
-
       <ContainerMain>
         <ContainerTitle>
           <TitleAdd>Cortes</TitleAdd>
