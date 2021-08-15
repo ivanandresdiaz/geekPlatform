@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { createNewSprint, uploadSprintPDF } from '../../actions/classroomActions';
@@ -7,17 +8,24 @@ import { getLoadedSprintPDF } from '../../reducers/salonReducer';
 const CreateSprints = (props) => {
   const { corteId, salonId } = props;
   const loadedSprintPDF = useSelector(getLoadedSprintPDF);
-  const [loadedPDF, setLoadedPDF] = useState(true);
+  const [disabled, setDisabled] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
     console.log(loadedSprintPDF);
     if (loadedSprintPDF.length > 0) {
-      console.log('se cargo el PDF');
-      setLoadedPDF(false);
+      setDisabled(false);
     } else {
-      setLoadedPDF(true);
+      setDisabled(true);
     }
   }, [loadedSprintPDF]);
+  const htmlInput = useRef(null);
+  const cssInput = useRef(null);
+  const webpackInput = useRef(null);
+  const reactJsInput = useRef(null);
+  const reactHooksInput = useRef(null);
+  const reduxInput = useRef(null);
+  const firebaseInput = useRef(null);
+  const testingInput = useRef(null);
   const [formValues, handleInputChange, reset] = useForm({
     title: '',
     description: '',
@@ -25,10 +33,19 @@ const CreateSprints = (props) => {
     startDate: '',
     deadline: '',
     deliveryLink: '',
+    html: false,
+    css: false,
+    webpack: false,
+    reactJs: false,
+    reactHooks: false,
+    redux: false,
+    firebase: false,
+    testing: false,
     supportLink1: '',
     supportLink2: '',
     supportLink3: '',
     supportLink4: '',
+    imgSprint: '',
   });
   const {
     title,
@@ -39,7 +56,47 @@ const CreateSprints = (props) => {
     supportLink1,
     supportLink2,
     supportLink3,
-    supportLink4 } = formValues;
+    supportLink4,
+    html,
+    css,
+    webpack,
+    reactJs,
+    reactHooks,
+    redux,
+    firebase,
+    testing } = formValues;
+  const handleUploadImgSprint = (event) => {
+    const file = event.target.files[0];
+    const refStorage = firebase.storage().ref(`socialGeek/personalProjects/${file.name}`);
+    const task = refStorage.put(file);
+    task.on(
+      'state_changed',
+      (snapshot) => {
+        const porcentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      },
+      (err) => {
+        alert(`Error subiendo archivo = > ${err.message}`);
+      },
+      () => {
+        task.snapshot.ref
+          .getDownloadURL()
+          .then((url) => {
+            const evento = {
+              target: {
+                value: url,
+                name: 'imgSprint',
+              },
+            };
+            handleInputChange(evento);
+            setDisabled(false);
+            // sessionStorage.setItem('imgNewPost', url);
+          })
+          .catch((err) => {
+            alerts(`Error obteniendo downloadURL = > ${err}`);
+          });
+      },
+    );
+  };
   const handleSubmit = (evento) => {
     evento.preventDefault();
     console.log(formValues);
@@ -51,8 +108,24 @@ const CreateSprints = (props) => {
       supportLink1,
       supportLink2,
       supportLink3,
-      supportLink4));
+      supportLink4,
+      html,
+      css,
+      webpack,
+      reactJs,
+      reactHooks,
+      redux,
+      firebase,
+      testing));
     reset();
+    htmlInput.current.checked = false;
+    cssInput.current.checked = false;
+    webpackInput.current.checked = false;
+    reactJsInput.current.checked = false;
+    reactHooksInput.current.checked = false;
+    reduxInput.current.checked = false;
+    firebaseInput.current.checked = false;
+    testingInput.current.checked = false;
   };
 
   const handleUploadSprintPDF = (event) => {
@@ -60,7 +133,7 @@ const CreateSprints = (props) => {
   };
   return (
     <div>
-      <h1>Crear Sprint</h1>
+      <h1>Crear Nuevo Sprint</h1>
       <form onSubmit={handleSubmit}>
         <input
           type='text'
@@ -93,6 +166,88 @@ const CreateSprints = (props) => {
           onChange={handleInputChange}
           required
         />
+        <label>
+          <input
+            ref={htmlInput}
+            type='checkbox'
+            name='html'
+            value={html}
+            onChange={handleInputChange}
+          />
+          Html
+        </label>
+        <label>
+          <input
+            ref={cssInput}
+            type='checkbox'
+            name='css'
+            value={css}
+            onChange={handleInputChange}
+          />
+          Css
+        </label>
+        <label>
+          <input
+            ref={webpackInput}
+            type='checkbox'
+            name='webpack'
+            value={webpack}
+            onChange={handleInputChange}
+          />
+          Webpack
+        </label>
+        <label>
+          <input
+            ref={reactJsInput}
+            type='checkbox'
+            name='reactJs'
+            value={reactJs}
+            onChange={handleInputChange}
+          />
+          React Js
+        </label>
+        <label>
+          <input
+            ref={reactHooksInput}
+            type='checkbox'
+            name='reactHooks'
+            value={reactHooks}
+            onChange={handleInputChange}
+          />
+          Reack Hooks
+        </label>
+
+        <label>
+          <input
+            ref={reduxInput}
+            type='checkbox'
+            name='redux'
+            value={redux}
+            onChange={handleInputChange}
+          />
+          Reack Hooks
+        </label>
+        <label>
+          <input
+            ref={firebaseInput}
+            type='checkbox'
+            name='firebase'
+            value={firebase}
+            onChange={handleInputChange}
+          />
+          Firebase
+        </label>
+        <label>
+          <input
+            ref={testingInput}
+            type='checkbox'
+            name='testing'
+            value={testing}
+            onChange={handleInputChange}
+          />
+          Testing
+        </label>
+
         <input
           type='text'
           placeholder='link de apoyo 1'
@@ -121,8 +276,15 @@ const CreateSprints = (props) => {
           value={supportLink4}
           onChange={handleInputChange}
         />
-        <input type='file' name='archivosubido' onChange={handleUploadSprintPDF} required />
-        <button type='submit' disabled={loadedPDF}>Añadir Nuevo Sprint</button>
+        <label>
+          Subir PDF
+          <input type='file' name='archivosubido' onChange={handleUploadSprintPDF} required />
+        </label>
+        <label>
+          Subir imagen
+          <input type='file' name='imgSprint' onChange={handleUploadImgSprint} required />
+        </label>
+        <button type='submit' disabled={disabled}>Añadir Nuevo Sprint</button>
       </form>
     </div>
   );

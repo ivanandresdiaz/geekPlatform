@@ -44,3 +44,21 @@ export const removeLikeResourceFirestore = (corteId, id) => (dispatch, getState)
   const subtractLike = functions.httpsCallable('subtractLike');
   subtractLike({ corteId, id });
 };
+
+export const addFirestorePersonalProject = (values) => async (dispatch, getState) => {
+  console.log('entro a addFirestorePersonalProject');
+  try {
+
+    const { uid, myProjects } = getState().auth;
+    const newProjects = [...myProjects, values];
+
+    await db.collection('students').doc(uid).update({ myProjects: newProjects });
+
+    alert('se ha agregado tu nuevo proyecto');
+    dispatch({ type: 'addFirestorePersonalProject', payload: newProjects });
+  } catch (error) {
+    alert('algo salio mal');
+    console.log(error.message);
+  }
+
+};

@@ -9,7 +9,8 @@ import ListarSprints from '../../uiComponents/ListarSprints/ListarSprints';
 import ListarWorkGroups from '../../uiComponents/ListarWorkGroups/ListarWorkGroups';
 import NavbarAdmin from '../../components/Structure/NavbarAdmin';
 import Footer from '../../components/Structure/Footer';
-import { ContainerMainSalon, ContainerRowSprint, ContainerRowSrint, ContainerTitleGreet } from './SalonStyles';
+import { ContainerMainSalon, ContainerRowSprint, ContainerRowSprint, ContainerTitleGreet } from './SalonStyles';
+import AssignedStandardSprints from '../../components/AssignedStandardSprints/AssignedStandardSprints';
 
 const Salon = (props) => {
   const role = useSelector(getRole);
@@ -50,6 +51,26 @@ const Salon = (props) => {
         )}
 
         <ListarWorkGroups corteId={corteId} salonId={salon} />
+      <NavbarAdmin />
+      <h1>
+        Bienvenido al salon
+        {' '}
+        {salonData.salonName}
+      </h1>
+      {role === 'teacher' && (
+        <CreateSprints corteId={corteId} salonId={salon} />
+      )}
+      {role === 'teacher' && (
+        <AssignedStandardSprints corteId={corteId} salonId={salon} />
+      )}
+
+      <ListarSprints corteId={corteId} salonId={salon} role={role} />
+      <h1>AQUI VA LA AGENDA DE TUTORIAS EXTRAS</h1>
+      {role === 'teacher' && (
+        <Link to={`/corte/${corteId}/${salon}/createGroups`}>
+          Crear Nuevos grupos de trabajo LINK !!! SOLO PROFESOR
+        </Link>
+      )}
 
         <Footer />
       </div>
