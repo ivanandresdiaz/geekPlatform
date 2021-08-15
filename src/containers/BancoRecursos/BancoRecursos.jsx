@@ -21,7 +21,7 @@ const BancoRecursos = () => {
     dispatch(getFirestoreCategoryData('Frontend'));
   }, []);
   const handleGetCategory = (category) => {
-    ispatch(getFirestoreCategoryData(category));
+    dispatch(getFirestoreCategoryData(category));
   };
   return (
     <>

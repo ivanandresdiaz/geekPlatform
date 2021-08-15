@@ -24,7 +24,7 @@ const CardRecursoAcademico = (props) => {
       </p>
       <p>{category}</p>
       {photoURL && <img src={photoURL} alt={title} />}
-      {recommendedByPhotoURL && <img src={photoURL} alt={title} />}
+      {recommendedByPhotoURL && <img src={recommendedByPhotoURL} alt={title} />}
       <p>
         Recomendado por:
         {recommendedBy}
