@@ -1,5 +1,7 @@
 /* eslint-disable radix */
 /* eslint-disable import/prefer-default-export */
+import toast, { Toaster } from 'react-hot-toast';
+import React from 'react';
 import { firebase, googleAuthProvider, db, functions } from '../firebase/firebaseConfig';
 
 export const getFirestoreSalon = (corteId, salonId) => (dispatch, getState) => {
@@ -266,5 +268,18 @@ export const uploadSprintPDF = (file) => async (dispatch, getState) => {
         });
     },
   );
+};
+export const enviarFirestoreLista = (corteId, listaEnviar) => (dispatch, getState) => {
+  const batch = db.batch();
+  listaEnviar.forEach((student) => {
+    batch.update(db.collection('students').doc(student.uid), { assistance: student.assistance });
+  });
+  batch
+    .commit()
+    .then(() => {
+      toast.success('Se ha tomado lista');
+      dispatch({ type: 'requestWeekStudent' });
+    })
+    .catch((error) => console.error(error));
 };
 
