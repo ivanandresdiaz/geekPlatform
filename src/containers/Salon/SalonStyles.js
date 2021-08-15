@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import imgcorte from '../../images/other/imagencorte.jpg'
 
 export const ContainerMainSalon = styled.div`
   margin: 30px 30px 0px 160px;
@@ -14,6 +13,7 @@ export const ContainerTitleGreet = styled.div`
     color: #333333;
     font-weight: 700;
     margin-bottom: 0.5rem;
+    text-align: center;
   }
 `;
 
@@ -24,7 +24,7 @@ export const ContainerRowSprint = styled.div`
 `;
 
 export const ContainerSprints = styled.div`
-  width: 20%;
+  width: 25%;
   padding: 0 15px;
 `;
 
@@ -40,9 +40,21 @@ export const ContainerContentSprint = styled.div`
   margin-bottom: 30px;
   place-self: center;
   flex-direction: column;
-  max-height: 250px;
-  height: 200px;
-  background-image: url(${imgcorte});
+  height: auto;
+
+  h4 {
+    color: #ff3b53;
+    padding-bottom: 5px;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  p {
+    color: #333333;
+    text-align: center;
+    font-size: 14px;
+  }
 `;
 
 export const ImagenSprint = styled.img`
@@ -53,5 +65,3 @@ export const ImagenSprint = styled.img`
   object-position: center;
   width: 100%;
 `;
-
-

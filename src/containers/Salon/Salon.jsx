@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRole } from '../../reducers/authReducer';
@@ -9,11 +9,15 @@ import ListarSprints from '../../uiComponents/ListarSprints/ListarSprints';
 import ListarWorkGroups from '../../uiComponents/ListarWorkGroups/ListarWorkGroups';
 import NavbarAdmin from '../../components/Structure/NavbarAdmin';
 import Footer from '../../components/Structure/Footer';
-import { ContainerMainSalon, ContainerRowSprint, ContainerRowSprint, ContainerTitleGreet } from './SalonStyles';
+import { ContainerMainSalon, ContainerRowSprint, ContainerTitleGreet } from './SalonStyles';
 import AssignedStandardSprints from '../../components/AssignedStandardSprints/AssignedStandardSprints';
+import { ModalSprints } from '../../uiComponents/Modal/Modal';
+import { Button } from '../../globalStyles';
 
 const Salon = (props) => {
   const role = useSelector(getRole);
+  const [showModalSprints, setShowModalSprints] = useState(false);
+  const OpenModalSprints = () => { setShowModalSprints((prevSprints) => !prevSprints); };
   const { match: { params: { salon, corteId } } } = props;
   const salonData = useSelector(getSalonData);
   const dispatch = useDispatch();
@@ -36,41 +40,37 @@ const Salon = (props) => {
               {salonData.salonName}
             </h1>
           </ContainerTitleGreet>
+          <ContainerTitleGreet>
+            {role === 'teacher' && (
+              <Button onClick={OpenModalSprints}>
+                Crear sprint
+              </Button>
+            )}
+            <ModalSprints showModalSprints={showModalSprints} setShowModalSprints={setShowModalSprints} />
+          </ContainerTitleGreet>
         </ContainerMainSalon>
         <ContainerMainSalon>
           <ContainerRowSprint>
-            <ListarSprints corteId={corteId} salonId={salon} />
+            <ListarSprints corteId={corteId} salonId={salon} role={role} />
           </ContainerRowSprint>
-          <CreateSprints corteId={corteId} salonId={salon} />
+
         </ContainerMainSalon>
+        <ListarWorkGroups corteId={corteId} salonId={salon} />
+        {/* 
+        {role === 'teacher' && (
+          <CreateSprints corteId={corteId} salonId={salon} />
+        )}
+        {role === 'teacher' && (
+          <AssignedStandardSprints corteId={corteId} salonId={salon} />
+        )}
+
+        <ListarSprints corteId={corteId} salonId={salon} role={role} />
         <h1>AQUI VA LA AGENDA DE TUTORIAS EXTRAS</h1>
         {role === 'teacher' && (
           <Link to={`/corte/${corteId}/${salon}/createGroups`}>
             Crear Nuevos grupos de trabajo LINK !!! SOLO PROFESOR
           </Link>
-        )}
-
-        <ListarWorkGroups corteId={corteId} salonId={salon} />
-      <NavbarAdmin />
-      <h1>
-        Bienvenido al salon
-        {' '}
-        {salonData.salonName}
-      </h1>
-      {role === 'teacher' && (
-        <CreateSprints corteId={corteId} salonId={salon} />
-      )}
-      {role === 'teacher' && (
-        <AssignedStandardSprints corteId={corteId} salonId={salon} />
-      )}
-
-      <ListarSprints corteId={corteId} salonId={salon} role={role} />
-      <h1>AQUI VA LA AGENDA DE TUTORIAS EXTRAS</h1>
-      {role === 'teacher' && (
-        <Link to={`/corte/${corteId}/${salon}/createGroups`}>
-          Crear Nuevos grupos de trabajo LINK !!! SOLO PROFESOR
-        </Link>
-      )}
+        )} */}
 
         <Footer />
       </div>

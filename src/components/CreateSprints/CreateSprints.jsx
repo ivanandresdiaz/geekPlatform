@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { createNewSprint, uploadSprintPDF } from '../../actions/classroomActions';
 import { getLoadedSprintPDF } from '../../reducers/salonReducer';
+import { FormInput, FormModal } from '../../uiComponents/Modal/ModalStyles';
 
 const CreateSprints = (props) => {
   const { corteId, salonId } = props;
@@ -134,8 +135,8 @@ const CreateSprints = (props) => {
   return (
     <div>
       <h1>Crear Nuevo Sprint</h1>
-      <form onSubmit={handleSubmit}>
-        <input
+      <FormModal onSubmit={handleSubmit}>
+        <FormInput
           type='text'
           placeholder='titulo del Sprint'
           name='title'
@@ -144,21 +145,21 @@ const CreateSprints = (props) => {
           required
         />
         <textarea name='description' cols='30' rows='10' value={description} placeholder='descripcion del sprint' onChange={handleInputChange} />
-        <input
+        <FormInput
           type='date'
           name='startDate'
           value={startDate}
           onChange={handleInputChange}
           required
         />
-        <input
+        <FormInput
           type='date'
           name='deadline'
           value={deadline}
           onChange={handleInputChange}
           required
         />
-        <input
+        <FormInput
           type='text'
           placeholder='link de entrega'
           name='deliveryLink'
@@ -285,7 +286,7 @@ const CreateSprints = (props) => {
           <input type='file' name='imgSprint' onChange={handleUploadImgSprint} required />
         </label>
         <button type='submit' disabled={disabled}>Añadir Nuevo Sprint</button>
-      </form>
+      </FormModal>
     </div>
   );
 };
