@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ContainerMainCorte = styled.div`
   margin: 30px 30px 0px 160px;
@@ -26,6 +26,20 @@ export const ContainerStudentCorte = styled.div`
   overflow: hidden;
   margin-bottom: 30px;
   place-self: center;
+`;
+
+export const ContainerStudentLista = styled.div`
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff; //agregar luego dark theme.
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px;
+  place-self: center;
+  width: 1467px;
 `;
 
 export const ContainerClassrooms = styled.div`
@@ -57,7 +71,6 @@ export const ContentImg = styled.div`
 export const ContentTitle = styled.div`
   flex-grow: 1;
   text-align: center;
- 
 
   h2 {
     color: #333333;
@@ -192,7 +205,6 @@ export const ContainerAddStudentCorte = styled.div`
 export const ContainerStudentTextCorte = styled.div`
   flex-grow: 1;
   text-align: center;
-
 
   h2 {
     color: #333333;

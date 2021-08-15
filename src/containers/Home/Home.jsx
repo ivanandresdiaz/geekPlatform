@@ -21,7 +21,7 @@ const Home = () => {
         );
       case 'student':
         return (
-          <div>
+          <div style={{ backgroundColor: '#F2F2F2' }}>
             <PanelStudent />
             <Footer />
           </div>

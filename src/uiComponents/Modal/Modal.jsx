@@ -4,6 +4,8 @@ import AddAdmin from '../../components/AddAdmin/AddAdmin';
 import AddStudents from '../../components/AddStudents/AddStudents';
 import AddTeachers from '../../components/AddTeachers/AddTeachers';
 import CreateCorte from '../../components/CreateCorte/CreateCorte';
+import AssignedStandardSprints from '../../components/AssignedStandardSprints/AssignedStandardSprints'
+import CreateSprints from '../../components/CreateSprints/CreateSprints';
 import { Background, CloseModalButton, ContainerModal, ModalContent } from './ModalStyles';
 
 export const Modal = ({ showModal, setShowModal }) => {
@@ -81,3 +83,45 @@ export const ModalEstudiantes = ({ showModalE, setShowModalE, corteId }) => {
     </>
   );
 };
+
+export const ModalSprints = ({ showModalSprints, setShowModalSprints, corteId, salon }) => {
+
+  return (
+    <>
+      {showModalSprints ? (
+        <Background>
+          <ContainerModal style={{ width: '800px' }} showModalSprints={showModalSprints}>
+            <ModalContent>
+              <CreateSprints corteId={corteId} salonId={salon} />
+              <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModalSprints((prevSprints) => !prevSprints)}>
+                <MdClose style={{ alignItems: 'center' }} />
+              </CloseModalButton>
+            </ModalContent>
+          </ContainerModal>
+        </Background>
+      ) : null}
+    </>
+  );
+};
+
+export const ModalSprintStandard = ({ showModalSprintStandard, setShowModalSprintStandard, corteId, salon }) => {
+
+  return (
+    <>
+      {showModalSprintStandard ? (
+        <Background>
+          <ContainerModal style={{ width: '800px' }} showModalSprintStandard={showModalSprintStandard}>
+            <ModalContent>
+              <AssignedStandardSprints corteId={corteId} salonId={salon} />
+              <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModalSprintStandard((prevSprintStandard) => !prevSprintStandard)}>
+                <MdClose style={{ alignItems: 'center' }} />
+              </CloseModalButton>
+            </ModalContent>
+          </ContainerModal>
+        </Background>
+      ) : null}
+    </>
+  );
+};
+
+

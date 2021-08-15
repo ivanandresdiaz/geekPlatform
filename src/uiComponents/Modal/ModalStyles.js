@@ -92,6 +92,16 @@ export const FormModal = styled.form`
   margin-bottom: 20px;
 `;
 
+export const FormModalSalon = styled.form`
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: auto;
+  display: flex;
+  padding: 5px 40px 25px 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
 export const LabelModal = styled.label`
   color: #323941;
   display: flex;
@@ -108,7 +118,7 @@ export const FormInput = styled.input`
   margin-top: 8px;
   border: none;
   font-size: 14px;
-  border: 1px solid #f0f0f0;
+  border: none;
 
   &:focus {
     color: #ff3b53;
@@ -126,17 +136,22 @@ export const FormInput = styled.input`
 
 export const FormTextArea = styled.textarea`
   padding: 10px 20px;
-  border-radius: 2px;
-  margin-right: 10px;
+  border-radius: 5px;
   outline: none;
-  border: none;
-  width: 300px;
+  width: 250px;
   margin-bottom: 20px;
-  font-size: 16px;
-  border: 1px solid #fff;
+  margin-top: 8px;
+  border: none;
+  font-size: 14px;
+  border: 1px solid #f0f0f0;
+  resize: none;
+
+  &:focus {
+    color: #ff3b53;
+  }
 
   &::placeholder {
-    color: #242424;
+    color: #525151;
   }
 
   @media screen and (max-width: 820px) {

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { forEach } from 'lodash';
 import { getFirestoreStudentsCorte } from '../../actions/studentsActions';
 import { getStudentsCorte } from '../../reducers/studentsReducer';
 import { DivContainerList, DivRowList, ImgStudent, ContainerPorcentajeAsistencia, PorcentajeAsistencia, ContainerPActivo, ContainerPInactivo, DivFullName, DivContainerInputCheckBox, ContainerGeekyPuntos } from './styledListarStudentsCorte.js';
 import { enviarFirestoreLista } from '../../actions/classroomActions';
+import { Button4, Button5 } from '../../globalStyles';
+import { ModalEstudiantes } from '../Modal/Modal';
 
 const ListarStudentsCorte = (props) => {
+  const [showModalE, setShowModalE] = useState(false);
+  const OpenModalE = () => { setShowModalE((prevE) => !prevE); };
   const { corteId } = props;
   const dispatch = useDispatch();
   const studentsCorte = useSelector(getStudentsCorte);
@@ -57,14 +59,12 @@ const ListarStudentsCorte = (props) => {
     dispatch(enviarFirestoreLista(corteId, listaEnviar));
   };
   return (
-    <div>
-      <h4>Lista estudiantes</h4>
+    <div style={{ width: '100%' }}>
       <DivContainerList>
         <DivRowList>
           <DivContainerInputCheckBox>
             <p>Asistencia</p>
           </DivContainerInputCheckBox>
-
           <div>
             <p>Nombre Completo</p>
           </div>
@@ -114,7 +114,9 @@ const ListarStudentsCorte = (props) => {
             </DivRowList>
           );
         })}
-        <button type='button' onClick={handleEnviarLista}>Enviar Toma de Lista</button>
+        <Button4 type='button' onClick={handleEnviarLista}>Enviar asistencia</Button4>
+        <Button4 primary animate={{}} onClick={OpenModalE}>Agregar estudiante</Button4>
+        <ModalEstudiantes corteId={corteId} showModalE={showModalE} setShowModalE={setShowModalE} />
       </DivContainerList>
 
     </div>

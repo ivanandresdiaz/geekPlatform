@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getWorkGroups } from '../../reducers/salonReducer';
 import { getFirestoreWorkGroups } from '../../actions/classroomActions';
 import Group from '../../components/Group/Group';
+import NavbarTeacher from '../../components/Structure/NavbarTeacher';
+import Footer from '../../components/Structure/Footer';
 
 const ListarWorkGroups = (props) => {
   const { corteId, salonId } = props;
@@ -14,13 +16,15 @@ const ListarWorkGroups = (props) => {
   }, []);
 
   return (
-    <div>
+    <>
+      
       <h3>Listar grupos de estudio</h3>
       {workGroups.length > 0 && workGroups.map((workGroup) => {
         const { columnOrder, columns, tasks, title, id } = workGroup;
         return <Group key={workGroup.id} columnOrder={columnOrder} columns={columns} tasks={tasks} title={title} id={id} corteId={corteId} salonId={salonId} />;
       })}
-    </div>
+      
+    </>
   );
 };
 

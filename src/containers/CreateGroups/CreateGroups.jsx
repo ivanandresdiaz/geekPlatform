@@ -6,6 +6,12 @@ import { createWorkGroups, generateTemplateGroups } from '../../actions/classroo
 import { getStudentsCorte } from '../../reducers/studentsReducer';
 import { getFirestoreStudentsCorte } from '../../actions/studentsActions';
 import { getPlantillaCreatingGroups } from '../../reducers/salonReducer';
+import NavbarTeacher from '../../components/Structure/NavbarTeacher';
+import Footer from '../../components/Structure/Footer';
+import { ContainerTitleGreet } from '../Salon/SalonStyles';
+import { FormInput, FormModal } from '../../uiComponents/Modal/ModalStyles';
+import { ContainerNewGroup, SelectPlantillas } from './CreateGroupsStyles';
+import { Button5 } from '../../globalStyles';
 
 const CreateNewGroups = (props) => {
   const { match: { params: { salon, corteId } } } = props;
@@ -35,37 +41,50 @@ const CreateNewGroups = (props) => {
 
   };
   return (
-    <div>
-      <h1>Crear nuevo Grupo</h1>
-      <p>Debes seleccionar la cantidad de grupos que quieres crear</p>
-      <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          placeholder='nombre de actividad en grupos'
-          name='title'
-          value={formValues.title}
-          onChange={handleInputChange}
-          required
-        />
-        <select value={cantidad} placeholder='¿Cuantos grupos?' name='cantidad' onChange={handleInputChange} required>
-          <option value=''> Seleccione</option>
-          <option value='1'>1</option>
-          <option value='2'>2</option>
-          <option value='3'>3</option>
-          <option value='4'>4</option>
-          <option value='5'>5</option>
-          <option value='6'>6</option>
-          <option value='7'>7</option>
-          <option value='8'>8</option>
-          <option value='9'>9</option>
-          <option value='10'>10</option>
-        </select>
-        <button type='submit'>generar plantillas</button>
-      </form>
+    <>
+      <NavbarTeacher />
 
-      <Group key={id} columnOrder={columnOrder} columns={columns} tasks={tasks} title={title} id={id} salonId={salon} corteId={corteId} />
+      <ContainerTitleGreet>
+        <h1>Crear nuevo Grupo</h1>
+        <p>Debes seleccionar la cantidad de grupos que quieres crear</p>
+      </ContainerTitleGreet>
+      <div style={{ margin: '30px, 30px, 0px, 160px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <ContainerNewGroup>
+            <FormModal onSubmit={handleSubmit}>
+              <FormInput
+                style={{ marginBottom: '5px' }}
+                type='text'
+                placeholder='Nombre de actividad grupal'
+                name='title'
+                value={formValues.title}
+                onChange={handleInputChange}
+                required
+              />
+              <SelectPlantillas style={{ marginBottom: '5px' }} value={cantidad} placeholder='¿Cuántos grupos?' name='cantidad' onChange={handleInputChange} required>
+                <option value=''> Seleccione</option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+                <option value='10'>10</option>
+              </SelectPlantillas>
+              <Button5 type='submit'>Generar</Button5>
+            </FormModal>
+              <Group key={id} columnOrder={columnOrder} columns={columns} tasks={tasks} title={title} id={id} salonId={salon} corteId={corteId} />
+          </ContainerNewGroup>
 
-    </div>
+
+        </div>
+      </div>
+
+      <Footer />
+    </>
   );
 };
 

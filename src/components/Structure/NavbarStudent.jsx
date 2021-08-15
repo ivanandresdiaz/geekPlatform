@@ -28,7 +28,7 @@ const NavbarStudent = () => {
                         </NavLogo>
                         <NavMenu>
                             <NavItem>
-                                <NavLinks to='/feed'>
+                                <NavLinks to='/socialGeek'>
                                     Social Feed
                                 </NavLinks>
                             </NavItem>

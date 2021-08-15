@@ -103,7 +103,7 @@ export const Button3 = styled(motion.button)`
 
 export const Button4 = styled.button`
   border-radius: 4px;
-  background: ${({ primary }) => (primary ? "#FF3B53" : "#9C1D2D")};
+  background: ${({ primary }) => (primary ? "#FF3B53" : "#1BE282")};
   white-space: nowrap;
   padding: ${({ big }) => (big ? "12px 64px" : "10px 20px")};
   margin-top: 10px;
@@ -117,7 +117,7 @@ export const Button4 = styled.button`
   &:hover {
     transition: all 0.3 ease-out;
     background: #fff;
-    background: ${({ primary }) => (primary ? "#9C1D2D" : "#FF3B53")};
+    background: ${({ primary }) => (primary ? "#9C1D2D" : "#16b568")};
   }
 
   @media screen and (max-width: 960px) {
@@ -126,8 +126,34 @@ export const Button4 = styled.button`
 `;
 
 export const Button5 = styled(motion.button)`
-  border-radius: 4px;
+  border-radius: 0px 4px 4px 0px;
   background: ${({ primary }) => (primary ? "#FF3B53" : "#1BE282")};
+  white-space: nowrap;
+  padding: ${({ big }) => (big ? "12px 64px" : "10px 20px")};
+  color: #fff;
+  font-family: "Montserrat", sans-serif !important;
+  font-size: ${({ fontBig }) => (fontBig ? "18px" : "14px")};
+  outline: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  &:hover {
+    transition: all 0.3 ease-out;
+    background: #fff;
+    background: ${({ primary }) => (primary ? "#9C1D2D" : "#16b568")};
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
+`;
+
+export const Button6 = styled(motion.button)`
+  border-radius: 4px;
+  background: ${({ primary }) => (primary ? "#B25327" : "#a04b23")};
   white-space: nowrap;
   padding: ${({ big }) => (big ? "12px 64px" : "10px 20px")};
   margin-top: 20px;
@@ -142,7 +168,31 @@ export const Button5 = styled(motion.button)`
   &:hover {
     transition: all 0.3 ease-out;
     background: #fff;
-    background: ${({ primary }) => (primary ? "#9C1D2D" : "#16b568")};
+    background: ${({ primary }) => (primary ? "#a04b23" : "#B25327")};
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
+`;
+
+export const Button7 = styled(motion.button)`
+  background: none;
+  white-space: nowrap;
+  padding: ${({ big }) => (big ? "12px 64px" : "10px 26px")};
+  margin-top: 20px;
+  color: #333333;
+  font-family: "Montserrat", sans-serif;
+  font-size: ${({ fontBig }) => (fontBig ? "18px" : "16px")};
+  font-weight: 600;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 8px;
+
+  &:hover {
+    transition: all 0.3 ease-out;
+    color: #ff3b53;
   }
 
   @media screen and (max-width: 960px) {

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import InnerList from './InnerList';
 import { createWorkGroups, deleteFirestoreGroups } from '../../actions/classroomActions';
+import { Button5 } from '../../globalStyles';
 
 const Container = styled.div`
   display: flex;
@@ -126,7 +127,7 @@ const Group = (props) => {
   };
   return (
     <div>
-      <h1>
+      <h1 style={{ textAlign: 'center' }}>
         Tema:
         {' '}
         {title}
@@ -159,19 +160,28 @@ const Group = (props) => {
         </Droppable>
       </DragDropContext>
       {id === 'readyToSend' ? (
-        <button type='button' onClick={handleSubmitNewGroups}>
-          Crear y enviar grupos de trabajo
-        </button>
+        <div style={{ textAlign: 'center' }}>
+          <Button5 primary type='button' onClick={handleSubmitNewGroups}>
+            Crear y enviar grupos de trabajo
+          </Button5>
+        </div>
+
       ) : null}
       {id === 'defaultPlantillaGrupos' ? (
-        <button type='button'>
-          no puedes enviar la plantilla default
-        </button>
+        <div style={{ textAlign: 'center' }}>
+          <Button5 primary type='button'>
+            No puedes enviar la plantilla por defecto
+          </Button5>
+        </div>
+
       ) : null}
       {id !== 'defaultPlantillaGrupos' && id !== 'readyToSend' ? (
-        <button type='button' onClick={handleDeleteGroups}>
-          Eliminar grupos
-        </button>
+        <div style={{ textAlign: 'center' }}>
+          <Button5 primary type='button' onClick={handleDeleteGroups}>
+            Eliminar grupos
+          </Button5>
+        </div>
+
       ) : null}
     </div>
 

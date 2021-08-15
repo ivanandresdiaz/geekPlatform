@@ -7,6 +7,7 @@ import menu from '../../../images/other/menu.png'
 import { FaFolder, FaShieldAlt, FaUserCircle, FaUserFriends, FaWrench } from 'react-icons/fa';
 import { VscColorMode } from "react-icons/vsc";
 import { Button3 } from '../../../globalStyles';
+import { Link } from 'react-router-dom';
 
 export const MenuTeacher = (props) => {
 
@@ -47,9 +48,12 @@ export const TeacherDropdown = () => {
                 {fullName}
             </Welcome>
             <TeacherDropdownItem leftIcon={<FaUserCircle />}>Mi perfil</TeacherDropdownItem>
-            <TeacherDropdownItem leftIcon={<FaFolder />}>Recursos</TeacherDropdownItem>
-            <TeacherDropdownItem leftIcon={<FaShieldAlt />}>Panel Teacher</TeacherDropdownItem>
-            <TeacherDropdownItem leftIcon={<FaUserFriends />}>Salones</TeacherDropdownItem>
+            <Link to='/bancoRecursosAcademicos'>
+                <TeacherDropdownItem leftIcon={<FaFolder />}>Recursos</TeacherDropdownItem>
+            </Link>
+            <Link to='/'>
+                <TeacherDropdownItem leftIcon={<FaShieldAlt />}>Panel Teacher</TeacherDropdownItem>
+            </Link>
             <TeacherDropdownItem leftIcon={<FaWrench />}>Configuración</TeacherDropdownItem>
             <TeacherDropdownItem leftIcon={<VscColorMode />}>Darkmode</TeacherDropdownItem>
             <Button3 type='button' onClick={handleCerrarSesion} primary>Cerrar sesión</Button3>
