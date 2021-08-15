@@ -5,6 +5,9 @@ import { getLoadedURL } from '../../reducers/bancoRecursosReducer';
 import { getPhotoURL, getFullName, getUserId, getRole } from '../../reducers/authReducer';
 import useForm from '../../hooks/useForm';
 import { addFirestoreNewAcademicResource, uploadImgResource } from '../../actions/bancoRecursosActions';
+import { FormInput, FormModal, FormTextArea } from '../../uiComponents/Modal/ModalStyles';
+import { SelectCat } from './NewAcademicResourceStyles';
+import { Button5 } from '../../globalStyles';
 
 const AddNewAcademicResource = (props) => {
   const { loggedUser, userId, categories, subCategories } = props;
@@ -49,64 +52,73 @@ const AddNewAcademicResource = (props) => {
 
   return (
     <div>
-      <h3>Añadir nuevos recursos</h3>
-      <form>
-        <select value={category} placeholder='categorias' name='category' onChange={handleInputChange} required>
-          <option value=''> Seleccione categoria</option>
-          {categories.length > 0 && categories.map((itemCategory, index) => <option key={index} value={itemCategory}>{itemCategory}</option>)}
-        </select>
-        <input
-          type='text'
-          placeholder='titulo de la recomendacion'
-          name='title'
-          value={title}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          type='text'
-          placeholder='inserte el link'
-          name='link'
-          value={link}
-          onChange={handleInputChange}
-          required
-        />
-        <select value={format} placeholder='formato de recurso' name='format' onChange={handleInputChange} required>
-          <option value=''> Seleccione categoria</option>
-          <option value='video'>video</option>
-          <option value='articulo'>articulo</option>
-          <option value='documentacion'>documentacion</option>
-          <option value='publicacion'>publicacion</option>
-          <option value='blog'>blog</option>
-          <option value='pagina web'>pagina web</option>
-          <option value='aplicacion'>aplicacion</option>
-        </select>
-        <select value={level} placeholder='nivel del recurso' name='level' onChange={handleInputChange} required>
-          <option value=''> Seleccione nivel de dificultad de recurso</option>
-          <option value='principiante'>principiante</option>
-          <option value='intermedio'>intermedio</option>
-          <option value='avanzado'>avanzado</option>
-        </select>
-        <select value={english} placeholder='¿ingles?' name='english' onChange={handleInputChange} required>
-          <option value='false'>No ingles</option>
-          <option value='true'>En ingles</option>
-        </select>
-        <textarea
-          placeholder='descripcion del recurso'
-          name='description'
-          value={description}
-          onChange={handleInputChange}
-          required
-        />
-        <input list='subCategories' placeholder='palabra clave' name='subCategory' value={subCategory} onChange={handleInputChange} required />
-        <datalist id='subCategories'>
-          {subCategories.length > 0 && subCategories.map((itemCategory, index) => <option key={index} value={itemCategory}>{itemCategory}</option>)}
-        </datalist>
-        <p>sube una imagen relacionada con el recurso</p>
-        <input type='file' name='archivosubido' onChange={handleUploadImage} required />
-        <button type='submit' onClick={handleSubmit} disabled={loaded}>Agregar recurso Academico</button>
-      </form>
-    </div>
+      <FormModal>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', margin: 'auto' }}>
+            <FormInput
+              type='text'
+              placeholder='TÍtulo de la recomendacion'
+              name='title'
+              value={title}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', margin: 'auto' }}>
+            <FormTextArea style={{ width: '520px', height: '110px' }}
+              placeholder='Descripción del recurso'
+              name='description'
+              value={description}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'row', margin: 'auto' }}>
+            <SelectCat style={{ marginRight: '15px' }} value={category} placeholder='categorias' name='category' onChange={handleInputChange} required>
+              <option value=''>Selecciona categoria</option>
+              {categories.length > 0 && categories.map((itemCategory, index) => <option key={index} value={itemCategory}>{itemCategory}</option>)}
+            </SelectCat>
+            <SelectCat style={{ marginRight: '15px' }} value={format} placeholder='formato de recurso' name='format' onChange={handleInputChange} required>
+              <option value=''> Seleccione artículo</option>
+              <option value='video'>Video</option>
+              <option value='articulo'>ArtÍculo</option>
+              <option value='documentacion'>Documentación</option>
+              <option value='publicacion'>Publicación</option>
+              <option value='blog'>Blog</option>
+              <option value='pagina web'>Página web</option>
+              <option value='aplicacion'>Aplicación</option>
+            </SelectCat>
+            <SelectCat style={{ marginRight: '15px' }} value={level} placeholder='nivel del recurso' name='level' onChange={handleInputChange} required>
+              <option value=''>Seleccione nivel de dificultad de recurso</option>
+              <option value='principiante'>Principiante</option>
+              <option value='intermedio'>Intermedio</option>
+              <option value='avanzado'>Avanzado</option>
+            </SelectCat>
+            <SelectCat style={{ marginRight: '15px' }} value={english} placeholder='¿ingles?' name='english' onChange={handleInputChange} required>
+              <option value='false'>No inglés</option>
+              <option value='true'>En inglés</option>
+            </SelectCat>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'row', margin: 'auto' }}>
+            <FormInput
+              style={{ marginRight: '15px' }}
+              type='text'
+              placeholder='Inserte el link'
+              name='link'
+              value={link}
+              onChange={handleInputChange}
+              required
+            />
+            <FormInput style={{ marginRight: '15px' }} list='subCategories' placeholder='Palabra clave' name='subCategory' value={subCategory} onChange={handleInputChange} required />
+            <datalist id='subCategories'>
+              {subCategories.length > 0 && subCategories.map((itemCategory, index) => <option key={index} value={itemCategory}>{itemCategory}</option>)}
+            </datalist>
+            <FormInput style={{ marginRight: '15px' }} type='file' name='archivosubido' onChange={handleUploadImage} required />
+          </div>
+          <Button5 type='submit' onClick={handleSubmit} disabled={loaded}>Agregar recurso Academico</Button5>
+        </div>
+      </FormModal >
+    </div >
   );
 };
 

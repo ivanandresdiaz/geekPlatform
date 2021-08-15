@@ -2,6 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { addFirestoreNewCategoryAcademicResource } from '../../actions/bancoRecursosActions';
+import { FormInput, FormModal } from '../../uiComponents/Modal/ModalStyles';
+import { Button5 } from '../../globalStyles';
 
 const CreateNewCategory = (props) => {
   const { categories } = props;
@@ -17,21 +19,23 @@ const CreateNewCategory = (props) => {
   };
   return (
     <div>
-      <h3>Crear nuevas categorias</h3>
-      <p>Las categorias deben tener un nombre diferente</p>
-      <form>
-        <input
-          type='text'
-          placeholder='nueva categoria'
-          name='category'
-          value={category}
-          onChange={handleInputChange}
-          required
-        />
-        <button type='submit' onClick={handleSubmit}>Agregar nueva categoria</button>
-      </form>
+      <FormModal style={{ marginBottom: '0px' }} >
+        <label style={{ position: 'relative' }}>
+          <FormInput
+            style={{ marginTop: '0px' }}
+            type='text'
+            placeholder='Nueva categoria'
+            name='category'
+            value={category}
+            onChange={handleInputChange}
+            required
+          />
+          <Button5 style={{ position: 'absolute' }} type='submit' onClick={handleSubmit}>Agregar</Button5>
+        </label>
 
-    </div>
+      </FormModal>
+
+    </div >
   );
 };
 

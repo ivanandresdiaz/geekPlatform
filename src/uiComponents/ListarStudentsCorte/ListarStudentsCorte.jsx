@@ -4,7 +4,7 @@ import { getFirestoreStudentsCorte } from '../../actions/studentsActions';
 import { getStudentsCorte } from '../../reducers/studentsReducer';
 import { DivContainerList, DivRowList, ImgStudent, ContainerPorcentajeAsistencia, PorcentajeAsistencia, ContainerPActivo, ContainerPInactivo, DivFullName, DivContainerInputCheckBox } from './styledListarStudentsCorte.js';
 import { enviarFirestoreLista } from '../../actions/classroomActions';
-import { Button5 } from '../../globalStyles'
+import { Button4, Button5 } from '../../globalStyles'
 import { ModalEstudiantes } from '../Modal/Modal';
 
 const ListarStudentsCorte = (props) => {
@@ -107,8 +107,8 @@ const ListarStudentsCorte = (props) => {
             );
           })
         }
-        <Button5 type='button' onClick={handleEnviarLista}>Enviar asistencia</Button5>
-        <Button5 primary animate={{}} onClick={OpenModalE}>Agregar estudiante</Button5>
+        <Button4 type='button' onClick={handleEnviarLista}>Enviar asistencia</Button4>
+        <Button4 primary animate={{}} onClick={OpenModalE}>Agregar estudiante</Button4>
         <ModalEstudiantes corteId={corteId} showModalE={showModalE} setShowModalE={setShowModalE} />
       </DivContainerList >
 

@@ -118,7 +118,7 @@ export const FormInput = styled.input`
   margin-top: 8px;
   border: none;
   font-size: 14px;
-  border: 1px solid #f0f0f0;
+  border: none;
 
   &:focus {
     color: #ff3b53;
