@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { createNewSprint, uploadSprintPDF } from '../../actions/classroomActions';
 import { getLoadedSprintPDF } from '../../reducers/salonReducer';
-import { FormInput, FormModal } from '../../uiComponents/Modal/ModalStyles';
+import { FormInput, FormModalSalon, FormTextArea } from '../../uiComponents/Modal/ModalStyles'
+import { Button4 } from '../../globalStyles';
+
 
 const CreateSprints = (props) => {
   const { corteId, salonId } = props;
@@ -134,160 +136,204 @@ const CreateSprints = (props) => {
   };
   return (
     <div>
-      <h1>Crear Nuevo Sprint</h1>
-      <FormModal onSubmit={handleSubmit}>
-        <FormInput
-          type='text'
-          placeholder='titulo del Sprint'
-          name='title'
-          value={title}
-          onChange={handleInputChange}
-          required
-        />
-        <textarea name='description' cols='30' rows='10' value={description} placeholder='descripcion del sprint' onChange={handleInputChange} />
-        <FormInput
-          type='date'
-          name='startDate'
-          value={startDate}
-          onChange={handleInputChange}
-          required
-        />
-        <FormInput
-          type='date'
-          name='deadline'
-          value={deadline}
-          onChange={handleInputChange}
-          required
-        />
-        <FormInput
-          type='text'
-          placeholder='link de entrega'
-          name='deliveryLink'
-          value={deliveryLink}
-          onChange={handleInputChange}
-          required
-        />
-        <label>
-          <input
-            ref={htmlInput}
-            type='checkbox'
-            name='html'
-            value={html}
-            onChange={handleInputChange}
-          />
-          Html
-        </label>
-        <label>
-          <input
-            ref={cssInput}
-            type='checkbox'
-            name='css'
-            value={css}
-            onChange={handleInputChange}
-          />
-          Css
-        </label>
-        <label>
-          <input
-            ref={webpackInput}
-            type='checkbox'
-            name='webpack'
-            value={webpack}
-            onChange={handleInputChange}
-          />
-          Webpack
-        </label>
-        <label>
-          <input
-            ref={reactJsInput}
-            type='checkbox'
-            name='reactJs'
-            value={reactJs}
-            onChange={handleInputChange}
-          />
-          React Js
-        </label>
-        <label>
-          <input
-            ref={reactHooksInput}
-            type='checkbox'
-            name='reactHooks'
-            value={reactHooks}
-            onChange={handleInputChange}
-          />
-          Reack Hooks
-        </label>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <h1>Crear Nuevo Sprint</h1>
+        <FormModalSalon onSubmit={handleSubmit}>
+          <div style={{ display: 'flex', flexDirection: 'column', margin: 'auto', alignItems: 'center' }}>
+            <FormInput
+              type='text'
+              placeholder='Título del Sprint'
+              name='title'
+              value={title}
+              onChange={handleInputChange}
+              required
+            />
+            <FormTextArea style={{ width: '400px', height: '120px' }} name='description' cols='30' rows='10' value={description} placeholder='Descripción del Sprint' onChange={handleInputChange} />
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', margin: 'auto', alignContent: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <p style={{ color: '#FF3B53', marginBottom: '1px', fontWeight: '600' }}>Empieza el</p>
+              <FormInput
+                style={{ marginLeft: '8px', width: 'auto' }}
+                type='date'
+                name='startDate'
+                value={startDate}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }} >
+              <p style={{ color: '#FF3B53', marginBottom: '1px', fontWeight: '600' }}>Termina el</p>
+              <FormInput
+                style={{ marginLeft: '8px', width: 'auto' }}
+                type='date'
+                name='deadline'
+                value={deadline}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }} >
+              <p style={{ color: '#FF3B53', marginBottom: '1px', fontWeight: '600' }}>Formulario</p>
+              <FormInput
+                style={{ marginLeft: '8px', width: 'auto' }}
+                type='text'
+                placeholder='Link de entrega'
+                name='deliveryLink'
+                value={deliveryLink}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', margin: 'auto', marginBottom: '20px', alignContent: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', margin: '0px, 25px', alignItems: 'start' }}>
+              <label>
+                <input
+                  style={{ marginRight: '10px' }}
+                  ref={htmlInput}
+                  type='checkbox'
+                  name='html'
+                  value={html}
+                  onChange={handleInputChange}
+                />
+                HTML
+              </label>
+              <label>
+                <input
+                  style={{ marginRight: '10px' }}
+                  ref={cssInput}
+                  type='checkbox'
+                  name='css'
+                  value={css}
+                  onChange={handleInputChange}
+                />
+                Css
+              </label>
+              <label>
+                <input
+                  style={{ marginRight: '10px' }}
+                  ref={webpackInput}
+                  type='checkbox'
+                  name='webpack'
+                  value={webpack}
+                  onChange={handleInputChange}
+                />
+                Webpack
+              </label>
+              <label>
+                <input
+                  style={{ marginRight: '10px' }}
+                  ref={reactJsInput}
+                  type='checkbox'
+                  name='reactJs'
+                  value={reactJs}
+                  onChange={handleInputChange}
+                />
+                React Js
+              </label>
+            </div>
 
-        <label>
-          <input
-            ref={reduxInput}
-            type='checkbox'
-            name='redux'
-            value={redux}
-            onChange={handleInputChange}
-          />
-          Reack Hooks
-        </label>
-        <label>
-          <input
-            ref={firebaseInput}
-            type='checkbox'
-            name='firebase'
-            value={firebase}
-            onChange={handleInputChange}
-          />
-          Firebase
-        </label>
-        <label>
-          <input
-            ref={testingInput}
-            type='checkbox'
-            name='testing'
-            value={testing}
-            onChange={handleInputChange}
-          />
-          Testing
-        </label>
+            <div style={{ display: 'flex', flexDirection: 'column', margin: '0px 25px', alignItems: 'start' }}>
+              <label>
+                <input
+                  style={{ marginRight: '10px' }}
+                  ref={reactHooksInput}
+                  type='checkbox'
+                  name='reactHooks'
+                  value={reactHooks}
+                  onChange={handleInputChange}
+                />
+                React Hooks
+              </label>
 
-        <input
-          type='text'
-          placeholder='link de apoyo 1'
-          name='supportLink1'
-          value={supportLink1}
-          onChange={handleInputChange}
-        />
-        <input
-          type='text'
-          placeholder='link de apoyo 2'
-          name='supportLink2'
-          value={supportLink2}
-          onChange={handleInputChange}
-        />
-        <input
-          type='text'
-          placeholder='link de apoyo 3'
-          name='supportLink3'
-          value={supportLink3}
-          onChange={handleInputChange}
-        />
-        <input
-          type='text'
-          placeholder='link de apoyo 4'
-          name='supportLink4'
-          value={supportLink4}
-          onChange={handleInputChange}
-        />
-        <label>
-          Subir PDF
-          <input type='file' name='archivosubido' onChange={handleUploadSprintPDF} required />
-        </label>
-        <label>
-          Subir imagen
-          <input type='file' name='imgSprint' onChange={handleUploadImgSprint} required />
-        </label>
-        <button type='submit' disabled={disabled}>Añadir Nuevo Sprint</button>
-      </FormModal>
-    </div>
+              <label>
+                <input
+                  style={{ marginRight: '10px' }}
+                  ref={reduxInput}
+                  type='checkbox'
+                  name='redux'
+                  value={redux}
+                  onChange={handleInputChange}
+                />
+                Redux
+              </label>
+              <label>
+                <input
+                  style={{ marginRight: '10px' }}
+                  ref={firebaseInput}
+                  type='checkbox'
+                  name='firebase'
+                  value={firebase}
+                  onChange={handleInputChange}
+                />
+                Firebase
+              </label>
+              <label>
+                <input
+                  style={{ marginRight: '10px' }}
+                  ref={testingInput}
+                  type='checkbox'
+                  name='testing'
+                  value={testing}
+                  onChange={handleInputChange}
+                />
+                Testing
+              </label>
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', margin: 'auto', alignContent: 'center' }}>
+            <FormInput
+              style={{ width: '150px', marginRight: '10px', marginTop: '0px' }}
+              type='text'
+              placeholder='Link de apoyo 1'
+              name='supportLink1'
+              value={supportLink1}
+              onChange={handleInputChange}
+            />
+            <FormInput
+              style={{ width: '150px', marginRight: '10px', marginTop: '0px' }}
+              type='text'
+              placeholder='Link de apoyo 2'
+              name='supportLink2'
+              value={supportLink2}
+              onChange={handleInputChange}
+            />
+            <FormInput
+              style={{ width: '150px', marginRight: '10px', marginTop: '0px' }}
+              type='text'
+              placeholder='Link de apoyo 3'
+              name='supportLink3'
+              value={supportLink3}
+              onChange={handleInputChange}
+            />
+            <FormInput
+              style={{ width: '150px', marginRight: '10px', marginTop: '0px' }}
+              type='text'
+              placeholder='Link de apoyo 4'
+              name='supportLink4'
+              value={supportLink4}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', width: '745px', alignContent: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', margin: 'auto' }}>
+              <p style={{ color: '#FF3B53', marginBottom: '1px', fontWeight: '600' }}>Subir PDF</p>
+              <input type='file' name='archivosubido' onChange={handleUploadSprintPDF} required />
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <p style={{ color: '#FF3B53', marginBottom: '1px', fontWeight: '600' }}>Subir imagen</p>
+                <input type='file' name='imgSprint' onChange={handleUploadImgSprint} required />
+              </div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignContent: 'center', margin: 'auto' }}>
+            <Button4 type='submit' disabled={disabled}>Añadir Nuevo Sprint</Button4>
+          </div>
+
+        </FormModalSalon>
+
+      </div >
+    </div >
   );
 };
 

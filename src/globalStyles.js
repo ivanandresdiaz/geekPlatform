@@ -150,4 +150,29 @@ export const Button5 = styled(motion.button)`
   }
 `;
 
+export const Button6 = styled(motion.button)`
+  border-radius: 4px;
+  background: ${({ primary }) => (primary ? "#B25327" : "#a04b23")};
+  white-space: nowrap;
+  padding: ${({ big }) => (big ? "12px 64px" : "10px 20px")};
+  margin-top: 20px;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: ${({ fontBig }) => (fontBig ? "18px" : "14px")};
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 8px;
+
+  &:hover {
+    transition: all 0.3 ease-out;
+    background: #fff;
+    background: ${({ primary }) => (primary ? "#a04b23" : "#B25327")};
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
+`;
+
 export default GlobalStyle;

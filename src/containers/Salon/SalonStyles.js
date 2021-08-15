@@ -3,10 +3,8 @@ import styled from "styled-components";
 export const ContainerMainSalon = styled.div`
   margin: 30px 30px 0px 160px;
 `;
-
 export const ContainerTitleGreet = styled.div`
   width: 100%;
-
   h1 {
     font-size: 1.5rem;
     line-height: 2.25rem;
@@ -41,7 +39,6 @@ export const ContainerContentSprint = styled.div`
   place-self: center;
   flex-direction: column;
   height: auto;
-
   h4 {
     color: #ff3b53;
     padding-bottom: 5px;
@@ -49,7 +46,6 @@ export const ContainerContentSprint = styled.div`
     font-weight: 700;
     text-align: center;
   }
-
   p {
     color: #333333;
     text-align: center;

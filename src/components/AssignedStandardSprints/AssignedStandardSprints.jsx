@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { assignedFirestoreSprint } from '../../actions/classroomActions';
+import { Button4, Button5 } from '../../globalStyles';
+import { FormInput, FormModal } from '../../uiComponents/Modal/ModalStyles';
 
 const CreateSprints = (props) => {
   const { corteId, salonId } = props;
@@ -101,26 +103,26 @@ const CreateSprints = (props) => {
     <div>
       <h1>Asignar sprint standard</h1>
       <div>
-        <button type='button' onClick={() => handleAssignedSprint('mascotas')}>Asignar Sprint 1 Adopcion Mascotas</button>
-        <button type='button' onClick={() => handleAssignedSprint('guajolotas')}>Asignar Sprint 2 Guajolotas</button>
-        <button type='button' onClick={() => handleAssignedSprint('blockMaster')}>Asignar Sprint 3 Block Master </button>
+        <Button5 type='button' onClick={() => handleAssignedSprint('mascotas')}>Asignar Sprint 1 Adopcion Mascotas</Button5>
+        <Button5 type='button' onClick={() => handleAssignedSprint('guajolotas')}>Asignar Sprint 2 Guajolotas</Button5>
+        <Button5 type='button' onClick={() => handleAssignedSprint('blockMaster')}>Asignar Sprint 3 Block Master </Button5>
       </div>
-      <form onSubmit={handleSubmit}>
-        <input
+      <FormModal onSubmit={handleSubmit}>
+        <FormInput
           type='date'
           name='start'
           value={start}
           onChange={handleInputChange}
           required
         />
-        <input
+        <FormInput
           type='date'
           name='end'
           value={end}
           onChange={handleInputChange}
           required
         />
-        <input
+        <FormInput
           type='text'
           placeholder='link de entrega'
           name='deliveryLink'
@@ -128,12 +130,12 @@ const CreateSprints = (props) => {
           onChange={handleInputChange}
           required
         />
-        <button type='submit' disabled={disabled}>
+        <Button4 type='submit' disabled={disabled}>
           Añadir Sprint
           {' '}
           {assignedSprint.title && assignedSprint.title}
-        </button>
-      </form>
+        </Button4>
+      </FormModal>
     </div>
   );
 };
