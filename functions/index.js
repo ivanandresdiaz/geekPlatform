@@ -170,6 +170,14 @@ exports.createSprint = functions.https.onCall((data, context)=> {
     supportLink2: data.supportLink2,
     supportLink3: data.supportLink3,
     supportLink4: data.supportLink4,
+    html: data.html,
+    css: data.css,
+    webpack: data.webpack,
+    reactJs: data.reactJs,
+    reactHooks: data.reactHooks,
+    redux: data.redux,
+    firebase: data.firebase,
+    testing: data.testing,
   };
   return db
       .collection("cortes").doc(data.corteId)

@@ -10,7 +10,7 @@ export const getFirestoreSalon = (corteId, salonId) => (dispatch, getState) => {
     .catch((err) => console.log(err));
 };
 
-export const createNewSprint = (corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4) => async (dispatch, getState) => {
+export const createNewSprint = (corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, webpack, reactJs, reactHooks, redux, firebase, testing) => async (dispatch, getState) => {
   try {
     const resourcePDF = getState().salon.loadedSprintPDF;
     if (Date.parse(start) > Date.parse(end)) {
@@ -28,7 +28,54 @@ export const createNewSprint = (corteId, salonId, title, description, start, end
         supportLink1,
         supportLink2,
         supportLink3,
-        supportLink4 };
+        supportLink4,
+        html,
+        css,
+        webpack,
+        reactJs,
+        reactHooks,
+        redux,
+        firebase,
+        testing };
+      await createSprint(data);
+      alert('sprint agregado');
+      dispatch({ type: 'newSprintCreated', payload: { ...data, id: title } });
+    }
+
+  } catch (error) {
+    alert('algo salio mal');
+    console.log(error);
+  }
+
+};
+
+export const assignedFirestoreSprint = ({ corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, webpack, reactJs, reactHooks, redux, firebase, testing }) => async (dispatch, getState) => {
+  try {
+    const resourcePDF = getState().salon.loadedSprintPDF;
+    if (Date.parse(start) > Date.parse(end)) {
+      alert('la fecha de entrega no puede ser menor a la fechan inicial');
+    } else {
+      const createSprint = functions.httpsCallable('createSprint');
+      const data = { corteId,
+        salonId,
+        title,
+        resourcePDF,
+        description,
+        start,
+        end,
+        deliveryLink,
+        supportLink1,
+        supportLink2,
+        supportLink3,
+        supportLink4,
+        html,
+        css,
+        webpack,
+        reactJs,
+        reactHooks,
+        redux,
+        firebase,
+        testing };
       await createSprint(data);
       alert('sprint agregado');
       dispatch({ type: 'newSprintCreated', payload: { ...data, id: title } });
@@ -220,3 +267,4 @@ export const uploadSprintPDF = (file) => async (dispatch, getState) => {
     },
   );
 };
+

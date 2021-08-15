@@ -7,6 +7,8 @@ import NewsFeedCategories from '../../components/NewsFeedCategories/NewsFeedCate
 import CreateNewsSocialGeek from '../../components/CreateNewsSocialGeek/CreateNewsSocialGeek';
 import ListarNews from '../../uiComponents/ListarNews/ListarNews';
 import { getFirestoreNewsCategory } from '../../actions/socialGeekActions';
+import ListarPersonalProjects from '../../uiComponents/ListarPersonalProjects/ListarPersonalProjects';
+import AddPersonalProjects from '../../components/AddPersonalProjects/AddPersonalProjects';
 
 const ProfileGeek = (props) => {
   const { match: { params: { profileUid } } } = props;
@@ -16,7 +18,6 @@ const ProfileGeek = (props) => {
   const [profileSocialGeek, setProfileSocialGeek] = useState('');
   const [isUserAuth, setIsUserAuth] = useState(false);
   useEffect(() => {
-    console.log(loggedUidUser, profileUid);
     if (loggedUidUser === profileUid) {
       setProfileSocialGeek(userDataLogged);
       setIsUserAuth(true);
@@ -33,7 +34,6 @@ const ProfileGeek = (props) => {
           alert(`algo salio mal al cargar el perfil, por favor recargue la pagina ${err.message}`);
         });
     }
-
   }, []);
   const handleGetNews = useCallback(
     (category) => {
@@ -41,7 +41,6 @@ const ProfileGeek = (props) => {
         const { corteId } = userDataLogged;
         dispatch(getFirestoreNewsCategory(corteId, category));
       }
-
     }, [],
   );
 
@@ -52,9 +51,12 @@ const ProfileGeek = (props) => {
         (
           <div>
             <ProfileSocialGeek profileSocialGeek={profileSocialGeek} isUserAuth={isUserAuth} />
+            {isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />}
+            <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />
             <p>Mis noticias</p>
             <NewsFeedCategories handleGetNews={handleGetNews} />
-            <CreateNewsSocialGeek corteId={profileSocialGeek.corteId} />
+            {isUserAuth && <CreateNewsSocialGeek corteId={profileSocialGeek.corteId} />}
+
             <h5>Listar mis publicaciones</h5>
             <ListarNews news={[]} />
           </div>

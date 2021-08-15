@@ -207,6 +207,7 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
         codelingoChallengesDone: [],
         wakatime: [],
         active: true,
+        myProjects: [],
       };
       db.collection('students').doc(user.uid)
         .set(data)

@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Switch, Redirect, Route } from 'react-router-dom';
 import { firebase } from '../firebase/firebaseConfig';
 import { login } from '../actions/authActions';
 import { AuthRouter } from './AuthRouter';
@@ -47,7 +47,7 @@ const App = () => {
   }, [setIsLoggedIn, dispatch]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <GlobalStyle />
       <div>
         <Switch>
@@ -108,7 +108,7 @@ const App = () => {
           <Redirect to='/auth/landingPage' />
         </Switch>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 export default App;

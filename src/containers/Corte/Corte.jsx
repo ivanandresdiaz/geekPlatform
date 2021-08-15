@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
+import { motion } from 'framer-motion';
 import ListarStudentsCorte from '../../uiComponents/ListarStudentsCorte/ListarStudentsCorte';
 import ListarSalones from '../../uiComponents/ListarSalones/ListarSalones';
 import Calendar from '../../components/Calendar/Calendar';
@@ -9,19 +10,17 @@ import Footer from '../../components/Structure/Footer';
 import { ContainerAddStudentCorte, ContainerMainCorte, ContainerMainTitleCorte, ContainerWrapCorte, ContainerWrap2Corte, ContainerTitleCorte, ContainerImgCorte, ContainerIconsCorte, ContainerClassrooms, ContainerStudentCorte, ContainerStudentImgCorte, ContainerStudentTextCorte } from './CorteStyles';
 import { Img } from '../../styles/PresentationStyles';
 import imgcorte from '../../images/other/corte.png';
-import ico from '../../images/other/icon.png'
-import ico1 from '../../images/other/icon-1.png'
-import ico2 from '../../images/other/icon-2.png'
-import ico3 from '../../images/other/icon-3.png'
-import student from '../../images/other/student.png'
+import ico from '../../images/other/icon.png';
+import ico1 from '../../images/other/icon-1.png';
+import ico2 from '../../images/other/icon-2.png';
+import ico3 from '../../images/other/icon-3.png';
+import student from '../../images/other/student.png';
 import { ModalEstudiantes } from '../../uiComponents/Modal/Modal';
 import { ButtonAdd, ButtonImgAdd } from '../../components/PanelAdmin/PanelAdminStyles';
 import { requestWeekStudent, cancelRequestWeekStudent } from '../../actions/geekyPuntos';
-import { motion } from 'framer-motion';
 import { getFirestoreCorteDataDetails } from '../../actions/adminActions';
 import { getCorteDataDetails } from '../../reducers/salonReducer';
 import { Button3, Button5 } from '../../globalStyles';
-
 
 const Corte = (props) => {
 
@@ -47,38 +46,65 @@ const Corte = (props) => {
         <div>
           <ContainerMainTitleCorte>
             <ContainerTitleCorte>
-              <motion.div initial={{ y: -300 }} animate={{ y: 0 }}
-                transition={{ delay: 0.1, type: 'spring', stiffness: 50 }}>
-                <h1>{' '}{corteId}</h1>
+              <motion.div
+                initial={{ y: -300 }}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.1, type: 'spring', stiffness: 50 }}
+              >
+                <h1>
+                  {' '}
+                  {corteId}
+                </h1>
               </motion.div>
               {/* Acá va la descripción de la corte, solo es un ejemplo */}
-              <motion.div initial={{ x: 300 }} animate={{ x: 0 }}
-                transition={{ delay: 0.1, type: 'spring', stiffness: 60 }} >
-                <p>Aprenderás a construir lo que ven y utilizan los usuarios en los sitios, aplicaciones y otras soluciones web, usando las metodologías y herramientas que las empresas utilizan
-                  Te harás fuerte en HTML-CSS, bootstrap, material design, Javascript entre otros. Potenciaremos tus habilidades para el siglo XXI, te daremos orientación laboral y te acompañaremos en la consecución de empleo. </p>
+              <motion.div
+                initial={{ x: 300 }}
+                animate={{ x: 0 }}
+                transition={{ delay: 0.1, type: 'spring', stiffness: 60 }}
+              >
+                <p>
+                  Aprenderás a construir lo que ven y utilizan los usuarios en los sitios, aplicaciones y otras soluciones web, usando las metodologías y herramientas que las empresas utilizan
+                  Te harás fuerte en HTML-CSS, bootstrap, material design, Javascript entre otros. Potenciaremos tus habilidades para el siglo XXI, te daremos orientación laboral y te acompañaremos en la consecución de empleo.
+                  {' '}
+                </p>
               </motion.div>
               <ContainerIconsCorte>
-                <motion.div initial={{ x: -300 }} animate={{ x: 0 }}
-                  transition={{ delay: 0.4, type: 'spring', stiffness: 40 }} >
+                <motion.div
+                  initial={{ x: -300 }}
+                  animate={{ x: 0 }}
+                  transition={{ delay: 0.4, type: 'spring', stiffness: 40 }}
+                >
                   <img src={ico} alt='Icon1' />
                 </motion.div>
-                <motion.div initial={{ x: -300 }} animate={{ x: 0 }}
-                  transition={{ delay: 0.3, type: 'spring', stiffness: 40 }}>
+                <motion.div
+                  initial={{ x: -300 }}
+                  animate={{ x: 0 }}
+                  transition={{ delay: 0.3, type: 'spring', stiffness: 40 }}
+                >
                   <img src={ico1} alt='Icon2' />
                 </motion.div>
-                <motion.div initial={{ x: -300 }} animate={{ x: 0 }}
-                  transition={{ delay: 0.2, type: 'spring', stiffness: 40 }}>
+                <motion.div
+                  initial={{ x: -300 }}
+                  animate={{ x: 0 }}
+                  transition={{ delay: 0.2, type: 'spring', stiffness: 40 }}
+                >
                   <img src={ico2} alt='Icon3' />
                 </motion.div>
-                <motion.div initial={{ x: -300 }} animate={{ x: 0 }}
-                  transition={{ delay: 0.1, type: 'spring', stiffness: 40 }}>
+                <motion.div
+                  initial={{ x: -300 }}
+                  animate={{ x: 0 }}
+                  transition={{ delay: 0.1, type: 'spring', stiffness: 40 }}
+                >
                   <img src={ico3} alt='Icon4' />
                 </motion.div>
               </ContainerIconsCorte>
             </ContainerTitleCorte>
             <ContainerImgCorte>
-              <motion.div initial={{ x: 300 }} animate={{ x: 0 }}
-                transition={{ delay: 0.1, type: 'spring', stiffness: 70 }}>
+              <motion.div
+                initial={{ x: 300 }}
+                animate={{ x: 0 }}
+                transition={{ delay: 0.1, type: 'spring', stiffness: 70 }}
+              >
                 <img src={imgcorte} alt='corte Imagen' />
               </motion.div>
             </ContainerImgCorte>
@@ -94,15 +120,17 @@ const Corte = (props) => {
                   <ContainerStudentCorte>
                     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                       <ContainerStudentImgCorte>
-                        <img src={student} alt="" />
+                        <img src={student} alt='' />
                       </ContainerStudentImgCorte>
                       <ContainerStudentTextCorte>
                         <h2>Estudiante de la semana</h2>
                         <p style={{ textTransform: 'none' }}>{corteDataDetails.choosingWeekStudent ? 'Esta activa la eleccion de Estudiante de la semana' : 'No esta activa la eleccion de Estudiante de la semana'}</p>
                         <Button5 whileHover={{ scale: 1.050 }} type='button' onClick={handleRequestWeekStudent}>Activar</Button5>
                         <Button5 whileHover={{ scale: 1.050 }} type='button' onClick={handleCancelRequestWeekStudent} primary>Desactivar</Button5>
-                        <Toaster position="top-center"
-                          reverseOrder={false} />
+                        <Toaster
+                          position='top-center'
+                          reverseOrder={false}
+                        />
                       </ContainerStudentTextCorte>
                     </div>
                   </ContainerStudentCorte>

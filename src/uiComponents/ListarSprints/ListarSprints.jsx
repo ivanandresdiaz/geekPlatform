@@ -4,7 +4,7 @@ import { deleteSprint, getFirestoreSprints } from '../../actions/classroomAction
 import { getSprints } from '../../reducers/salonReducer';
 
 const ListarSprints = (props) => {
-  const { corteId, salonId } = props;
+  const { corteId, salonId, role } = props;
   const dispatch = useDispatch();
   const sprints = useSelector(getSprints);
   useEffect(() => {
@@ -36,8 +36,8 @@ const ListarSprints = (props) => {
             <a href={sprint.supportLink2}>{sprint.supportLink2}</a>
             <a href={sprint.supportLink3}>{sprint.supportLink3}</a>
             <a href={sprint.supportLink4}>{sprint.supportLink4}</a>
-            <button type='button'> Descargar PDF (Aun no disponible)</button>
-            <button type='button' onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</button>
+            <a href={sprint.resourcePDF} download={sprint.title} target='_blank' rel='noreferrer'>Descargar PDF</a>
+            {role === 'teacher' && <button type='button' onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</button>}
           </div>
         ))}
       </div>
