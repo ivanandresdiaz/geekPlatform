@@ -17,13 +17,13 @@ const ListarWorkGroups = (props) => {
 
   return (
     <>
-      
+
       <h3>Listar grupos de estudio</h3>
       {workGroups.length > 0 && workGroups.map((workGroup) => {
         const { columnOrder, columns, tasks, title, id } = workGroup;
         return <Group key={workGroup.id} columnOrder={columnOrder} columns={columns} tasks={tasks} title={title} id={id} corteId={corteId} salonId={salonId} />;
       })}
-      
+
     </>
   );
 };

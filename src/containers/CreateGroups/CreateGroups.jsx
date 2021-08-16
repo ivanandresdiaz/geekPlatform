@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
 import useForm from '../../hooks/useForm';
 import Group from '../../components/Group/Group';
 import { createWorkGroups, generateTemplateGroups } from '../../actions/classroomActions';
@@ -12,7 +13,6 @@ import { ContainerTitleGreet } from '../Salon/SalonStyles';
 import { FormInput, FormModal } from '../../uiComponents/Modal/ModalStyles';
 import { ContainerNewGroup, SelectPlantillas } from './CreateGroupsStyles';
 import { Button4, Button5 } from '../../globalStyles';
-import toast from 'react-hot-toast';
 
 const CreateNewGroups = (props) => {
   const { match: { params: { salon, corteId } } } = props;
@@ -75,7 +75,7 @@ const CreateNewGroups = (props) => {
                 <option value='9'>9</option>
                 <option value='10'>10</option>
               </SelectPlantillas>
-              <Button4 type='submit'>Generar</Button4>
+              <Button4 type='submit'>Generar Plantillas</Button4>
             </FormModal>
             <Group key={id} columnOrder={columnOrder} columns={columns} tasks={tasks} title={title} id={id} salonId={salon} corteId={corteId} />
           </ContainerNewGroup>

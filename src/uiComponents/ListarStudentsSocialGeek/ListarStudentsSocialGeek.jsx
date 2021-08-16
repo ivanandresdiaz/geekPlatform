@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getFirestoreStudentsCorte } from '../../actions/studentsActions';
 import { getStudentsCorte } from '../../reducers/studentsReducer';
@@ -12,8 +13,22 @@ const ListarStudentsSocialGeek = (props) => {
     }
   }, []);
   console.log(studentsCorte);
+
   return (
-    <div />
+    <div>
+      {
+        studentsCorte.length > 0 && studentsCorte.map((student) => {
+          return (
+            <div>
+              <Link to={`/socialGeek/${student.uid}`}>
+                {student.fullName}
+              </Link>
+            </div>
+          );
+        })
+      }
+    </div>
+
   );
 };
 

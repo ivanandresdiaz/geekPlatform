@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import toast from 'react-hot-toast';
 import InnerList from './InnerList';
 import { createWorkGroups, deleteFirestoreGroups } from '../../actions/classroomActions';
 import { Button4, Button5 } from '../../globalStyles';
-import toast from 'react-hot-toast';
 
 const Container = styled.div`
   display: flex;
