@@ -4,6 +4,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { firebase } from '../../firebase/firebaseConfig';
 import { updateFirestoreUser } from '../../actions/authActions';
 import useForm from '../../hooks/useForm';
+import toast from 'react-hot-toast';
 
 const EditProfileSocialGeek = (props) => {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const EditProfileSocialGeek = (props) => {
       // eslint-disable-next-line react/jsx-indent
 
     } else {
-      alert('las contraseñas no coinciden');
+      toast.error('Las contraseñas no coinciden');
     }
 
   };

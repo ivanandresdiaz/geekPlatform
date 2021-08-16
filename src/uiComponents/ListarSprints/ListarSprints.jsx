@@ -8,8 +8,8 @@ import { motion } from 'framer-motion';
 import { deleteSprint, getFirestoreSprints } from '../../actions/classroomActions';
 import { ContainerContentSprint, ContainerSprints } from '../../containers/Salon/SalonStyles';
 import { getSprints } from '../../reducers/salonReducer';
-import { Button5 } from '../../globalStyles';
-
+import { Button4, Button5 } from '../../globalStyles';
+import { motion } from 'framer-motion';
 const ListarSprints = (props) => {
   const { corteId, salonId, role } = props;
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const ListarSprints = (props) => {
                     </a>
                   </div>
                 </div>
-                {role === 'teacher' && <Button5 type='button' primary onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</Button5>}
+                {role === 'teacher' && <Button4 type='button' primary onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</Button4>}
                 {role === 'teacher' && <Link to={`/scoreSprints/${sprint.id}`}>Calificar Sprint LINK !!</Link>}
               </ContainerContentSprint>
             </div>

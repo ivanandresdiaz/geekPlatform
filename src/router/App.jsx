@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter, HashRouter, Switch, Redirect, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import { firebase } from '../firebase/firebaseConfig';
 import { login } from '../actions/authActions';
 import { AuthRouter } from './AuthRouter';
@@ -18,7 +19,6 @@ import BancoRecursos from '../containers/BancoRecursos/BancoRecursos';
 import SocialGeek from '../containers/SocialGeek/SocialGeek';
 import EditProfileSocialGeek from '../components/EditProfileSocialGeek/EditProfileSocialGeek';
 import ProfileGeek from '../containers/ProfileGeek/ProfileGeek';
-import ScoreSprints from '../containers/ScoreSprints/ScoreSprints';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -48,7 +48,13 @@ const App = () => {
   }, [setIsLoggedIn, dispatch]);
 
   return (
+
     <HashRouter>
+      <Toaster
+        style={{ textAlign: 'center' }}
+        position='top-center'
+        reverseOrder={false}
+      />
       <GlobalStyle />
       <div>
         <Switch>

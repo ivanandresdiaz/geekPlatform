@@ -5,7 +5,8 @@ import styled from 'styled-components';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import InnerList from './InnerList';
 import { createWorkGroups, deleteFirestoreGroups } from '../../actions/classroomActions';
-import { Button5 } from '../../globalStyles';
+import { Button4, Button5 } from '../../globalStyles';
+import toast from 'react-hot-toast';
 
 const Container = styled.div`
   display: flex;
@@ -97,7 +98,7 @@ const Group = (props) => {
   };
   const handleSubmitNewGroups = () => {
     if (state.columns.column0.taskIds.length > 0) {
-      return alert('la columna estudiantes contiene estudiantes sin grupo');
+      return toast.error('La columna estudiantes contiene estudiantes sin grupo.');
     }
     const numberColumns = Object.entries(state.columns);
     const filtro = numberColumns.filter((column) => column[0] !== 'column0');
@@ -105,7 +106,7 @@ const Group = (props) => {
     const emptyColumns = numberColumns.map((column) => {
       if (column[1].taskIds.length === 0) {
         if (column[1].title !== 'Estudiantes') {
-          alert(`el ${column[1].title} no puede quedar vacio`);
+          toast.error(`el ${column[1].title} no puede quedar vacio`);
           return 'error';
         }
       }
@@ -161,25 +162,25 @@ const Group = (props) => {
       </DragDropContext>
       {id === 'readyToSend' ? (
         <div style={{ textAlign: 'center' }}>
-          <Button5 primary type='button' onClick={handleSubmitNewGroups}>
+          <Button4 primary type='button' onClick={handleSubmitNewGroups}>
             Crear y enviar grupos de trabajo
-          </Button5>
+          </Button4>
         </div>
 
       ) : null}
       {id === 'defaultPlantillaGrupos' ? (
         <div style={{ textAlign: 'center' }}>
-          <Button5 primary type='button'>
+          <Button4 primary type='button'>
             No puedes enviar la plantilla por defecto
-          </Button5>
+          </Button4>
         </div>
 
       ) : null}
       {id !== 'defaultPlantillaGrupos' && id !== 'readyToSend' ? (
         <div style={{ textAlign: 'center' }}>
-          <Button5 primary type='button' onClick={handleDeleteGroups}>
+          <Button4 primary type='button' onClick={handleDeleteGroups}>
             Eliminar grupos
-          </Button5>
+          </Button4>
         </div>
 
       ) : null}

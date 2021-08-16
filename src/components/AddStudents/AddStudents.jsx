@@ -1,4 +1,5 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { registerNewStudent } from '../../actions/authActions';
 import { Button4 } from '../../globalStyles';
@@ -21,7 +22,7 @@ const AddStudents = (props) => {
       dispatch(registerNewStudent(email, password, fullName, corteId));
       reset();
     } else {
-      alert('las contraseñas no coinciden');
+      toast.error('Las contraseñas no coinciden');
     }
   };
   return (

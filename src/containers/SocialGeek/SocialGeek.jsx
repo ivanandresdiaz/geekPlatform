@@ -1,13 +1,14 @@
 import React, { useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
 import CreateNewsSocialGeek from '../../components/CreateNewsSocialGeek/CreateNewsSocialGeek';
 import NewsFeedCategories from '../../components/NewsFeedCategories/NewsFeedCategories';
 import ListarNews from '../../uiComponents/ListarNews/ListarNews';
 import { getFirestoreNewsCategory } from '../../actions/socialGeekActions';
 import { getNewsCategory } from '../../reducers/socialGeekReducer';
 import RankingGeekyPuntos from '../../uiComponents/RankingGeekyPuntos/RankingGeekyPuntos';
-import ListarStudentsSocialGeek from '../../uiComponents/ListarStudentsSocialGeek/ListarStudentsSocialGeek';
+import ListarStudentsCorte from '../../uiComponents/ListarStudentsCorte/ListarStudentsCorte';
 
 const SocialGeek = (props) => {
   const userDataLogged = useSelector((state) => state.auth);
@@ -18,7 +19,7 @@ const SocialGeek = (props) => {
       const { corteId } = userDataLogged;
       dispatch(getFirestoreNewsCategory(corteId, 'blogs'));
     } else {
-      alert('no estas autenticado');
+      toast.error('No estás autenticado');
     }
   }, []);
   const handleGetNews = useCallback(

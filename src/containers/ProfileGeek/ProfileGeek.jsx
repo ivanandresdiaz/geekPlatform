@@ -9,6 +9,7 @@ import ListarNews from '../../uiComponents/ListarNews/ListarNews';
 import { getFirestoreNewsCategory } from '../../actions/socialGeekActions';
 import ListarPersonalProjects from '../../uiComponents/ListarPersonalProjects/ListarPersonalProjects';
 import AddPersonalProjects from '../../components/AddPersonalProjects/AddPersonalProjects';
+import toast from 'react-hot-toast';
 
 const ProfileGeek = (props) => {
   const { match: { params: { profileUid } } } = props;
@@ -31,7 +32,7 @@ const ProfileGeek = (props) => {
           setProfileSocialGeek(data);
         })
         .catch((err) => {
-          alert(`algo salio mal al cargar el perfil, por favor recargue la pagina ${err.message}`);
+          toast.error(`Algo salio mal al cargar el perfil, por favor recargue la página ${err.message}`);
         });
     }
   }, []);
