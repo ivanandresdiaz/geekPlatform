@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
 import useForm from '../../hooks/useForm';
 import { assignedFirestoreSprint } from '../../actions/classroomActions';
 import { Button4, Button5 } from '../../globalStyles';
 import { FormInput, FormModal } from '../../uiComponents/Modal/ModalStyles';
-import toast from 'react-hot-toast';
 
-const CreateSprints = (props) => {
+const AssignedStandardSprints = (props) => {
   const { corteId, salonId } = props;
   const [disabled, setDisabled] = useState(true);
   const [assignedSprint, setAssignedSprint] = useState('');
@@ -40,7 +40,7 @@ const CreateSprints = (props) => {
           redux: false,
           firebase: false,
           testing: false,
-          imgSprint: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/Imagen3.png?alt=media&token=3fce71c0-1ea6-4866-83a1-7f0bedbcecd6',
+          image: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/Imagen3.png?alt=media&token=3fce71c0-1ea6-4866-83a1-7f0bedbcecd6',
           resourcePDF: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/Sprint%201%20-%20Frontend.pdf?alt=media&token=156d154c-e6e6-4e5a-a7d5-7a061de30384',
         });
         break;
@@ -60,7 +60,7 @@ const CreateSprints = (props) => {
           redux: false,
           firebase: false,
           testing: false,
-          imgSprint: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/guajolotas.png?alt=media&token=83fe4329-6ac2-4a45-99e5-06251a14ff75',
+          image: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/guajolotas.png?alt=media&token=83fe4329-6ac2-4a45-99e5-06251a14ff75',
           resourcePDF: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/Sprint%202.pdf?alt=media&token=002e4386-da52-429d-a984-f6e8f5958674',
         });
         break;
@@ -80,8 +80,8 @@ const CreateSprints = (props) => {
           redux: true,
           firebase: true,
           testing: false,
-          imgSprint: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/guajolotas.png?alt=media&token=83fe4329-6ac2-4a45-99e5-06251a14ff75',
-          resourcePDF: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/Sprint%202.pdf?alt=media&token=002e4386-da52-429d-a984-f6e8f5958674',
+          image: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/blockMaster.png?alt=media&token=1940529d-9505-409a-b58d-237d952b996e',
+          resourcePDF: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/Sprint%203.pdf?alt=media&token=755177e6-9420-4e41-b238-d4f6c1016155',
         });
         break;
       default:
@@ -96,6 +96,7 @@ const CreateSprints = (props) => {
         ...assignedSprint,
         ...formValues,
       };
+      console.log(newSprint);
       dispatch(assignedFirestoreSprint(newSprint));
       reset();
     } else {
@@ -144,4 +145,4 @@ const CreateSprints = (props) => {
   );
 };
 
-export default CreateSprints;
+export default AssignedStandardSprints;

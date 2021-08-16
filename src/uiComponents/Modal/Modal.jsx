@@ -4,7 +4,7 @@ import AddAdmin from '../../components/AddAdmin/AddAdmin';
 import AddStudents from '../../components/AddStudents/AddStudents';
 import AddTeachers from '../../components/AddTeachers/AddTeachers';
 import CreateCorte from '../../components/CreateCorte/CreateCorte';
-import AssignedStandardSprints from '../../components/AssignedStandardSprints/AssignedStandardSprints'
+import AssignedStandardSprints from '../../components/AssignedStandardSprints/AssignedStandardSprints';
 import CreateSprints from '../../components/CreateSprints/CreateSprints';
 import { Background, CloseModalButton, ContainerModal, ModalContent } from './ModalStyles';
 
@@ -84,7 +84,7 @@ export const ModalEstudiantes = ({ showModalE, setShowModalE, corteId }) => {
   );
 };
 
-export const ModalSprints = ({ showModalSprints, setShowModalSprints, corteId, salon }) => {
+export const ModalSprints = ({ showModalSprints, setShowModalSprints, corteId, salonId }) => {
 
   return (
     <>
@@ -92,7 +92,7 @@ export const ModalSprints = ({ showModalSprints, setShowModalSprints, corteId, s
         <Background>
           <ContainerModal style={{ width: '800px' }} showModalSprints={showModalSprints}>
             <ModalContent>
-              <CreateSprints corteId={corteId} salonId={salon} />
+              <CreateSprints corteId={corteId} salonId={salonId} />
               <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModalSprints((prevSprints) => !prevSprints)}>
                 <MdClose style={{ alignItems: 'center' }} />
               </CloseModalButton>
@@ -104,7 +104,7 @@ export const ModalSprints = ({ showModalSprints, setShowModalSprints, corteId, s
   );
 };
 
-export const ModalSprintStandard = ({ showModalSprintStandard, setShowModalSprintStandard, corteId, salon }) => {
+export const ModalSprintStandard = ({ showModalSprintStandard, setShowModalSprintStandard, corteId, salonId }) => {
 
   return (
     <>
@@ -112,7 +112,7 @@ export const ModalSprintStandard = ({ showModalSprintStandard, setShowModalSprin
         <Background>
           <ContainerModal style={{ width: '800px' }} showModalSprintStandard={showModalSprintStandard}>
             <ModalContent>
-              <AssignedStandardSprints corteId={corteId} salonId={salon} />
+              <AssignedStandardSprints corteId={corteId} salonId={salonId} />
               <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModalSprintStandard((prevSprintStandard) => !prevSprintStandard)}>
                 <MdClose style={{ alignItems: 'center' }} />
               </CloseModalButton>
@@ -123,5 +123,4 @@ export const ModalSprintStandard = ({ showModalSprintStandard, setShowModalSprin
     </>
   );
 };
-
 

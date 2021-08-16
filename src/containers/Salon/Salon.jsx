@@ -14,11 +14,11 @@ import { Button6 } from '../../globalStyles';
 
 const Salon = (props) => {
   const role = useSelector(getRole);
+  const { match: { params: { salon, corteId } } } = props;
   const [showModalSprints, setShowModalSprints] = useState(false);
   const [showModalSprintStandard, setShowModalSprintStandard] = useState(false);
   const OpenModalSprintStandard = () => { setShowModalSprintStandard((prevSprintStandard) => !prevSprintStandard); };
   const OpenModalSprints = () => { setShowModalSprints((prevSprints) => !prevSprints); };
-  const { match: { params: { salon, corteId } } } = props;
   const salonData = useSelector(getSalonData);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -57,8 +57,8 @@ const Salon = (props) => {
               </Button6>
             </Link>
           )}
-          <ModalSprintStandard showModalSprintStandard={showModalSprintStandard} setShowModalSprintStandard={setShowModalSprintStandard} />
-          <ModalSprints showModalSprints={showModalSprints} setShowModalSprints={setShowModalSprints} />
+          <ModalSprintStandard showModalSprintStandard={showModalSprintStandard} setShowModalSprintStandard={setShowModalSprintStandard} corteId={corteId} salonId={salon} />
+          <ModalSprints showModalSprints={showModalSprints} setShowModalSprints={setShowModalSprints} corteId={corteId} salonId={salon} />
         </ContainerTitleGreet>
       </ContainerMainSalon>
       <ContainerMainSalon>
