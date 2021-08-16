@@ -12,7 +12,7 @@ export const getFirestoreSalon = (corteId, salonId) => (dispatch, getState) => {
     .catch((err) => console.log(err));
 };
 
-export const createNewSprint = (corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, webpack, reactJs, reactHooks, redux, firebase, testing) => async (dispatch, getState) => {
+export const createNewSprint = (corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, webpack, reactJs, reactHooks, redux, firebase, testing, image) => async (dispatch, getState) => {
   try {
     const resourcePDF = getState().salon.loadedSprintPDF;
     if (Date.parse(start) > Date.parse(end)) {
@@ -38,7 +38,8 @@ export const createNewSprint = (corteId, salonId, title, description, start, end
         reactHooks,
         redux,
         firebase,
-        testing };
+        testing,
+        image };
       await createSprint(data);
       alert('sprint agregado');
       dispatch({ type: 'newSprintCreated', payload: { ...data, id: title } });
@@ -168,7 +169,6 @@ export const createWorkGroups = (corteId, salonId, title, newGroup) => async (di
     dispatch({ type: 'generateTemplateGroups', payload: plantillaCreatingGroups });
   } catch (error) {
     alert('ha habido un error');
-    console.log(error);
   }
 };
 export const generateTemplateGroups = (title, cantidad) => async (dispatch, getState) => {
@@ -283,3 +283,42 @@ export const enviarFirestoreLista = (corteId, listaEnviar) => (dispatch, getStat
     .catch((error) => console.error(error));
 };
 
+export const calificarSprintStudent = (sprintId, uid, values, calificacion, corteId, salonId) => async (dispatch, getState) => {
+  try {
+    const { studentsCorte } = getState().students;
+    const studentArrayFiltered = studentsCorte.filter((student) => student.uid === uid);
+    const student = studentArrayFiltered[0];
+    await db.collection('students').doc(student.uid).set({ mySprints: { ...student.mySprints, [sprintId]: { sprintId, calificacion } } }, { merge: true });
+    //agregar a calificados de sprint el uid
+    const { allSprints } = getState().salon;
+    const sprintArray = allSprints.filter((item) => item.id === sprintId);
+    const sprint = sprintArray[0];
+    let nuevosCalificados;
+    if (sprint.calificados.includes(uid)) {
+      nuevosCalificados = [...sprint.calificados];
+    } else {
+      nuevosCalificados = [...sprint.calificados, uid];
+    }
+
+    await db.collection('cortes').doc(corteId).collection('sprints').doc(sprintId)
+      .update({ calificados: nuevosCalificados });
+    // ya esta agregado al atributos del sprint :{calificados :[ uid ...uid..]}
+    const batch = db.batch();
+    const valuesArray = Object.entries(values);
+    valuesArray.forEach((item) => {
+      const notaNumber = parseInt(item[1]);
+      const studentArray = Object.entries(student);
+      const findAtributoArray = studentArray.filter((atributo) => atributo[0] === item[0]);
+      const findAtributo = findAtributoArray[0];
+      batch.update(db.collection('students').doc(uid), { [item[0]]: [...findAtributo[1], notaNumber] });
+    });
+    await batch.commit();
+    const sumaGeekyPuntos = Math.round(calificacion / 10);
+    await db.collection('students').doc(uid).update({ geekyPuntos: student.geekyPuntos + sumaGeekyPuntos });
+    alert(`calificado ${student.fullName}`);
+  } catch (error) {
+    alert('algo salio mal');
+    console.log(error.message);
+  }
+
+};

@@ -107,7 +107,7 @@ const App = () => {
           />
           <PrivateRoute
             exact
-            path='/scoreSprints'
+            path='/scoreSprints/:sprintId'
             component={ScoreSprints}
             isAuthenticated={isLoggedIn}
           />

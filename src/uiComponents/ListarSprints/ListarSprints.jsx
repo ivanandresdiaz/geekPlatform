@@ -1,12 +1,15 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { FaFilePdf, FaLink } from 'react-icons/fa';
-import { BsFolderSymlink, IconName } from "react-icons/bs";
+import { BsFolderSymlink, IconName } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
 import { deleteSprint, getFirestoreSprints } from '../../actions/classroomActions';
 import { ContainerContentSprint, ContainerSprints } from '../../containers/Salon/SalonStyles';
 import { getSprints } from '../../reducers/salonReducer';
 import { Button5 } from '../../globalStyles';
-import { motion } from 'framer-motion';
+
 const ListarSprints = (props) => {
   const { corteId, salonId, role } = props;
   const dispatch = useDispatch();
@@ -19,11 +22,12 @@ const ListarSprints = (props) => {
   };
   return (
     <>
+      <h4>Sprints</h4>
       {sprints.length > 0 && sprints.map((sprint) => (
-        <ContainerSprints>
+        <ContainerSprints key={sprint.id}>
           <motion.div whileHover={{ scale: 1.050 }}>
 
-            <div key={sprint.id}>
+            <div>
               <ContainerContentSprint>
                 <h4>
                   {sprint.title}
@@ -44,17 +48,22 @@ const ListarSprints = (props) => {
                   </div>
                   <div style={{ flexDirection: 'column', padding: '5px 5px 5px 5px', textAlign: 'center' }}>
                     <p style={{ color: '#3CC5FF' }}>Links de apoyo</p>
-                    <a style={{ padding: '5px 5px 5px 5px' }} href={sprint.supportLink1}><BsFolderSymlink /></a>
-                    <a style={{ padding: '5px 5px 5px 5px' }} href={sprint.supportLink2}><BsFolderSymlink /></a>
-                    <a style={{ padding: '5px 5px 5px 5px' }} href={sprint.supportLink3}><BsFolderSymlink /></a>
-                    <a style={{ padding: '5px 5px 5px 5px' }} href={sprint.supportLink4}><BsFolderSymlink /></a>
+                    <a style={{ padding: '5px 5px 5px 5px' }} href={sprint.supportLink1} target='_blank' rel='noreferrer'><BsFolderSymlink /></a>
+                    <a style={{ padding: '5px 5px 5px 5px' }} href={sprint.supportLink2} target='_blank' rel='noreferrer'><BsFolderSymlink /></a>
+                    <a style={{ padding: '5px 5px 5px 5px' }} href={sprint.supportLink3} target='_blank' rel='noreferrer'><BsFolderSymlink /></a>
+                    <a style={{ padding: '5px 5px 5px 5px' }} href={sprint.supportLink4} target='_blank' rel='noreferrer'><BsFolderSymlink /></a>
                   </div>
                   <div style={{ flexDirection: 'column', padding: '5px 5px 5px 5px', textAlign: 'center' }}>
                     <p style={{ color: '#3CC5FF' }}>PDF</p>
-                    <a href={sprint.resourcePDF} download={sprint.title} target='_blank' rel='noreferrer'> <FaFilePdf /> </a>
+                    <a href={sprint.resourcePDF} download={sprint.title} target='_blank' rel='noreferrer'>
+                      {' '}
+                      <FaFilePdf />
+                      {' '}
+                    </a>
                   </div>
                 </div>
                 {role === 'teacher' && <Button5 type='button' primary onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</Button5>}
+                {role === 'teacher' && <Link to={`/scoreSprints/${sprint.id}`}>Calificar Sprint LINK !!</Link>}
               </ContainerContentSprint>
             </div>
           </motion.div>

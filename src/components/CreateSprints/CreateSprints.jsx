@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { createNewSprint, uploadSprintPDF } from '../../actions/classroomActions';
 import { getLoadedSprintPDF } from '../../reducers/salonReducer';
-import { FormInput, FormModalSalon, FormTextArea } from '../../uiComponents/Modal/ModalStyles'
+import { FormInput, FormModalSalon, FormTextArea } from '../../uiComponents/Modal/ModalStyles';
 import { Button4 } from '../../globalStyles';
-
 
 const CreateSprints = (props) => {
   const { corteId, salonId } = props;
@@ -48,7 +47,7 @@ const CreateSprints = (props) => {
     supportLink2: '',
     supportLink3: '',
     supportLink4: '',
-    imgSprint: '',
+    image: '',
   });
   const {
     title,
@@ -67,7 +66,8 @@ const CreateSprints = (props) => {
     reactHooks,
     redux,
     firebase,
-    testing } = formValues;
+    testing,
+    image } = formValues;
   const handleUploadImgSprint = (event) => {
     const file = event.target.files[0];
     const refStorage = firebase.storage().ref(`socialGeek/personalProjects/${file.name}`);
@@ -87,7 +87,7 @@ const CreateSprints = (props) => {
             const evento = {
               target: {
                 value: url,
-                name: 'imgSprint',
+                name: 'image',
               },
             };
             handleInputChange(evento);
@@ -119,7 +119,8 @@ const CreateSprints = (props) => {
       reactHooks,
       redux,
       firebase,
-      testing));
+      testing,
+      image));
     reset();
     htmlInput.current.checked = false;
     cssInput.current.checked = false;
@@ -162,7 +163,7 @@ const CreateSprints = (props) => {
                 required
               />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }} >
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <p style={{ color: '#FF3B53', marginBottom: '1px', fontWeight: '600' }}>Termina el</p>
               <FormInput
                 style={{ marginLeft: '8px', width: 'auto' }}
@@ -173,7 +174,7 @@ const CreateSprints = (props) => {
                 required
               />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }} >
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <p style={{ color: '#FF3B53', marginBottom: '1px', fontWeight: '600' }}>Formulario</p>
               <FormInput
                 style={{ marginLeft: '8px', width: 'auto' }}
@@ -332,8 +333,8 @@ const CreateSprints = (props) => {
 
         </FormModalSalon>
 
-      </div >
-    </div >
+      </div>
+    </div>
   );
 };
 

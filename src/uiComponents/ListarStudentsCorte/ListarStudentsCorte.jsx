@@ -54,10 +54,9 @@ const ListarStudentsCorte = (props) => {
   const handleEnviarLista = () => {
     const preparacionLista = { ...dataListStudents, ...state };
     const listaEnviar = Object.entries(preparacionLista).map((item) => item[1]);
-    console.log(preparacionLista);
-    console.log(listaEnviar);
     dispatch(enviarFirestoreLista(corteId, listaEnviar));
   };
+  console.log(studentsCorte);
   return (
     <div style={{ width: '100%' }}>
       <DivContainerList>

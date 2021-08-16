@@ -119,7 +119,7 @@ const Corte = (props) => {
                         <h2>Estudiante de la semana</h2>
                         <p style={{ textTransform: 'none' }}>{corteDataDetails.choosingWeekStudent ? 'Esta activa la eleccion de Estudiante de la semana' : 'No esta activa la eleccion de Estudiante de la semana'}</p>
                         <Button4 style={{ margin: '0 8px', marginTop: '15px' }} whileHover={{ scale: 1.050 }} type='button' onClick={handleRequestWeekStudent}>Activar</Button4>
-                        <Button4 primary style={{ margin: '0 5px' }} whileHover={{ scale: 1.050 }} type='button' onClick={handleCancelRequestWeekStudent} primary>Desactivar</Button4>
+                        <Button4 primary style={{ margin: '0 5px' }} whileHover={{ scale: 1.050 }} type='button' onClick={handleCancelRequestWeekStudent}>Desactivar</Button4>
                         <Toaster
                           position='top-center'
                           reverseOrder={false}

@@ -180,7 +180,6 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
   addStudentCorte({ corteId, email, password, fullName })
     .then((doc) => {
       const user = doc.data;
-      console.log(user);
       const data = {
         uid: user.uid,
         email,
@@ -201,18 +200,31 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
         instagram: '',
         linkedin: '',
         geekyPuntos: 100,
-        sprintsAssigned: [],
         graduated: false,
         tutorialsRequired: [],
         codelingoChallengesDone: [],
         wakatime: [],
         active: true,
         myProjects: [],
+        assistance: [],
+        html: [],
+        css: [],
+        javascript: [],
+        webpack: [],
+        reactJs: [],
+        reactHooks: [],
+        redux: [],
+        firebase: [],
+        testing: [],
+        mySprints: [],
+        sigloXXI: [],
+        designThinking: [],
       };
       db.collection('students').doc(user.uid)
         .set(data)
         .then(() => {
           alert(`estudiante ${data.fullName} ha sido creado`);
+          console.log(data);
           dispatch({ type: 'addNewStudent', payload: data });
         });
     }).catch((err) => alert('error en el registro estudiante', err));

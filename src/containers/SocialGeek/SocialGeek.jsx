@@ -7,7 +7,7 @@ import ListarNews from '../../uiComponents/ListarNews/ListarNews';
 import { getFirestoreNewsCategory } from '../../actions/socialGeekActions';
 import { getNewsCategory } from '../../reducers/socialGeekReducer';
 import RankingGeekyPuntos from '../../uiComponents/RankingGeekyPuntos/RankingGeekyPuntos';
-import ListarStudentsCorte from '../../uiComponents/ListarStudentsCorte/ListarStudentsCorte';
+import ListarStudentsSocialGeek from '../../uiComponents/ListarStudentsSocialGeek/ListarStudentsSocialGeek';
 
 const SocialGeek = (props) => {
   const userDataLogged = useSelector((state) => state.auth);
@@ -39,7 +39,7 @@ const SocialGeek = (props) => {
         {userDataLogged.fullName}
       </Link>
       <RankingGeekyPuntos corteId={userDataLogged.corteId} />
-      <ListarStudentsCorte corteId={userDataLogged.corteId} />
+      <ListarStudentsSocialGeek corteId={userDataLogged.corteId} />
       <CreateNewsSocialGeek corteId={userDataLogged.corteId} uid={userDataLogged.uid} />
       <NewsFeedCategories handleGetNews={handleGetNews} />
       <ListarNews news={news} corteId={userDataLogged.corteId} uid={userDataLogged.uid} />

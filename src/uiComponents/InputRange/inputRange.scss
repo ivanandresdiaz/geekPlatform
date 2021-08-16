@@ -1,5 +1,4 @@
 .containerInputRange {
-  height: 100px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -26,6 +25,7 @@
   h4 {
     color: #999;
     font-weight: 500;
+    z-index: 1000;
     &:after {
       content: "%";
       padding-left: 1px;
@@ -38,7 +38,6 @@
     border-radius: 500px;
     width: 400px;
     max-width: 100%;
-    margin: 24px 0 16px;
     transition: box-shadow 0.2s ease-in-out;
     // Chrome
     @media screen and (-webkit-min-device-pixel-ratio: 0) {
