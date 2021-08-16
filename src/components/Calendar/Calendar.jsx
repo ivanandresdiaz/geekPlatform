@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react'; // Componente
 import dayGridPlugin from '@fullcalendar/daygrid'; // plugins de dias...
 import interactionPlugin from '@fullcalendar/interaction'; // Plugin de interacion
+import listPlugin from '@fullcalendar/list'; // plugin de agenda
 import esLocale from '@fullcalendar/core/locales/es'; // idioma
 import { useDispatch, useSelector } from 'react-redux';
 import { getFirestoreAllSprints } from '../../actions/classroomActions';
@@ -64,7 +65,13 @@ const Calendar = (props) => {
     <div style={{ backgroundColor: 'ffffff', width: 550 }}>
       <h1 style={{ color: '#333333' }}>Calendario GeekPlatform</h1>
       <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin]} // plugins
+      headerToolbar={{
+        center: 'dayGridMonth,listWeek,today',
+        left:'title',
+        right: 'prev,next',
+        }}
+        titleFormat ={ {year: 'numeric', month: 'short', day: 'numeric'} }
+        plugins={[dayGridPlugin, interactionPlugin,listPlugin]} // plugins
         weekends={true} // para mostrar los dias de fines de semana
         events={allSprints} // todos los eventos registrados
         eventClick={handleEvent} // darle click a un evento hacer una accion
