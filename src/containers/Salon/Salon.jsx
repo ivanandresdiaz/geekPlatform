@@ -30,7 +30,15 @@ const Salon = (props) => {
   }
   return (
     <>
-      <NavbarAdmin />
+      {role === 'teacher' && (
+        <NavbarTeacher />
+      )}
+      {role === 'admin' && (
+        <NavbarAdmin />
+      )}
+      {role === 'student' && (
+        <NavbarStudent />
+      )}
       <ContainerMainSalon>
         <ContainerTitleGreet>
           <h1>

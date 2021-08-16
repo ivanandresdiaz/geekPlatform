@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { FaFilePdf, FaLink } from 'react-icons/fa';
 import { BsFolderSymlink, IconName } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import { motion } from 'framer-motion';
 import { deleteSprint, getFirestoreSprints } from '../../actions/classroomActions';
 import { ContainerContentSprint, ContainerSprints } from '../../containers/Salon/SalonStyles';
 import { getSprints } from '../../reducers/salonReducer';
