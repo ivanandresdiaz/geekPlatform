@@ -8,7 +8,6 @@ import { login } from '../actions/authActions';
 import { AuthRouter } from './AuthRouter';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
-import bancoRecursos from '../containers/BancoRecursos/BancoRecursos';
 import Home from '../containers/Home/Home';
 import Corte from '../containers/Corte/Corte';
 import GlobalStyle from '../globalStyles';
@@ -19,6 +18,7 @@ import BancoRecursos from '../containers/BancoRecursos/BancoRecursos';
 import SocialGeek from '../containers/SocialGeek/SocialGeek';
 import EditProfileSocialGeek from '../components/EditProfileSocialGeek/EditProfileSocialGeek';
 import ProfileGeek from '../containers/ProfileGeek/ProfileGeek';
+import ScoreSprints from '../containers/ScoreSprints/ScoreSprints';
 
 const App = () => {
   const dispatch = useDispatch();
