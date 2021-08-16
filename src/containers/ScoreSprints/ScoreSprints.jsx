@@ -11,7 +11,7 @@ import Row from './Row';
 const ScoreSprints = (props) => {
   const { match: { params: { sprintId } } } = props;
   const allSprints = useSelector(getAllSprints);
-  const sprintArray = allSprints.filter((sprint) => sprint.id === sprintId);
+  const sprintArray = allSprints.filter((item) => item.id === sprintId);
   const sprint = sprintArray[0];
   const { corteId } = props;
   const dispatch = useDispatch();
@@ -42,10 +42,11 @@ const ScoreSprints = (props) => {
           {studentsCorte.length > 0 && studentsCorte.map((student, index) => {
             const isCalificado = sprint.calificados.includes(student.uid);
             const mySprintsArray = Object.entries(student.mySprints);
-            const mySprintArray = mySprintsArray.map((item) => item[1]);
+            const mySprintSelected = mySprintsArray.filter((item) => item[1].sprintId === sprintId);
             let promedioSprint;
-            if (mySprintArray[0]) {
-              promedioSprint = mySprintArray[0].calificacion;
+            if (mySprintSelected.length > 0) {
+              const getScore = mySprintSelected[0];
+              promedioSprint = getScore[1].calificacion;
             } else {
               promedioSprint = 0;
             }

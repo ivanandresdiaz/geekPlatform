@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { DivContainerList, ButtonCalificar, DivRowList, ImgStudent, DivTopicScore, ContainerPActivo, ContainerPInactivo, DivFullName, ContainerPorcentajeCalificacion, PorcentajeCalificacion, DivContainerInputCheckBox, ContainerGeekyPuntos } from './styledScoreSprints';
 import './Row.scss';
@@ -8,22 +8,21 @@ import { calificarSprintStudent } from '../../actions/classroomActions';
 
 const Row = (props) => {
   const { isCalificado, student, promedioSprint, sprint } = props;
-  let state = {};
+  // let state = {};
+  const [state, setState] = useState({});
   const dispatch = useDispatch();
   const [estaCalificado, setEstaCalificado] = useState(isCalificado);
   const [porcentajeCalificacion, setPorcentajeCalificacion] = useState(promedioSprint);
   const { firebase, html, css, javascript, webpack, id, reactHooks, reactJs, redux, testing, title } = sprint;
-  const handleInputRangeChangeFather = useCallback(
-    (name, value) => {
-      state = {
-        ...state,
-        [name]: value,
-      };
-    },
-    [],
-  );
+  const handleInputRangeChangeFather = (name, value) => {
+    setState({
+      ...state,
+      [name]: value,
+    });
+  };
   const handleCalificarSprint = (uid) => {
-    const stateArray = Object.entries(state);
+    const newState = state;
+    const stateArray = Object.entries(newState);
     if (stateArray.length > 0) {
       const getNumbers = stateArray.map((item) => parseInt(item[1]));
       const calificacionSprint = Math.round((getNumbers.reduce((a, b) => a + b, 0) / getNumbers.length));

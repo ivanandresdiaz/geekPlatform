@@ -19,6 +19,7 @@ import SocialGeek from '../containers/SocialGeek/SocialGeek';
 import EditProfileSocialGeek from '../components/EditProfileSocialGeek/EditProfileSocialGeek';
 import ProfileGeek from '../containers/ProfileGeek/ProfileGeek';
 import ScoreSprints from '../containers/ScoreSprints/ScoreSprints';
+import AcercaDeProgramadores from '../containers/AcercaDeProgramadores/AcercaDeProgramadores';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -117,7 +118,12 @@ const App = () => {
             component={ScoreSprints}
             isAuthenticated={isLoggedIn}
           />
-
+          <PublicRoute
+            exact
+            path='/acercaDeProgramadores'
+            component={AcercaDeProgramadores}
+            isAuthenticated={isLoggedIn}
+          />
           <Redirect to='/auth/landingPage' />
         </Switch>
       </div>

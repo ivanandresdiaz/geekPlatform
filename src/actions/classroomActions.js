@@ -92,7 +92,7 @@ export const assignedFirestoreSprint = ({ corteId, salonId, title, description, 
       };
       await createSprint(data);
       toast.success('sprint agregado');
-      dispatch({ type: 'newSprintCreated', payload: { ...data, id: title } });
+      dispatch({ type: 'newSprintCreated', payload: { ...data, calificados: [], id: title } });
     }
   } catch (error) {
     toast.error('Algo sucedió');
@@ -319,9 +319,10 @@ export const calificarSprintStudent = (sprintId, uid, values, calificacion, cort
     } else {
       nuevosCalificados = [...sprint.calificados, uid];
     }
-
     await db.collection('cortes').doc(corteId).collection('sprints').doc(sprintId)
       .update({ calificados: nuevosCalificados });
+
+    // dispatch({ type: 'nuevaCalificacion', payload: { nuevosCalificados, sprintId } });
     // ya esta agregado al atributos del sprint :{calificados :[ uid ...uid..]}
     const batch = db.batch();
     const valuesArray = Object.entries(values);
@@ -336,6 +337,8 @@ export const calificarSprintStudent = (sprintId, uid, values, calificacion, cort
     const sumaGeekyPuntos = Math.round(calificacion / 10);
     await db.collection('students').doc(uid).update({ geekyPuntos: student.geekyPuntos + sumaGeekyPuntos });
     alert(`calificado ${student.fullName}`);
+    //por el momento tuve que ahorrarme mucha logica de redux volviendo a llamar todos los sprints para que se renderize el view con el llamado a la api
+    dispatch(getFirestoreAllSprints(student.corteId));
   } catch (error) {
     alert('algo salio mal');
     console.log(error.message);

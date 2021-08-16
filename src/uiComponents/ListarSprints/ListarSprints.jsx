@@ -20,6 +20,7 @@ const ListarSprints = (props) => {
   const handleDeleteSprint = (id) => {
     dispatch(deleteSprint(id, corteId));
   };
+  console.log(sprints);
   return (
     <>
       <h4>Sprints</h4>

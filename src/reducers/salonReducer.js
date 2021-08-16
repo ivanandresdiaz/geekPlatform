@@ -116,6 +116,20 @@ export const salonReducer = (state = initialState, action) => {
           choosingWeekStudent: true,
         },
       };
+      // case 'nuevaCalificacion': {
+
+      //   const newAllSprints = state.allSprints.map((sprint) => {
+      //     if (sprint.id === action.payload.sprintId) {
+      //       return { ...sprint, calificados: action.payload.nuevosCalificados };
+      //     }
+      //     return sprint;
+      //   });
+      //   return {
+      //     ...state,
+      //     allSprints: [
+      //       ...newAllSprints,
+      //     ],
+      //   }; }
 
     default:
       return state;
