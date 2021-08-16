@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { firebase } from '../../firebase/firebaseConfig';
 import { addFirestorePersonalProject } from '../../actions/socialGeekActions';
+import toast from 'react-hot-toast';
 
 const AddPersonalProjects = (props) => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const AddPersonalProjects = (props) => {
         const porcentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       },
       (err) => {
-        alert(`Error subiendo archivo = > ${err.message}`);
+        toast.error(`Error subiendo archivo = > ${err.message}`);
       },
       () => {
         task.snapshot.ref
@@ -46,7 +47,7 @@ const AddPersonalProjects = (props) => {
             // sessionStorage.setItem('imgNewPost', url);
           })
           .catch((err) => {
-            alerts(`Error obteniendo downloadURL = > ${err}`);
+            toast.error(`Error obteniendo downloadURL = > ${err}`);
           });
       },
     );

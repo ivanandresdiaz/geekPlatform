@@ -11,7 +11,8 @@ import Footer from '../../components/Structure/Footer';
 import { ContainerTitleGreet } from '../Salon/SalonStyles';
 import { FormInput, FormModal } from '../../uiComponents/Modal/ModalStyles';
 import { ContainerNewGroup, SelectPlantillas } from './CreateGroupsStyles';
-import { Button5 } from '../../globalStyles';
+import { Button4, Button5 } from '../../globalStyles';
+import toast from 'react-hot-toast';
 
 const CreateNewGroups = (props) => {
   const { match: { params: { salon, corteId } } } = props;
@@ -32,11 +33,11 @@ const CreateNewGroups = (props) => {
         dispatch(generateTemplateGroups(formValues.title, cantidad));
         reset();
       } else {
-        alert('seleccione la cantidad de grupos');
+        toast.error('Seleccione la cantidad de grupos');
       }
     } else {
       dispatch(getFirestoreStudentsCorte(corteId));
-      alert('los estudiantes no han cargado, intentelo de nuevo');
+      toast.error('Los estudiantes no han cargado, intentelo de nuevo');
     }
 
   };
@@ -74,15 +75,12 @@ const CreateNewGroups = (props) => {
                 <option value='9'>9</option>
                 <option value='10'>10</option>
               </SelectPlantillas>
-              <Button5 type='submit'>Generar</Button5>
+              <Button4 type='submit'>Generar</Button4>
             </FormModal>
-              <Group key={id} columnOrder={columnOrder} columns={columns} tasks={tasks} title={title} id={id} salonId={salon} corteId={corteId} />
+            <Group key={id} columnOrder={columnOrder} columns={columns} tasks={tasks} title={title} id={id} salonId={salon} corteId={corteId} />
           </ContainerNewGroup>
-
-
         </div>
       </div>
-
       <Footer />
     </>
   );

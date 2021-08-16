@@ -8,6 +8,7 @@ import { getFirestoreNewsCategory } from '../../actions/socialGeekActions';
 import { getNewsCategory } from '../../reducers/socialGeekReducer';
 import RankingGeekyPuntos from '../../uiComponents/RankingGeekyPuntos/RankingGeekyPuntos';
 import ListarStudentsCorte from '../../uiComponents/ListarStudentsCorte/ListarStudentsCorte';
+import toast from 'react-hot-toast';
 
 const SocialGeek = (props) => {
   const userDataLogged = useSelector((state) => state.auth);
@@ -18,7 +19,7 @@ const SocialGeek = (props) => {
       const { corteId } = userDataLogged;
       dispatch(getFirestoreNewsCategory(corteId, 'blogs'));
     } else {
-      alert('no estas autenticado');
+      toast.error('No estás autenticado');
     }
   }, []);
   const handleGetNews = useCallback(

@@ -6,6 +6,7 @@ import { createNewSprint, uploadSprintPDF } from '../../actions/classroomActions
 import { getLoadedSprintPDF } from '../../reducers/salonReducer';
 import { FormInput, FormModalSalon, FormTextArea } from '../../uiComponents/Modal/ModalStyles'
 import { Button4 } from '../../globalStyles';
+import toast from 'react-hot-toast';
 
 
 const CreateSprints = (props) => {
@@ -78,7 +79,7 @@ const CreateSprints = (props) => {
         const porcentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       },
       (err) => {
-        alert(`Error subiendo archivo = > ${err.message}`);
+        toast.error(`Error subiendo archivo = > ${err.message}`);
       },
       () => {
         task.snapshot.ref
@@ -95,7 +96,7 @@ const CreateSprints = (props) => {
             // sessionStorage.setItem('imgNewPost', url);
           })
           .catch((err) => {
-            alerts(`Error obteniendo downloadURL = > ${err}`);
+            toast.error(`Error obteniendo downloadURL = > ${err}`);
           });
       },
     );

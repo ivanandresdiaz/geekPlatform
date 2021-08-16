@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteSprint, getFirestoreSprints } from '../../actions/classroomActions';
 import { ContainerContentSprint, ContainerSprints } from '../../containers/Salon/SalonStyles';
 import { getSprints } from '../../reducers/salonReducer';
-import { Button5 } from '../../globalStyles';
+import { Button4, Button5 } from '../../globalStyles';
 import { motion } from 'framer-motion';
 const ListarSprints = (props) => {
   const { corteId, salonId, role } = props;
@@ -54,7 +54,7 @@ const ListarSprints = (props) => {
                     <a href={sprint.resourcePDF} download={sprint.title} target='_blank' rel='noreferrer'> <FaFilePdf /> </a>
                   </div>
                 </div>
-                {role === 'teacher' && <Button5 type='button' primary onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</Button5>}
+                {role === 'teacher' && <Button4 type='button' primary onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</Button4>}
               </ContainerContentSprint>
             </div>
           </motion.div>

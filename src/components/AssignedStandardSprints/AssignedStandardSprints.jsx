@@ -5,6 +5,7 @@ import useForm from '../../hooks/useForm';
 import { assignedFirestoreSprint } from '../../actions/classroomActions';
 import { Button4, Button5 } from '../../globalStyles';
 import { FormInput, FormModal } from '../../uiComponents/Modal/ModalStyles';
+import toast from 'react-hot-toast';
 
 const CreateSprints = (props) => {
   const { corteId, salonId } = props;
@@ -95,7 +96,7 @@ const CreateSprints = (props) => {
       dispatch(assignedFirestoreSprint(newSprint));
       reset();
     } else {
-      alert('por favor selecciona el sprint que vas a asignar');
+      toast.error('Por favor selecciona el sprint que vas a asignar');
     }
   };
 

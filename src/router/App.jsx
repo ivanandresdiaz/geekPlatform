@@ -18,6 +18,7 @@ import BancoRecursos from '../containers/BancoRecursos/BancoRecursos';
 import SocialGeek from '../containers/SocialGeek/SocialGeek';
 import EditProfileSocialGeek from '../components/EditProfileSocialGeek/EditProfileSocialGeek';
 import ProfileGeek from '../containers/ProfileGeek/ProfileGeek';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -47,7 +48,13 @@ const App = () => {
   }, [setIsLoggedIn, dispatch]);
 
   return (
+
     <HashRouter>
+      <Toaster
+        style={{ textAlign: 'center' }}
+        position="top-center"
+        reverseOrder={false}
+      />
       <GlobalStyle />
       <div>
         <Switch>

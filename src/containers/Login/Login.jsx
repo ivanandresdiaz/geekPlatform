@@ -48,9 +48,11 @@ const Login = (props) => {
             <Button2 type='submit'>Ingresar</Button2>
             <ResetPassword>¿Olvidaste tu contraseña?</ResetPassword>
           </FormLogin>
-          <hr/>
+          <hr />
           <SubtitleLogin>¿Aún no tienes cuenta en GeekPlatform?</SubtitleLogin>
-          <Button2><a href='https://academiageek.co/admisiones/' target='blank' aria-label='Compañia'>Póstulate</a></Button2>
+          <Button2>
+            <a style={{ color: 'white' }} href='https://academiageek.co/admisiones/' target='blank' aria-label='Compañia'>Póstulate </a>
+          </Button2>
         </ContainerLogin>
       </DivContainerLogin>
     </>

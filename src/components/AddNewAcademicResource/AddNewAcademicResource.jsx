@@ -7,7 +7,7 @@ import useForm from '../../hooks/useForm';
 import { addFirestoreNewAcademicResource, uploadImgResource } from '../../actions/bancoRecursosActions';
 import { FormInput, FormModal, FormTextArea } from '../../uiComponents/Modal/ModalStyles';
 import { SelectCat } from './NewAcademicResourceStyles';
-import { Button5 } from '../../globalStyles';
+import { Button4, Button5 } from '../../globalStyles';
 
 const AddNewAcademicResource = (props) => {
   const { loggedUser, userId, categories, subCategories } = props;
@@ -53,6 +53,7 @@ const AddNewAcademicResource = (props) => {
   return (
     <div>
       <FormModal>
+        <h1 style={{ textAlign: 'center', color: '#FF3B53', fontSize: '16px' }}>Agrega un nuevo recurso académico</h1>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', flexDirection: 'column', margin: 'auto' }}>
             <FormInput
@@ -115,7 +116,7 @@ const AddNewAcademicResource = (props) => {
             </datalist>
             <FormInput style={{ marginRight: '15px' }} type='file' name='archivosubido' onChange={handleUploadImage} required />
           </div>
-          <Button5 type='submit' onClick={handleSubmit} disabled={loaded}>Agregar recurso Academico</Button5>
+          <Button4 style={{ margin: 'auto' }} type='submit' onClick={handleSubmit} disabled={loaded}>Agregar recurso Academico</Button4>
         </div>
       </FormModal >
     </div >
