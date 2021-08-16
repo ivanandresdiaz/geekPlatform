@@ -9,7 +9,7 @@ import { deleteSprint, getFirestoreSprints } from '../../actions/classroomAction
 import { ContainerContentSprint, ContainerSprints } from '../../containers/Salon/SalonStyles';
 import { getSprints } from '../../reducers/salonReducer';
 import { Button4, Button5 } from '../../globalStyles';
-import { motion } from 'framer-motion';
+
 const ListarSprints = (props) => {
   const { corteId, salonId, role } = props;
   const dispatch = useDispatch();
