@@ -1,5 +1,4 @@
 import React, { useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import CreateNewsSocialGeek from '../../components/CreateNewsSocialGeek/CreateNewsSocialGeek';
@@ -9,8 +8,15 @@ import { getFirestoreNewsCategory } from '../../actions/socialGeekActions';
 import { getNewsCategory } from '../../reducers/socialGeekReducer';
 import RankingGeekyPuntos from '../../uiComponents/RankingGeekyPuntos/RankingGeekyPuntos';
 import ListarStudentsSocialGeek from '../../uiComponents/ListarStudentsSocialGeek/ListarStudentsSocialGeek';
+import { getRole } from '../../reducers/authReducer';
+import NavbarTeacher from '../../components/Structure/NavbarTeacher';
+import NavbarAdmin from '../../components/Structure/NavbarAdmin';
+import NavbarStudent from '../../components/Structure/NavbarStudent';
+import Footer from '../../components/Structure/Footer';
+
 
 const SocialGeek = (props) => {
+  const role = useSelector(getRole);
   const userDataLogged = useSelector((state) => state.auth);
   const news = useSelector(getNewsCategory);
   const dispatch = useDispatch();
@@ -32,21 +38,33 @@ const SocialGeek = (props) => {
   );
 
   return (
-    <div>
-
-      <h1>Bienvenido a social geek</h1>
-      <Link to={`/socialGeek/${userDataLogged.uid}`}>
-        Ir a mi perfil
-        {' '}
-        {userDataLogged.fullName}
-      </Link>
-      <RankingGeekyPuntos corteId={userDataLogged.corteId} />
-      <ListarStudentsSocialGeek corteId={userDataLogged.corteId} />
-      <CreateNewsSocialGeek corteId={userDataLogged.corteId} uid={userDataLogged.uid} />
-      <NewsFeedCategories handleGetNews={handleGetNews} />
-      <ListarNews news={news} corteId={userDataLogged.corteId} uid={userDataLogged.uid} />
-
-    </div>
+    <>
+      <div style={{ background: '#F2F2F2' }}>
+        {role === 'teacher' && (
+          <NavbarTeacher />
+        )}
+        {role === 'admin' && (
+          <NavbarAdmin />
+        )}
+        {role === 'student' && (
+          <NavbarStudent />
+        )}
+        <div style={{ display: 'flex', width: '100', background: '#F2F2F2' }}>
+          <div style={{ flex: '3', height: 'calc(100vh - 50px)', position: 'sticky', top: '50px' }}>
+            <RankingGeekyPuntos corteId={userDataLogged.corteId} />
+          </div>
+          <div style={{ flex: '5.5' }}>
+            <CreateNewsSocialGeek corteId={userDataLogged.corteId} uid={userDataLogged.uid} />
+            <NewsFeedCategories handleGetNews={handleGetNews} />
+            <ListarNews news={news} corteId={userDataLogged.corteId} uid={userDataLogged.uid} />
+          </div>
+          <div style={{ flex: '3.5' }}>
+            <ListarStudentsSocialGeek corteId={userDataLogged.corteId} />
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 
