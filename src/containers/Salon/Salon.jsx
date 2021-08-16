@@ -7,10 +7,13 @@ import { getFirestoreSalon } from '../../actions/classroomActions';
 import ListarSprints from '../../uiComponents/ListarSprints/ListarSprints';
 import ListarWorkGroups from '../../uiComponents/ListarWorkGroups/ListarWorkGroups';
 import NavbarAdmin from '../../components/Structure/NavbarAdmin';
+import NavbarTeacher from '../../components/Structure/NavbarTeacher';
+import NavbarStudent from '../../components/Structure/NavbarStudent';
 import Footer from '../../components/Structure/Footer';
 import { ContainerMainSalon, ContainerRowSprint, ContainerTitleGreet } from './SalonStyles';
 import { ModalSprints, ModalSprintStandard } from '../../uiComponents/Modal/Modal';
 import { Button6 } from '../../globalStyles';
+
 
 const Salon = (props) => {
   const role = useSelector(getRole);
@@ -30,7 +33,15 @@ const Salon = (props) => {
   }
   return (
     <>
-      <NavbarAdmin />
+      {role === 'teacher' && (
+        <NavbarTeacher />
+      )}
+      {role === 'admin' && (
+        <NavbarAdmin />
+      )}
+      {role === 'student' && (
+        <NavbarStudent />
+      )}
       <ContainerMainSalon>
         <ContainerTitleGreet>
           <h1>

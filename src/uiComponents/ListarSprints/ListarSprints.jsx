@@ -2,13 +2,13 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFilePdf, FaLink } from 'react-icons/fa';
-import { BsFolderSymlink, IconName } from 'react-icons/bs';
+import { BsFolderSymlink } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { deleteSprint, getFirestoreSprints } from '../../actions/classroomActions';
 import { ContainerContentSprint, ContainerSprints } from '../../containers/Salon/SalonStyles';
 import { getSprints } from '../../reducers/salonReducer';
-import { Button4, Button5 } from '../../globalStyles';
+import { Button4 } from '../../globalStyles';
 
 const ListarSprints = (props) => {
   const { corteId, salonId, role } = props;
@@ -28,7 +28,6 @@ const ListarSprints = (props) => {
         return (
           <ContainerSprints key={sprint.id}>
             <motion.div whileHover={{ scale: 1.050 }}>
-
               <div>
                 <ContainerContentSprint>
                   <h4>
@@ -65,7 +64,7 @@ const ListarSprints = (props) => {
                     </div>
                   </div>
                   {role === 'teacher' && <Button4 type='button' primary onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</Button4>}
-                  {role === 'teacher' && <Link to={`/scoreSprints/${sprint.id}`}>Calificar Sprint LINK !!</Link>}
+                  {role === 'teacher' && <Link to={`/scoreSprints/${sprint.id}`}><Button4>Calificar</Button4></Link>}
                 </ContainerContentSprint>
               </div>
             </motion.div>
