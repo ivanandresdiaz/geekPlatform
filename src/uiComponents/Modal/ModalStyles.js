@@ -116,9 +116,8 @@ export const FormInput = styled.input`
   width: 250px;
   margin-bottom: 20px;
   margin-top: 8px;
-  border: none;
+  border: 1px solid #f0f0f0 !important;
   font-size: 14px;
-  border: none;
 
   &:focus {
     color: #ff3b53;
@@ -143,7 +142,7 @@ export const FormTextArea = styled.textarea`
   margin-top: 8px;
   border: none;
   font-size: 14px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid #f0f0f0 !important;
   resize: none;
 
   &:focus {

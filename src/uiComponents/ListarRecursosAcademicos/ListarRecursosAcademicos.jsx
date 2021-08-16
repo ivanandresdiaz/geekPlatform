@@ -6,7 +6,6 @@ const ListarRecursosAcademicos = (props) => {
 
   return (
     <div>
-      <h1>Listar recursos academicos</h1>
       {categoryData.map((resource) => <CardRecursoAcademico key={resource.id} resource={resource} />)}
     </div>
   );
