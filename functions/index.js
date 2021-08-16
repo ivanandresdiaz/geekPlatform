@@ -170,6 +170,7 @@ exports.createSprint = functions.https.onCall((data, context)=> {
     supportLink2: data.supportLink2,
     supportLink3: data.supportLink3,
     supportLink4: data.supportLink4,
+    calificados: [],
     html: data.html,
     css: data.css,
     webpack: data.webpack,
@@ -178,6 +179,7 @@ exports.createSprint = functions.https.onCall((data, context)=> {
     redux: data.redux,
     firebase: data.firebase,
     testing: data.testing,
+    image: data.image,
   };
   return db
       .collection("cortes").doc(data.corteId)

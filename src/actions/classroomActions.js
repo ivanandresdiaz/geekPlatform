@@ -19,66 +19,37 @@ export const getFirestoreSalon = (corteId, salonId) => (dispatch, getState) => {
     .catch((err) => console.log(err));
 };
 
-export const createNewSprint =
-  (
-    corteId,
-    salonId,
-    title,
-    description,
-    start,
-    end,
-    deliveryLink,
-    supportLink1,
-    supportLink2,
-    supportLink3,
-    supportLink4,
-    html,
-    css,
-    webpack,
-    reactJs,
-    reactHooks,
-    redux,
-    firebase,
-    testing
-  ) =>
-  async (dispatch, getState) => {
-    try {
-      const resourcePDF = getState().salon.loadedSprintPDF;
-      if (Date.parse(start) > Date.parse(end)) {
-        toast.error(
-          "La fecha de entrega no puede ser menor a la fechan inicial"
-        );
-      } else {
-        const createSprint = functions.httpsCallable("createSprint");
-        const data = {
-          corteId,
-          salonId,
-          title,
-          resourcePDF,
-          description,
-          start,
-          end,
-          deliveryLink,
-          supportLink1,
-          supportLink2,
-          supportLink3,
-          supportLink4,
-          html,
-          css,
-          webpack,
-          reactJs,
-          reactHooks,
-          redux,
-          firebase,
-          testing,
-        };
-        await createSprint(data);
-        toast.success("Sprint agregado");
-        dispatch({ type: "newSprintCreated", payload: { ...data, id: title } });
-      }
-    } catch (error) {
-      toast.error("Algo sucedió");
-      console.log(error);
+export const createNewSprint = (corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, webpack, reactJs, reactHooks, redux, firebase, testing, image) => async (dispatch, getState) => {
+  try {
+    const resourcePDF = getState().salon.loadedSprintPDF;
+    if (Date.parse(start) > Date.parse(end)) {
+      alert('la fecha de entrega no puede ser menor a la fechan inicial');
+    } else {
+      const createSprint = functions.httpsCallable('createSprint');
+      const data = { corteId,
+        salonId,
+        title,
+        resourcePDF,
+        description,
+        start,
+        end,
+        deliveryLink,
+        supportLink1,
+        supportLink2,
+        supportLink3,
+        supportLink4,
+        html,
+        css,
+        webpack,
+        reactJs,
+        reactHooks,
+        redux,
+        firebase,
+        testing,
+        image };
+      await createSprint(data);
+      alert('sprint agregado');
+      dispatch({ type: 'newSprintCreated', payload: { ...data, id: title } });
     }
   };
 
@@ -188,20 +159,15 @@ export const getFirestoreAllSprints =
 
 // Crear grupos
 
-export const createWorkGroups =
-  (corteId, salonId, title, newGroup) => async (dispatch, getState) => {
+export const createWorkGroups = (corteId, salonId, title, newGroup) => async (dispatch, getState) => {
     try {
       const initialData = {
         ...newGroup,
         title,
         salonId,
       };
-      await db
-        .collection("cortes")
-        .doc(corteId)
-        .collection("groups")
-        .add(initialData);
-      toast.succes("Se ha creado los nuevos grupos");
+      await db        .collection("cortes")        .doc(corteId)        .collection("groups")        .add(initialData);
+      
       const plantillaCreatingGroups = {
         title: "Default plantilla grupos",
         id: "defaultPlantillaGrupos",
@@ -228,8 +194,28 @@ export const createWorkGroups =
             taskIds: [],
           },
         },
-        // Facilitate reordering of the columns
-        columnOrder: ["column1", "column2", "column3"],
+      // Facilitate reordering of the columns
+      columnOrder: ['column1', 'column2', 'column3'],
+    };
+    dispatch({ type: 'generateTemplateGroups', payload: plantillaCreatingGroups });
+    toast.succes("Se ha creado los nuevos grupos");
+  } catch (error) {
+    alert('ha habido un error');
+  }
+};
+export const generateTemplateGroups = (title, cantidad) => async (dispatch, getState) => {
+  try {
+    const students = getState().students.studentsCorte;
+    console.log('students', students);
+    const studentsDataTransform = students.map((student) => (
+      { id: student.uid, content: student.fullName }
+    ));
+    let tasks = {};
+    let taskIds = [];
+    studentsDataTransform.forEach((element) => {
+      tasks = {
+        ...tasks,
+        [element.id]: element,
       };
       dispatch({
         type: "generateTemplateGroups",
@@ -347,19 +333,56 @@ export const uploadSprintPDF = (file) => async (dispatch, getState) => {
     }
   );
 };
-export const enviarFirestoreLista =
-  (corteId, listaEnviar) => (dispatch, getState) => {
+export const enviarFirestoreLista = (corteId, listaEnviar) => (dispatch, getState) => {
+  const batch = db.batch();
+  listaEnviar.forEach((student) => {
+    batch.update(db.collection('students').doc(student.uid), { assistance: student.assistance, geekyPuntos: student.geekyPuntos + 1 });
+  });
+  batch
+    .commit()
+    .then(() => {
+      toast.success('Se ha tomado lista');
+      dispatch({ type: 'requestWeekStudent' });
+    })
+    .catch((error) => console.error(error));
+};
+
+export const calificarSprintStudent = (sprintId, uid, values, calificacion, corteId, salonId) => async (dispatch, getState) => {
+  try {
+    const { studentsCorte } = getState().students;
+    const studentArrayFiltered = studentsCorte.filter((student) => student.uid === uid);
+    const student = studentArrayFiltered[0];
+    await db.collection('students').doc(student.uid).set({ mySprints: { ...student.mySprints, [sprintId]: { sprintId, calificacion } } }, { merge: true });
+    //agregar a calificados de sprint el uid
+    const { allSprints } = getState().salon;
+    const sprintArray = allSprints.filter((item) => item.id === sprintId);
+    const sprint = sprintArray[0];
+    let nuevosCalificados;
+    if (sprint.calificados.includes(uid)) {
+      nuevosCalificados = [...sprint.calificados];
+    } else {
+      nuevosCalificados = [...sprint.calificados, uid];
+    }
+
+    await db.collection('cortes').doc(corteId).collection('sprints').doc(sprintId)
+      .update({ calificados: nuevosCalificados });
+    // ya esta agregado al atributos del sprint :{calificados :[ uid ...uid..]}
     const batch = db.batch();
-    listaEnviar.forEach((student) => {
-      batch.update(db.collection("students").doc(student.uid), {
-        assistance: student.assistance,
-      });
+    const valuesArray = Object.entries(values);
+    valuesArray.forEach((item) => {
+      const notaNumber = parseInt(item[1]);
+      const studentArray = Object.entries(student);
+      const findAtributoArray = studentArray.filter((atributo) => atributo[0] === item[0]);
+      const findAtributo = findAtributoArray[0];
+      batch.update(db.collection('students').doc(uid), { [item[0]]: [...findAtributo[1], notaNumber] });
     });
-    batch
-      .commit()
-      .then(() => {
-        toast.success("Se ha tomado lista");
-        dispatch({ type: "requestWeekStudent" });
-      })
-      .catch((error) => console.error(error));
-  };
+    await batch.commit();
+    const sumaGeekyPuntos = Math.round(calificacion / 10);
+    await db.collection('students').doc(uid).update({ geekyPuntos: student.geekyPuntos + sumaGeekyPuntos });
+    alert(`calificado ${student.fullName}`);
+  } catch (error) {
+    alert('algo salio mal');
+    console.log(error.message);
+  }
+
+};

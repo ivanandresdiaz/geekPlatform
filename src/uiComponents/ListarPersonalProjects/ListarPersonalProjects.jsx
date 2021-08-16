@@ -10,8 +10,8 @@ const ListarPersonalProjects = (props) => {
         <div key={project.projectTitle}>
           <h4>{project.projectTitle}</h4>
           <img src={project.coverProject} alt={project.projectTitle} />
-          <a href={project.linkDespliegue}>Link de despliegue</a>
-          <a href={project.linkGithub}>Link de github</a>
+          <a href={project.linkDespliegue} target='_blank' rel='noreferrer'>Link de despliegue</a>
+          <a href={project.linkGithub} target='_blank' rel='noreferrer'>Link de github</a>
         </div>
       ))}
     </div>

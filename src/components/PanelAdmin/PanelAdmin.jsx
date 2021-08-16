@@ -28,6 +28,7 @@ const PanelAdmin = () => {
       </p> */}
 
       {/* Sección agregar administradores */}
+
       <ContainerMain>
         <ContainerTitle>
           <TitleAdd>Administradores</TitleAdd>

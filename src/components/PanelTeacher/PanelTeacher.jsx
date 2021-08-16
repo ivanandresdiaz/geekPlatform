@@ -23,13 +23,13 @@ const PanelTeacher = () => {
         </ContainerTitle>
         <ListarTeachers />
       </ContainerMain>
-    
+
       <ContainerMain>
         <ContainerTitle>
           <TitleAdd>Cortes</TitleAdd>
         </ContainerTitle>
         <ListarCortes />
-      </ContainerMain>   
+      </ContainerMain>
     </>
   );
 };

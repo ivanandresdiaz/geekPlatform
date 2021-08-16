@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ContainerMainCorte = styled.div`
   margin: 30px 30px 0px 160px;
