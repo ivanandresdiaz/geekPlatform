@@ -106,7 +106,7 @@ const CreateSprints = (props) => {
   return (
     <div>
       <h1>Asignar sprint standard</h1>
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'column', marginTop: '5px' }}>
         <Button4 type='button' onClick={() => handleAssignedSprint('mascotas')}>Asignar Sprint 1 Adopcion Mascotas</Button4>
         <Button4 type='button' onClick={() => handleAssignedSprint('guajolotas')}>Asignar Sprint 2 Guajolotas</Button4>
         <Button4 type='button' onClick={() => handleAssignedSprint('blockMaster')}>Asignar Sprint 3 Block Master </Button4>
