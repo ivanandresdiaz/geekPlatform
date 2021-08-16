@@ -1,20 +1,20 @@
 /* eslint-disable radix */
 /* eslint-disable import/prefer-default-export */
-import toast, { Toaster } from "react-hot-toast";
-import React from "react";
+import toast, { Toaster } from 'react-hot-toast';
+import React from 'react';
 import {
   firebase,
   googleAuthProvider,
   db,
   functions,
-} from "../firebase/firebaseConfig";
+} from '../firebase/firebaseConfig';
 
 export const getFirestoreSalon = (corteId, salonId) => (dispatch, getState) => {
   db.collection(`cortes/${corteId}/classrooms`)
     .doc(salonId)
     .get()
     .then((doc) => {
-      dispatch({ type: "getFirestoreSalon", payload: doc.data() });
+      dispatch({ type: 'getFirestoreSalon', payload: doc.data() });
     })
     .catch((err) => console.log(err));
 };
@@ -51,7 +51,11 @@ export const createNewSprint = (corteId, salonId, title, description, start, end
       alert('sprint agregado');
       dispatch({ type: 'newSprintCreated', payload: { ...data, id: title } });
     }
-  };
+  } catch (error) {
+    toast.error('Sucedió un error');
+    console.log(error);
+  }
+};;
 
 export const assignedFirestoreSprint =
   ({
@@ -74,16 +78,15 @@ export const assignedFirestoreSprint =
     redux,
     firebase,
     testing,
-  }) =>
-  async (dispatch, getState) => {
+  }) => async (dispatch, getState) => {
     try {
       const resourcePDF = getState().salon.loadedSprintPDF;
       if (Date.parse(start) > Date.parse(end)) {
         toast.error(
-          "La fecha de entrega no puede ser menor a la fechan inicial"
+          'La fecha de entrega no puede ser menor a la fechan inicial',
         );
       } else {
-        const createSprint = functions.httpsCallable("createSprint");
+        const createSprint = functions.httpsCallable('createSprint');
         const data = {
           corteId,
           salonId,
@@ -107,25 +110,25 @@ export const assignedFirestoreSprint =
           testing,
         };
         await createSprint(data);
-        toast.succes("sprint agregado");
-        dispatch({ type: "newSprintCreated", payload: { ...data, id: title } });
+        toast.succes('sprint agregado');
+        dispatch({ type: 'newSprintCreated', payload: { ...data, id: title } });
       }
     } catch (error) {
-      toast.error("Algo sucedió");
+      toast.error('Algo sucedió');
       console.log(error);
     }
   };
 export const getFirestoreSprints =
   (corteId, salonId) => async (dispatch, getState) => {
     db.collection(`/cortes/${corteId}/sprints`)
-      .where("salonId", "==", salonId)
+      .where('salonId', '==', salonId)
       .get()
       .then((snapshot) => {
         const data = snapshot.docs.map((doc) => {
           const dataDocument = doc.data();
           return { ...dataDocument, id: doc.id };
         });
-        dispatch({ type: "getFirestoreSprints", payload: data });
+        dispatch({ type: 'getFirestoreSprints', payload: data });
       })
       .catch((err) => console.log(err));
   };
@@ -133,26 +136,26 @@ export const getFirestoreSprints =
 export const deleteSprint = (id, corteId) => async (dispatch) => {
   try {
     await db.collection(`/cortes/${corteId}/sprints`).doc(id).delete();
-    toast.error("Sprint eliminado");
-    dispatch({ type: "deleteSprint", payload: id });
+    toast.error('Sprint eliminado');
+    dispatch({ type: 'deleteSprint', payload: id });
   } catch (error) {
-    toast.error("Sucedió un error");
+    toast.error('Sucedió un error');
     console.log(error);
   }
 };
 
 export const getFirestoreAllSprints =
   (corteId) => async (dispatch, getState) => {
-    db.collection("cortes")
+    db.collection('cortes')
       .doc(corteId)
-      .collection("sprints")
+      .collection('sprints')
       .get()
       .then((snapshot) => {
         const data = snapshot.docs.map((doc) => {
           const dataDocument = doc.data();
           return { ...dataDocument, id: doc.id };
         });
-        dispatch({ type: "getFirestoreAllSprints", payload: data });
+        dispatch({ type: 'getFirestoreAllSprints', payload: data });
       })
       .catch((err) => console.log(err));
   };
@@ -160,77 +163,55 @@ export const getFirestoreAllSprints =
 // Crear grupos
 
 export const createWorkGroups = (corteId, salonId, title, newGroup) => async (dispatch, getState) => {
-    try {
-      const initialData = {
-        ...newGroup,
-        title,
-        salonId,
-      };
-      await db        .collection("cortes")        .doc(corteId)        .collection("groups")        .add(initialData);
-      
-      const plantillaCreatingGroups = {
-        title: "Default plantilla grupos",
-        id: "defaultPlantillaGrupos",
-        tasks: {
-          task111: { id: "task111", content: "Estudiante 1" },
-          task2: { id: "task2", content: "Estudiante 2" },
-          task3: { id: "task3", content: "Estudiante 3" },
-          task4: { id: "task4", content: "Estudiante 4" },
+  try {
+    const initialData = {
+      ...newGroup,
+      title,
+      salonId,
+    };
+    await db.collection('cortes').doc(corteId).collection('groups').add(initialData);
+
+    const plantillaCreatingGroups = {
+      title: 'Default plantilla grupos',
+      id: 'defaultPlantillaGrupos',
+      tasks: {
+        task111: { id: 'task111', content: 'Estudiante 1' },
+        task2: { id: 'task2', content: 'Estudiante 2' },
+        task3: { id: 'task3', content: 'Estudiante 3' },
+        task4: { id: 'task4', content: 'Estudiante 4' },
+      },
+      columns: {
+        column1: {
+          id: 'column1',
+          title: 'Estudiantes',
+          taskIds: ['task111', 'task2', 'task3', 'task4'],
         },
-        columns: {
-          column1: {
-            id: "column1",
-            title: "Estudiantes",
-            taskIds: ["task111", "task2", "task3", "task4"],
-          },
-          column2: {
-            id: "column2",
-            title: "Grupo 1",
-            taskIds: [],
-          },
-          column3: {
-            id: "column3",
-            title: "Grupo 2",
-            taskIds: [],
-          },
+        column2: {
+          id: 'column2',
+          title: 'Grupo 1',
+          taskIds: [],
         },
+        column3: {
+          id: 'column3',
+          title: 'Grupo 2',
+          taskIds: [],
+        },
+      },
       // Facilitate reordering of the columns
       columnOrder: ['column1', 'column2', 'column3'],
     };
     dispatch({ type: 'generateTemplateGroups', payload: plantillaCreatingGroups });
-    toast.succes("Se ha creado los nuevos grupos");
+    toast.succes('Se ha creado los nuevos grupos');
   } catch (error) {
     alert('ha habido un error');
   }
 };
-export const generateTemplateGroups = (title, cantidad) => async (dispatch, getState) => {
-  try {
-    const students = getState().students.studentsCorte;
-    console.log('students', students);
-    const studentsDataTransform = students.map((student) => (
-      { id: student.uid, content: student.fullName }
-    ));
-    let tasks = {};
-    let taskIds = [];
-    studentsDataTransform.forEach((element) => {
-      tasks = {
-        ...tasks,
-        [element.id]: element,
-      };
-      dispatch({
-        type: "generateTemplateGroups",
-        payload: plantillaCreatingGroups,
-      });
-    } catch (error) {
-      toast.error("Sucedió un error");
-      console.log(error);
-    }
-  };
+
 export const generateTemplateGroups =
   (title, cantidad) => async (dispatch, getState) => {
     try {
       const students = getState().students.studentsCorte;
-      console.log("students", students);
+      console.log('students', students);
       const studentsDataTransform = students.map((student) => ({
         id: student.uid,
         content: student.fullName,
@@ -247,12 +228,12 @@ export const generateTemplateGroups =
       const groupsNumber = parseInt(cantidad) + 1;
       let columns = {
         column0: {
-          id: "column0",
-          title: "Estudiantes",
+          id: 'column0',
+          title: 'Estudiantes',
           taskIds,
         },
       };
-      let columnOrder = ["column0"];
+      let columnOrder = ['column0'];
       for (let index = 1; index < groupsNumber; index++) {
         columns = {
           ...columns,
@@ -266,15 +247,15 @@ export const generateTemplateGroups =
       }
 
       const initialData = {
-        id: "readyToSend",
+        id: 'readyToSend',
         title,
         tasks,
         columns,
         columnOrder,
       };
-      dispatch({ type: "generateTemplateGroups", payload: initialData });
+      dispatch({ type: 'generateTemplateGroups', payload: initialData });
     } catch (error) {
-      toast.error("Sucedió un error");
+      toast.error('Sucedió un error');
       console.log(error);
     }
   };
@@ -282,14 +263,14 @@ export const generateTemplateGroups =
 export const getFirestoreWorkGroups =
   (corteId, salonId) => async (dispatch, getState) => {
     db.collection(`/cortes/${corteId}/groups`)
-      .where("salonId", "==", salonId)
+      .where('salonId', '==', salonId)
       .get()
       .then((snapshot) => {
         const data = snapshot.docs.map((doc) => {
           const dataDocument = doc.data();
           return { ...dataDocument, id: doc.id };
         });
-        dispatch({ type: "getFirestoreWorkGroups", payload: data });
+        dispatch({ type: 'getFirestoreWorkGroups', payload: data });
       })
       .catch((err) => console.log(err));
   };
@@ -300,8 +281,8 @@ export const deleteFirestoreGroups =
       .collection(`/cortes/${corteId}/classrooms/${salonId}/groups`)
       .doc(id)
       .delete();
-    toast.error("Se ha eliminado el grupo");
-    dispatch({ type: "deleteFirestoreGroups", payload: id });
+    toast.error('Se ha eliminado el grupo');
+    dispatch({ type: 'deleteFirestoreGroups', payload: id });
   };
 
 export const uploadSprintPDF = (file) => async (dispatch, getState) => {
@@ -310,7 +291,7 @@ export const uploadSprintPDF = (file) => async (dispatch, getState) => {
   const task = refStorage.put(file);
 
   task.on(
-    "state_changed",
+    'state_changed',
     (snapshot) => {
       const porcentaje =
         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -324,13 +305,13 @@ export const uploadSprintPDF = (file) => async (dispatch, getState) => {
       task.snapshot.ref
         .getDownloadURL()
         .then((url) => {
-          dispatch({ type: "uploadSprintPDF", payload: url });
+          dispatch({ type: 'uploadSprintPDF', payload: url });
           // sessionStorage.setItem('imgNewPost', url);
         })
         .catch((err) => {
           console.log(`Error obteniendo downloadURL = > ${err}`);
         });
-    }
+    },
   );
 };
 export const enviarFirestoreLista = (corteId, listaEnviar) => (dispatch, getState) => {
