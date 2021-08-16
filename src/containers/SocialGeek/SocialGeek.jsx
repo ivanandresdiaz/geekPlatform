@@ -33,6 +33,7 @@ const SocialGeek = (props) => {
 
   return (
     <div>
+      
       <h1>Bienvenido a social geek</h1>
       <Link to={`/socialGeek/${userDataLogged.uid}`}>
         Ir a mi perfil
