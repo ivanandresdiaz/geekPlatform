@@ -14,6 +14,7 @@ import ico from '../../images/other/icon.png';
 import ico1 from '../../images/other/icon-1.png';
 import ico2 from '../../images/other/icon-2.png';
 import ico3 from '../../images/other/icon-3.png';
+import ChartStudent from '../../components/ChartStudent/ChartStudent';
 
 const CorteStudent = (props) => {
   const corteId = useSelector(getCorteId);
@@ -110,8 +111,6 @@ const CorteStudent = (props) => {
             </div>
           </div>
         </ContainerMainCorte>
-        <Link to='/socialGeek'> Social Geek Link !!!</Link>
-        <Link to='/bancoRecursosAcademicos'> Social Geek Link !!!</Link>
       </div>
     </>
   );
