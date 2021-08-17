@@ -47,7 +47,7 @@ export const createNewSprint = ({ title, description, start, end, deliveryLink, 
     console.log(data);
     await createSprint(data);
     alert('sprint agregado');
-    dispatch({ type: 'newSprintCreated', payload: { ...data, id: `${title} ` } });// no eliminar espacio, es importante para la logica
+    dispatch({ type: 'newSprintCreated', payload: { ...data, id: ` ${title} ` } });// no eliminar espacio, es importante para la logica
 
   } catch (error) {
     toast.error('Sucedió un error');
