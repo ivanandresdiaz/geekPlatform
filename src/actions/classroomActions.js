@@ -341,6 +341,7 @@ export const calificarSprintStudent = (sprintId, uid, values, calificacion, cort
     dispatch(getFirestoreAllSprints(student.corteId));
   } catch (error) {
     alert('algo salio mal');
+    console.log(error);
     console.log(error.message);
   }
 

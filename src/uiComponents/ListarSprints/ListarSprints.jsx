@@ -65,7 +65,7 @@ const ListarSprints = (props) => {
                     </div>
                   </div>
                   {role === 'teacher' && <Button4 type='button' primary onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</Button4>}
-                  {role === 'teacher' && <Link to={`/scoreSprints/${sprint.id}`}><Button4>Calificar</Button4></Link>}
+                  {role === 'teacher' && <Link to={`/scoreSprints/${corteId}/${sprint.id}`}><Button4>Calificar</Button4></Link>}
                 </ContainerContentSprint>
               </div>
             </motion.div>

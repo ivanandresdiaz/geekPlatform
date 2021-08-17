@@ -5,14 +5,14 @@ import interactionPlugin from '@fullcalendar/interaction'; // Plugin de interaci
 import listPlugin from '@fullcalendar/list'; // plugin de agenda
 import esLocale from '@fullcalendar/core/locales/es'; // idioma
 import { useDispatch, useSelector } from 'react-redux';
+import { MdClose } from 'react-icons/md';
 import { getFirestoreAllSprints } from '../../actions/classroomActions';
 import { getAllSprints } from '../../reducers/salonReducer';
 import { ContainerModal, ModalContent, CloseModalButton, Background } from '../../uiComponents/Modal/ModalStyles';
-import { MdClose } from 'react-icons/md';
 
 const Calendar = (props) => {
   const [showModalCalendar, setShowModalCalendar] = useState(false);
-  const [eventData, setEventData] = useState({})
+  const [eventData, setEventData] = useState({});
 
   const { corteId } = props;
   const allSprints = useSelector(getAllSprints);
@@ -23,14 +23,19 @@ const Calendar = (props) => {
     }
   }, []);
   const ModalTrue = () => {
-    console.log(props.title)
     return (
       <Background>
         <ContainerModal showModalCalendar={showModalCalendar}>
           <ModalContent>
             <h1>{eventData.title}</h1>
-            <h4>Cohorte: {eventData.corteId}</h4>
-            <h4>Salon: {eventData.salonId}</h4>
+            <h4>
+              Cohorte:
+              {eventData.corteId}
+            </h4>
+            <h4>
+              Salon:
+              {eventData.salonId}
+            </h4>
             <hr />
             <h4>Descripcion</h4>
             <p>{eventData.description}</p>
@@ -45,10 +50,10 @@ const Calendar = (props) => {
           </ModalContent>
         </ContainerModal>
       </Background>
-    )
-  }
+    );
+  };
   const handleEvent = (el) => {
-    let data = {
+    const data = {
       title: el.event.title,
       description: el.event._def.extendedProps.description,
       corteId: el.event._def.extendedProps.corteId,
@@ -56,22 +61,22 @@ const Calendar = (props) => {
       resourcePDF: el.event._def.extendedProps.resourcePDF,
       salonId: el.event._def.extendedProps.salonId,
       supportLink1: el.event._def.extendedProps.supportLink1,
-    }
-    setEventData(data)
-    setShowModalCalendar(true)
+    };
+    setEventData(data);
+    setShowModalCalendar(true);
   };
-  console.log(eventData)
+  console.log(eventData);
   return (
     <div style={{ backgroundColor: 'ffffff', width: 550 }}>
       <h1 style={{ color: '#333333' }}>Calendario GeekPlatform</h1>
       <FullCalendar
-      headerToolbar={{
-        center: 'dayGridMonth,listWeek,today',
-        left:'title',
-        right: 'prev,next',
+        headerToolbar={{
+          center: 'dayGridMonth,listWeek,today',
+          left: 'title',
+          right: 'prev,next',
         }}
-        titleFormat ={ {year: 'numeric', month: 'short', day: 'numeric'} }
-        plugins={[dayGridPlugin, interactionPlugin,listPlugin]} // plugins
+        titleFormat={{ year: 'numeric', month: 'short', day: 'numeric' }}
+        plugins={[dayGridPlugin, interactionPlugin, listPlugin]} // plugins
         weekends={true} // para mostrar los dias de fines de semana
         events={allSprints} // todos los eventos registrados
         eventClick={handleEvent} // darle click a un evento hacer una accion
@@ -81,7 +86,7 @@ const Calendar = (props) => {
         selectable={true} // nos servira para calcular y dibujar un conjunto de fechas
         unselectAuto={true}
       />
-      {showModalCalendar ? <ModalTrue /> : console.log("modalfalse")}
+      {showModalCalendar ? <ModalTrue /> : console.log('modalfalse')}
     </div>
   );
 };

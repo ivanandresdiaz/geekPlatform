@@ -26,7 +26,7 @@ const Row = (props) => {
     if (stateArray.length > 0) {
       const getNumbers = stateArray.map((item) => parseInt(item[1]));
       const calificacionSprint = Math.round((getNumbers.reduce((a, b) => a + b, 0) / getNumbers.length));
-      dispatch(calificarSprintStudent(id, uid, state, calificacionSprint, sprint.corteId, sprint.salonId));
+      dispatch(calificarSprintStudent(id, uid, state, calificacionSprint, sprint.corteId, sprint.salonId, sprint.title));
       setPorcentajeCalificacion(calificacionSprint);
       setEstaCalificado(true);
     } else {
