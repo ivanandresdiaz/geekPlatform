@@ -1,33 +1,33 @@
 //aqui se manejan todos los actions que tenga que ver con el banco de recursos
-import toast from "react-hot-toast";
-import { db, firebase } from "../firebase/firebaseConfig";
-import { types } from "../types";
+import toast from 'react-hot-toast';
+import { db, firebase } from '../firebase/firebaseConfig';
+import { types } from '../types';
 
 export const getFirestoreCategoryData = (category) => (dispatch) => {
-  db.collection("bancos")
-    .doc("recursosAcademicos")
-    .collection("resources")
-    .where("category", "==", category)
+  db.collection('bancos')
+    .doc('recursosAcademicos')
+    .collection('resources')
+    .where('category', '==', category)
     .get()
     .then((snapshot) => {
       const data = snapshot.docs.map((doc) => {
         const dataDocument = doc.data();
         return { ...dataDocument, id: doc.id };
       });
-      dispatch({ type: "getFirestoreCategoryData", payload: data });
+      dispatch({ type: 'getFirestoreCategoryData', payload: data });
     })
     .then(() => {
-      db.collection("bancos")
-        .doc("recursosAcademicos")
+      db.collection('bancos')
+        .doc('recursosAcademicos')
         .get()
         .then((doc) => {
           const data = { ...doc.data(), id: doc.id };
-          dispatch({ type: "getCategoriesFirestore", payload: data });
+          dispatch({ type: 'getCategoriesFirestore', payload: data });
         });
     })
     .catch((err) => {
       console.log(err);
-      toast.error("Algo salió mal");
+      toast.error('Algo salió mal');
     });
 };
 
@@ -37,21 +37,21 @@ export const addFirestoreNewCategoryAcademicResource =
       const newCategories = [...categories, category];
 
       const agregado = await db
-        .collection("bancos")
-        .doc("recursosAcademicos")
+        .collection('bancos')
+        .doc('recursosAcademicos')
         .update({
           categories: newCategories,
         });
       dispatch({
-        type: "addFirestoreNewCategoryAcademicResource",
+        type: 'addFirestoreNewCategoryAcademicResource',
         payload: newCategories,
       });
       if (agregado) {
-        toast.success("Se ha agregado una nueva Categoria con éxito");
+        toast.success('Se ha agregado una nueva Categoria con éxito');
       }
     } catch (error) {
       console.log(error.message);
-      toast.error("No se puede agregar a favoritos, intente de nuevo.");
+      toast.error('No se puede agregar a favoritos, intente de nuevo.');
     }
   };
 
@@ -65,25 +65,25 @@ export const addFirestoreNewAcademicResource =
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       };
       const agregado = await db
-        .collection("bancos")
-        .doc("recursosAcademicos")
-        .collection("resources")
+        .collection('bancos')
+        .doc('recursosAcademicos')
+        .collection('resources')
         .add(nuevoRecurso);
       if (agregado) {
         const existSubCategory = subCategories.filter(
-          (item) => item === values.subCategory
+          (item) => item === values.subCategory,
         );
         if (!(existSubCategory.length > 0)) {
           const newSubCategories = [...subCategories, values.subCategory];
-          await db.collection("bancos").doc("recursosAcademicos").update({
+          await db.collection('bancos').doc('recursosAcademicos').update({
             subCategories: newSubCategories,
           });
         }
-        toast.success("Se ha agregado con éxito.");
+        toast.success('Se ha agregado con éxito.');
       }
     } catch (error) {
       console.log(error.message);
-      toast.error("No se puedo agregar, intente de nuevo.");
+      toast.error('No se puedo agregar, intente de nuevo.');
     }
   };
 
@@ -93,7 +93,7 @@ export const uploadImgResource = (file) => async (dispatch, getState) => {
   const task = refStorage.put(file);
 
   task.on(
-    "state_changed",
+    'state_changed',
     (snapshot) => {
       const porcentaje =
         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -107,28 +107,28 @@ export const uploadImgResource = (file) => async (dispatch, getState) => {
       task.snapshot.ref
         .getDownloadURL()
         .then((url) => {
-          console.log("url", url);
-          dispatch({ type: "uploadImgResource", payload: url });
+          console.log('url', url);
+          dispatch({ type: 'uploadImgResource', payload: url });
           // sessionStorage.setItem('imgNewPost', url);
         })
         .catch((err) => {
           console.log(`Error obteniendo downloadURL = > ${err}`);
         });
-    }
+    },
   );
 };
 export const deleteRecursoFirestore = (id) => async (dispatch) => {
   await db
-    .collection("bancos")
-    .doc("recursosAcademicos")
-    .collection("resources")
+    .collection('bancos')
+    .doc('recursosAcademicos')
+    .collection('resources')
     .doc(id)
     .delete();
-  dispatch({ type: "deleteRecursoFirestore", payload: id });
+  dispatch({ type: 'deleteRecursoFirestore', payload: id });
 };
 
 export const updateFavorite = (id, nombre) => async (dispatch) => {
-  await db.collection("bancoRecursosAcademicos").doc(id).update({
+  await db.collection('bancoRecursosAcademicos').doc(id).update({
     nombre,
   });
   dispatch(consultarFavoritos());
@@ -138,9 +138,9 @@ export const scoreResourceFirestore =
   (id, newScore, lastScore) => async (dispatch) => {
     const updatedScore = [...lastScore, newScore];
     await db
-      .collection("bancos")
-      .doc("recursosAcademicos")
-      .collection("resources")
+      .collection('bancos')
+      .doc('recursosAcademicos')
+      .collection('resources')
       .doc(id)
       .update({ score: updatedScore });
   };

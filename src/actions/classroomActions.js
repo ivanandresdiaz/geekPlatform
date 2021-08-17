@@ -303,12 +303,12 @@ export const enviarFirestoreLista = (corteId, listaEnviar) => (dispatch, getStat
     .catch((error) => console.error(error));
 };
 
-export const calificarSprintStudent = (sprintId, uid, values, calificacion, corteId, salonId) => async (dispatch, getState) => {
+export const calificarSprintStudent = (sprintId, uid, values, calificacion, corteId, salonId, title) => async (dispatch, getState) => {
   try {
     const { studentsCorte } = getState().students;
     const studentArrayFiltered = studentsCorte.filter((student) => student.uid === uid);
     const student = studentArrayFiltered[0];
-    await db.collection('students').doc(student.uid).set({ mySprints: { ...student.mySprints, [sprintId]: { sprintId, calificacion } } }, { merge: true });
+    await db.collection('students').doc(student.uid).set({ mySprints: { ...student.mySprints, [sprintId]: { sprintId, calificacion, title } } }, { merge: true });
     //agregar a calificados de sprint el uid
     const { allSprints } = getState().salon;
     const sprintArray = allSprints.filter((item) => item.id === sprintId);

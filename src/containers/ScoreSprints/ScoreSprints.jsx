@@ -5,7 +5,6 @@ import { getFirestoreStudentsCorte } from '../../actions/studentsActions';
 import { getStudentsCorte } from '../../reducers/studentsReducer';
 import { DivContainerList, DivRowList, ImgStudent, DividirPantalla, ContainerPActivo, ContainerPInactivo, DivFullName, ContainerPorcentajeAsistencia, PorcentajeAsistencia, DivContainerInputCheckBox, ContainerGeekyPuntos } from './styledScoreSprints';
 import { getAllSprints } from '../../reducers/salonReducer';
-import { enviarFirestoreLista } from '../../actions/classroomActions';
 import Row from './Row';
 
 const ScoreSprints = (props) => {
