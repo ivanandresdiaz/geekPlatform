@@ -57,7 +57,7 @@ const ListarSprints = (props) => {
                     </div>
                     <div style={{ flexDirection: 'column', padding: '5px 5px 5px 5px', textAlign: 'center' }}>
                       <p style={{ color: '#3CC5FF' }}>PDF</p>
-                      <a href={sprint.resourcePDF} target='_blank' rel='noreferrer'>
+                      <a href={sprint.resourcePDF} target='_blank' rel='noreferrer' download={sprint.resourcePDF} onClick={() => console.log(sprint.resourcePDF)} rel='noreferrer'>
                         {' '}
                         <FaFilePdf />
                         {' '}

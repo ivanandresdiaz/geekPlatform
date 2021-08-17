@@ -63,11 +63,11 @@ export const salonReducer = (state = initialState, action) => {
         allSprints: [...state.allSprints, action.payload],
       };
 
-    case 'uploadSprintPDF':
-      return {
-        ...state,
-        loadedSprintPDF: action.payload,
-      };
+    // case 'uploadSprintPDF':
+    //   return {
+    //     ...state,
+    //     loadedSprintPDF: action.payload,
+    //   };
     case 'deleteSprint': {
       const updatedSprints = state.sprints.filter((sprint) => sprint.id !== action.payload);
       const updatedAllSprints = state.allSprints.filter((sprint) => sprint.id !== action.payload);

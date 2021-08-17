@@ -1,26 +1,18 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import { firebase as firebaseBackend } from '../../firebase/firebaseConfig';
 import useForm from '../../hooks/useForm';
-import { createNewSprint, uploadSprintPDF } from '../../actions/classroomActions';
-import { getLoadedSprintPDF } from '../../reducers/salonReducer';
+import { createNewSprint } from '../../actions/classroomActions';
 import { FormInput, FormModalSalon, FormTextArea } from '../../uiComponents/Modal/ModalStyles';
 import { Button4 } from '../../globalStyles';
-import toast from 'react-hot-toast';
 
 const CreateSprints = (props) => {
   const { corteId, salonId } = props;
-  const loadedSprintPDF = useSelector(getLoadedSprintPDF);
   const [disabled, setDisabled] = useState(true);
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log(loadedSprintPDF);
-    if (loadedSprintPDF.length > 0) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [loadedSprintPDF]);
+
   const htmlInput = useRef(null);
   const cssInput = useRef(null);
   const webpackInput = useRef(null);
@@ -33,8 +25,8 @@ const CreateSprints = (props) => {
     title: '',
     description: '',
     salonId: '',
-    startDate: '',
-    deadline: '',
+    start: '',
+    end: '',
     deliveryLink: '',
     html: false,
     css: false,
@@ -49,12 +41,13 @@ const CreateSprints = (props) => {
     supportLink3: '',
     supportLink4: '',
     image: '',
+    resourcePDF: '',
   });
   const {
     title,
     description,
-    startDate,
-    deadline,
+    start,
+    end,
     deliveryLink,
     supportLink1,
     supportLink2,
@@ -68,10 +61,11 @@ const CreateSprints = (props) => {
     redux,
     firebase,
     testing,
-    image } = formValues;
+    image,
+    resourcePDF } = formValues;
   const handleUploadImgSprint = (event) => {
     const file = event.target.files[0];
-    const refStorage = firebase.storage().ref(`socialGeek/personalProjects/${file.name}`);
+    const refStorage = firebaseBackend.storage().ref(`socialGeek/personalProjects/${file.name}`);
     const task = refStorage.put(file);
     task.on(
       'state_changed',
@@ -101,41 +95,66 @@ const CreateSprints = (props) => {
       },
     );
   };
+  const handleUploadSprintPDF = (event) => {
+    const file = event.target.files[0];
+    const refStorage = firebaseBackend.storage().ref(`socialGeek/personalProjects/${file.name}`);
+    const task = refStorage.put(file);
+    task.on(
+      'state_changed',
+      (snapshot) => {
+        const porcentaje = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      },
+      (err) => {
+        toast.error(`Error subiendo archivo = > ${err.message}`);
+      },
+      () => {
+        task.snapshot.ref
+          .getDownloadURL()
+          .then((url) => {
+            const evento = {
+              target: {
+                value: url,
+                name: 'resourcePDF',
+              },
+            };
+            handleInputChange(evento);
+            setDisabled(false);
+            // sessionStorage.setItem('imgNewPost', url);
+          })
+          .catch((err) => {
+            toast.error(`Error obteniendo downloadURL = > ${err}`);
+          });
+      },
+    );
+  };
   const handleSubmit = (evento) => {
     evento.preventDefault();
     console.log(formValues);
-    dispatch(createNewSprint(corteId, salonId, title,
-      description,
-      startDate,
-      deadline,
-      deliveryLink,
-      supportLink1,
-      supportLink2,
-      supportLink3,
-      supportLink4,
-      html,
-      css,
-      webpack,
-      reactJs,
-      reactHooks,
-      redux,
-      firebase,
-      testing,
-      image));
-    reset();
-    htmlInput.current.checked = false;
-    cssInput.current.checked = false;
-    webpackInput.current.checked = false;
-    reactJsInput.current.checked = false;
-    reactHooksInput.current.checked = false;
-    reduxInput.current.checked = false;
-    firebaseInput.current.checked = false;
-    testingInput.current.checked = false;
+    if (Date.parse(start) > Date.parse(end)) {
+      alert('la fecha de entrega no puede ser menor a la fechan inicial');
+    } else {
+      if (image.length > 0) {
+        if (resourcePDF.length > 0) {
+          dispatch(createNewSprint(formValues, corteId, salonId));
+          reset();
+          htmlInput.current.checked = false;
+          cssInput.current.checked = false;
+          webpackInput.current.checked = false;
+          reactJsInput.current.checked = false;
+          reactHooksInput.current.checked = false;
+          reduxInput.current.checked = false;
+          firebaseInput.current.checked = false;
+          testingInput.current.checked = false;
+        } else {
+          alert('el PDF aun no ha sido cargado');
+        }
+      } else {
+        alert('la imagen aun no ha sido cargado');
+      }
+    }
+
   };
 
-  const handleUploadSprintPDF = (event) => {
-    dispatch(uploadSprintPDF(event.target.files[0]));
-  };
   return (
     <div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -158,8 +177,8 @@ const CreateSprints = (props) => {
               <FormInput
                 style={{ marginLeft: '8px', width: 'auto' }}
                 type='date'
-                name='startDate'
-                value={startDate}
+                name='start'
+                value={start}
                 onChange={handleInputChange}
                 required
               />
@@ -169,8 +188,8 @@ const CreateSprints = (props) => {
               <FormInput
                 style={{ marginLeft: '8px', width: 'auto' }}
                 type='date'
-                name='deadline'
-                value={deadline}
+                name='end'
+                value={end}
                 onChange={handleInputChange}
                 required
               />
@@ -329,7 +348,7 @@ const CreateSprints = (props) => {
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignContent: 'center', margin: 'auto' }}>
-            <Button4 type='submit' disabled={disabled}>Añadir Nuevo Sprint</Button4>
+            <Button4 type='submit'>Añadir Nuevo Sprint</Button4>
           </div>
 
         </FormModalSalon>
