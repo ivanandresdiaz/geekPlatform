@@ -17,8 +17,7 @@ const RankingGeekyPuntos = (props) => {
     <div>
       <h4>
         RankingGeekyPuntos
-      </h4>
-      <p>solo se muestra el Top 5 de geeky puntos, esto con el fin de no hacer sentir mal a quienes van de ultimos</p>
+      </h4>                                                            
       {rankingStudentsGeekyPuntos.length > 0 && rankingStudentsGeekyPuntos.map((student, index) => {
         return (
           <div key={student.uid}>

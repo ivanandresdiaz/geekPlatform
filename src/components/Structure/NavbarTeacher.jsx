@@ -27,11 +27,11 @@ const NavbarTeacher = () => {
                             Geek Platform
                         </NavLogo>
                         <NavMenu>
-                            <NavItem>
+                            {/* <NavItem>
                                 <NavLinks to='/feed'>
                                     Social Geek
                                 </NavLinks>
-                            </NavItem>
+                            </NavItem> */}
                             <NavItemBtn>
                                 <MenuTeacher>
                                     <TeacherDropdown />

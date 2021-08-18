@@ -58,7 +58,7 @@ const SocialGeek = (props) => {
               <ListarCodelingoChallenges />
             </div>
           </Sidebar>
-          <div style={{ flex: '5.5' }}>
+          <div style={{ flex: '5', margin: '30px 10px' }}>
             <CreateNewsSocialGeek corteId={userDataLogged.corteId} uid={userDataLogged.uid} />
             <NewsFeedCategories handleGetNews={handleGetNews} />
             <ListarNews news={news} corteId={userDataLogged.corteId} uid={userDataLogged.uid} />

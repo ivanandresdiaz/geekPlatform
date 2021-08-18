@@ -5,7 +5,7 @@ const NewsFeed = (props) => {
   const { handleGetNews } = props;
 
   return (
-    <div>
+    <>
       <h1>Noticias</h1>
       <div>
         <button type='button' onClick={() => handleGetNews('blogs')}>
@@ -19,7 +19,7 @@ const NewsFeed = (props) => {
         </button>
       </div>
 
-    </div>
+    </>
   );
 };
 

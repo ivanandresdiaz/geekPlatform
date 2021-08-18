@@ -26,11 +26,11 @@ const NavbarAdmin = () => {
               Geek Platform
             </NavLogo>
             <NavMenu>
-              <NavItem>
+              {/* <NavItem>
                 <NavLinks to='/feed'>
                   Social Geek
                 </NavLinks>
-              </NavItem>
+              </NavItem> */}
               <NavItemBtn>
                 <MenuAdmin>
                   <AdminDropdown />
