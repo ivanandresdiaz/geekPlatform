@@ -53,7 +53,6 @@ const SocialGeek = (props) => {
           <Sidebar>
             <RankingGeekyPuntos corteId={corteId} />
             <div>
-              <h2>Retos codelingo</h2>
               <ListarCodelingoChallenges />
             </div>
           </Sidebar>
