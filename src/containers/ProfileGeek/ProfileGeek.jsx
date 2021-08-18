@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import { db } from '../../firebase/firebaseConfig';
 import ProfileSocialGeek from '../../uiComponents/ProfileSocialGeek/ProfileSocialGeek';
-import { getUserId } from '../../reducers/authReducer';
+import { getRole, getUserId } from '../../reducers/authReducer';
 import NewsFeedCategories from '../../components/NewsFeedCategories/NewsFeedCategories';
 import CreateNewsSocialGeek from '../../components/CreateNewsSocialGeek/CreateNewsSocialGeek';
 import ListarNews from '../../uiComponents/ListarNews/ListarNews';
@@ -12,8 +12,13 @@ import ListarPersonalProjects from '../../uiComponents/ListarPersonalProjects/Li
 import AddPersonalProjects from '../../components/AddPersonalProjects/AddPersonalProjects';
 import ChartStudent from '../../components/ChartStudent/ChartStudent';
 import ChartMySprints from '../../components/ChartMySprints/ChartMySprints';
+import NavbarTeacher from '../../components/Structure/NavbarTeacher';
+import NavbarAdmin from '../../components/Structure/NavbarAdmin';
+import NavbarStudent from '../../components/Structure/NavbarStudent';
+import Footer from '../../components/Structure/Footer';
 
 const ProfileGeek = (props) => {
+  const role = useSelector(getRole);
   const { match: { params: { profileUid, corteId } } } = props;
   const userDataLogged = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -46,26 +51,38 @@ const ProfileGeek = (props) => {
   );
 
   return (
-    <div>
-      <h1>Bienvenido a social geek</h1>
-      {profileSocialGeek &&
-        (
-          <div>
-            <ProfileSocialGeek profileSocialGeek={profileSocialGeek} isUserAuth={isUserAuth} />
-            {profileSocialGeek.ProfileGeek === 'student' && <ChartStudent profileSocialGeek={profileSocialGeek} />}
-            {profileSocialGeek.ProfileGeek === 'student' && <ChartMySprints mySprints={profileSocialGeek.mySprints} />}
-            {isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />}
-            {profileSocialGeek.ProfileGeek === 'student' && <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />}
-            <p>Mis noticias</p>
-            <NewsFeedCategories handleGetNews={handleGetNews} />
-            {isUserAuth && <CreateNewsSocialGeek corteId={corteId} />}
-            <h5>Listar mis publicaciones</h5>
-            <ListarNews news={[]} />
-          </div>
-
+    <>
+      <div style={{ background: '#F2F2F2' }}>
+        {role === 'teacher' && (
+          <NavbarTeacher />
         )}
-
-    </div>
+        {role === 'admin' && (
+          <NavbarAdmin />
+        )}
+        {role === 'student' && (
+          <NavbarStudent />
+        )}
+        {profileSocialGeek &&
+          (
+            <div style={{ display: 'flex', width: '100', background: '#F2F2F2' }}>
+              <div style={{ flex: '5', margin: '30px 120px' }}>
+                <ProfileSocialGeek profileSocialGeek={profileSocialGeek} isUserAuth={isUserAuth} />
+                <NewsFeedCategories handleGetNews={handleGetNews} />
+                {isUserAuth && <CreateNewsSocialGeek corteId={corteId} />}
+                <h5>Listar mis publicaciones</h5>
+                <ListarNews news={[]} />
+              </div>
+              <div style={{ flex: '5', margin: '30px' }}>
+                {profileSocialGeek.ProfileGeek === 'student' && <ChartStudent profileSocialGeek={profileSocialGeek} />}
+                {profileSocialGeek.ProfileGeek === 'student' && <ChartMySprints mySprints={profileSocialGeek.mySprints} />}
+                {isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />}
+                {profileSocialGeek.ProfileGeek === 'student' && <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />}
+              </div>
+            </div>
+          )}
+        <Footer />
+      </div>
+    </>
   );
 };
 
