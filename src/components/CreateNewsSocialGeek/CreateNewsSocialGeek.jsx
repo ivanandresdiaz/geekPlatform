@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IconName, MdPermMedia } from 'react-icons/md';
+import { MdPermMedia } from 'react-icons/md';
 import useForm from '../../hooks/useForm';
 import { firebase } from '../../firebase/firebaseConfig';
 import { addFirestoreNewsSocialGeek } from '../../actions/socialGeekActions';
-import { ContainerNewPub, ShareBottom, ShareHr, ShareIcon, ShareInput, ShareOption, ShareOptions, ShareTop } from './CreateNewsStyles';
-import { Button4, Button7 } from '../../globalStyles';
+import { ContainerNewPub, ShareBottom, ShareHr, ShareOption, ShareOptions, ShareTop } from './CreateNewsStyles';
+import { Button4 } from '../../globalStyles';
+import { SelectCat } from '../../components/AddNewAcademicResource/NewAcademicResourceStyles';
 
 const CreateNewsSocialGeek = (props) => {
   const hiddenFileInput = React.useRef(null);
@@ -73,13 +74,13 @@ const CreateNewsSocialGeek = (props) => {
       <ContainerNewPub>
         <div style={{ padding: '10px', backgroundColor: 'white', borderRadius: '12px' }}>
           <form>
-            <div styel={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '10px' }}>
               <h3>Escribe una publicación</h3>
-              <select placeholder='' name='cantidad' onChange={handleInputChange} required>
-                <option value=''> Seleccione tipo de publicacion</option>
-                <option value='resources'>resources</option>
-                <option value='memes'>memes</option>
-              </select>
+              <SelectCat style={{ padding: '0', marginBottom: '0', marginTop: '0', border: 'none', marginLeft: '275px ' }} placeholder='' name='cantidad' onChange={handleInputChange} required>
+                <option style={{ fontWeight: '600' }} value=''>Tipo de publicación</option>
+                <option value='resources'>Resources</option>
+                <option value='memes'>Memes</option>
+              </SelectCat>
             </div>
             <ShareTop>
               {/* imagen de perfil del que publica */}
