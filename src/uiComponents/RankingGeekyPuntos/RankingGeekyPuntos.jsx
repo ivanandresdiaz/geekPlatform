@@ -28,7 +28,7 @@ const RankingGeekyPuntos = (props) => {
                   <span style={{ color: 'white', alignSelf: 'center', marginRight: '10px' }}>
                     {index + 1}
                   </span>
-                  {student.photoURL ? <img src={student.photoURL} alt='Imagen de perfil' /> : <img src='https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/default-profile.png?alt=media&token=0f8bf7f6-acc2-451c-be86-c7800e3ca059' alt={student.fullName} />}
+                  {student.photoURL ? <img src={student.photoURL} alt='Imagen perfil' /> : <img src='https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/default-profile.png?alt=media&token=0f8bf7f6-acc2-451c-be86-c7800e3ca059' alt={student.fullName} />}
                   <span style={{ color: 'white', marginRight: 'auto' }}>
                     {' '}
                     {student.fullName}
