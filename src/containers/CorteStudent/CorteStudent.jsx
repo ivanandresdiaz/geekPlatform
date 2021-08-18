@@ -110,8 +110,6 @@ const CorteStudent = (props) => {
             </div>
           </div>
         </ContainerMainCorte>
-        <Link to='/socialGeek'> Social Geek Link !!!</Link>
-        <Link to='/bancoRecursosAcademicos'> Social Geek Link !!!</Link>
       </div>
     </>
   );
