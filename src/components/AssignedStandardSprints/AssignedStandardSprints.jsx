@@ -42,6 +42,10 @@ const AssignedStandardSprints = (props) => {
           testing: false,
           image: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/Imagen3.png?alt=media&token=3fce71c0-1ea6-4866-83a1-7f0bedbcecd6',
           resourcePDF: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/Sprint%201%20-%20Frontend.pdf?alt=media&token=156d154c-e6e6-4e5a-a7d5-7a061de30384',
+          supportLink1: '',
+          supportLink2: '',
+          supportLink3: '',
+          supportLink4: '',
         });
         break;
       case 'guajolotas':
@@ -62,6 +66,10 @@ const AssignedStandardSprints = (props) => {
           testing: false,
           image: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/guajolotas.png?alt=media&token=83fe4329-6ac2-4a45-99e5-06251a14ff75',
           resourcePDF: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/Sprint%202.pdf?alt=media&token=002e4386-da52-429d-a984-f6e8f5958674',
+          supportLink1: '',
+          supportLink2: '',
+          supportLink3: '',
+          supportLink4: '',
         });
         break;
       case 'blockMaster':
@@ -82,6 +90,10 @@ const AssignedStandardSprints = (props) => {
           testing: false,
           image: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/blockMaster.png?alt=media&token=1940529d-9505-409a-b58d-237d952b996e',
           resourcePDF: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/Sprint%203.pdf?alt=media&token=755177e6-9420-4e41-b238-d4f6c1016155',
+          supportLink1: '',
+          supportLink2: '',
+          supportLink3: '',
+          supportLink4: '',
         });
         break;
       default:

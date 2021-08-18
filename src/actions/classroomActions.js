@@ -19,9 +19,8 @@ export const getFirestoreSalon = (corteId, salonId) => (dispatch, getState) => {
     .catch((err) => console.log(err));
 };
 
-export const createNewSprint = ({ title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, webpack, reactJs, reactHooks, redux, firebase, testing, image, resourcePDF }, corteId, salonId) => async (dispatch, getState) => {
+export const createNewSprint = ({ title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, javascript, webpack, reactJs, reactHooks, redux, firebase, testing, image, resourcePDF }, corteId, salonId) => async (dispatch, getState) => {
   try {
-
     const createSprint = functions.httpsCallable('createSprint');
     const data = { corteId,
       salonId,
@@ -37,6 +36,7 @@ export const createNewSprint = ({ title, description, start, end, deliveryLink, 
       supportLink4,
       html,
       css,
+      javascript,
       webpack,
       reactJs,
       reactHooks,
@@ -44,9 +44,8 @@ export const createNewSprint = ({ title, description, start, end, deliveryLink, 
       firebase,
       testing,
       image };
-    console.log(data);
     await createSprint(data);
-    alert('sprint agregado');
+    toast.success('sprint agregado');
     dispatch({ type: 'newSprintCreated', payload: { ...data, id: ` ${title} ` } });// no eliminar espacio, es importante para la logica
 
   } catch (error) {
@@ -55,7 +54,7 @@ export const createNewSprint = ({ title, description, start, end, deliveryLink, 
   }
 };;
 
-export const assignedFirestoreSprint = ({ resourcePDF, corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, webpack, reactJs, reactHooks, redux, firebase, testing, image }) => async (dispatch, getState) => {
+export const assignedFirestoreSprint = ({ resourcePDF, corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, javascript, webpack, reactJs, reactHooks, redux, firebase, testing, image }) => async (dispatch, getState) => {
   try {
     if (Date.parse(start) > Date.parse(end)) {
       toast.error(
@@ -79,6 +78,7 @@ export const assignedFirestoreSprint = ({ resourcePDF, corteId, salonId, title, 
         html,
         css,
         webpack,
+        javascript,
         reactJs,
         reactHooks,
         redux,
@@ -332,11 +332,11 @@ export const calificarSprintStudent = (sprintId, uid, values, calificacion, cort
     await batch.commit();
     const sumaGeekyPuntos = Math.round(calificacion / 10);
     await db.collection('students').doc(uid).update({ geekyPuntos: student.geekyPuntos + sumaGeekyPuntos });
-    alert(`calificado ${student.fullName}`);
+    toast.success(`calificado ${student.fullName}`);
     //por el momento tuve que ahorrarme mucha logica de redux volviendo a llamar todos los sprints para que se renderize el view con el llamado a la api
     dispatch(getFirestoreAllSprints(student.corteId));
   } catch (error) {
-    alert('algo salio mal');
+    toast.error('algo salio mal');
     console.log(error);
     console.log(error.message);
   }
