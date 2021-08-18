@@ -31,7 +31,7 @@ const ListarStudentsSocialGeek = (props) => {
                 if (student.corteId === corteId) {
                   return (
                     <StudentsContent key={student.uid}>
-                      <img src={student.photoURL} alt="Imagen de perfil" />
+                      {student.photoURL ? <img src={student.photoURL} alt='Imagen de perfil' /> : <img src='https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/default-profile.png?alt=media&token=0f8bf7f6-acc2-451c-be86-c7800e3ca059' alt={student.fullName} />}
                       <Link style={{ alignSelf: 'center' }} to={`/socialGeek/${corteId}/${student.uid}`}>
                         {student.fullName}
                       </Link>

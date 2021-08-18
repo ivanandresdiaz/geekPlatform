@@ -24,7 +24,7 @@ const ListarTeachersSocialGeek = (props) => {
             </h4>
             {teachers.length > 0 && teachers.map((teacher) => (
               <TeachersContent key={teacher.uid}>
-                <img src={teacher.photoURL} alt="Imagen de perfil" />
+                {teacher.photoURL ? <img src={teacher.photoURL} alt='Imagen de perfil' /> : <img src='https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/default-profile.png?alt=media&token=0f8bf7f6-acc2-451c-be86-c7800e3ca059' alt={teacher.fullName} />}
                 <Link style={{ alignSelf: 'center' }} to={`/socialGeek/${corteId}/${teacher.uid}`}>
                   {teacher.fullName}
                 </Link>

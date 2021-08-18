@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { FiMoreVertical } from 'react-icons/fi';
+import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
 import { addLikeResourceFirestore, removeLikeResourceFirestore } from '../../actions/socialGeekActions';
 import { LikeCounter, Post, PostBottom, PostBottomLeft, PostCenter, PostDate, PostImg, PostProfileImg, PostTop, PostTopLeft, PostUsername, PostWrapper } from './SingleNewStyles';
-import { FiMoreVertical } from "react-icons/fi";
-import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 
 const SingleNew = (props) => {
   const { corteId, uid, resource } = props;
@@ -45,7 +45,7 @@ const SingleNew = (props) => {
         <PostWrapper>
           <PostTop>
             <PostTopLeft>
-              {resource.photoURL && <PostProfileImg src={resource.photoURL} alt={resource.fullName} />}
+              {resource.photoURL ? <PostProfileImg src={resource.photoURL} alt={resource.fullName} /> : <PostProfileImg src='https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/default-profile.png?alt=media&token=0f8bf7f6-acc2-451c-be86-c7800e3ca059' alt={resource.fullName} />}
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <PostUsername>
                   <Link to={`/socialGeek/${resource.uid}`}>
@@ -74,7 +74,7 @@ const SingleNew = (props) => {
               >
                 {liked ? <FcLike size={28} /> : <FcLikePlaceholder size={28} />}
               </button>
-              <LikeCounter >
+              <LikeCounter>
                 {amountLikes}
               </LikeCounter>
             </PostBottomLeft>
