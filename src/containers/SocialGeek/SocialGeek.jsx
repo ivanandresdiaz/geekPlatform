@@ -54,7 +54,6 @@ const SocialGeek = (props) => {
           <Sidebar>
             <RankingGeekyPuntos corteId={corteId} />
             <div>
-              <h2>Retos codelingo</h2>
               <ListarCodelingoChallenges />
             </div>
           </Sidebar>
@@ -64,9 +63,7 @@ const SocialGeek = (props) => {
             <ListarNews news={news} corteId={corteId} uid={userDataLogged.uid} />
           </div>
           <div style={{ flex: '3.5' }}>
-            <h2>Estudiantes</h2>
             <ListarStudentsSocialGeek corteId={corteId} />
-            <h2>Profesores</h2>
             <ListarTeachersSocialGeek corteId={corteId} />
           </div>
         </div>
