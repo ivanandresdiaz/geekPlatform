@@ -45,7 +45,7 @@ export const Dropdown = styled.div`
   box-shadow: #333333;
 `;
 
-export const MenuItems = styled.a`
+export const MenuItems = styled.div`
   height: 40px;
   display: flex;
   align-items: center;
