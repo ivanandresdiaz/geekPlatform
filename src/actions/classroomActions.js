@@ -186,7 +186,6 @@ export const createWorkGroups = (corteId, salonId, title, newGroup) => async (di
 export const generateTemplateGroups = (title, cantidad) => async (dispatch, getState) => {
   try {
     const students = getState().students.studentsCorte;
-    console.log('students', students);
     const studentsDataTransform = students.map((student) => ({
       id: student.uid,
       content: student.fullName,
@@ -219,6 +218,7 @@ export const generateTemplateGroups = (title, cantidad) => async (dispatch, getS
         },
       };
       columnOrder = [...columnOrder, `column${index}`];
+
     }
 
     const initialData = {

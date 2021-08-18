@@ -52,6 +52,10 @@ export const loginEmailPassword = (email, password) => {
         dispatch(login(user.uid, user.displayName));
       })
       .catch((err) => {
+        if (err.message == 'The password is invalid or the user does not have a password.') {
+          toast.error('contraseña incorrecta');
+
+        }
         console.log(err);
       });
   };

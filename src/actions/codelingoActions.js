@@ -1,23 +1,27 @@
+/* eslint-disable radix */
 /* eslint-disable import/prefer-default-export */
 import toast from 'react-hot-toast';
 import { db, firebase } from '../firebase/firebaseConfig';
 
-export const addFirestoreNewCodelingoChallenge = (values) => async (dispatch, getState) => {
-  const createdBy = getState().auth.fullName;
-  try {
-    const nuevoRecurso = {
-      ...values,
-      geekyPuntos: Math.round(values.geekyPuntos),
-      createdBy,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    };
-    await db.collection('bancos').doc('codelingo').collection('resources').add(nuevoRecurso);
-    toast.success('Se ha agregado reto con éxito.');
-    dispatch({ type: 'addFirestoreNewCodelingoChallenge', payload: { ...nuevoRecurso, id: values.title } });
-  } catch (error) {
-    console.log(error.message);
-    toast.error('No se puedo agregar, intente de nuevo.');
-  }
+export const addFirestoreNewCodelingoChallenge = (values, fullName) => (dispatch, getState) => {
+  const geekyPuntos = Math.round(parseInt(values.geekyPuntos));
+  const nuevoRecurso = {
+    ...values,
+    geekyPuntos,
+    createdBy: fullName,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+  };
+  console.log(nuevoRecurso);
+  db.collection('bancos').doc('codelingo').collection('resources').add(nuevoRecurso)
+    .then(() => {
+      toast.success('Se ha agregado reto con éxito.');
+      dispatch({ type: 'addFirestoreNewCodelingoChallenge', payload: { ...nuevoRecurso, id: values.title } });
+    })
+    .catch((error) => {
+      console.log(error.message);
+      // toast.error('No se puedo agregar, intente de nuevo.');
+    });
+
 };
 export const deleteFirestoreCodelingoChallenge = (id) => async (dispatch, getState) => {
   await db

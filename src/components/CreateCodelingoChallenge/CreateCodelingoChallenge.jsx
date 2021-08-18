@@ -10,13 +10,14 @@ import { Button4 } from '../../globalStyles';
 
 const CreateCodelingoChallenge = () => {
   const dispatch = useDispatch();
+  const fullName = useSelector(getFullName);
   const [formValues, handleInputChange, reset] = useForm({
     link: '',
     title: '',
-    geekyPuntos: 15,
+    geekyPuntos: 0,
     html: false,
     css: false,
-    javascript: true,
+    javascript: false,
     webpack: false,
     reactJs: false,
     reactHooks: false,
@@ -41,21 +42,26 @@ const CreateCodelingoChallenge = () => {
     } else if (geekyPuntos > 50) {
       alert('Un reto codelingo no puede valer máss de 50 geekyPuntos');
     } else {
-      dispatch(addFirestoreNewCodelingoChallenge(formValues));
-      console.log(formValues);
-      reset();
-      htmlInput.current.checked = false;
-      cssInput.current.checked = false;
-      webpackInput.current.checked = false;
-      javascriptInput.current.checked = false;
-      reactJsInput.current.checked = false;
-      reactHooksInput.current.checked = false;
-      reduxInput.current.checked = false;
-      firebaseInput.current.checked = false;
-      testingInput.current.checked = false;
+      if (html === true || css === true || javascript === true || webpack === true || reactJs === true || reactHooks === true || redux === true || firebase === true || testing === true) {
+        dispatch(addFirestoreNewCodelingoChallenge(formValues, fullName));
+        console.log(formValues);
+        reset();
+        htmlInput.current.checked = false;
+        cssInput.current.checked = false;
+        webpackInput.current.checked = false;
+        javascriptInput.current.checked = false;
+        reactJsInput.current.checked = false;
+        reactHooksInput.current.checked = false;
+        reduxInput.current.checked = false;
+        firebaseInput.current.checked = false;
+        testingInput.current.checked = false;
+      } else {
+        alert('debes seleccionar al menos una categoria para el reto. html, css, javascript ...');
+      }
+
     }
   };
-  const fullName = useSelector(getFullName);
+
   const handleInputRangeChangeFather = (name, value) => {
     const evento = {
       target: {
