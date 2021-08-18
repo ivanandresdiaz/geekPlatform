@@ -17,6 +17,7 @@ const CreateSprints = (props) => {
   const cssInput = useRef(null);
   const webpackInput = useRef(null);
   const reactJsInput = useRef(null);
+  const javascriptInput = useRef(null);
   const reactHooksInput = useRef(null);
   const reduxInput = useRef(null);
   const firebaseInput = useRef(null);
