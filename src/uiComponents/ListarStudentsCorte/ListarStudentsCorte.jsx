@@ -6,8 +6,10 @@ import { DivContainerList, DivRowList, ImgStudent, ContainerPorcentajeAsistencia
 import { enviarFirestoreLista } from '../../actions/classroomActions';
 import { Button4, Button5 } from '../../globalStyles';
 import { ModalEstudiantes } from '../Modal/Modal';
+import { getRole } from '../../reducers/authReducer';
 
 const ListarStudentsCorte = (props) => {
+  const role = useSelector(getRole);
   const [showModalE, setShowModalE] = useState(false);
   const OpenModalE = () => { setShowModalE((prevE) => !prevE); };
   const { corteId } = props;
@@ -21,7 +23,8 @@ const ListarStudentsCorte = (props) => {
         assistance: [...student.assistance, 0],
         uid: student.uid,
         geekyPuntos: student.geekyPuntos,
-      } };
+      }
+    };
   });
   const [state, setState] = useState({});
   useEffect(() => {
@@ -109,12 +112,24 @@ const ListarStudentsCorte = (props) => {
                     </p>
                   </PorcentajeAsistencia>
                 </ContainerPorcentajeAsistencia>
-              ) }
+              )}
             </DivRowList>
           );
         })}
-        <Button4 type='button' onClick={handleEnviarLista}>Enviar asistencia</Button4>
-        <Button4 primary animate={{}} onClick={OpenModalE}>Agregar estudiante</Button4>
+        {role === 'teacher' && (
+          <Button4 type='button' onClick={handleEnviarLista}>Enviar asistencia</Button4>
+
+        )}
+        {role === 'teacher' && (
+          <Button4 primary animate={{}} onClick={OpenModalE}>Agregar estudiante</Button4>
+        )}
+
+        {role === 'admin' && (
+          <Button4 type='button' onClick={handleEnviarLista}>Enviar asistencia</Button4>
+        )}
+        {role === 'admin' && (
+          <Button4 primary animate={{}} onClick={OpenModalE}>Agregar estudiante</Button4>
+        )}
         <ModalEstudiantes corteId={corteId} showModalE={showModalE} setShowModalE={setShowModalE} />
       </DivContainerList>
 

@@ -9,7 +9,6 @@ const LandingPage = () => {
     <>
       <Navbar />
       <PresentationHome />
-      <Link to='/acercaDeProgramadores'>Acerca de Programadores</Link>
       <Footer />
     </>
   );

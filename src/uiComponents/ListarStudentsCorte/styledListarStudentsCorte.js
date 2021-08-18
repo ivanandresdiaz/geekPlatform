@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const DivContainerList = styled.div`
   display: grid;
@@ -9,13 +9,14 @@ export const DivContainerList = styled.div`
 `;
 
 export const DivRowList = styled.div`
-display:grid;
-grid-template-columns: 10% 20% 13% 13% 20% 24%;
-align-items: center;
-:hover{
-  background-color:#2f33a7;
-  color: white;
-}
+  display: grid;
+  grid-template-columns: 10% 20% 13% 13% 20% 24%;
+  align-items: center;
+  :hover {
+    background-color: #3cc5ff;
+    color: white;
+    border-radius: 5px;
+  }
 `;
 
 export const ImgStudent = styled.img`
@@ -43,21 +44,21 @@ export const PorcentajeAsistencia = styled.div`
   }
   background-color: ${(props) => {
     if (props.porcentajeAsistencia > 70) {
-      return '#3CD4A0';
+      return "#3CD4A0";
     }
     if (props.porcentajeAsistencia > 60) {
-      return '#FFC260';
+      return "#FFC260";
     }
     if (props.porcentajeAsistencia > 50) {
-      return '#FF5C93';
+      return "#FF5C93";
     }
-    return '#E21B3C';
+    return "#E21B3C";
   }};
   border-radius: 5px;
 `;
 export const ContainerGeekyPuntos = styled.div`
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
 `;
 
 export const ContainerPActivo = styled.div`

@@ -23,6 +23,7 @@ import aliance1 from '../../images/other/landing-1.png';
 import aliance2 from '../../images/other/landing-2.png';
 import aliance3 from '../../images/other/landing-3.png';
 import aliance4 from '../../images/other/landing-4.png';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
 
@@ -125,7 +126,9 @@ const Footer = () => {
           </FooterAliances>
         </FooterSubscription>
         <SocialMedia>
-          <WebsiteRights>Copyright @ 2021, Equipo Dinamita, todos los derechos reservados. </WebsiteRights>
+          <Link to='/acercaDeProgramadores'>
+            <WebsiteRights>Copyright @ 2021, Equipo Dinamita, todos los derechos reservados. </WebsiteRights>
+          </Link>
         </SocialMedia>
       </FooterContainer>
     </>

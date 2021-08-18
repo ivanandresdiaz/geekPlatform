@@ -4,7 +4,7 @@ import { getFullName } from '../../../reducers/authReducer';
 import { singOutAuth } from '../../../actions/authActions';
 import { Dropdown, IconButton, IconMenu, MenuItems, Welcome } from './MenuTeacherStyles'
 import menu from '../../../images/other/menu.png'
-import { FaFolder, FaShieldAlt, FaUserCircle, FaUserFriends, FaWrench } from 'react-icons/fa';
+import { FaCode, FaFolder, FaShieldAlt, FaUserCircle, FaUserFriends, FaWrench } from 'react-icons/fa';
 import { VscColorMode } from "react-icons/vsc";
 import { Button3 } from '../../../globalStyles';
 import { Link } from 'react-router-dom';
@@ -54,9 +54,15 @@ export const TeacherDropdown = () => {
             <Link to='/'>
                 <TeacherDropdownItem leftIcon={<FaShieldAlt />}>Panel Teacher</TeacherDropdownItem>
             </Link>
+            <Link to='/codelingoTeacher'>
+                <TeacherDropdownItem leftIcon={<  FaCode />}>Codelingo</TeacherDropdownItem>
+            </Link>
             <TeacherDropdownItem leftIcon={<FaWrench />}>Configuración</TeacherDropdownItem>
             <TeacherDropdownItem leftIcon={<VscColorMode />}>Darkmode</TeacherDropdownItem>
             <Button3 type='button' onClick={handleCerrarSesion} primary>Cerrar sesión</Button3>
+
+
+
         </Dropdown>
     )
 }

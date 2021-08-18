@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MdClose } from 'react-icons/md';
 import { getFirestoreAllSprints } from '../../actions/classroomActions';
 import { getAllSprints } from '../../reducers/salonReducer';
-import { ContainerModal, ModalContent, CloseModalButton, Background } from '../../uiComponents/Modal/ModalStyles';
+import { ContainerModal, ModalContent, CloseModalButton, Background, FormModal } from '../../uiComponents/Modal/ModalStyles';
+import { Button4 } from '../../globalStyles';
 
 const Calendar = (props) => {
   const [showModalCalendar, setShowModalCalendar] = useState(false);
@@ -27,26 +28,27 @@ const Calendar = (props) => {
       <Background>
         <ContainerModal showModalCalendar={showModalCalendar}>
           <ModalContent>
-            <h1>{eventData.title}</h1>
-            <h4>
-              Cohorte:
-              {eventData.corteId}
-            </h4>
-            <h4>
-              Salon:
-              {eventData.salonId}
-            </h4>
-            <hr />
-            <h4>Descripcion</h4>
-            <p>{eventData.description}</p>
-            <br />
-            <a href={eventData.deliveryLink}>Link De Entrega</a>
-            <a href={eventData.supportLink1}>Link De Apoyo</a>
-            <a href={eventData.resourcePDF}>PDF</a>
-
-            <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModalCalendar(false)}>
-              <MdClose style={{ alignItems: 'center' }} />
-            </CloseModalButton>
+            <FormModal style={{ margin: '25px' }}>
+              <h1>{eventData.title}</h1>
+              <h4> Cohorte: {eventData.corteId}</h4>
+              <h4>Salón: {eventData.salonId}</h4>
+              <hr />
+              <h4>Descripción</h4>
+              <p style={{ textAlign: 'center' }}>{eventData.description}</p>
+              <br />
+              <Button4>
+                <a href={eventData.deliveryLink}>Enlace de entrega</a>
+              </Button4>
+              <Button4>
+                <a href={eventData.supportLink1}>Enlace de apoyo</a>
+              </Button4>
+              <Button4>
+                <a href={eventData.resourcePDF}>PDF</a>
+              </Button4>
+              <CloseModalButton whileHover={{ scale: 1.1 }} aria-label='Close modal' onClick={() => setShowModalCalendar(false)}>
+                <MdClose style={{ alignItems: 'center' }} />
+              </CloseModalButton>
+            </FormModal>
           </ModalContent>
         </ContainerModal>
       </Background>
