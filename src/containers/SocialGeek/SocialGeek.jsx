@@ -18,12 +18,12 @@ import { Sidebar } from './SocialGeekStyles';
 
 const SocialGeek = (props) => {
   const role = useSelector(getRole);
+  const { match: { params: { corteId } } } = props;
   const userDataLogged = useSelector((state) => state.auth);
   const news = useSelector(getNewsCategory);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (userDataLogged.corteId) {
-      const { corteId } = userDataLogged;
+    if (userDataLogged) {
       dispatch(getFirestoreNewsCategory(corteId, 'blogs'));
     } else {
       toast.error('No estás autenticado');
@@ -32,7 +32,6 @@ const SocialGeek = (props) => {
   const handleGetNews = useCallback(
     (category) => {
       if (userDataLogged) {
-        const { corteId } = userDataLogged;
         dispatch(getFirestoreNewsCategory(corteId, category));
       }
     }, [],

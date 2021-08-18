@@ -23,6 +23,9 @@ const ListarCortes = () => {
               <LinkCortes to={`/corte/${corte.corteId}`}>
                 <p>{corte.corteId}</p>
               </LinkCortes>
+              <LinkCortes to={`/socialGeek/${corte.corteId}`}>
+                <p>SocialGeek</p>
+              </LinkCortes>
             </ContainerContent>
           );
         })}

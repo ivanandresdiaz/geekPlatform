@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { getFirestoreStudentsCorte } from '../../actions/studentsActions';
 import { getStudentsCorte } from '../../reducers/studentsReducer';
 
 const ListarStudentsSocialGeek = (props) => {
   const { corteId } = props;
+  const dispatch = useDispatch();
   const studentsCorte = useSelector(getStudentsCorte);
   useEffect(() => {
     if (!(studentsCorte.length > 0)) {

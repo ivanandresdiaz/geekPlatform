@@ -97,7 +97,7 @@ const App = () => {
           />
           <PrivateRoute
             exact
-            path='/socialGeek'
+            path='/socialGeek/:corteId'
             component={SocialGeek}
             isAuthenticated={isLoggedIn}
           />
