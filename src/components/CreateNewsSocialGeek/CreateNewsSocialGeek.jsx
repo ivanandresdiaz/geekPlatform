@@ -83,7 +83,13 @@ const CreateNewsSocialGeek = (props) => {
             </div>
             <ShareTop>
               {/* imagen de perfil del que publica */}
-              <img src={userDataLogged.photoURL} alt={userDataLogged.fullName} />
+              {userDataLogged.photoURL ? <img src={userDataLogged.photoURL} alt={userDataLogged.fullName} /> : (
+                <img
+                  src='https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/default-profile.png?alt=media&token=0f8bf7f6-acc2-451c-be86-c7800e3ca059'
+                  alt={userDataLogged.fullName}
+                />
+              )}
+
               <textarea
                 style={{ resize: 'none', border: 'none', boxShadow: 'none', outline: 'none', fontSize: '16px', width: '500px' }}
                 placeholder='¿Qué piensas Geek?'
