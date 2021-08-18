@@ -77,7 +77,7 @@ const CreateNewGroups = (props) => {
                 <option value='9'>9</option>
                 <option value='10'>10</option>
               </SelectPlantillas>
-              <Button4 type='submit' disabled={disabled}>Generar Plantillas</Button4>
+              {!disabled && <Button4 type='submit' disabled={disabled}>Generar Plantillas</Button4>}
             </FormModal>
             <Group key={id} columnOrder={plantillaCreatingGroups.columnOrder} columns={plantillaCreatingGroups.columns} tasks={plantillaCreatingGroups.tasks} title={plantillaCreatingGroups.title} id={plantillaCreatingGroups.id} salonId={salon} corteId={corteId} />
           </ContainerNewGroup>
