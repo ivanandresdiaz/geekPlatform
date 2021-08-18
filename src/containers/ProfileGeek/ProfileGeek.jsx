@@ -52,36 +52,32 @@ const ProfileGeek = (props) => {
 
   return (
     <>
-      <div style={{ background: '#F2F2F2' }}>
-        {role === 'teacher' && (
-          <NavbarTeacher />
-        )}
-        {role === 'admin' && (
-          <NavbarAdmin />
-        )}
-        {role === 'student' && (
-          <NavbarStudent />
-        )}
-        {profileSocialGeek &&
-          (
-            <div style={{ display: 'flex', width: '100', background: '#F2F2F2' }}>
-              <div style={{ flex: '5', margin: '30px 120px' }}>
-                <ProfileSocialGeek profileSocialGeek={profileSocialGeek} isUserAuth={isUserAuth} />
-                <NewsFeedCategories handleGetNews={handleGetNews} />
-                {isUserAuth && <CreateNewsSocialGeek corteId={corteId} />}
-                <h5>Listar mis publicaciones</h5>
-                <ListarNews news={[]} />
-              </div>
-              <div style={{ flex: '5', margin: '30px' }}>
-                {profileSocialGeek.ProfileGeek === 'student' && <ChartStudent profileSocialGeek={profileSocialGeek} />}
-                {profileSocialGeek.ProfileGeek === 'student' && <ChartMySprints mySprints={profileSocialGeek.mySprints} />}
-                {isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />}
-                {profileSocialGeek.ProfileGeek === 'student' && <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />}
-              </div>
+      {role === 'admin' && (
+        <NavbarAdmin />
+      )}
+      {role === 'student' && (
+        <NavbarStudent />
+      )}
+      {profileSocialGeek &&
+        (
+          <div style={{ display: 'flex', width: '100', background: '#F2F2F2' }}>
+            <div style={{ flex: '5', margin: '30px 120px' }}>
+              <ProfileSocialGeek profileSocialGeek={profileSocialGeek} isUserAuth={isUserAuth} />
+              <NewsFeedCategories handleGetNews={handleGetNews} />
+              {isUserAuth && <CreateNewsSocialGeek corteId={corteId} />}
+              <h5>Listar mis publicaciones</h5>
+              <ListarNews news={[]} />
             </div>
-          )}
-        <Footer />
-      </div>
+            <div style={{ flex: '5', margin: '30px' }}>
+              {profileSocialGeek.roleGeek === 'student' && <ChartStudent profileSocialGeek={profileSocialGeek} />}
+              {profileSocialGeek.roleGeek === 'student' && <ChartMySprints mySprints={profileSocialGeek.mySprints} />}
+              {profileSocialGeek.roleGeek === 'student' && isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />}
+              {profileSocialGeek.roleGeek === 'student' && <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />}
+            </div>
+          </div>
+        )}
+      <Footer />
+
     </>
   );
 };

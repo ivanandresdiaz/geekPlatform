@@ -28,6 +28,7 @@ const initialState = {
   website: '',
   whatsapp: '',
   myProjects: [],
+  roleGeek: '',
 };
 
 export const authReducer = (state = initialState, action) => {

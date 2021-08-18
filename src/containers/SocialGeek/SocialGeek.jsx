@@ -58,7 +58,7 @@ const SocialGeek = (props) => {
             </div>
           </Sidebar>
           <div style={{ flex: '5', margin: '30px 120px' }}>
-            <CreateNewsSocialGeek corteId={userDataLogged.corteId} uid={userDataLogged.uid} />
+            <CreateNewsSocialGeek corteId={corteId} uid={userDataLogged.uid} />
             <NewsFeedCategories handleGetNews={handleGetNews} />
             <ListarNews news={news} corteId={corteId} uid={userDataLogged.uid} />
           </div>
