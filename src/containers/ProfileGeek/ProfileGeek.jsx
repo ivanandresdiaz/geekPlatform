@@ -72,8 +72,6 @@ const ProfileGeek = (props) => {
             <div style={{ flex: '5', margin: '30px' }}>
               {profileSocialGeek.roleGeek === 'student' && <ChartStudent profileSocialGeek={profileSocialGeek} />}
               {profileSocialGeek.roleGeek === 'student' && <ChartMySprints mySprints={profileSocialGeek.mySprints} />}
-              {profileSocialGeek.roleGeek === 'student' && isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />}
-              {profileSocialGeek.roleGeek === 'student' && <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />}
             </div>
           </div>
         )}
@@ -84,3 +82,6 @@ const ProfileGeek = (props) => {
 };
 
 export default ProfileGeek;
+
+// {/* {profileSocialGeek.roleGeek === 'student' && isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />} */}
+//               {/* {profileSocialGeek.roleGeek === 'student' && <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />} */}
