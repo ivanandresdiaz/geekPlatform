@@ -131,7 +131,7 @@ const App = () => {
             component={CodelingoTeacher}
             isAuthenticated={isLoggedIn}
           />
-          {/* <Redirect to='/auth/landingPage' /> */}
+          <Redirect to='/auth/landingPage' />
         </Switch>
       </div>
     </HashRouter>

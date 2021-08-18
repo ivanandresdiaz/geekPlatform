@@ -9,6 +9,7 @@ const initialState = {
   active: '',
   bio: '',
   codelingoChallengesDone: [],
+  codelingoChallengesToScore: [],
   corteId: '',
   email: '',
   facebook: '',
@@ -42,6 +43,11 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         myProjects: action.payload,
+      };
+    case 'enviarChallengeCodelingoDone':
+      return {
+        ...state,
+        codelingoChallengesToScore: action.payload,
       };
     default:
       return state;

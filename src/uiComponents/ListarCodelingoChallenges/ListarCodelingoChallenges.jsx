@@ -29,8 +29,9 @@ const ListarCodelingoChallenges = () => {
       <DivContainerList>
         {allCodelingoChallenges.length > 0 && allCodelingoChallenges.map((challenge, index) => {
           const isDone = userDataLogged.codelingoChallengesDone.includes(challenge.id);
+          const isPending = userDataLogged.codelingoChallengesToScore.includes(challenge.id);
           return (
-            <Row key={challenge.id} isDone={isDone} challenge={challenge} teacher={teacher} student={student} />
+            <Row key={challenge.id} isDone={isDone} isPending={isPending} challenge={challenge} teacher={teacher} student={student} />
           );
         })}
       </DivContainerList>

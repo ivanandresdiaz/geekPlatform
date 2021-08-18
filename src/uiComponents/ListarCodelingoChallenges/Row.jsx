@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import './Row.scss';
 import { enviarChallengeCodelingoDone, deleteFirestoreCodelingoChallenge } from '../../actions/codelingoActions';
-import { DivContent, ButtonCalificar, DivButtonsActionsRow, DivRowList, ContainerPActivo, DivTitle, DivDetails, SpanHtml, SpanCSS, SpanJAVASCRIPT, SpanWEBPACK, SpanREACTJS, SpanREDUX, SpanREACTHOOKS, SpanFIREBASE, SpanTESTING, PGeekyPuntos } from './styledListarCodelingoChallenges';
+import { DivContent, ButtonCalificar, ContainerPInactivo, DivButtonsActionsRow, DivRowList, ContainerPActivo, DivTitle, DivDetails, SpanHtml, SpanCSS, SpanJAVASCRIPT, SpanWEBPACK, SpanREACTJS, SpanREDUX, SpanREACTHOOKS, SpanFIREBASE, SpanTESTING, PGeekyPuntos } from './styledListarCodelingoChallenges';
 
 const Row = (props) => {
-  const { challenge, isDone, teacher, student } = props;
+  const { challenge, isDone, isPending, teacher, student } = props;
   const { id, geekyPuntos, description, title, html, css, javascript, webpack, reactJs, reactHooks, redux, firebase, testing } = challenge;
   const userDataLogged = useSelector((state) => state.auth);
   const { photoURL, uid, fullName } = userDataLogged;
@@ -75,16 +75,19 @@ const Row = (props) => {
                 testing && <SpanTESTING>testing</SpanTESTING>
               }
             </div>
-            {isDone ? (<ContainerPActivo><p>Hecho</p></ContainerPActivo>) : (
-              <PGeekyPuntos>
-                Geeky Puntos
-                {' '}
-                <span>
-                  +
-                  {geekyPuntos}
-                </span>
 
-              </PGeekyPuntos>
+            {isDone ? (<ContainerPActivo><p>Hecho</p></ContainerPActivo>) : (
+              isPending ? <ContainerPInactivo><p>Pendiente</p></ContainerPInactivo> : (
+                <PGeekyPuntos>
+                  Geeky Puntos
+                  {' '}
+                  <span>
+                    +
+                    {geekyPuntos}
+                  </span>
+
+                </PGeekyPuntos>
+              )
             )}
           </DivDetails>
 
@@ -96,7 +99,7 @@ const Row = (props) => {
             {teacher && <ButtonCalificar type='button' onClick={() => handleDeleteChallenge()}>Eliminar Reto</ButtonCalificar>}
           </DivButtonsActionsRow>
           {isDone && <p>Completado</p>}
-          {student && !isDone && (
+          {student && !isDone && !isPending && (
             <form>
               <label>
                 Link de despliegue

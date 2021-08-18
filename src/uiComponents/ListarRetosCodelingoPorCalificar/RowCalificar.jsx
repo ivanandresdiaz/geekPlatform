@@ -4,29 +4,39 @@ import { DivContainerList, DivContainerButtons, DivContainerGridDetails, ButtonC
 import './RowCalificar.scss';
 import InputRange from '../InputRange/InputRange';
 import { calificarSprintStudent } from '../../actions/classroomActions';
+import { aprobadoRetoCodelingo } from '../../actions/codelingoActions';
+import useForm from '../../hooks/useForm';
 
 const Row = (props) => {
   const { challenge, dataChallengeToScore } = props;
-  const [state, setState] = useState({});
+  const [calificaciones, setCalificaciones] = useState({});
+  const [isCalificado, setIsCalificado] = useState(false);
   const dispatch = useDispatch();
   const { firebase, html, css, javascript, webpack, id, reactHooks, reactJs, redux, testing, title, link, geekyPuntos } = challenge;
   const { fullName, uid, linkGithub, linkDespliegue, photoURL } = dataChallengeToScore;
+  console.log('dataChallengeToScore', dataChallengeToScore);
   const handleInputRangeChangeFather = (name, value) => {
-    setState({
-      ...state,
+    setCalificaciones({
+      ...calificaciones,
       [name]: value,
     });
   };
-  const handleInputChangeTextArea = (evento) => {
-    handleInputRangeChangeFather(evento.target.name, evento.target.value);
-  };
+  const [formValues, handleInputChange, reset] = useForm({
+    comentarios: '',
+  });
+  const { comentarios } = formValues;
+
   const handleCalificarSprint = () => {
-    console.log('reto aprobado');
-    console.log(state, uid, id);
+    //enviar los geekyPuntos, enviar los promedios a uid, y agregar a hechos en uid
+    dispatch(aprobadoRetoCodelingo(calificaciones, uid, id, geekyPuntos, comentarios, dataChallengeToScore.id));
+    setIsCalificado(true);
   };
   const handleReprobarReto = () => {
     console.log('retro reporbado');
   };
+  if (isCalificado) {
+    return null;
+  }
   return (
     <>
       <details>
@@ -96,7 +106,7 @@ const Row = (props) => {
             </DivTopicScore>
           )}
           <DivContainerGridDetails>
-            <textarea name='comentarios' placeholder='comentarios sobre el trabajo' onChange={handleInputChangeTextArea} />
+            <textarea name='comentarios' placeholder='comentarios sobre el trabajo' value={comentarios} onChange={handleInputChange} />
             <div>
               <a href={linkDespliegue}>Link de despliegue</a>
               <a href={linkGithub}>Link de github </a>
@@ -114,7 +124,7 @@ const Row = (props) => {
           </DivContainerGridDetails>
           <DivContainerButtons>
             <ButtonReprobar type='button' onClick={handleReprobarReto}>Reprobar</ButtonReprobar>
-            <ButtonCalificar type='button' onClick={() => handleCalificarSprint(student.uid)}>Aprobar</ButtonCalificar>
+            <ButtonCalificar type='button' onClick={() => handleCalificarSprint()}>Aprobar</ButtonCalificar>
 
           </DivContainerButtons>
 

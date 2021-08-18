@@ -69,8 +69,13 @@ export const getCategoryCodelingo = (category) => async (dispatch, getState) => 
     });
 };
 export const enviarChallengeCodelingoDone = (uid, fullName, photoURL, id, linkDespliegue, linkGithub) => async (dispatch, getState) => {
+  const userDataLogged = getState().auth;
+
   try {
-    await db.collection('bancos').doc('codelingo').collection('challengesDone').add({ uid, fullName, photoURL, challengeId: id, linkDespliegue, linkGithub });
+    const newCodelingoChallengesToScore = [...userDataLogged.codelingoChallengesToScore, id];
+    await db.collection('bancos').doc('codelingo').collection('challengesDone').add({ uid, fullName, photoURL, challengeId: id, linkDespliegue, linkGithub, calificado: false });
+    await db.collection('students').doc(uid).update({ codelingoChallengesToScore: newCodelingoChallengesToScore });
+    dispatch({ type: 'enviarChallengeCodelingoDone', payload: newCodelingoChallengesToScore });
     toast.success('Se ha enviado tu reto con exito.');
   } catch (error) {
     alert('algo salio mal al subir tu reto');
@@ -79,7 +84,7 @@ export const enviarChallengeCodelingoDone = (uid, fullName, photoURL, id, linkDe
 
 };
 export const getCodelingoChallengesToScore = () => (dispatch) => {
-  db.collection('bancos').doc('codelingo').collection('challengesDone')
+  db.collection('bancos').doc('codelingo').collection('challengesDone').where('calificado', '==', false)
     .get()
     .then((snapshot) => {
       const data = snapshot.docs.map((doc) => {
@@ -89,4 +94,62 @@ export const getCodelingoChallengesToScore = () => (dispatch) => {
       dispatch({ type: 'getCodelingoChallengesToScore', payload: data });
     })
     .catch((err) => console.log(err));
+};
+export const aprobadoRetoCodelingo = (calificaciones, uid, id, geekyPuntos, comentarios, dataChallengeToScoreId) => (dispatch) => {
+  console.log('id', id);
+  //enviar los geekyPuntos, enviar los promedios a uid, y agregar a hechos en uid, enviar notificaiones
+  // AGREGAR NOTAS A PROMEDIOS
+  const calificacionesArray = Object.entries(calificaciones);
+  const calificacionesNumber = calificacionesArray.map((item) => {
+    const tecnologiaEvaluada = item[0];
+    const calificacionToNumber = parseInt(item[1]);
+    return {
+      [tecnologiaEvaluada]: calificacionToNumber,
+    };
+  });
+  db.collection('students').doc(uid).get()
+    .then((doc) => {
+      const dataDocument = doc.data();
+
+      const dataDocumentArray = Object.entries(dataDocument);
+      const batch = db.batch();
+      calificacionesNumber.forEach((calificacion) => {
+        const getAtributoEspecifico = dataDocumentArray.filter((item) => {
+          const calificacionArray = Object.entries(calificacion);
+          return (item[0] === calificacionArray[0][0]);
+        });
+        if (getAtributoEspecifico.length > 0) {
+          const calificacionArray = Object.entries(calificacion);
+          const calificacionParaAñadir = calificacionArray[0].slice(1);
+          const grupoCalificaciones = getAtributoEspecifico[0].slice(1);
+          const nuevasCalificaciones = [...calificacionParaAñadir, ...grupoCalificaciones[0]];
+          batch.update(db.collection('students').doc(uid), { [getAtributoEspecifico[0][0]]: nuevasCalificaciones });
+        }
+
+      });
+      batch
+        .commit()
+        // FIN DE AGREGAR NOTAS A PROMEDIOS
+        .then(() => {
+          toast.success('se ha agregado las notas al promedio del estudiante');
+          dispatch({ type: 'requestWeekStudent' });
+        }).then(() => {
+          //agregar geekypuntos
+          db.collection('students').doc(uid).update({ geekyPuntos: dataDocument.geekyPuntos + geekyPuntos });
+
+          toast.success(`se han sumado ${geekyPuntos} geekyPuntos a ${dataDocument.fullName}`);
+          db.collection('students').doc(uid).update({ codelingoChallengesDone: [...dataDocument.codelingoChallengesDone, id] });
+          const updatePendingToScore = dataDocument.codelingoChallengesToScore.filter((item) => item !== id);
+          db.collection('students').doc(uid).update({ codelingoChallengesToScore: updatePendingToScore });
+          //agregar geekypuntos
+          db.collection('bancos').doc('codelingo').collection('challengesDone').doc(dataChallengeToScoreId)
+            .update({ calificado: true });
+        })
+        .catch((error) => console.error(error));
+
+      //agregar geekypuntos
+
+    })
+    .catch((err) => console.log(err));
+
 };

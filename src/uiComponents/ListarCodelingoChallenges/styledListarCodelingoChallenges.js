@@ -39,12 +39,26 @@ export const ContainerPActivo = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  
   p {
+    
     padding: 2px;
     border-radius: 5px;
     color: white;
     background-color: #1be282;
   }
+`;
+export const ContainerPInactivo = styled.div`
+display: flex;
+justify-content: flex-start;
+align-items: center;
+p {
+  margin-left: -20px;
+  padding: 2px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgba(255, 166,16);
+}
 `;
 
 export const DivTitle = styled.div`
