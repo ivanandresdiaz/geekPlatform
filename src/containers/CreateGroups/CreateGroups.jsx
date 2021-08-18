@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import useForm from '../../hooks/useForm';
@@ -19,6 +19,7 @@ const CreateNewGroups = (props) => {
   const plantillaCreatingGroups = useSelector(getPlantillaCreatingGroups);
   const { columnOrder, columns, tasks, title, id } = plantillaCreatingGroups;
   ;
+  const [disabled, setDisabled] = useState(false);
   const dispatch = useDispatch();
   const studentsCorte = useSelector(getStudentsCorte);
   const [formValues, handleInputChange, reset] = useForm({
@@ -31,7 +32,7 @@ const CreateNewGroups = (props) => {
     if (studentsCorte.length > 0) {
       if (cantidad.length > 0) {
         dispatch(generateTemplateGroups(formValues.title, cantidad));
-        reset();
+        setDisabled(true);
       } else {
         toast.error('Seleccione la cantidad de grupos');
       }
@@ -61,8 +62,9 @@ const CreateNewGroups = (props) => {
                 value={formValues.title}
                 onChange={handleInputChange}
                 required
+                disabled={disabled}
               />
-              <SelectPlantillas style={{ marginBottom: '5px' }} value={cantidad} placeholder='¿Cuántos grupos?' name='cantidad' onChange={handleInputChange} required>
+              <SelectPlantillas style={{ marginBottom: '5px' }} value={cantidad} placeholder='¿Cuántos grupos?' name='cantidad' onChange={handleInputChange} required disabled={disabled}>
                 <option value=''> Seleccione</option>
                 <option value='1'>1</option>
                 <option value='2'>2</option>
@@ -75,9 +77,9 @@ const CreateNewGroups = (props) => {
                 <option value='9'>9</option>
                 <option value='10'>10</option>
               </SelectPlantillas>
-              <Button4 type='submit'>Generar Plantillas</Button4>
+              <Button4 type='submit' disabled={disabled}>Generar Plantillas</Button4>
             </FormModal>
-            <Group key={id} columnOrder={columnOrder} columns={columns} tasks={tasks} title={title} id={id} salonId={salon} corteId={corteId} />
+            <Group key={id} columnOrder={plantillaCreatingGroups.columnOrder} columns={plantillaCreatingGroups.columns} tasks={plantillaCreatingGroups.tasks} title={plantillaCreatingGroups.title} id={plantillaCreatingGroups.id} salonId={salon} corteId={corteId} />
           </ContainerNewGroup>
         </div>
       </div>
