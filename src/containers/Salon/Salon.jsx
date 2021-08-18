@@ -14,7 +14,6 @@ import { ContainerMainSalon, ContainerRowSprint, ContainerTitleGreet } from './S
 import { ModalSprints, ModalSprintStandard } from '../../uiComponents/Modal/Modal';
 import { Button6 } from '../../globalStyles';
 
-
 const Salon = (props) => {
   const role = useSelector(getRole);
   const { match: { params: { salon, corteId } } } = props;
@@ -43,6 +42,7 @@ const Salon = (props) => {
         <NavbarStudent />
       )}
       <ContainerMainSalon>
+        <Link to='/codelingoTeacher'>Codelingo Teacher Linkk !!!</Link>
         <ContainerTitleGreet>
           <h1>
             Bienvenido al salon
@@ -78,6 +78,7 @@ const Salon = (props) => {
         </ContainerRowSprint>
       </ContainerMainSalon>
       <ListarWorkGroups corteId={corteId} salonId={salon} />
+
       <Footer />
     </>
   );

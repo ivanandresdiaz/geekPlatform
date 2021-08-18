@@ -114,6 +114,7 @@ const Row = (props) => {
             </DivTopicScore>
           )}
           <ButtonCalificar style={{ margin: '0 8px', marginTop: '15px' }} whileHover={{ scale: 1.050 }} type='button' onClick={() => handleCalificarSprint(student.uid)}>Enviar Calificacion</ButtonCalificar>
+          <p>no es necesario calificar todas la categorias. lo importante es que lo que sea calificado sea un numero idoneo para el desempeño del estudiante</p>
         </div>
 
       </details>

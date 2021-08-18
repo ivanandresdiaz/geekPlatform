@@ -30,6 +30,7 @@ const CreateSprints = (props) => {
     deliveryLink: '',
     html: false,
     css: false,
+    javascript: false,
     webpack: false,
     reactJs: false,
     reactHooks: false,
@@ -62,7 +63,7 @@ const CreateSprints = (props) => {
     firebase,
     testing,
     image,
-    resourcePDF } = formValues;
+    resourcePDF, javascript } = formValues;
   const handleUploadImgSprint = (event) => {
     const file = event.target.files[0];
     const refStorage = firebaseBackend.storage().ref(`socialGeek/personalProjects/${file.name}`);
@@ -139,6 +140,7 @@ const CreateSprints = (props) => {
           reset();
           htmlInput.current.checked = false;
           cssInput.current.checked = false;
+          javascriptInput.current.checked = false;
           webpackInput.current.checked = false;
           reactJsInput.current.checked = false;
           reactHooksInput.current.checked = false;
@@ -227,6 +229,17 @@ const CreateSprints = (props) => {
                   type='checkbox'
                   name='css'
                   value={css}
+                  onChange={handleInputChange}
+                />
+                Css
+              </label>
+              <label>
+                <input
+                  style={{ marginRight: '10px' }}
+                  ref={javascriptInput}
+                  type='checkbox'
+                  name='javascript'
+                  value={javascript}
                   onChange={handleInputChange}
                 />
                 Css

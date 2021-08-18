@@ -20,6 +20,7 @@ import EditProfileSocialGeek from '../components/EditProfileSocialGeek/EditProfi
 import ProfileGeek from '../containers/ProfileGeek/ProfileGeek';
 import ScoreSprints from '../containers/ScoreSprints/ScoreSprints';
 import AcercaDeProgramadores from '../containers/AcercaDeProgramadores/AcercaDeProgramadores';
+import CodelingoTeacher from '../containers/CodelingoTeacher/CodelingoTeacher';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -124,7 +125,13 @@ const App = () => {
             component={AcercaDeProgramadores}
             isAuthenticated={isLoggedIn}
           />
-          <Redirect to='/auth/landingPage' />
+          <PrivateRoute
+            exact
+            path='/codelingoTeacher'
+            component={CodelingoTeacher}
+            isAuthenticated={isLoggedIn}
+          />
+          {/* <Redirect to='/auth/landingPage' /> */}
         </Switch>
       </div>
     </HashRouter>

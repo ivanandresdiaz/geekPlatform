@@ -13,7 +13,7 @@ import NavbarTeacher from '../../components/Structure/NavbarTeacher';
 import NavbarAdmin from '../../components/Structure/NavbarAdmin';
 import NavbarStudent from '../../components/Structure/NavbarStudent';
 import Footer from '../../components/Structure/Footer';
-
+import ListarCodelingoChallenges from '../../uiComponents/ListarCodelingoChallenges/ListarCodelingoChallenges';
 
 const SocialGeek = (props) => {
   const role = useSelector(getRole);
@@ -52,6 +52,10 @@ const SocialGeek = (props) => {
         <div style={{ display: 'flex', width: '100', background: '#F2F2F2' }}>
           <div style={{ flex: '3', height: 'calc(100vh - 50px)', position: 'sticky', top: '50px' }}>
             <RankingGeekyPuntos corteId={userDataLogged.corteId} />
+            <div>
+              <h2>Retos codelingo</h2>
+              <ListarCodelingoChallenges />
+            </div>
           </div>
           <div style={{ flex: '5.5' }}>
             <CreateNewsSocialGeek corteId={userDataLogged.corteId} uid={userDataLogged.uid} />

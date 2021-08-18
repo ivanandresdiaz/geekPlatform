@@ -1,29 +1,29 @@
 /* eslint-disable import/prefer-default-export */
-import toast from "react-hot-toast";
+import toast from 'react-hot-toast';
 import {
   firebase,
   googleAuthProvider,
   db,
   functions,
-} from "../firebase/firebaseConfig";
+} from '../firebase/firebaseConfig';
 
 export const getFirestoreNewsCategory =
   (corteId, categoryNews) => (dispatch, getState) => {
-    db.collection("cortes")
+    db.collection('cortes')
       .doc(corteId)
-      .collection("news")
-      .where("categoryNews", "==", categoryNews)
+      .collection('news')
+      .where('categoryNews', '==', categoryNews)
       .get()
       .then((snapshot) => {
         const data = snapshot.docs.map((doc) => {
           const dataDocument = doc.data();
           return { ...dataDocument, id: doc.id };
         });
-        dispatch({ type: "getFirestoreNewsCategory", payload: data });
+        dispatch({ type: 'getFirestoreNewsCategory', payload: data });
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Algo salio mal");
+        toast.error('Algo salio mal');
       });
   };
 
@@ -40,44 +40,44 @@ export const addFirestoreNewsSocialGeek =
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       };
       await db
-        .collection("cortes")
+        .collection('cortes')
         .doc(corteId)
-        .collection("news")
+        .collection('news')
         .add(nuevoRecurso);
-      toast.success("Se ha agregado con exito");
+      toast.success('Se ha agregado con exito');
     } catch (error) {
       console.log(error.message);
-      toast.error("No se puede agregar, intente de nuevo.");
+      toast.error('No se puede agregar, intente de nuevo.');
     }
   };
 
 export const addLikeResourceFirestore =
   (corteId, id) => (dispatch, getState) => {
-    const addLike = functions.httpsCallable("addLike");
+    const addLike = functions.httpsCallable('addLike');
     addLike({ corteId, id });
   };
 export const removeLikeResourceFirestore =
   (corteId, id) => (dispatch, getState) => {
-    const subtractLike = functions.httpsCallable("subtractLike");
+    const subtractLike = functions.httpsCallable('subtractLike');
     subtractLike({ corteId, id });
   };
 
 export const addFirestorePersonalProject =
   (values) => async (dispatch, getState) => {
-    console.log("entro a addFirestorePersonalProject");
+    console.log('entro a addFirestorePersonalProject');
     try {
       const { uid, myProjects } = getState().auth;
       const newProjects = [...myProjects, values];
 
       await db
-        .collection("students")
+        .collection('students')
         .doc(uid)
         .update({ myProjects: newProjects });
 
-      toast.success("Se ha agregado un nuevo proyecto");
-      dispatch({ type: "addFirestorePersonalProject", payload: newProjects });
+      toast.success('Se ha agregado un nuevo proyecto');
+      dispatch({ type: 'addFirestorePersonalProject', payload: newProjects });
     } catch (error) {
-      toast.error("Algo sucedió");
+      toast.error('Algo sucedió');
       console.log(error.message);
     }
   };
