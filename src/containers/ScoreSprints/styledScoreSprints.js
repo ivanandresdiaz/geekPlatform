@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const DividirPantalla = styled.div`
-display: grid;
-width: 90%;
-grid-template-columns: 50% 50%;
-gap: 20px;
+  display: grid;
+  width: 90%;
+  grid-template-columns: 50% 50%;
+  gap: 20px;
 `;
 export const DivContainerList = styled.div`
   display: block;
@@ -14,17 +14,34 @@ export const DivContainerList = styled.div`
 `;
 
 export const DivRowList = styled.summary`
-display:grid;
-grid-template-columns: 40% 18% 42%;
-align-items: center;
-:hover{
-  background-color:#2f33a7;
-  color: white;
-}
+  display: grid;
+  grid-template-columns: 40% 18% 42%;
+  align-items: center;
+  :hover {
+    background-color: #3cc5ff;
+    color: white;
+    border-radius: 5px;
+  }
+`;
+
+export const ContainerDescSprint = styled.div`
+  position: relative;
+  z-index: 10;
+  height: auto;
+  width: auto;
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  grid-template-rows: 50% 50%;
+  align-items: center;
+  justify-items: start;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
+    0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 `;
 
 export const ImgStudent = styled.img`
-margin:5px 5px;
+  margin: 5px 5px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -49,25 +66,25 @@ export const PorcentajeCalificacion = styled.div`
   }
   background-color: ${(props) => {
     if (props.porcentajeCalificacion > 80) {
-      return '#01b41c';
+      return "#01b41c";
     }
 
     if (props.porcentajeCalificacion > 70) {
-      return '#3CD4A0';
+      return "#3CD4A0";
     }
     if (props.porcentajeCalificacion > 60) {
-      return '#FFC260';
+      return "#FFC260";
     }
     if (props.porcentajeCalificacion > 50) {
-      return '#FF5C93';
+      return "#FF5C93";
     }
-    return '#E21B3C';
+    return "#E21B3C";
   }};
   border-radius: 5px;
 `;
 export const ContainerGeekyPuntos = styled.div`
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
 `;
 
 export const ContainerPActivo = styled.div`
@@ -110,22 +127,21 @@ export const DivContainerInputCheckBox = styled.div`
   }
 `;
 export const DivTopicScore = styled.div`
-display:grid;
-grid-template-columns: 20% 80%;
-align-items: center;
-height: 40px;
-width: 100%;
-margin: 0 auto;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  margin: 0 auto;
 `;
 export const ButtonCalificar = styled.button`
-width: 120px;
-height: 40px;
-border-radius: 6px;
-background-color:#2e318c;
-color: white;
-margin: 0 0 10px;
-:hover{
-  background-color:#2f33a7;
-  
-}
+  width: 120px;
+  height: 40px;
+  border-radius: 6px;
+  background-color: #3cc5ff;
+  color: white;
+  margin: 0 0 10px;
+  :hover {
+    background-color: #36b1e6;
+  }
 `;

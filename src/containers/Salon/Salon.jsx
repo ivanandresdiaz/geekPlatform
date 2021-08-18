@@ -42,7 +42,6 @@ const Salon = (props) => {
         <NavbarStudent />
       )}
       <ContainerMainSalon>
-        <Link to='/codelingoTeacher'>Codelingo Teacher Linkk !!!</Link>
         <ContainerTitleGreet>
           <h1>
             Bienvenido al salon

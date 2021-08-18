@@ -54,11 +54,11 @@ const Row = (props) => {
                 </p>
               </PorcentajeCalificacion>
             </ContainerPorcentajeCalificacion>
-          ) }
+          )}
         </DivRowList>
 
         <div className='content'>
-          {estaCalificado ? <h3>Editar calificacion</h3> : <h3>Desempeño en las siguientes habilidades:</h3> }
+          {estaCalificado ? <h3>Editar calificacion</h3> : <h3>Desempeño en las siguientes habilidades:</h3>}
           {html && (
             <DivTopicScore>
               Html
@@ -114,7 +114,7 @@ const Row = (props) => {
             </DivTopicScore>
           )}
           <ButtonCalificar style={{ margin: '0 8px', marginTop: '15px' }} whileHover={{ scale: 1.050 }} type='button' onClick={() => handleCalificarSprint(student.uid)}>Enviar Calificacion</ButtonCalificar>
-          <p>no es necesario calificar todas la categorias. lo importante es que lo que sea calificado sea un numero idoneo para el desempeño del estudiante</p>
+          <p style={{ marginTop: '10px', marginBottom: '10px' }}>No es necesario calificar todas la categorias. Es importante que sea calificado en base a su desempeño.</p>
         </div>
 
       </details>

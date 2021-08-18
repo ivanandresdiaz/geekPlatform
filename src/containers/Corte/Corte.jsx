@@ -19,9 +19,11 @@ import { requestWeekStudent, cancelRequestWeekStudent } from '../../actions/geek
 import { getFirestoreCorteDataDetails } from '../../actions/adminActions';
 import { getCorteDataDetails } from '../../reducers/salonReducer';
 import { Button4, Button5 } from '../../globalStyles';
+import { getRole } from '../../reducers/authReducer';
+import NavbarTeacher from '../../components/Structure/NavbarTeacher';
 
 const Corte = (props) => {
-
+  const role = useSelector(getRole);
   const dispatch = useDispatch();
   const corteDataDetails = useSelector(getCorteDataDetails);
   const { match: { params: { corteId } } } = props;
@@ -37,8 +39,12 @@ const Corte = (props) => {
   return (
     <>
       <div style={{ backgroundColor: '#F2F2F2' }}>
-        <NavbarAdmin />
-
+        {role === 'teacher' && (
+          <NavbarTeacher />
+        )}
+        {role === 'admin' && (
+          <NavbarAdmin />
+        )}
         <div>
           <ContainerMainTitleCorte>
             <ContainerTitleCorte>
@@ -145,9 +151,7 @@ const Corte = (props) => {
             </div>
           </ContainerMainCorte>
         </div>
-        <Link to='/codelingoTeachers'>Codelingo Teachers Linkk !!!</Link>
         <Footer />
-
       </div>
     </>
   );
