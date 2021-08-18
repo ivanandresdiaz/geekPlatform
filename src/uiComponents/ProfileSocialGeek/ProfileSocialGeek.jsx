@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ProfileSocialGeek = (props) => {
-  const { profileSocialGeek, isUserAuth } = props;
-  const { active, bio, city, codelingoChallengesDone, corteId, cover, displayName,
+  const { profileSocialGeek, corteId, isUserAuth } = props;
+  const { active, bio, city, codelingoChallengesDone, cover, displayName,
     email, facebook, fullName, geekyPuntos, github, graduated, id,
     instagram, linkedin, password, photoURL, role, skills, sprintsAssigned,
     tutorialsRequired, twitter, uid, wakatime, website, whatsapp,
@@ -20,14 +20,10 @@ const ProfileSocialGeek = (props) => {
       </div>
       <h4>{fullName}</h4>
       <p>{!active && 'Inactivo'}</p>
-      {isUserAuth ? <Link to='/socialGeek/:profileUid/edit'>Editar</Link> : null}
+      {isUserAuth ? <Link to={`/socialGeek/${corteId}/${uid}/edit`}>Editar</Link> : null}
       <p>{city}</p>
       <p>
         {bio}
-      </p>
-      <p>
-        Geeky Puntos
-        {geekyPuntos}
       </p>
       {skills > 0 && skills.map((skill) => <p key={skill}>{skill}</p>)}
     </div>

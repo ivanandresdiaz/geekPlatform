@@ -22,7 +22,7 @@ const ListarStudentsSocialGeek = (props) => {
         studentsCorte.length > 0 && studentsCorte.map((student) => {
           return (
             <div key={student.uid}>
-              <Link to={`/socialGeek/${student.uid}`}>
+              <Link to={`/socialGeek/${corteId}/${student.uid}`}>
                 {student.fullName}
               </Link>
             </div>
