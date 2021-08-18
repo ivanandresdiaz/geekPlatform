@@ -1,18 +1,19 @@
 import React, { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { IconName, MdPermMedia } from 'react-icons/md';
 import useForm from '../../hooks/useForm';
 import { firebase } from '../../firebase/firebaseConfig';
 import { addFirestoreNewsSocialGeek } from '../../actions/socialGeekActions';
 import { ContainerNewPub, ShareBottom, ShareHr, ShareIcon, ShareInput, ShareOption, ShareOptions, ShareTop } from './CreateNewsStyles';
-import { Button4, Button7 } from '../../globalStyles'
-import { IconName, MdPermMedia } from "react-icons/md";
+import { Button4, Button7 } from '../../globalStyles';
 
 const CreateNewsSocialGeek = (props) => {
   const hiddenFileInput = React.useRef(null);
-  const handleClick = event => {
+  const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
-  const handleChange = event => {
+  const userDataLogged = useSelector((state) => state.auth);
+  const handleChange = (event) => {
     const fileUploaded = event.target.files[0];
     props.handleFile(fileUploaded);
   };
@@ -57,15 +58,6 @@ const CreateNewsSocialGeek = (props) => {
     );
   };
 
-  const handleChooseCategory = (category) => {
-    const evento = {
-      target: {
-        value: category,
-        name: 'categoryNews',
-      },
-    };
-    handleInputChange(evento);
-  };
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(addFirestoreNewsSocialGeek(corteId, values));
@@ -78,12 +70,15 @@ const CreateNewsSocialGeek = (props) => {
           <form>
             <div styel={{ display: 'flex', flexDirection: 'row' }}>
               <h3>Escribe una publicación</h3>
-              {/* <Button7 type='button' onClick={() => handleChooseCategory('memes')}>Memes</Button7>
-              <Button7 type='button' onClick={() => handleChooseCategory('resources')}>Recursos interesantes</Button7> */}
+              <select placeholder='' name='cantidad' onChange={handleInputChange} required>
+                <option value=''> Seleccione tipo de publicacion</option>
+                <option value='resources'>resources</option>
+                <option value='memes'>memes</option>
+              </select>
             </div>
             <ShareTop>
               {/* imagen de perfil del que publica */}
-              <img src="" alt="" />
+              <img src={userDataLogged.photoURL} alt={userDataLogged.fullName} />
               <textarea
                 style={{ resize: 'none', border: 'none', boxShadow: 'none', outline: 'none', fontSize: '16px', width: '500px' }}
                 placeholder='¿Qué piensas Geek?'
@@ -110,7 +105,8 @@ const CreateNewsSocialGeek = (props) => {
                     type='file'
                     name='archivosubido'
                     onChange={handleUploadImageSocialGeek}
-                    required />
+                    required
+                  />
                 </ShareOption>
                 <ShareOption>
                   <Button4 type='submit' onClick={handleSubmit} disabled={disabled}>Publicar</Button4>
