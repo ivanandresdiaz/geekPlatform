@@ -51,19 +51,19 @@ const SocialGeek = (props) => {
         )}
         <div style={{ display: 'flex', width: '100', background: '#F2F2F2' }}>
           <Sidebar>
-            <RankingGeekyPuntos corteId={userDataLogged.corteId} />
+            <RankingGeekyPuntos corteId={corteId} />
             <div>
               <h2>Retos codelingo</h2>
               <ListarCodelingoChallenges />
             </div>
           </Sidebar>
           <div style={{ flex: '5', margin: '30px 10px' }}>
-            <CreateNewsSocialGeek corteId={userDataLogged.corteId} uid={userDataLogged.uid} />
+            <CreateNewsSocialGeek corteId={corteId} uid={userDataLogged.uid} />
             <NewsFeedCategories handleGetNews={handleGetNews} />
-            <ListarNews news={news} corteId={userDataLogged.corteId} uid={userDataLogged.uid} />
+            <ListarNews news={news} corteId={corteId} uid={userDataLogged.uid} />
           </div>
           <div style={{ flex: '3.5' }}>
-            <ListarStudentsSocialGeek corteId={userDataLogged.corteId} />
+            <ListarStudentsSocialGeek corteId={corteId} />
           </div>
         </div>
         <Footer />
