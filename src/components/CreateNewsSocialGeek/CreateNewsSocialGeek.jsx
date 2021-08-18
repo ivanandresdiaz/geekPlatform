@@ -61,7 +61,7 @@ const CreateNewsSocialGeek = (props) => {
     reset();
   };
   return (
-    <div>
+    <>
       <h3>Añadir nuevos recursos</h3>
       <div>
         <button type='button' onClick={() => handleChooseCategory('blogs')}>Blogs</button>
@@ -80,7 +80,7 @@ const CreateNewsSocialGeek = (props) => {
         <input type='file' name='archivosubido' onChange={handleUploadImageSocialGeek} required />
         <button type='submit' onClick={handleSubmit} disabled={disabled}>Agregar recurso Academico</button>
       </form>
-    </div>
+    </>
   );
 };
 
