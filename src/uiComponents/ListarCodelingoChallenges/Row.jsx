@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import './Row.scss';
 import { enviarChallengeCodelingoDone, deleteFirestoreCodelingoChallenge } from '../../actions/codelingoActions';
-import { DivContent, ButtonCalificar, ContainerPInactivo, DivButtonsActionsRow, DivRowList, ContainerPActivo, DivTitle, DivDetails, SpanHtml, SpanCSS, SpanJAVASCRIPT, SpanWEBPACK, SpanREACTJS, SpanREDUX, SpanREACTHOOKS, SpanFIREBASE, SpanTESTING, PGeekyPuntos } from './styledListarCodelingoChallenges';
+import { DivContent, ContainerPInactivo, DivButtonsActionsRow, DivRowList, ContainerPActivo, DivTitle, DivDetails, SpanHtml, SpanCSS, SpanJAVASCRIPT, SpanWEBPACK, SpanREACTJS, SpanREDUX, SpanREACTHOOKS, SpanFIREBASE, SpanTESTING, PGeekyPuntos } from './styledListarCodelingoChallenges';
 import { Button4 } from '../../globalStyles';
+import { FormInput } from '../../uiComponents/Modal/ModalStyles';
 
 const Row = (props) => {
   const { challenge, isDone, isPending, teacher, student } = props;
@@ -95,40 +96,38 @@ const Row = (props) => {
         </DivRowList>
         <DivContent className='content'>
           <p>{description}</p>
-          <DivButtonsActionsRow>
-            <a href={challenge.link} target='_blank' rel='noreferrer'><Button4 type='button'>Reto</Button4></a>
+          <DivButtonsActionsRow style={{ margin: '0' }}>
+            <a href={challenge.link} target='_blank' rel='noreferrer'><Button4 style={{}} type='button'>Reto</Button4></a>
             {teacher && <Button4 primary type='button' onClick={() => handleDeleteChallenge()}>Eliminar</Button4>}
           </DivButtonsActionsRow>
           {isDone && <p>Completado</p>}
           {student && !isDone && !isPending && (
             <form>
-              <label>
-                Link de despliegue
-                <input
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <FormInput
+                  style={{ width: '300px' }}
                   type='text'
-                  placeholder='link de despliegue'
+                  placeholder='Enlace de despliegue'
                   name='linkDespliegue'
                   value={linkDespliegue}
                   onChange={handleInputChange}
                   autoComplete='off'
                   required
                 />
-              </label>
-              <label>
-                Link de github
-                <input
+                <FormInput
+                  style={{ width: '300px' }}
                   type='text'
-                  placeholder='link de github'
+                  placeholder='Enlace de GitHub'
                   name='linkGithub'
                   value={linkGithub}
                   onChange={handleInputChange}
                   autoComplete='off'
                   required
                 />
-              </label>
-              <button type='button' onClick={handleEnviarReto}>
-                Enviar mi reto
-              </button>
+                <Button4 primary type='button' onClick={handleEnviarReto}>
+                  Enviar mi reto
+                </Button4>
+              </div>
             </form>
           )}
 
