@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addLikeResourceFirestore, removeLikeResourceFirestore } from '../../actions/socialGeekActions';
+import { ContainerPub } from '../../components/CreateNewsSocialGeek/CreateNewsStyles';
 
 const SingleNew = (props) => {
   const { corteId, uid, resource } = props;
@@ -37,31 +38,33 @@ const SingleNew = (props) => {
   const fechaCreacion = obtenerFecha(resource.createdAt.toDate());
 
   return (
-    <div>
-      { resource.photoURL && <img src={resource.photoURL} alt={resource.fullName} />}
-      <Link to={`/socialGeek/${resource.uid}`}>
-        Creador:
-        {resource.fullName}
-      </Link>
-      <p>
-        {resource.description}
-      </p>
-      <img src={resource.photoURLNews} alt={resource.description} />
-      <p>
-        Fecha de creacion:
-        {fechaCreacion}
-      </p>
-      <button
-        type='button'
-        onClick={() => handleLike(resource.id, liked)}
-      >
-        {liked ? 'quitar like' : 'dar like'}
-        {/* liked significa que el usuario ya le ha dado me gusta */}
-      </button>
-      <p>
-        {amountLikes }
-      </p>
-    </div>
+    <>
+      <ContainerPub>
+        {resource.photoURL && <img src={resource.photoURL} alt={resource.fullName} />}
+        <Link to={`/socialGeek/${resource.uid}`}>
+          Creador:
+          {resource.fullName}
+        </Link>
+        <p>
+          {resource.description}
+        </p>
+        <img src={resource.photoURLNews} alt={resource.description} />
+        <p>
+          Fecha de creacion:
+          {fechaCreacion}
+        </p>
+        <button
+          type='button'
+          onClick={() => handleLike(resource.id, liked)}
+        >
+          {liked ? 'quitar like' : 'dar like'}
+          {/* liked significa que el usuario ya le ha dado me gusta */}
+        </button>
+        <p>
+          {amountLikes}
+        </p>
+      </ContainerPub>
+    </>
   );
 };
 

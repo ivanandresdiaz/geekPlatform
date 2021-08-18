@@ -11,6 +11,17 @@ export const ContainerNewPub = styled.div`
   margin-bottom: 20px;
 `;
 
+export const ContainerPub = styled.div`
+  width: 800px;
+  margin: auto;
+  height: 170px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  background-color: "#FFFFFE";
+  margin-bottom: 20px;
+`;
+
 export const ShareTop = styled.div`
   display: flex;
   align-items: center;
