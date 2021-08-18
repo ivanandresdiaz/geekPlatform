@@ -77,8 +77,9 @@ const Salon = (props) => {
           <ListarSprints corteId={corteId} salonId={salon} role={role} />
         </ContainerRowSprint>
       </ContainerMainSalon>
-      <ListarWorkGroups corteId={corteId} salonId={salon} />
-
+      <ContainerMainSalon>
+        <ListarWorkGroups corteId={corteId} salonId={salon} />
+      </ContainerMainSalon>
       <Footer />
     </>
   );

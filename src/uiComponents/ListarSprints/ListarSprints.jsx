@@ -23,7 +23,6 @@ const ListarSprints = (props) => {
   console.log(sprints);
   return (
     <>
-      <h4>Sprints</h4>
       {sprints.length > 0 && sprints.map((sprint) => {
         console.log('resourcePDF', sprint.resourcePDF);
         return (

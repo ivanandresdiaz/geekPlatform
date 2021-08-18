@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 a{
-  color: black;
+  color:  ${({ primary }) => (primary ? "#FFFFF" : "#000000")};
 }`;
 
 export const Container = styled.div`
@@ -122,6 +122,10 @@ export const Button4 = styled.button`
 
   @media screen and (max-width: 960px) {
     width: 100%;
+  }
+
+  a {
+    color: white;
   }
 `;
 
