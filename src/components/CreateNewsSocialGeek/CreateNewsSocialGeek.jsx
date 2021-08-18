@@ -6,7 +6,7 @@ import { firebase } from '../../firebase/firebaseConfig';
 import { addFirestoreNewsSocialGeek } from '../../actions/socialGeekActions';
 import { ContainerNewPub, ShareBottom, ShareHr, ShareOption, ShareOptions, ShareTop } from './CreateNewsStyles';
 import { Button4 } from '../../globalStyles';
-import { SelectCat } from '../../components/AddNewAcademicResource/NewAcademicResourceStyles';
+import { SelectCat } from '../AddNewAcademicResource/NewAcademicResourceStyles';
 
 const CreateNewsSocialGeek = (props) => {
   const hiddenFileInput = React.useRef(null);
@@ -112,7 +112,6 @@ const CreateNewsSocialGeek = (props) => {
                   </Button4>
                   <input
                     ref={hiddenFileInput}
-                    onChange={handleChange}
                     style={{ display: 'none' }}
                     type='file'
                     name='archivosubido'
