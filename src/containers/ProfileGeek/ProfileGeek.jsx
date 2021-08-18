@@ -7,24 +7,26 @@ import { getUserId } from '../../reducers/authReducer';
 import NewsFeedCategories from '../../components/NewsFeedCategories/NewsFeedCategories';
 import CreateNewsSocialGeek from '../../components/CreateNewsSocialGeek/CreateNewsSocialGeek';
 import ListarNews from '../../uiComponents/ListarNews/ListarNews';
-import { getFirestoreNewsCategory } from '../../actions/socialGeekActions';
+import { getFirestoreMyNewsCategory } from '../../actions/socialGeekActions';
 import ListarPersonalProjects from '../../uiComponents/ListarPersonalProjects/ListarPersonalProjects';
 import AddPersonalProjects from '../../components/AddPersonalProjects/AddPersonalProjects';
 import ChartStudent from '../../components/ChartStudent/ChartStudent';
+import { getMyNewsCategory } from '../../reducers/socialGeekReducer';
 import ChartMySprints from '../../components/ChartMySprints/ChartMySprints';
 
 const ProfileGeek = (props) => {
   const { match: { params: { profileUid, corteId } } } = props;
   const userDataLogged = useSelector((state) => state.auth);
+  const myNews = useSelector(getMyNewsCategory);
   const dispatch = useDispatch();
   const loggedUidUser = useSelector(getUserId);
   const [profileSocialGeek, setProfileSocialGeek] = useState('');
   const [isUserAuth, setIsUserAuth] = useState(false);
   useEffect(() => {
+    dispatch(getFirestoreMyNewsCategory(corteId, 'blogs', profileUid));
     if (loggedUidUser === profileUid) {
       setProfileSocialGeek(userDataLogged);
       setIsUserAuth(true);
-      dispatch(getFirestoreNewsCategory(corteId, 'blogs'));
     } else {
       db.collection('students').doc(profileUid).get()
         .then((doc) => {
@@ -40,11 +42,10 @@ const ProfileGeek = (props) => {
   const handleGetNews = useCallback(
     (category) => {
       if (userDataLogged) {
-        dispatch(getFirestoreNewsCategory(corteId, category));
+        dispatch(getFirestoreMyNewsCategory(corteId, category, profileUid));
       }
     }, [],
   );
-
   return (
     <div>
       <h1>Bienvenido a social geek</h1>
@@ -60,7 +61,7 @@ const ProfileGeek = (props) => {
             <NewsFeedCategories handleGetNews={handleGetNews} />
             {isUserAuth && <CreateNewsSocialGeek corteId={corteId} />}
             <h5>Listar mis publicaciones</h5>
-            <ListarNews news={[]} />
+            <ListarNews news={myNews} />
           </div>
 
         )}

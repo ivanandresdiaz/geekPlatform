@@ -26,6 +26,26 @@ export const getFirestoreNewsCategory =
         toast.error('Algo salio mal');
       });
   };
+export const getFirestoreMyNewsCategory = (corteId, categoryNews, uidProfile) => (dispatch, getState) => {
+  db.collection('cortes')
+    .doc(corteId)
+    .collection('news')
+    .where('categoryNews', '==', categoryNews)
+    .where('uid', '==', uidProfile)
+    .get()
+    .then((snapshot) => {
+      const data = snapshot.docs.map((doc) => {
+        const dataDocument = doc.data();
+        return { ...dataDocument, id: doc.id };
+      });
+      console.log(data);
+      dispatch({ type: 'getFirestoreMyNewsCategory', payload: data });
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error('Algo salio mal');
+    });
+};
 
 export const addFirestoreNewsSocialGeek = (corteId, values) => async (dispatch, getState) => {
   const { photoURL, fullName, uid } = getState().auth;
