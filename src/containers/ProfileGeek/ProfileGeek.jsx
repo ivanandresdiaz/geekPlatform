@@ -51,10 +51,10 @@ const ProfileGeek = (props) => {
       {profileSocialGeek &&
         (
           <div>
-            <ProfileSocialGeek profileSocialGeek={profileSocialGeek} isUserAuth={isUserAuth} />
+            <ProfileSocialGeek profileSocialGeek={profileSocialGeek} isUserAuth={isUserAuth} corteId={corteId} />
             {profileSocialGeek.ProfileGeek === 'student' && <ChartStudent profileSocialGeek={profileSocialGeek} />}
             {profileSocialGeek.ProfileGeek === 'student' && <ChartMySprints mySprints={profileSocialGeek.mySprints} />}
-            {isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />}
+            {profileSocialGeek.ProfileGeek === 'student' && isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />}
             {profileSocialGeek.ProfileGeek === 'student' && <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />}
             <p>Mis noticias</p>
             <NewsFeedCategories handleGetNews={handleGetNews} />

@@ -1,12 +1,15 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import { firebase } from '../../firebase/firebaseConfig';
-import { updateFirestoreUser } from '../../actions/authActions';
-import useForm from '../../hooks/useForm';
 import toast from 'react-hot-toast';
+import { firebase } from '../../firebase/firebaseConfig';
+import { updateFirestoreStudent, updateFirestoreTeacher, updateFirestoreAdmin } from '../../actions/authActions';
+import useForm from '../../hooks/useForm';
 
 const EditProfileSocialGeek = (props) => {
+  const { history, match: { params: { corteId } } } = props;
   const dispatch = useDispatch();
   const userDataLogged = useSelector((state) => state.auth);
   const [disabled, setDisabled] = useState(false);
@@ -42,9 +45,28 @@ const EditProfileSocialGeek = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (formValues.password === formValues.confirmPassword) {
-      dispatch(updateFirestoreUser(userDataLogged.uid, formValues));
-      reset();
-      props.history.push(`/socialGeek${userDataLogged.uid}`);
+      console.log(userDataLogged.roleGeek);
+      switch (userDataLogged.roleGeek) {
+        case 'student':
+          dispatch(updateFirestoreStudent(userDataLogged.uid, formValues));
+          reset();
+          history.push(`/socialGeek/${corteId}/${userDataLogged.uid}`);
+          break;
+        case 'teacher':
+          dispatch(updateFirestoreTeacher(userDataLogged.uid, formValues));
+          reset();
+          history.push(`/socialGeek/${corteId}/${userDataLogged.uid}`);
+          break;
+        case 'admin':
+          dispatch(updateFirestoreAdmin(userDataLogged.uid, formValues));
+          reset();
+          history.push(`/socialGeek/${corteId}/${userDataLogged.uid}`);
+          break;
+        default:
+          alert('no tienes roleGeek');
+          break;
+      }
+
       // eslint-disable-next-line react/jsx-indent
 
     } else {

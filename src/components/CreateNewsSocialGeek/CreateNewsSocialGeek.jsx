@@ -9,7 +9,9 @@ import { Button4 } from '../../globalStyles';
 import { SelectCat } from '../AddNewAcademicResource/NewAcademicResourceStyles';
 
 const CreateNewsSocialGeek = (props) => {
+  const { corteId } = props;
   const hiddenFileInput = React.useRef(null);
+  const [disabled, setDisabled] = useState(true);
   const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
@@ -19,8 +21,7 @@ const CreateNewsSocialGeek = (props) => {
     props.handleFile(fileUploaded);
   };
   const dispatch = useDispatch();
-  const { corteId } = props;
-  const [disabled, setDisabled] = useState(true);
+
   const [values, handleInputChange, reset] = useForm({
     categoryNews: 'blogs',
     description: '',
@@ -61,13 +62,8 @@ const CreateNewsSocialGeek = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (disable) {
-      alert('no se ha cargado la imagen');
-    } else {
-      dispatch(addFirestoreNewsSocialGeek(corteId, values));
-      reset();
-    }
-
+    dispatch(addFirestoreNewsSocialGeek(corteId, values));
+    reset();
   };
   return (
     <>
@@ -76,7 +72,7 @@ const CreateNewsSocialGeek = (props) => {
           <form>
             <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '10px' }}>
               <h3>Escribe una publicación</h3>
-              <SelectCat style={{ padding: '0', marginBottom: '0', marginTop: '0', border: 'none', marginLeft: '275px ' }} placeholder='' name='cantidad' onChange={handleInputChange} required>
+              <SelectCat style={{ padding: '0', marginBottom: '0', marginTop: '0', border: 'none', marginLeft: '275px ' }} placeholder='' name='categoryNews' onChange={handleInputChange} required>
                 <option style={{ fontWeight: '600' }} value=''>Tipo de publicación</option>
                 <option value='resources'>Resources</option>
                 <option value='memes'>Memes</option>

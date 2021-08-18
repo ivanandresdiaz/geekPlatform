@@ -27,29 +27,28 @@ export const getFirestoreNewsCategory =
       });
   };
 
-export const addFirestoreNewsSocialGeek =
-  (corteId, values) => async (dispatch, getState) => {
-    const { photoURL, fullName, uid } = getState().auth;
-    try {
-      const nuevoRecurso = {
-        ...values,
-        photoURL,
-        fullName,
-        uid,
-        likes: [],
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      };
-      await db
-        .collection('cortes')
-        .doc(corteId)
-        .collection('news')
-        .add(nuevoRecurso);
-      toast.success('Se ha agregado con exito');
-    } catch (error) {
-      console.log(error.message);
-      toast.error('No se puede agregar, intente de nuevo.');
-    }
-  };
+export const addFirestoreNewsSocialGeek = (corteId, values) => async (dispatch, getState) => {
+  const { photoURL, fullName, uid } = getState().auth;
+  try {
+    const nuevoRecurso = {
+      ...values,
+      photoURL,
+      fullName,
+      uid,
+      likes: [],
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    };
+    await db
+      .collection('cortes')
+      .doc(corteId)
+      .collection('news')
+      .add(nuevoRecurso);
+    toast.success('Se ha agregado con exito');
+  } catch (error) {
+    console.log(error.message);
+    toast.error('No se puede agregar, intente de nuevo.');
+  }
+};
 
 export const addLikeResourceFirestore =
   (corteId, id) => (dispatch, getState) => {

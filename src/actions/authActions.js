@@ -28,7 +28,40 @@ export const login = (uid, displayName, role) => async (dispatch, getState) => {
           });
       }
       break;
-
+    case 'teacher':
+      {
+        db.collection('teachers')
+          .doc(uid)
+          .get()
+          .then((doc) => {
+            const data = { ...doc.data(), id: doc.id };
+            dispatch({
+              type: types.login,
+              payload: { ...data, displayName, role },
+            });
+          })
+          .catch((err) => {
+            toast.error(`Algo salio mal en el login: ${err.message}`);
+          });
+      }
+      break;
+    case 'admin':
+      {
+        db.collection('admin')
+          .doc(uid)
+          .get()
+          .then((doc) => {
+            const data = { ...doc.data(), id: doc.id };
+            dispatch({
+              type: types.login,
+              payload: { ...data, displayName, role },
+            });
+          })
+          .catch((err) => {
+            toast.error(`Algo salio mal en el login: ${err.message}`);
+          });
+      }
+      break;
     default:
       {
         dispatch({
@@ -115,7 +148,7 @@ export const registerWithEmailPasswordTeacher =
       sprintsToScore: [],
       codelingoChallegencesToScore: [],
       academicResourcesToScore: [],
-      role: 'teacher',
+      roleGeek: 'teacher',
       active: false,
     };
     db.doc(`/teachers/${username}`)
@@ -272,10 +305,26 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
     }).catch((err) => alert('error en el registro estudiante', err));
 };
 
-export const updateFirestoreUser = (uid, newDataStudent) => async () => {
+export const updateFirestoreStudent = (uid, newDataStudent) => async () => {
   try {
-    await db.collection('students').doc(uid).update(newDataStudent);
+    await db.collection('students').doc(uid).set(newDataStudent, { merge: true });
+    toast.success('Actualización éxitosa, recarga la pagina para ver cambios');
+  } catch (error) {
+    toast.error('Algo ocurrió en la actualización');
+  }
+};
+export const updateFirestoreTeacher = (uid, newDataStudent) => async () => {
+  try {
+    await db.collection('teachers').doc(uid).set(newDataStudent, { merge: true });
     toast.success('Actualización éxitosa');
+  } catch (error) {
+    toast.error('Algo ocurrió en la actualización, recarga la pagina para ver cambios');
+  }
+};
+export const updateFirestoreAdmin = (uid, newDataStudent) => async () => {
+  try {
+    await db.collection('admin').doc(uid).set(newDataStudent, { merge: true });
+    toast.success('Actualización éxitosa, recarga la pagina para ver cambios');
   } catch (error) {
     toast.error('Algo ocurrió en la actualización');
   }
