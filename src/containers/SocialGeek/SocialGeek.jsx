@@ -15,6 +15,7 @@ import NavbarStudent from '../../components/Structure/NavbarStudent';
 import Footer from '../../components/Structure/Footer';
 import ListarCodelingoChallenges from '../../uiComponents/ListarCodelingoChallenges/ListarCodelingoChallenges';
 import { Sidebar } from './SocialGeekStyles';
+import ListarTeachersSocialGeek from '../../uiComponents/ListarTeachersSocialGeek/ListarTeachersSocialGeek';
 
 const SocialGeek = (props) => {
   const role = useSelector(getRole);
@@ -63,7 +64,10 @@ const SocialGeek = (props) => {
             <ListarNews news={news} corteId={corteId} uid={userDataLogged.uid} />
           </div>
           <div style={{ flex: '3.5' }}>
+            <h2>Estudiantes</h2>
             <ListarStudentsSocialGeek corteId={corteId} />
+            <h2>Profesores</h2>
+            <ListarTeachersSocialGeek corteId={corteId} />
           </div>
         </div>
         <Footer />

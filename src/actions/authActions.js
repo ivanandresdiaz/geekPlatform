@@ -162,6 +162,7 @@ export const registerNewAdmin =
           bio: '',
           whatsapp: '',
           linkedin: '',
+          roleGeek: 'admin',
         };
         return db.collection('admin').doc(user.uid).set(newAdmin);
       })
@@ -202,6 +203,7 @@ export const registerNewTeacher =
             twitter: '',
             instagram: '',
             linkedin: '',
+            roleGeek: 'teacher',
             personalizedTutorials: [],
             sprintsToScore: [], //
             codelingoChallegencesToScore: [],
@@ -239,6 +241,7 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
         instagram: '',
         linkedin: '',
         geekyPuntos: 100,
+        roleGeek: 'student',
         graduated: false,
         tutorialsRequired: [],
         codelingoChallengesDone: [],
