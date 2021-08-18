@@ -14,7 +14,7 @@ import ChartStudent from '../../components/ChartStudent/ChartStudent';
 import ChartMySprints from '../../components/ChartMySprints/ChartMySprints';
 
 const ProfileGeek = (props) => {
-  const { match: { params: { profileUid } } } = props;
+  const { match: { params: { profileUid, corteId } } } = props;
   const userDataLogged = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const loggedUidUser = useSelector(getUserId);
@@ -24,7 +24,6 @@ const ProfileGeek = (props) => {
     if (loggedUidUser === profileUid) {
       setProfileSocialGeek(userDataLogged);
       setIsUserAuth(true);
-      const { corteId } = userDataLogged;
       dispatch(getFirestoreNewsCategory(corteId, 'blogs'));
     } else {
       db.collection('students').doc(profileUid).get()
@@ -41,7 +40,6 @@ const ProfileGeek = (props) => {
   const handleGetNews = useCallback(
     (category) => {
       if (userDataLogged) {
-        const { corteId } = userDataLogged;
         dispatch(getFirestoreNewsCategory(corteId, category));
       }
     }, [],
@@ -60,7 +58,7 @@ const ProfileGeek = (props) => {
             <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />
             <p>Mis noticias</p>
             <NewsFeedCategories handleGetNews={handleGetNews} />
-            {isUserAuth && <CreateNewsSocialGeek corteId={profileSocialGeek.corteId} />}
+            {isUserAuth && <CreateNewsSocialGeek corteId={corteId} />}
 
             <h5>Listar mis publicaciones</h5>
             <ListarNews news={[]} />

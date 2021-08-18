@@ -97,19 +97,19 @@ const App = () => {
           />
           <PrivateRoute
             exact
-            path='/socialGeek'
+            path='/socialGeek/:corteId'
             component={SocialGeek}
             isAuthenticated={isLoggedIn}
           />
           <PrivateRoute
             exact
-            path='/socialGeek/:profileUid'
+            path='/socialGeek/:corteId/:profileUid'
             component={ProfileGeek}
             isAuthenticated={isLoggedIn}
           />
           <PrivateRoute
             exact
-            path='/socialGeek/:profileUid/edit'
+            path='/socialGeek/:corteId/:profileUid/edit'
             component={EditProfileSocialGeek}
             isAuthenticated={isLoggedIn}
           />

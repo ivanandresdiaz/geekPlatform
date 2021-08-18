@@ -60,8 +60,13 @@ const CreateNewsSocialGeek = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addFirestoreNewsSocialGeek(corteId, values));
-    reset();
+    if (disable) {
+      alert('no se ha cargado la imagen');
+    } else {
+      dispatch(addFirestoreNewsSocialGeek(corteId, values));
+      reset();
+    }
+
   };
   return (
     <>

@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { getFirestoreStudentsCorte } from '../../actions/studentsActions';
 import { getStudentsCorte } from '../../reducers/studentsReducer';
 
 const ListarStudentsSocialGeek = (props) => {
   const { corteId } = props;
+  const dispatch = useDispatch();
   const studentsCorte = useSelector(getStudentsCorte);
   useEffect(() => {
     if (!(studentsCorte.length > 0)) {
@@ -20,7 +22,7 @@ const ListarStudentsSocialGeek = (props) => {
         studentsCorte.length > 0 && studentsCorte.map((student) => {
           return (
             <div key={student.uid}>
-              <Link to={`/socialGeek/${student.uid}`}>
+              <Link to={`/socialGeek/${corteId}/${student.uid}`}>
                 {student.fullName}
               </Link>
             </div>

@@ -23,7 +23,7 @@ const ListarStudentsCorte = (props) => {
         assistance: [...student.assistance, 0],
         uid: student.uid,
         geekyPuntos: student.geekyPuntos,
-      }
+      },
     };
   });
   const [state, setState] = useState({});
@@ -64,9 +64,15 @@ const ListarStudentsCorte = (props) => {
     <div style={{ width: '100%' }}>
       <DivContainerList>
         <DivRowList>
-          <DivContainerInputCheckBox>
-            <p>Asistencia</p>
-          </DivContainerInputCheckBox>
+          {role === 'teacher' ? (
+            <DivContainerInputCheckBox>
+              <p>Asistencia</p>
+            </DivContainerInputCheckBox>
+          ) : (
+            <DivContainerInputCheckBox>
+              <p>Indice</p>
+            </DivContainerInputCheckBox>
+          )}
           <div>
             <p>Nombre Completo</p>
           </div>
@@ -78,7 +84,7 @@ const ListarStudentsCorte = (props) => {
           <p>Voto</p>
           <p>Porcentaje de asistencia</p>
         </DivRowList>
-        {studentsCorte.length > 0 && studentsCorte.map((student) => {
+        {studentsCorte.length > 0 && studentsCorte.map((student, index) => {
           let porcentajeAsistencia;
           if (student.assistance.length > 0) {
             porcentajeAsistencia = Math.round((student.assistance.reduce((a, b) => a + b, 0) / student.assistance.length) * 100);
@@ -87,9 +93,15 @@ const ListarStudentsCorte = (props) => {
           }
           return (
             <DivRowList key={student.uid}>
-              <DivContainerInputCheckBox>
-                <input type='checkbox' name='assistance' onChange={(evento) => handleInputChangeCheckbox(evento, student.uid, student.assistance, student.geekyPuntos)} />
-              </DivContainerInputCheckBox>
+              {role === 'teacher' ? (
+                <DivContainerInputCheckBox>
+                  <input type='checkbox' name='assistance' onChange={(evento) => handleInputChangeCheckbox(evento, student.uid, student.assistance, student.geekyPuntos)} />
+                </DivContainerInputCheckBox>
+              ) : (
+                <DivContainerInputCheckBox>
+                  <p>{index}</p>
+                </DivContainerInputCheckBox>
+              )}
 
               <DivFullName>
                 {student.photoURL ? <ImgStudent src={student.photoURL} alt={student.fullName} /> : <ImgStudent src='https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/default-profile.png?alt=media&token=0f8bf7f6-acc2-451c-be86-c7800e3ca059' alt={student.fullName} />}
