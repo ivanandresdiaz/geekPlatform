@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addLikeResourceFirestore, removeLikeResourceFirestore } from '../../actions/socialGeekActions';
+import { LikeCounter, Post, PostBottom, PostBottomLeft, PostCenter, PostDate, PostImg, PostProfileImg, PostTop, PostTopLeft, PostUsername, PostWrapper } from './SingleNewStyles';
+import { FiMoreVertical } from "react-icons/fi";
+import { FcDislike, FcLike, IconName } from "react-icons/fc";
 
 const SingleNew = (props) => {
   const { corteId, uid, resource } = props;
@@ -37,31 +40,49 @@ const SingleNew = (props) => {
   const fechaCreacion = obtenerFecha(resource.createdAt.toDate());
 
   return (
-    <div>
-      { resource.photoURL && <img src={resource.photoURL} alt={resource.fullName} />}
-      <Link to={`/socialGeek/${resource.uid}`}>
-        Creador:
-        {resource.fullName}
-      </Link>
-      <p>
-        {resource.description}
-      </p>
-      <img src={resource.photoURLNews} alt={resource.description} />
-      <p>
-        Fecha de creacion:
-        {fechaCreacion}
-      </p>
-      <button
-        type='button'
-        onClick={() => handleLike(resource.id, liked)}
-      >
-        {liked ? 'quitar like' : 'dar like'}
-        {/* liked significa que el usuario ya le ha dado me gusta */}
-      </button>
-      <p>
-        {amountLikes }
-      </p>
-    </div>
+    <>
+      <Post>
+        <PostWrapper>
+          <PostTop>
+            <PostTopLeft>
+              {resource.photoURL && <PostProfileImg src={resource.photoURL} alt={resource.fullName} />}
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <PostUsername>
+                  <Link to={`/socialGeek/${resource.uid}`}>
+                    {resource.fullName}
+                  </Link>
+                </PostUsername>
+                <PostDate>
+                  {fechaCreacion}
+                </PostDate>
+              </div>
+              <div>
+                <FiMoreVertical />
+              </div>
+            </PostTopLeft>
+          </PostTop>
+          <PostCenter>
+            <p>{resource.description}</p>
+            <p><PostImg src={resource.photoURLNews} alt={resource.description} /></p>
+          </PostCenter>
+          <PostBottom>
+            <PostBottomLeft>
+              <button
+                type='button'
+                onClick={() => handleLike(resource.id, liked)}
+              >
+                {liked ? <FcDislike /> : <FcLike />}
+              </button>
+              <LikeCounter>
+                <p>
+                  {amountLikes}
+                </p>
+              </LikeCounter>
+            </PostBottomLeft>
+          </PostBottom>
+        </PostWrapper>
+      </Post>
+    </>
   );
 };
 
