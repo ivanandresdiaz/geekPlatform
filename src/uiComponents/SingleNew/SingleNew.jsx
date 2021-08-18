@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addLikeResourceFirestore, removeLikeResourceFirestore } from '../../actions/socialGeekActions';
 import { LikeCounter, Post, PostBottom, PostBottomLeft, PostCenter, PostDate, PostImg, PostProfileImg, PostTop, PostTopLeft, PostUsername, PostWrapper } from './SingleNewStyles';
 import { FiMoreVertical } from "react-icons/fi";
-import { FcDislike, FcLike, IconName } from "react-icons/fc";
+import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 
 const SingleNew = (props) => {
   const { corteId, uid, resource } = props;
@@ -68,15 +68,14 @@ const SingleNew = (props) => {
           <PostBottom>
             <PostBottomLeft>
               <button
+                style={{ background: 'white', cursor: 'pointer' }}
                 type='button'
                 onClick={() => handleLike(resource.id, liked)}
               >
-                {liked ? <FcDislike /> : <FcLike />}
+                {liked ? <FcLike size={28} /> : <FcLikePlaceholder size={28} />}
               </button>
-              <LikeCounter>
-                <p>
-                  {amountLikes}
-                </p>
+              <LikeCounter >
+                {amountLikes}
               </LikeCounter>
             </PostBottomLeft>
           </PostBottom>

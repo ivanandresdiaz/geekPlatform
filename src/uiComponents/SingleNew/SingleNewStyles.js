@@ -66,6 +66,7 @@ export const LikeIcon = styled.div`
   cursor: pointer;
 `;
 
-export const LikeCounter = styled.div`
+export const LikeCounter = styled.p`
   font-size: 15px;
+  margin-left: 10px;
 `;
