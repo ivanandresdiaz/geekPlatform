@@ -52,14 +52,13 @@ const ProfileGeek = (props) => {
         (
           <div>
             <ProfileSocialGeek profileSocialGeek={profileSocialGeek} isUserAuth={isUserAuth} />
-            <ChartStudent profileSocialGeek={profileSocialGeek} />
-            <ChartMySprints mySprints={profileSocialGeek.mySprints} />
+            {profileSocialGeek.ProfileGeek === 'student' && <ChartStudent profileSocialGeek={profileSocialGeek} />}
+            {profileSocialGeek.ProfileGeek === 'student' && <ChartMySprints mySprints={profileSocialGeek.mySprints} />}
             {isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />}
-            <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />
+            {profileSocialGeek.ProfileGeek === 'student' && <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />}
             <p>Mis noticias</p>
             <NewsFeedCategories handleGetNews={handleGetNews} />
             {isUserAuth && <CreateNewsSocialGeek corteId={corteId} />}
-
             <h5>Listar mis publicaciones</h5>
             <ListarNews news={[]} />
           </div>

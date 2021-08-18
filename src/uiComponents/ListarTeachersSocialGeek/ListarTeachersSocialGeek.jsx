@@ -1,31 +1,31 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { listarTeachers } from '../../actions/teachersActions';
-import { ContainerContent } from '../../components/PanelAdmin/PanelAdminStyles';
 import { getTeachers } from '../../reducers/teachersReducer';
 
-const ListarTeachers = () => {
+const ListarTeachersSocialGeek = (props) => {
+  const { corteId } = props;
   const dispatch = useDispatch();
   const teachers = useSelector(getTeachers);
   useEffect(() => {
-    if (teachers.length > 0) {
-    } else {
+    if (!(teachers.length > 0)) {
       dispatch(listarTeachers());
     }
   }, []);
   return (
     <>
-      <ContainerContent>
+      <div>
         {teachers.length > 0 && teachers.map((teacher) => (
-          <ContainerContent key={teacher.uid}>
-            <p>
+          <div key={teacher.uid}>
+            <Link to={`/socialGeek/${corteId}/${teacher.uid}`}>
               {teacher.fullName}
-            </p>
-          </ContainerContent>
+            </Link>
+          </div>
         ))}
-      </ContainerContent>
+      </div>
     </>
   );
 };
 
-export default ListarTeachers;
+export default ListarTeachersSocialGeek ;

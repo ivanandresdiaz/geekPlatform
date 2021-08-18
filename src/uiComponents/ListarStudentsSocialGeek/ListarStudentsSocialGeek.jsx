@@ -12,21 +12,25 @@ const ListarStudentsSocialGeek = (props) => {
   useEffect(() => {
     if (!(studentsCorte.length > 0)) {
       dispatch(getFirestoreStudentsCorte(corteId));
+    } else if (studentsCorte[0].corteId !== corteId) {
+      dispatch(getFirestoreStudentsCorte(corteId));
     }
   }, []);
-  console.log(studentsCorte);
 
   return (
     <div>
       {
         studentsCorte.length > 0 && studentsCorte.map((student) => {
-          return (
-            <div key={student.uid}>
-              <Link to={`/socialGeek/${corteId}/${student.uid}`}>
-                {student.fullName}
-              </Link>
-            </div>
-          );
+          if (student.corteId === corteId) {
+            return (
+              <div key={student.uid}>
+                <Link to={`/socialGeek/${corteId}/${student.uid}`}>
+                  {student.fullName}
+                </Link>
+              </div>
+            );
+          }
+
         })
       }
     </div>
