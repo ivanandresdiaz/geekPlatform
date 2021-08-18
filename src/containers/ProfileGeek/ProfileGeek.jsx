@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
 import { db } from '../../firebase/firebaseConfig';
 import ProfileSocialGeek from '../../uiComponents/ProfileSocialGeek/ProfileSocialGeek';
 import { getUserId } from '../../reducers/authReducer';
@@ -9,7 +10,8 @@ import ListarNews from '../../uiComponents/ListarNews/ListarNews';
 import { getFirestoreNewsCategory } from '../../actions/socialGeekActions';
 import ListarPersonalProjects from '../../uiComponents/ListarPersonalProjects/ListarPersonalProjects';
 import AddPersonalProjects from '../../components/AddPersonalProjects/AddPersonalProjects';
-import toast from 'react-hot-toast';
+import ChartStudent from '../../components/ChartStudent/ChartStudent';
+import ChartMySprints from '../../components/ChartMySprints/ChartMySprints';
 
 const ProfileGeek = (props) => {
   const { match: { params: { profileUid } } } = props;
@@ -52,6 +54,8 @@ const ProfileGeek = (props) => {
         (
           <div>
             <ProfileSocialGeek profileSocialGeek={profileSocialGeek} isUserAuth={isUserAuth} />
+            <ChartStudent profileSocialGeek={profileSocialGeek} />
+            <ChartMySprints mySprints={profileSocialGeek.mySprints} />
             {isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />}
             <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />
             <p>Mis noticias</p>

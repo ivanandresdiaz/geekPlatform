@@ -49,7 +49,7 @@ const AssignedStandardSprints = (props) => {
         setAssignedSprint({
           corteId,
           salonId,
-          title: 'Guappjolotas',
+          title: 'Guappjolotas ', // no eliminen este espacio , es importante esta linea para la logica
           description: 'Evidenciar los concepto esenciales de ReactJS,Entender el ciclo de vida de componentes como clase. Aplicar y desarrollar SPA con ReactJS. Implementar y utilizar React Hooks en ReactJS. Enrutamiento dinámico.Desplegar aplicaciones de ReactJS en Netlify,Vercel',
           html: true,
           css: true,

@@ -173,6 +173,7 @@ exports.createSprint = functions.https.onCall((data, context)=> {
     calificados: [],
     html: data.html,
     css: data.css,
+    javascript: data.javascript,
     webpack: data.webpack,
     reactJs: data.reactJs,
     reactHooks: data.reactHooks,
@@ -256,3 +257,4 @@ exports.subtractLike = functions.https.onCall((data, context)=> {
     }
   });
 });
+

@@ -19,48 +19,44 @@ export const getFirestoreSalon = (corteId, salonId) => (dispatch, getState) => {
     .catch((err) => console.log(err));
 };
 
-export const createNewSprint = (corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, webpack, reactJs, reactHooks, redux, firebase, testing, image) => async (dispatch, getState) => {
+export const createNewSprint = ({ title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, webpack, reactJs, reactHooks, redux, firebase, testing, image, resourcePDF }, corteId, salonId) => async (dispatch, getState) => {
   try {
-    const resourcePDF = getState().salon.loadedSprintPDF;
-    if (Date.parse(start) > Date.parse(end)) {
-      alert('la fecha de entrega no puede ser menor a la fechan inicial');
-    } else {
-      const createSprint = functions.httpsCallable('createSprint');
-      const data = { corteId,
-        salonId,
-        title,
-        resourcePDF,
-        description,
-        start,
-        end,
-        deliveryLink,
-        supportLink1,
-        supportLink2,
-        supportLink3,
-        supportLink4,
-        html,
-        css,
-        webpack,
-        reactJs,
-        reactHooks,
-        redux,
-        firebase,
-        testing,
-        image };
-      console.log(data);
-      await createSprint(data);
-      alert('sprint agregado');
-      dispatch({ type: 'newSprintCreated', payload: { ...data, id: title } });
-    }
+
+    const createSprint = functions.httpsCallable('createSprint');
+    const data = { corteId,
+      salonId,
+      title,
+      resourcePDF,
+      description,
+      start,
+      end,
+      deliveryLink,
+      supportLink1,
+      supportLink2,
+      supportLink3,
+      supportLink4,
+      html,
+      css,
+      webpack,
+      reactJs,
+      reactHooks,
+      redux,
+      firebase,
+      testing,
+      image };
+    console.log(data);
+    await createSprint(data);
+    alert('sprint agregado');
+    dispatch({ type: 'newSprintCreated', payload: { ...data, id: ` ${title} ` } });// no eliminar espacio, es importante para la logica
+
   } catch (error) {
     toast.error('Sucedió un error');
     console.log(error);
   }
 };;
 
-export const assignedFirestoreSprint = ({ corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, webpack, reactJs, reactHooks, redux, firebase, testing, image }) => async (dispatch, getState) => {
+export const assignedFirestoreSprint = ({ resourcePDF, corteId, salonId, title, description, start, end, deliveryLink, supportLink1, supportLink2, supportLink3, supportLink4, html, css, webpack, reactJs, reactHooks, redux, firebase, testing, image }) => async (dispatch, getState) => {
   try {
-    const resourcePDF = getState().salon.loadedSprintPDF;
     if (Date.parse(start) > Date.parse(end)) {
       toast.error(
         'La fecha de entrega no puede ser menor a la fechan inicial',
@@ -92,7 +88,7 @@ export const assignedFirestoreSprint = ({ corteId, salonId, title, description, 
       };
       await createSprint(data);
       toast.success('sprint agregado');
-      dispatch({ type: 'newSprintCreated', payload: { ...data, id: title } });
+      dispatch({ type: 'newSprintCreated', payload: { ...data, calificados: [], id: title } });
     }
   } catch (error) {
     toast.error('Algo sucedió');
@@ -260,35 +256,35 @@ export const deleteFirestoreGroups = (corteId, salonId, id) => async (dispatch) 
   dispatch({ type: 'deleteFirestoreGroups', payload: id });
 };
 
-export const uploadSprintPDF = (file) => async (dispatch, getState) => {
-  console.log(file.name);
-  const refStorage = firebase.storage().ref(`sprintDocs/${file.name}`);
-  const task = refStorage.put(file);
+// export const uploadSprintPDF = (file) => async (dispatch, getState) => {
+//   console.log(file.name);
+//   const refStorage = firebase.storage().ref(`sprintDocs/${file.name}`);
+//   const task = refStorage.put(file);
 
-  task.on(
-    'state_changed',
-    (snapshot) => {
-      const porcentaje =
-        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log(`porcentaje de carga ${porcentaje}`);
-      // $('.determinate').attr('style', `width: ${porcentaje}%`);
-    },
-    (err) => {
-      console.log(`Error subiendo archivo = > ${err.message}`);
-    },
-    () => {
-      task.snapshot.ref
-        .getDownloadURL()
-        .then((url) => {
-          dispatch({ type: 'uploadSprintPDF', payload: url });
-          // sessionStorage.setItem('imgNewPost', url);
-        })
-        .catch((err) => {
-          console.log(`Error obteniendo downloadURL = > ${err}`);
-        });
-    },
-  );
-};
+//   task.on(
+//     'state_changed',
+//     (snapshot) => {
+//       const porcentaje =
+//         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+//       console.log(`porcentaje de carga ${porcentaje}`);
+//       // $('.determinate').attr('style', `width: ${porcentaje}%`);
+//     },
+//     (err) => {
+//       console.log(`Error subiendo archivo = > ${err.message}`);
+//     },
+//     () => {
+//       task.snapshot.ref
+//         .getDownloadURL()
+//         .then((url) => {
+//           dispatch({ type: 'uploadSprintPDF', payload: url });
+//           // sessionStorage.setItem('imgNewPost', url);
+//         })
+//         .catch((err) => {
+//           console.log(`Error obteniendo downloadURL = > ${err}`);
+//         });
+//     },
+//   );
+// };
 export const enviarFirestoreLista = (corteId, listaEnviar) => (dispatch, getState) => {
   const batch = db.batch();
   listaEnviar.forEach((student) => {
@@ -303,12 +299,12 @@ export const enviarFirestoreLista = (corteId, listaEnviar) => (dispatch, getStat
     .catch((error) => console.error(error));
 };
 
-export const calificarSprintStudent = (sprintId, uid, values, calificacion, corteId, salonId) => async (dispatch, getState) => {
+export const calificarSprintStudent = (sprintId, uid, values, calificacion, corteId, salonId, title) => async (dispatch, getState) => {
   try {
     const { studentsCorte } = getState().students;
     const studentArrayFiltered = studentsCorte.filter((student) => student.uid === uid);
     const student = studentArrayFiltered[0];
-    await db.collection('students').doc(student.uid).set({ mySprints: { ...student.mySprints, [sprintId]: { sprintId, calificacion } } }, { merge: true });
+    await db.collection('students').doc(student.uid).set({ mySprints: { ...student.mySprints, [sprintId]: { sprintId, calificacion, title } } }, { merge: true });
     //agregar a calificados de sprint el uid
     const { allSprints } = getState().salon;
     const sprintArray = allSprints.filter((item) => item.id === sprintId);
@@ -319,9 +315,10 @@ export const calificarSprintStudent = (sprintId, uid, values, calificacion, cort
     } else {
       nuevosCalificados = [...sprint.calificados, uid];
     }
-
     await db.collection('cortes').doc(corteId).collection('sprints').doc(sprintId)
       .update({ calificados: nuevosCalificados });
+
+    // dispatch({ type: 'nuevaCalificacion', payload: { nuevosCalificados, sprintId } });
     // ya esta agregado al atributos del sprint :{calificados :[ uid ...uid..]}
     const batch = db.batch();
     const valuesArray = Object.entries(values);
@@ -336,8 +333,11 @@ export const calificarSprintStudent = (sprintId, uid, values, calificacion, cort
     const sumaGeekyPuntos = Math.round(calificacion / 10);
     await db.collection('students').doc(uid).update({ geekyPuntos: student.geekyPuntos + sumaGeekyPuntos });
     alert(`calificado ${student.fullName}`);
+    //por el momento tuve que ahorrarme mucha logica de redux volviendo a llamar todos los sprints para que se renderize el view con el llamado a la api
+    dispatch(getFirestoreAllSprints(student.corteId));
   } catch (error) {
     alert('algo salio mal');
+    console.log(error);
     console.log(error.message);
   }
 

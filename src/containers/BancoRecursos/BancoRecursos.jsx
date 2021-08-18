@@ -13,7 +13,7 @@ import ListarRecursosAcademicos from '../../uiComponents/ListarRecursosAcademico
 import NavbarAdmin from '../../components/Structure/NavbarAdmin';
 import NavbarStudent from '../../components/Structure/NavbarStudent';
 import Footer from '../../components/Structure/Footer';
-import './estilosBanco.css'
+import './estilosBanco.css';
 import { Button7 } from '../../globalStyles';
 
 const BancoRecursos = () => {
@@ -45,9 +45,9 @@ const BancoRecursos = () => {
         <ContainerTitleRecursos>
           <h1>Banco de Recursos academicos</h1>
         </ContainerTitleRecursos>
-        <form action="" className="search-bar">
-          <input type="search" name="search" pattern=".*\S.*" required />
-          <button className="search-btn" type="submit">
+        <form action='' className='search-bar'>
+          <input type='search' name='search' pattern='.*\S.*' required />
+          <button className='search-btn' type='submit'>
             <span>Search</span>
           </button>
         </form>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
 import { motion } from 'framer-motion';
@@ -37,6 +38,7 @@ const Corte = (props) => {
     <>
       <div style={{ backgroundColor: '#F2F2F2' }}>
         <NavbarAdmin />
+
         <div>
           <ContainerMainTitleCorte>
             <ContainerTitleCorte>
@@ -62,6 +64,7 @@ const Corte = (props) => {
                   {' '}
                 </p>
               </motion.div>
+
               <ContainerIconsCorte>
                 <motion.div
                   initial={{ x: -300 }}
@@ -142,7 +145,9 @@ const Corte = (props) => {
             </div>
           </ContainerMainCorte>
         </div>
+        <Link to='/codelingoTeachers'>Codelingo Teachers Linkk !!!</Link>
         <Footer />
+
       </div>
     </>
   );

@@ -19,6 +19,8 @@ import SocialGeek from '../containers/SocialGeek/SocialGeek';
 import EditProfileSocialGeek from '../components/EditProfileSocialGeek/EditProfileSocialGeek';
 import ProfileGeek from '../containers/ProfileGeek/ProfileGeek';
 import ScoreSprints from '../containers/ScoreSprints/ScoreSprints';
+import AcercaDeProgramadores from '../containers/AcercaDeProgramadores/AcercaDeProgramadores';
+import CodelingoTeacher from '../containers/CodelingoTeacher/CodelingoTeacher';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -113,11 +115,22 @@ const App = () => {
           />
           <PrivateRoute
             exact
-            path='/scoreSprints/:sprintId'
+            path='/scoreSprints/:corteId/:sprintId'
             component={ScoreSprints}
             isAuthenticated={isLoggedIn}
           />
-
+          <PublicRoute
+            exact
+            path='/acercaDeProgramadores'
+            component={AcercaDeProgramadores}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path='/codelingoTeacher'
+            component={CodelingoTeacher}
+            isAuthenticated={isLoggedIn}
+          />
           <Redirect to='/auth/landingPage' />
         </Switch>
       </div>

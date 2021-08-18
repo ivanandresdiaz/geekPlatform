@@ -20,6 +20,7 @@ const ListarSprints = (props) => {
   const handleDeleteSprint = (id) => {
     dispatch(deleteSprint(id, corteId));
   };
+  console.log(sprints);
   return (
     <>
       <h4>Sprints</h4>
@@ -56,7 +57,7 @@ const ListarSprints = (props) => {
                     </div>
                     <div style={{ flexDirection: 'column', padding: '5px 5px 5px 5px', textAlign: 'center' }}>
                       <p style={{ color: '#3CC5FF' }}>PDF</p>
-                      <a href={sprint.resourcePDF} target='_blank' rel='noreferrer'>
+                      <a href={sprint.resourcePDF} target='_blank' rel='noreferrer' download={sprint.resourcePDF} onClick={() => console.log(sprint.resourcePDF)} rel='noreferrer'>
                         {' '}
                         <FaFilePdf />
                         {' '}
@@ -64,7 +65,7 @@ const ListarSprints = (props) => {
                     </div>
                   </div>
                   {role === 'teacher' && <Button4 type='button' primary onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</Button4>}
-                  {role === 'teacher' && <Link to={`/scoreSprints/${sprint.id}`}><Button4>Calificar</Button4></Link>}
+                  {role === 'teacher' && <Link to={`/scoreSprints/${corteId}/${sprint.id}`}><Button4>Calificar</Button4></Link>}
                 </ContainerContentSprint>
               </div>
             </motion.div>
