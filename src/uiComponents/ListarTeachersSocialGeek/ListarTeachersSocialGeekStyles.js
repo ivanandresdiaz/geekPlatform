@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ContainerRanking = styled.div`
+export const ContainerTeachers = styled.div`
   width: auto;
   margin: 20px auto;
   height: auto;
@@ -11,10 +11,10 @@ export const ContainerRanking = styled.div`
   margin-bottom: 20px;
 `;
 
-export const RankingContent = styled.div`
+export const TeachersContent = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   img {
     width: 50px;

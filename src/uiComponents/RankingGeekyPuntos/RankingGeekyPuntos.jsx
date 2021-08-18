@@ -28,7 +28,7 @@ const RankingGeekyPuntos = (props) => {
                   <span style={{ color: 'white', alignSelf: 'center', marginRight: '10px' }}>
                     {index + 1}
                   </span>
-                  <img src="" alt="" />
+                  <img src={student.photoURL} alt="Imagen de perfil" />
                   <span style={{ color: 'white', marginRight: 'auto' }}> {student.fullName}</span>
                   <span style={{ color: 'white' }}> {student.geekyPuntos}</span>
                 </RankingContent>
