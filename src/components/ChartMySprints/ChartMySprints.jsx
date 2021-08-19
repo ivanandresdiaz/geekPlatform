@@ -11,29 +11,32 @@ const ChartMySprints = (props) => {
   console.log('labels', labels);
   console.log('calificaciones', calificaciones);
   return (
-    <div>
-      <Bar
-        data={{
-          labels,
-          datasets: [{
-            label: 'Calificacion de mis sprints',
-            data: [...calificaciones],
-            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-            borderColor: 'rgb(153, 102, 255)',
-            borderWidth: 1,
-          }],
-        }}
-        options={{
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          } }}
-        height={400}
-        width={600}
-      />
-    </div>
+    <>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <Bar
+          data={{
+            labels,
+            datasets: [{
+              label: 'Calificacion de mis sprints',
+              data: [...calificaciones],
+              backgroundColor: 'rgba(153, 102, 255, 0.2)',
+              borderColor: 'rgb(153, 102, 255)',
+              borderWidth: 1,
+            }],
+          }}
+          options={{
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            }
+          }}
+          height={200}
+          width={200}
+        />
+      </div>
+    </>
   );
 };
 

@@ -69,15 +69,14 @@ const ProfileGeek = (props) => {
               <ListarNews news={[]} />
             </div>
             <div style={{ flex: '5', margin: '30px' }}>
-              {profileSocialGeek.roleGeek === 'student' && <ChartStudent profileSocialGeek={profileSocialGeek} />}
+             {profileSocialGeek.roleGeek === 'student' && <ChartStudent profileSocialGeek={profileSocialGeek} />}
               {profileSocialGeek.roleGeek === 'student' && <ChartMySprints mySprints={profileSocialGeek.mySprints} />}
-              {profileSocialGeek.roleGeek === 'student' && isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />}
-              {profileSocialGeek.roleGeek === 'student' && <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />}
+              {/* {profileSocialGeek.roleGeek === 'student' && isUserAuth && <AddPersonalProjects profileSocialGeek={profileSocialGeek} />}
+              {profileSocialGeek.roleGeek === 'student' && <ListarPersonalProjects personalProjects={profileSocialGeek.myProjects} />}  */}
             </div>
           </div>
         )}
       <Footer />
-
     </>
   );
 };
