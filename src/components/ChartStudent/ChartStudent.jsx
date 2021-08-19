@@ -16,47 +16,51 @@ const ChartStudent = (props) => {
   const sigloXXIAverage = Math.round(sigloXXI.reduce((a, b) => a + b, 0) / sigloXXI.length);
   const designThinkingAverage = Math.round(designThinking.reduce((a, b) => a + b, 0) / designThinking.length);
   return (
-    <div>
-      <Radar
-        data={{
-          labels: [
-            'Html',
-            'Css',
-            'Javascript',
-            'Webpack',
-            'ReactJs',
-            'ReactHooks',
-            'Redux',
-            'Firebase',
-            'testing',
-            'HabilidadesSigloXXI',
-            'DesignThinking',
-          ],
-          datasets: [
-            {
-              label: `${profileSocialGeek.fullName}`,
-              data: [htmlAverage, cssAverage, javascriptAverage, webpackAverage, reactJsAverage, reactHooksAverage, reduxAverage, firebaseAverage, testingAverage, sigloXXIAverage, designThinkingAverage],
-              fill: true,
-              backgroundColor: 'rgba(54, 162, 235, 0.2)',
-              borderColor: 'rgb(54, 162, 235)',
-              pointBackgroundColor: 'rgb(54, 162, 235)',
-              pointBorderColor: '#fff',
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: 'rgb(54, 162, 235)',
-            }],
-        }}
-        options={{
-          maintainAspectRatio: false,
-          elements: {
-            line: {
-              borderWidth: 3,
+    <>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+
+
+        <Radar
+          data={{
+            labels: [
+              'Html',
+              'Css',
+              'Javascript',
+              'Webpack',
+              'ReactJs',
+              'ReactHooks',
+              'Redux',
+              'Firebase',
+              'testing',
+              'HabilidadesSigloXXI',
+              'DesignThinking',
+            ],
+            datasets: [
+              {
+                label: `${profileSocialGeek.fullName}`,
+                data: [htmlAverage, cssAverage, javascriptAverage, webpackAverage, reactJsAverage, reactHooksAverage, reduxAverage, firebaseAverage, testingAverage, sigloXXIAverage, designThinkingAverage],
+                fill: true,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgb(54, 162, 235)',
+                pointBackgroundColor: 'rgb(54, 162, 235)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(54, 162, 235)',
+              }],
+          }}
+          options={{
+            maintainAspectRatio: false,
+            elements: {
+              line: {
+                borderWidth: 3,
+              },
             },
-          },
-        }}
-        height={400}
-        width={600}
-      />
-    </div>
+          }}
+          height={200}
+          width={200}
+        />
+      </div>
+    </>
   );
 };
 

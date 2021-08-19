@@ -76,7 +76,6 @@ const ProfileGeek = (props) => {
           </div>
         )}
       <Footer />
-
     </>
   );
 };
