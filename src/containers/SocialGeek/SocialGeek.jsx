@@ -25,7 +25,7 @@ const SocialGeek = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (userDataLogged) {
-      dispatch(getFirestoreNewsCategory(corteId, 'memes'));
+      dispatch(getFirestoreNewsCategory(corteId, 'resources'));
     } else {
       toast.error('No estás autenticado');
     }
@@ -33,7 +33,6 @@ const SocialGeek = (props) => {
   const handleGetNews = useCallback(
     (category) => {
       if (category === 'blogs') {
-        console.log('entro a  category blogs');
         dispatch(getFirestoreNewsCategoryBlogs(corteId));
       } else {
         dispatch(getFirestoreNewsCategory(corteId, category));
