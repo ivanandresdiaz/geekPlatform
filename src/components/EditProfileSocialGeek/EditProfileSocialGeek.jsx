@@ -1,14 +1,25 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/LabelLogin-has-associated-control */
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { firebase } from '../../firebase/firebaseConfig';
 import { updateFirestoreStudent, updateFirestoreTeacher, updateFirestoreAdmin } from '../../actions/authActions';
 import useForm from '../../hooks/useForm';
+import NavbarTeacher from '../Structure/NavbarTeacher';
+import NavbarAdmin from '../Structure/NavbarAdmin';
+import NavbarStudent from '../Structure/NavbarStudent';
+import { getRole } from '../../reducers/authReducer';
+import { DivContainerLogin, ContainerLogin, TitleLogin, FormInput, LabelLogin, FormLogin, SubtitleLogin, Reset, LabelLoginPassword } from '../../styles/styledLogin';
+import { Button4 } from '../../globalStyles';
+import { useRef } from 'preact/hooks';
 
 const EditProfileSocialGeek = (props) => {
+  const hiddenFileInput = React.useRef(null);
+  const handleClick = (event) => {
+    hiddenFileInput.current.click();
+  };
+  const role = useSelector(getRole);
   const { history, match: { params: { corteId } } } = props;
   const dispatch = useDispatch();
   const userDataLogged = useSelector((state) => state.auth);
@@ -146,125 +157,160 @@ const EditProfileSocialGeek = (props) => {
     );
   };
   return (
-    <div>
-      <form>
-        <label>
-          nombre:
-          <input
-            type='text'
-            placeholder='nombre'
-            name='fullName'
-            value={fullName}
-            onChange={handleInputChange}
-            required
-          />
-        </label>
-        <label>
-          Presentacion
-          <textarea name='bio' cols='30' rows='10' value={bio} placeholder='breve presentacion' onChange={handleInputChange} />
-        </label>
-        <label>
-          Link de facebook:
-          <input
-            type='text'
-            placeholder='link de facebook'
-            name='facebook'
-            value={facebook}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Link de github:
-          <input
-            type='text'
-            placeholder='link de github'
-            name='github'
-            value={github}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Link de instagram:
-          <input
-            type='text'
-            placeholder='link de instagram'
-            name='instagram'
-            value={instagram}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Link de linkedin:
-          <input
-            type='text'
-            placeholder='link de linkedin'
-            name='linkedin'
-            value={linkedin}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Link de twitter:
-          <input
-            type='text'
-            placeholder='link de twitter'
-            name='twitter'
-            value={twitter}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Link de website:
-          <input
-            type='text'
-            placeholder='link de linkedin'
-            name='linkedin'
-            value={linkedin}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          numero de whatsapp:
-          <input
-            type='number'
-            placeholder='numero de whatsapp'
-            name='whatsapp'
-            value={whatsapp}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          password:
-          <input
-            type='text'
-            placeholder='link de password'
-            name='password'
-            value={password}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          confirmar password:
-          <input
-            type='text'
-            placeholder='confirmar password'
-            name='confirmPassword'
-            value={confirmPassword}
-            onChange={handleInputChange}
-          />
-        </label>
+    <>
+      <div style={{ background: '#F2F2F2' }} >
+        {role === 'teacher' && (
+          <NavbarTeacher />
+        )}
+        {role === 'admin' && (
+          <NavbarAdmin />
+        )}
+        {role === 'student' && (
+          <NavbarStudent />
+        )}
+        <DivContainerLogin>
+          <ContainerLogin style={{ width: '1200px', height: 'auto' }}>
+            <TitleLogin>Modifica tus datos</TitleLogin>
 
-        <label>
-          Cambio de Foto de perfil
-          <input type='file' name='photoUrl' onChange={handleUploadphotoURL} />
-        </label>
-        <label>
-          Cambio de Foto de portada
-          <input type='file' name='photoUrl' onChange={handleUploadCover} />
-        </label>
-        <button type='submit' disabled={disabled} onClick={handleSubmit}>Editar mi perfil</button>
-      </form>
-    </div>
+            <FormLogin>
+
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <LabelLogin>
+                  Nombre
+                  <FormInput
+                    type='text'
+                    placeholder='Nombre'
+                    name='fullName'
+                    value={fullName}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </LabelLogin>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <LabelLogin>
+                  Presentación
+                  <textarea name='bio' cols='30' rows='10' value={bio} placeholder='Breve presentación' onChange={handleInputChange} />
+                </LabelLogin>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <LabelLogin>
+                  Facebook
+                  <FormInput
+                    type='text'
+                    placeholder='Enlace de facebook'
+                    name='facebook'
+                    value={facebook}
+                    onChange={handleInputChange}
+                  />
+                </LabelLogin>
+                <LabelLogin>
+                  GitHub
+                  <FormInput
+                    type='text'
+                    placeholder='Enlace de GitHub'
+                    name='github'
+                    value={github}
+                    onChange={handleInputChange}
+                  />
+                </LabelLogin>
+                <LabelLogin>
+                  Instagram
+                  <FormInput
+                    type='text'
+                    placeholder='Enlace instagram'
+                    name='instagram'
+                    value={instagram}
+                    onChange={handleInputChange}
+                  />
+                </LabelLogin>
+
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <LabelLogin>
+                  LinkedIn
+                  <FormInput
+                    type='text'
+                    placeholder='Enlace LinkedIn'
+                    name='linkedin'
+                    value={linkedin}
+                    onChange={handleInputChange}
+                  />
+                </LabelLogin>
+
+                <LabelLogin>
+                  Twitter
+                  <FormInput
+                    type='text'
+                    placeholder='Enlace de Twitter'
+                    name='twitter'
+                    value={twitter}
+                    onChange={handleInputChange}
+                  />
+                </LabelLogin>
+                <LabelLogin>
+                  Sitio web
+                  <FormInput
+                    type='text'
+                    placeholder='Enlace de Sitio Web'
+                    name='linkedin'
+                    value={linkedin}
+                    onChange={handleInputChange}
+                  />
+                </LabelLogin>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <LabelLogin>
+                  WhatsApp
+                  <FormInput
+                    type='number'
+                    placeholder='Número de WhatsApp'
+                    name='whatsapp'
+                    value={whatsapp}
+                    onChange={handleInputChange}
+                  />
+                </LabelLogin>
+                <LabelLogin>
+                  Contraseña
+                  <FormInput
+                    type='text'
+                    placeholder='Contraseña'
+                    name='password'
+                    value={password}
+                    onChange={handleInputChange}
+                  />
+                </LabelLogin>
+                <LabelLogin>
+                  Confirmar contraseña
+                  <FormInput
+                    type='text'
+                    placeholder='Repetir contraseña'
+                    name='confirmPassword'
+                    value={confirmPassword}
+                    onChange={handleInputChange}
+                  />
+                </LabelLogin>
+              </div>
+              <LabelLogin>
+                Foto de perfil
+                <Button4 onClick={handleClick}>
+                  Foto de perfil
+                </Button4>
+                <input style={{ display: 'none' }} type='file' name='photoUrl' ref={hiddenFileInput} onChange={handleUploadphotoURL} />
+              </LabelLogin>
+              <LabelLogin>
+                {/* <Button4 onClick={handleClick}>
+                  Foto de portada
+                </Button4> */}
+                <input style={{ display: 'none' }} type='file' name='photoUrl' onChange={handleUploadCover} />
+              </LabelLogin>
+              <Button4 type='submit' disabled={disabled} onClick={handleSubmit, handleClick}>Guardar</Button4>
+            </FormLogin>
+          </ContainerLogin>
+        </DivContainerLogin>
+      </div>
+    </>
   );
 };
 

@@ -127,7 +127,7 @@ const Footer = () => {
         </FooterSubscription>
         <SocialMedia>
           <Link to='/acercaDeProgramadores'>
-            <WebsiteRights>Copyright @ 2021, Equipo Dinamita, todos los derechos reservados. </WebsiteRights>
+            <WebsiteRights>Copyright @ 2021, Equipo GeekPlatform, todos los derechos reservados. </WebsiteRights>
           </Link>
         </SocialMedia>
       </FooterContainer>

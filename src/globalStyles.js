@@ -204,4 +204,27 @@ export const Button7 = styled(motion.button)`
   }
 `;
 
+export const ButtonSocial = styled(motion.button)`
+  white-space: nowrap;
+  margin-top: 20px;
+  color: #333333;
+  font-family: "Montserrat", sans-serif;
+  font-size: ${({ fontBig }) => (fontBig ? "18px" : "16px")};
+  font-weight: 600;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 16px;
+  background: none;
+
+  &:hover {
+    transition: all 0.3 ease-out;
+    color: #ff3b53;
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
+`;
+
 export default GlobalStyle;

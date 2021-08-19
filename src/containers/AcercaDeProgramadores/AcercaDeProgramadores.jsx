@@ -2,8 +2,7 @@ import React from 'react';
 import logo from '../../images/brand/logo.png';
 import { FooterIcon, SocialLogo } from '../../styles/FooterStyles';
 import { ContainerCardAbout, ContImg } from './AboutStyles';
-
-// import Andres from "../../images/brand/andres.png"; //Acá va la foto de Andrés que todavía no la tengo :'v
+import Andres from "../../images/brand/andres.jpg";
 import Jorge from "../../images/brand/jorge.png";
 import Juan from "../../images/brand/juan.jpg";
 import imgR from "../../images/brand/react.png";
@@ -50,7 +49,7 @@ const AcercaDeProgramadores = () => {
               <ContainerCardAbout>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <ContImg>
-                    {/* <img src={andres} alt="Iván Andrés Diaz" /> */}
+                    <img src={Andres} alt="Iván Andrés Diaz" />
                   </ContImg>
                   <h3 style={{ textAlign: 'center', fontWeight: '700' }}>Iván Andrés Diaz</h3>
                 </div>

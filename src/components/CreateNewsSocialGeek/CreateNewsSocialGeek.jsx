@@ -15,6 +15,7 @@ const CreateNewsSocialGeek = (props) => {
   const [disabled, setDisabled] = useState(true);
   const handleClick = (event) => {
     hiddenFileInput.current.click();
+    event.preventDefault();
   };
   const userDataLogged = useSelector((state) => state.auth);
   const handleChange = (event) => {

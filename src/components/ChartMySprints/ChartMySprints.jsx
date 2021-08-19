@@ -12,7 +12,7 @@ const ChartMySprints = (props) => {
   console.log('calificaciones', calificaciones);
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', borderRadius: '10px', background: 'white', marginTop: '15px', padding: '21px' }}>
         <Bar
           data={{
             labels,
