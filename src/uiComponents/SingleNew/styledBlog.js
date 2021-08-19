@@ -7,6 +7,3 @@ export const ImgBlog = styled.img`
   object-fit: cover;
   object-position: center;
 `;
-export const SpanNegrilla = styled.span`
-font-weight: 700px;
-`;
