@@ -4,6 +4,7 @@ const initialState = {
   cortes: [],
   admin: [],
   salones: [],
+
 };
 
 export const adminReducer = (state = initialState, action) => {

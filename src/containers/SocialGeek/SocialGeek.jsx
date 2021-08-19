@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import CreateNewsSocialGeek from '../../components/CreateNewsSocialGeek/CreateNewsSocialGeek';
 import NewsFeedCategories from '../../components/NewsFeedCategories/NewsFeedCategories';
 import ListarNews from '../../uiComponents/ListarNews/ListarNews';
-import { getFirestoreNewsCategory } from '../../actions/socialGeekActions';
+import { getFirestoreNewsCategory, getFirestoreNewsCategoryBlogs } from '../../actions/socialGeekActions';
 import { getNewsCategory } from '../../reducers/socialGeekReducer';
 import RankingGeekyPuntos from '../../uiComponents/RankingGeekyPuntos/RankingGeekyPuntos';
 import ListarStudentsSocialGeek from '../../uiComponents/ListarStudentsSocialGeek/ListarStudentsSocialGeek';
@@ -25,16 +25,21 @@ const SocialGeek = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (userDataLogged) {
-      dispatch(getFirestoreNewsCategory(corteId, 'blogs'));
+      dispatch(getFirestoreNewsCategoryBlogs(corteId));
     } else {
       toast.error('No estás autenticado');
     }
   }, []);
   const handleGetNews = useCallback(
     (category) => {
-      if (userDataLogged) {
+      console.log(category);
+      if (category === 'blogs') {
+        console.log('entro a  category blogs');
+        dispatch(getFirestoreNewsCategoryBlogs(corteId));
+      } else {
         dispatch(getFirestoreNewsCategory(corteId, category));
       }
+
     }, [],
   );
 

@@ -21,6 +21,8 @@ import ProfileGeek from '../containers/ProfileGeek/ProfileGeek';
 import ScoreSprints from '../containers/ScoreSprints/ScoreSprints';
 import AcercaDeProgramadores from '../containers/AcercaDeProgramadores/AcercaDeProgramadores';
 import CodelingoTeacher from '../containers/CodelingoTeacher/CodelingoTeacher';
+import CreateBlog from '../containers/CreateBlog/CreateBlog';
+import BlogRead from '../containers/BlogRead/BlogRead';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -131,6 +133,19 @@ const App = () => {
             component={CodelingoTeacher}
             isAuthenticated={isLoggedIn}
           />
+          <PrivateRoute
+            exact
+            path='/createBlog/:corteId/:profileUid'
+            component={CreateBlog}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path='/blog/:corteId/:uid/:idBlog'
+            component={BlogRead}
+            isAuthenticated={isLoggedIn}
+          />
+
           <Redirect to='/auth/landingPage' />
         </Switch>
       </div>

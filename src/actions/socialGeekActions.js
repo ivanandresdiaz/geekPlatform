@@ -2,30 +2,45 @@
 import toast from 'react-hot-toast';
 import {
   firebase,
-  googleAuthProvider,
   db,
   functions,
 } from '../firebase/firebaseConfig';
 
-export const getFirestoreNewsCategory =
-  (corteId, categoryNews) => (dispatch, getState) => {
-    db.collection('cortes')
-      .doc(corteId)
-      .collection('news')
-      .where('categoryNews', '==', categoryNews)
-      .get()
-      .then((snapshot) => {
-        const data = snapshot.docs.map((doc) => {
-          const dataDocument = doc.data();
-          return { ...dataDocument, id: doc.id };
-        });
-        dispatch({ type: 'getFirestoreNewsCategory', payload: data });
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error('Algo salio mal');
+export const getFirestoreNewsCategory = (corteId, categoryNews) => (dispatch, getState) => {
+  db.collection('cortes')
+    .doc(corteId)
+    .collection('news')
+    .where('categoryNews', '==', categoryNews)
+    .get()
+    .then((snapshot) => {
+      const data = snapshot.docs.map((doc) => {
+        const dataDocument = doc.data();
+        return { ...dataDocument, id: doc.id };
       });
-  };
+      dispatch({ type: 'getFirestoreNewsCategory', payload: data });
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error('Algo salio mal');
+    });
+};
+export const getFirestoreNewsCategoryBlogs = (corteId) => (dispatch, getState) => {
+  db.collection('cortes')
+    .doc(corteId)
+    .collection('blogs')
+    .get()
+    .then((snapshot) => {
+      const data = snapshot.docs.map((doc) => {
+        const dataDocument = doc.data();
+        return { ...dataDocument, id: doc.id };
+      });
+      dispatch({ type: 'getFirestoreNewsCategoryBlog', payload: data });
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error('Algo salio mal');
+    });
+};
 export const getFirestoreMyNewsCategory = (corteId, categoryNews, uidProfile) => (dispatch, getState) => {
   db.collection('cortes')
     .doc(corteId)
@@ -80,6 +95,16 @@ export const removeLikeResourceFirestore =
     const subtractLike = functions.httpsCallable('subtractLike');
     subtractLike({ corteId, id });
   };
+export const addLikeResourceFirestoreBlog =
+  (corteId, id) => (dispatch, getState) => {
+    const addLikeBlog = functions.httpsCallable('addLikeBlog');
+    addLikeBlog({ corteId, id });
+  };
+export const removeLikeResourceFirestoreBlog =
+  (corteId, id) => (dispatch, getState) => {
+    const subtractLikeBlog = functions.httpsCallable('subtractLikeBlog');
+    subtractLikeBlog({ corteId, id });
+  };
 
 export const addFirestorePersonalProject =
   (values) => async (dispatch, getState) => {
@@ -100,3 +125,37 @@ export const addFirestorePersonalProject =
       console.log(error.message);
     }
   };
+export const createFirestoreNewBlog = (title, description, sitioWeb, gitHub, video, image, textTop, textBottom, corteId, uid) => async (dispatch, getState) => {
+  const { photoURL, fullName, uid } = getState().auth;
+  try {
+    const data = {
+      title,
+      description,
+      sitioWeb,
+      gitHub,
+      video,
+      image,
+      textTop,
+      textBottom,
+      corteId,
+      uid,
+      fullName,
+      photoURL,
+      likes: [],
+      categoryNews: 'blogs',
+      slug: title.split(' ').join('-'),
+      date: new Date().toLocaleDateString(),
+    };
+    await db
+      .collection('cortes')
+      .doc(corteId)
+      .collection('blogs')
+      .add(data);
+    toast.success('Se ha agregado con exito');
+    // dispatch({ type: 'createFirestoreNewBlog', payload: { ...data, id: title } });
+  } catch (error) {
+    toast.error('Algo sucedió');
+    console.log(error.message);
+  }
+
+};

@@ -25,6 +25,17 @@ export const socialGeekReducer = (state = initialState, action) => {
         myNews: action.payload,
       };
     }
+    case 'getFirestoreNewsCategoryBlog':
+      return {
+        ...state,
+        news: action.payload,
+      };
+    case 'createFirestoreNewBlog': {
+      return {
+        ...state,
+        news: [...state.news, action.payload],
+      };
+    }
     default:
       return state;
   }
