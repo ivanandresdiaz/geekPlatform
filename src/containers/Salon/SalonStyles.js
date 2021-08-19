@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ContainerMainSalon = styled.div`
   margin: 30px 30px 0px 160px;
@@ -70,3 +70,4 @@ export const ImagenSprint = styled.img`
   object-position: center;
   width: 100%;
 `;
+

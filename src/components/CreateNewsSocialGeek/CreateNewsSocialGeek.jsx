@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { MdPermMedia } from 'react-icons/md';
 import useForm from '../../hooks/useForm';
 import { firebase } from '../../firebase/firebaseConfig';
@@ -119,6 +120,11 @@ const CreateNewsSocialGeek = (props) => {
                   <Button4 type='submit' onClick={handleSubmit} disabled={disabled}>Publicar</Button4>
                   {/*  */}
                 </ShareOption>
+                {/* <ShareOption>
+                  <Link to={`/createBlog/${corteId}/${userDataLogged.uid}`}>
+                    <Button4>Crear Blog</Button4>
+                  </Link>
+                </ShareOption> */}
               </ShareOptions>
             </ShareBottom>
           </form>

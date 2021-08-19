@@ -87,6 +87,9 @@ export const loginEmailPassword = (email, password) => {
       .catch((err) => {
         if (err.message == 'The password is invalid or the user does not have a password.') {
           toast.error('contraseña incorrecta');
+          if (err.message == 'There is no user record corresponding to this identifier. The user may have been deleted.') {
+            toast.error('no existe un usuario con este correo');
+          }
 
         }
         console.log(err);
@@ -191,7 +194,8 @@ export const registerNewAdmin =
           email,
           fullName,
           password,
-          photoURL: '',
+          photoURL: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/default-profile.png?alt=media&token=0f8bf7f6-acc2-451c-be86-c7800e3ca059',
+          cover: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/defaultPortada.png?alt=media&token=88ae3cac-2742-44f4-b7a4-ad373b451e2e',
           bio: '',
           whatsapp: '',
           linkedin: '',
@@ -225,7 +229,8 @@ export const registerNewTeacher =
             email,
             fullName,
             password,
-            photoURL: '',
+            photoURL: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/default-profile.png?alt=media&token=0f8bf7f6-acc2-451c-be86-c7800e3ca059',
+            cover: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/defaultPortada.png?alt=media&token=88ae3cac-2742-44f4-b7a4-ad373b451e2e',
             bio: 'escribe tu presentacion',
             website: '',
             location: '',
@@ -260,8 +265,8 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
         fullName,
         password,
         corteId,
-        photoURL: '',
-        cover: '',
+        photoURL: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/default-profile.png?alt=media&token=0f8bf7f6-acc2-451c-be86-c7800e3ca059',
+        cover: 'https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/defaultPortada.png?alt=media&token=88ae3cac-2742-44f4-b7a4-ad373b451e2e',
         bio: '',
         website: '',
         city: '',

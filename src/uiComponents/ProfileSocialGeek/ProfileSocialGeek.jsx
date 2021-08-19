@@ -15,21 +15,23 @@ const ProfileSocialGeek = (props) => {
         <ProfileCover>
           <ProfileCoverImg
             src={cover}
-            alt="Foto de portada"
+            alt='Foto de portada'
           />
-          <ProfileUserImg
-            src={photoURL}
-            alt="Foto de perfil"
-          />
+          {photoURL ? (
+            <ProfileUserImg
+              src={photoURL}
+              alt='Foto de perfil'
+            />
+          ) : <img src='https://firebasestorage.googleapis.com/v0/b/geekplatform-dc705.appspot.com/o/default-profile.png?alt=media&token=0f8bf7f6-acc2-451c-be86-c7800e3ca059' alt='foto perfil' />}
+
         </ProfileCover>
         <ProfileInfo>
-          <ProfileInfoName >{fullName}</ProfileInfoName>
-          <ProfileInfoDesc >Hello my friends!</ProfileInfoDesc>
+          <ProfileInfoName>{fullName}</ProfileInfoName>
+          <ProfileInfoDesc>Hello my friends!</ProfileInfoDesc>
         </ProfileInfo>
       </div>
-      <h1>Ya estan los datos ahora falta maquetarlos</h1>
 
-      <h4></h4>
+      <h4 />
       <p>{!active && 'Inactivo'}</p>
       {isUserAuth ? <Link to={`/socialGeek/${corteId}/${uid}/edit`}>Editar</Link> : null}
       <p>{city}</p>

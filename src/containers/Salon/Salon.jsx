@@ -78,6 +78,7 @@ const Salon = (props) => {
       </ContainerMainSalon>
       <ContainerMainSalon>
         <ListarWorkGroups corteId={corteId} salonId={salon} />
+
       </ContainerMainSalon>
       <Footer />
     </>

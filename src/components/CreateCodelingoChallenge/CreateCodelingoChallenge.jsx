@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useForm from '../../hooks/useForm';
@@ -115,7 +116,7 @@ const CreateCodelingoChallenge = () => {
             </label>
             <h4 style={{ textAlign: 'center', marginBottom: '20px' }}>Asignar tematicas de reto codelingo</h4>
             <div style={{ display: 'flex', flexDirection: 'column', alignSelf: 'center', marginBottom: '15px' }}>
-              <label >
+              <label>
                 <input
                   style={{ marginRight: '5px', marginLeft: '5px' }}
                   ref={htmlInput}
@@ -223,9 +224,9 @@ const CreateCodelingoChallenge = () => {
               Crear Codelingo challenge
             </Button4>
           </div>
-        </FormModal >
+        </FormModal>
       </ContainerCreateChallenge>
-    </div >
+    </div>
   );
 };
 

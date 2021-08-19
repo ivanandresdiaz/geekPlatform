@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import {
   FooterContainer,
   FooterSubscription,
@@ -23,7 +24,6 @@ import aliance1 from '../../images/other/landing-1.png';
 import aliance2 from '../../images/other/landing-2.png';
 import aliance3 from '../../images/other/landing-3.png';
 import aliance4 from '../../images/other/landing-4.png';
-import { Link } from 'react-router-dom';
 
 const Footer = () => {
 
