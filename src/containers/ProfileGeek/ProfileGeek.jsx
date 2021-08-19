@@ -28,7 +28,7 @@ const ProfileGeek = (props) => {
   const [profileSocialGeek, setProfileSocialGeek] = useState('');
   const [isUserAuth, setIsUserAuth] = useState(false);
   useEffect(() => {
-    dispatch(getFirestoreMyNewsCategory(corteId, 'blogs', profileUid));
+    dispatch(getFirestoreMyNewsCategory(corteId, 'memes', profileUid));
     if (loggedUidUser === profileUid) {
       setProfileSocialGeek(userDataLogged);
       setIsUserAuth(true);
@@ -66,8 +66,8 @@ const ProfileGeek = (props) => {
               <ProfileSocialGeek profileSocialGeek={profileSocialGeek} isUserAuth={isUserAuth} />
               <NewsFeedCategories handleGetNews={handleGetNews} />
               {isUserAuth && <CreateNewsSocialGeek corteId={corteId} />}
-              <h5>Listar mis publicaciones</h5>
-              <ListarNews news={myNews} />
+              {/* <h5>Listar mis publicaciones</h5> */}
+              {/* <ListarNews news={myNews} /> */}
             </div>
             <div style={{ flex: '5', margin: '30px' }}>
               {profileSocialGeek.roleGeek === 'student' && <ChartStudent profileSocialGeek={profileSocialGeek} />}

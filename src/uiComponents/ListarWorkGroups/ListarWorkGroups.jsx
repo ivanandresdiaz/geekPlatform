@@ -6,6 +6,7 @@ import { getFirestoreWorkGroups } from '../../actions/classroomActions';
 import Group from '../../components/Group/Group';
 import NavbarTeacher from '../../components/Structure/NavbarTeacher';
 import Footer from '../../components/Structure/Footer';
+import { DivCentrar } from './styledListarWorkgroups';
 
 const ListarWorkGroups = (props) => {
   const { corteId, salonId } = props;
@@ -18,10 +19,15 @@ const ListarWorkGroups = (props) => {
   return (
     <>
 
-      <h3 style={{textAlign: 'center', color: '#662E9B'}}>Grupos de estudio</h3>
+      <h3 style={{ textAlign: 'center', color: '#662E9B' }}>Grupos de estudio</h3>
       {workGroups.length > 0 && workGroups.map((workGroup) => {
         const { columnOrder, columns, tasks, title, id } = workGroup;
-        return <Group key={workGroup.id} columnOrder={columnOrder} columns={columns} tasks={tasks} title={title} id={id} corteId={corteId} salonId={salonId} />;
+        return (
+          <DivCentrar key={workGroup.id}>
+            <Group columnOrder={columnOrder} columns={columns} tasks={tasks} title={title} id={id} corteId={corteId} salonId={salonId} />
+          </DivCentrar>
+
+        );
       })}
 
     </>

@@ -14,7 +14,7 @@ export const addFirestoreNewCodelingoChallenge = (values, fullName) => (dispatch
   console.log(nuevoRecurso);
   db.collection('bancos').doc('codelingo').collection('resources').add(nuevoRecurso)
     .then(() => {
-      toast.success('Se ha agregado reto con éxito.');
+      toast.success('Se ha agregado nuevo reto con éxito.');
       dispatch({ type: 'addFirestoreNewCodelingoChallenge', payload: { ...nuevoRecurso, id: values.title } });
     })
     .catch((error) => {

@@ -120,11 +120,11 @@ const CreateNewsSocialGeek = (props) => {
                   <Button4 type='submit' onClick={handleSubmit} disabled={disabled}>Publicar</Button4>
                   {/*  */}
                 </ShareOption>
-                <ShareOption>
+                {/* <ShareOption>
                   <Link to={`/createBlog/${corteId}/${userDataLogged.uid}`}>
                     <Button4>Crear Blog</Button4>
                   </Link>
-                </ShareOption>
+                </ShareOption> */}
               </ShareOptions>
             </ShareBottom>
           </form>
