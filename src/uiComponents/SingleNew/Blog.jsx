@@ -63,7 +63,7 @@ const Blog = (props) => {
       .doc(id)
       .update({ comments: newComments })
       .then(() => {
-        setTotalComments(newComments);
+        setTotalComments({ comments: newComments });
         reset();
       })
       .catch((err) => alert('error al agregrar tu comentario', err));

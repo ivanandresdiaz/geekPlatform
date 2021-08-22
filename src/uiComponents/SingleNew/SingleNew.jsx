@@ -71,6 +71,18 @@ const SingleNew = (props) => {
   const handleDeleteBlog = () => {
     dispatch(deleteFirestoreNews(corteId, resource.id));
   };
+  const handleDeleteComentario = (comment) => {
+    const newComments = totalComments.filter((item) => item.comment !== comment);
+    db.collection('cortes').doc(corteId)
+      .collection('news')
+      .doc(resource.id)
+      .update({ comments: newComments })
+      .then(() => {
+        setTotalComments({ comments: newComments });
+        reset();
+      })
+      .catch((err) => alert('error al agregrar tu comentario', err));
+  };
   return (
     <>
       <Post>
@@ -134,6 +146,7 @@ const SingleNew = (props) => {
                         <p>
                           {item.comment}
                         </p>
+                        {userDataLogged.uid === resource.uid && <button type='button' onClick={() => handleDeleteComentario(item.comment)}>Eliminar comentario</button>}
                       </div>
                     );
                   }) : <p>Sin comentarios</p>}
