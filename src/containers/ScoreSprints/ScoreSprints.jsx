@@ -16,7 +16,6 @@ const ScoreSprints = (props) => {
   const allSprints = useSelector(getAllSprints);
   const sprintArray = allSprints.filter((item) => item.id === sprintId);
   const sprint = sprintArray[0];
-
   const studentsCorte = useSelector(getStudentsCorte);
   useEffect(() => {
     if (!(studentsCorte.length > 0)) {

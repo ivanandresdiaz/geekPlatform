@@ -20,11 +20,9 @@ const ListarSprints = (props) => {
   const handleDeleteSprint = (id) => {
     dispatch(deleteSprint(id, corteId));
   };
-  console.log(sprints);
   return (
     <>
       {sprints.length > 0 && sprints.map((sprint) => {
-        console.log('resourcePDF', sprint.resourcePDF);
         return (
           <ContainerSprints key={sprint.id}>
             <motion.div whileHover={{ scale: 1.050 }}>
@@ -65,6 +63,7 @@ const ListarSprints = (props) => {
                   </div>
                   {role === 'teacher' && <Button4 type='button' primary onClick={() => handleDeleteSprint(sprint.id)}>Eliminar sprint</Button4>}
                   {role === 'teacher' && <Link to={`/scoreSprints/${corteId}/${sprint.id}`}><Button4>Calificar</Button4></Link>}
+                  {role === 'student' && <Link to={`/deliverSprint/${corteId}/${sprint.id}`}><Button4>Entregar Sprint</Button4></Link>}
                 </ContainerContentSprint>
               </div>
             </motion.div>

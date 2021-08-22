@@ -22,6 +22,8 @@ const initialState = {
   password: '',
   skills: [],
   sprintsAssigned: [],
+  mySprints: [],
+  sprintsEnviados: [],
   tutorialsRequired: [],
   twitter: '',
   wakatime: '',
@@ -49,6 +51,11 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         codelingoChallengesToScore: action.payload,
+      };
+    case 'sendMySprint':
+      return {
+        ...state,
+        sprintsEnviados: action.payload,
       };
     default:
       return state;

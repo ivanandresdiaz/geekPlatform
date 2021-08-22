@@ -13,7 +13,7 @@ const Row = (props) => {
   const dispatch = useDispatch();
   const [estaCalificado, setEstaCalificado] = useState(isCalificado);
   const [porcentajeCalificacion, setPorcentajeCalificacion] = useState(promedioSprint);
-  const { firebase, html, css, javascript, webpack, id, reactHooks, reactJs, redux, testing, title } = sprint;
+  const { firebase, html, css, javascript, webpack, id, reactHooks, reactJs, redux, testing, title, entregados } = sprint;
   const handleInputRangeChangeFather = (name, value) => {
     setState({
       ...state,
@@ -32,8 +32,9 @@ const Row = (props) => {
     } else {
       alert('no has calificado');
     }
-
   };
+  const isEnviado = student.sprintsEnviados.filter((item) => item.sprintId === id);
+
   return (
     <>
       <details>
@@ -45,7 +46,7 @@ const Row = (props) => {
             </p>
           </DivFullName>
           {estaCalificado ? (<ContainerPActivo><p>Calificado</p></ContainerPActivo>) : <ContainerPInactivo><p>No calificado</p></ContainerPInactivo>}
-
+          {isEnviado.length > 0 ? <p>entregó</p> : <p>no entregó</p>}
           {porcentajeCalificacion && (
             <ContainerPorcentajeCalificacion>
               <PorcentajeCalificacion porcentajeCalificacion={porcentajeCalificacion}>
@@ -114,7 +115,9 @@ const Row = (props) => {
             </DivTopicScore>
           )}
           <ButtonCalificar style={{ margin: '0 8px', marginTop: '15px' }} whileHover={{ scale: 1.050 }} type='button' onClick={() => handleCalificarSprint(student.uid)}>Enviar Calificacion</ButtonCalificar>
-          <p style={{ marginTop: '10px', marginBottom: '10px' }}>No es necesario calificar todas la categorias. Es importante que sea calificado en base a su desempeño.</p>
+          {isEnviado.length > 0 && <a href={isEnviado[0].linkGithub} target='_blank' rel='noreferrer'>Link de Github</a> }
+          {isEnviado.length > 0 && <a href={isEnviado[0].linkDespliegue} target='_blank' rel='noreferrer'>Link de Despliegue</a> }
+          <p style={{ marginTop: '10px', marginBottom: '10px' }}>No es necesario calificar todas la categorias.lo importante es que lo que sea calificado sea realmente verificado.</p>
         </div>
 
       </details>

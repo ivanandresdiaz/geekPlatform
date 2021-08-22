@@ -23,6 +23,7 @@ import AcercaDeProgramadores from '../containers/AcercaDeProgramadores/AcercaDeP
 import CodelingoTeacher from '../containers/CodelingoTeacher/CodelingoTeacher';
 import CreateBlog from '../containers/CreateBlog/CreateBlog';
 import BlogRead from '../containers/BlogRead/BlogRead';
+import DeliverSprint from '../containers/DeliverSprint/DeliverSprint';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -119,6 +120,12 @@ const App = () => {
             exact
             path='/scoreSprints/:corteId/:sprintId'
             component={ScoreSprints}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path='/deliverSprint/:corteId/:sprintId'
+            component={DeliverSprint}
             isAuthenticated={isLoggedIn}
           />
           <PublicRoute

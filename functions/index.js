@@ -171,6 +171,7 @@ exports.createSprint = functions.https.onCall((data, context)=> {
     supportLink3: data.supportLink3,
     supportLink4: data.supportLink4,
     calificados: [],
+    entregados: [],
     html: data.html,
     css: data.css,
     javascript: data.javascript,

@@ -119,6 +119,26 @@ export const deleteSprint = (id, corteId) => async (dispatch) => {
     console.log(error);
   }
 };
+export const sendMySprint = (sprintId, linkGithub, linkDespliegue) => async (dispatch, getState) => {
+  const { uid, sprintsEnviados } = getState().auth;
+  const mySprintToSend = {
+    sprintId,
+    linkGithub,
+    linkDespliegue,
+  };
+  const nuevosSprintsEnviados = [...sprintsEnviados, mySprintToSend];
+  db.collection('students').doc(uid).set({
+    sprintsEnviados: nuevosSprintsEnviados,
+  }, { merge: true })
+    .then(() => {
+      toast.success('Se ha enviado tu sprint con exito.');
+      dispatch({ type: 'sendMySprint', payload: { ...mySprintToSend, id: nuevosSprintsEnviados } });
+    })
+    .catch((error) => {
+      console.log(error.message);
+      // toast.error('No se puedo agregar, intente de nuevo.');
+    });
+};
 
 export const getFirestoreAllSprints = (corteId) => async (dispatch, getState) => {
   db.collection('cortes')

@@ -297,6 +297,7 @@ export const registerNewStudent = (email, password, fullName, corteId) => async 
         firebase: [],
         testing: [],
         mySprints: [],
+        sprintsEnviados: [],
         sigloXXI: [],
         designThinking: [],
       };

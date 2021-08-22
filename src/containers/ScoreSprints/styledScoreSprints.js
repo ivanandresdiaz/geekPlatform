@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const DividirPantalla = styled.div`
   display: grid;
@@ -15,7 +15,7 @@ export const DivContainerList = styled.div`
 
 export const DivRowList = styled.summary`
   display: grid;
-  grid-template-columns: 40% 18% 42%;
+  grid-template-columns: 38% 15% 10% 27%;
   align-items: center;
   :hover {
     background-color: #3cc5ff;
@@ -66,19 +66,19 @@ export const PorcentajeCalificacion = styled.div`
   }
   background-color: ${(props) => {
     if (props.porcentajeCalificacion > 80) {
-      return "#01b41c";
+      return '#01b41c';
     }
 
     if (props.porcentajeCalificacion > 70) {
-      return "#3CD4A0";
+      return '#3CD4A0';
     }
     if (props.porcentajeCalificacion > 60) {
-      return "#FFC260";
+      return '#FFC260';
     }
     if (props.porcentajeCalificacion > 50) {
-      return "#FF5C93";
+      return '#FF5C93';
     }
-    return "#E21B3C";
+    return '#E21B3C';
   }};
   border-radius: 5px;
 `;
