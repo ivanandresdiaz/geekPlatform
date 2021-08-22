@@ -251,6 +251,15 @@ exports.addLikeBlog = functions.https.onCall((data, context)=> {
     return resource.update({
       likes: [...doc.data().likes, context.auth.uid],
     });
+  }).then(()=> {
+    const user = admin.firestore().collection("students").doc(data.uid);
+    return user.get().then((doc) => {
+      return user.set({
+        geekyPuntos: doc.data().geekyPuntos+1,
+      });
+    }, {merge: true});
+  }).catch((err) => {
+    return {message: err.message};
   });
 });
 
@@ -290,7 +299,7 @@ exports.subtractLikeBlog = functions.https.onCall((data, context)=> {
 
 
   const resource = admin.firestore().collection("cortes").doc(data.corteId)
-      .collection("news").doc(data.id);
+      .collection("blogs").doc(data.id);
   return resource.get().then((doc) => {
     if (doc.data().likes.includes(context.auth.uid)) {
       const newLikes= doc.data()
@@ -303,6 +312,15 @@ exports.subtractLikeBlog = functions.https.onCall((data, context)=> {
           "no has dado like aun, al parecer hay un error. Informanos"
       );
     }
+  }).then(()=> {
+    const user = admin.firestore().collection("students").doc(data.uid);
+    return user.get().then((doc) => {
+      return user.set({
+        geekyPuntos: doc.data().geekyPuntos-1,
+      });
+    }, {merge: true});
+  }).catch((err) => {
+    return {message: err.message};
   });
 });
 

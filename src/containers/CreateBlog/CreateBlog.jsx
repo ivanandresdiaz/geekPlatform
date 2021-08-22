@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { firebase } from '../../firebase/firebaseConfig';
+import { firebase as firebaseFirestorage } from '../../firebase/firebaseConfig';
 import { createFirestoreNewBlog } from '../../actions/socialGeekActions';
 import useForm from '../../hooks/useForm';
 
@@ -17,13 +17,31 @@ const CreateBlog = (props) => {
     image: '',
     textTop: '',
     textBottom: '',
+    html: false,
+    css: false,
+    javascript: false,
+    webpack: false,
+    reactJs: false,
+    reactHooks: false,
+    redux: false,
+    firebase: false,
+    testing: false,
   });
 
-  const { title, description, sitioWeb, gitHub, video, image, textTop, textBottom } = formValues;
+  const { title, description, sitioWeb, gitHub, video, image, textTop, textBottom, html, css, javascript, webpack, reactJs, reactHooks, redux, firebase, testing } = formValues;
+  const htmlInput = useRef(null);
+  const cssInput = useRef(null);
+  const javascriptInput = useRef(null);
+  const webpackInput = useRef(null);
+  const reactJsInput = useRef(null);
+  const reactHooksInput = useRef(null);
+  const reduxInput = useRef(null);
+  const firebaseInput = useRef(null);
+  const testingInput = useRef(null);
   const handleUploadphotoURL = (event) => {
     setDisabled(true);
     const file = event.target.files[0];
-    const refStorage = firebase.storage().ref(`socialGeek/${file.name}`);
+    const refStorage = firebaseFirestorage.storage().ref(`socialGeek/${file.name}`);
     const task = refStorage.put(file);
     task.on(
       'state_changed',
@@ -59,8 +77,17 @@ const CreateBlog = (props) => {
   const handleSubmit = (evento) => {
     evento.preventDefault();
     console.log(formValues);
-    dispatch(createFirestoreNewBlog(title, description, sitioWeb, gitHub, video, image, textTop, textBottom, corteId, profileUid));
+    dispatch(createFirestoreNewBlog(title, description, sitioWeb, gitHub, video, image, textTop, textBottom, html, css, javascript, webpack, reactJs, reactHooks, redux, firebase, testing, corteId, profileUid));
     reset();
+    htmlInput.current.checked = false;
+    cssInput.current.checked = false;
+    webpackInput.current.checked = false;
+    javascriptInput.current.checked = false;
+    reactJsInput.current.checked = false;
+    reactHooksInput.current.checked = false;
+    reduxInput.current.checked = false;
+    firebaseInput.current.checked = false;
+    testingInput.current.checked = false;
     history.push(`/socialGeek/${corteId}`);
   };
 
@@ -111,6 +138,106 @@ const CreateBlog = (props) => {
           value={video}
           onChange={handleInputChange}
         />
+        <label>
+          <input
+            style={{ marginRight: '5px', marginLeft: '5px' }}
+            ref={htmlInput}
+            type='checkbox'
+            name='html'
+            value={html}
+            onChange={handleInputChange}
+          />
+          HTML
+        </label>
+        <label>
+          <input
+            style={{ marginRight: '5px', marginLeft: '5px' }}
+            ref={cssInput}
+            type='checkbox'
+            name='css'
+            value={css}
+            onChange={handleInputChange}
+          />
+          Css
+        </label>
+        <label>
+          <input
+            style={{ marginRight: '5px', marginLeft: '5px' }}
+            ref={javascriptInput}
+            type='checkbox'
+            name='javascript'
+            value={javascript}
+            onChange={handleInputChange}
+          />
+          JavaScript
+        </label>
+        <label>
+          <input
+            style={{ marginRight: '5px', marginLeft: '5px' }}
+            ref={webpackInput}
+            type='checkbox'
+            name='webpack'
+            value={webpack}
+            onChange={handleInputChange}
+          />
+          Webpack
+        </label>
+        <label>
+          <input
+            style={{ marginRight: '5px', marginLeft: '5px' }}
+            ref={reactJsInput}
+            type='checkbox'
+            name='reactJs'
+            value={reactJs}
+            onChange={handleInputChange}
+          />
+          React Js
+        </label>
+        <label>
+          <input
+            style={{ marginRight: '5px', marginLeft: '5px' }}
+            ref={reactHooksInput}
+            type='checkbox'
+            name='reactHooks'
+            value={reactHooks}
+            onChange={handleInputChange}
+          />
+          React Hooks
+        </label>
+
+        <label>
+          <input
+            style={{ marginRight: '5px', marginLeft: '5px' }}
+            ref={reduxInput}
+            type='checkbox'
+            name='redux'
+            value={redux}
+            onChange={handleInputChange}
+          />
+          Redux
+        </label>
+        <label>
+          <input
+            style={{ marginRight: '5px', marginLeft: '5px' }}
+            ref={firebaseInput}
+            type='checkbox'
+            name='firebase'
+            value={firebase}
+            onChange={handleInputChange}
+          />
+          Firebase
+        </label>
+        <label>
+          <input
+            style={{ marginRight: '5px', marginLeft: '5px' }}
+            ref={testingInput}
+            type='checkbox'
+            name='testing'
+            value={testing}
+            onChange={handleInputChange}
+          />
+          Testing
+        </label>
         <button type='submit' disabled={disabled}>Publicar Blog</button>
         {/* //no toccar disabled */}
       </form>

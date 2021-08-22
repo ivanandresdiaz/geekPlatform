@@ -36,6 +36,12 @@ export const socialGeekReducer = (state = initialState, action) => {
         news: [...state.news, action.payload],
       };
     }
+    case 'deleteFirestoreBlog': {
+      const newNews = state.news.filter((item) => item.id !== action.payload);
+      return {
+        ...state,
+        news: newNews,
+      }; }
     default:
       return state;
   }

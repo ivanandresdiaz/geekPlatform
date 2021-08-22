@@ -96,14 +96,16 @@ export const removeLikeResourceFirestore =
     subtractLike({ corteId, id });
   };
 export const addLikeResourceFirestoreBlog =
-  (corteId, id) => (dispatch, getState) => {
+  (corteId, id, uid, fullName) => (dispatch, getState) => {
     const addLikeBlog = functions.httpsCallable('addLikeBlog');
-    addLikeBlog({ corteId, id });
+
+    addLikeBlog({ corteId, id, uid });
+    toast.success(`le has enviado 1 geekyPunto a ${fullName}`);
   };
 export const removeLikeResourceFirestoreBlog =
-  (corteId, id) => (dispatch, getState) => {
+  (corteId, id, uid, fullName) => (dispatch, getState) => {
     const subtractLikeBlog = functions.httpsCallable('subtractLikeBlog');
-    subtractLikeBlog({ corteId, id });
+    subtractLikeBlog({ corteId, id, uid });
   };
 
 export const addFirestorePersonalProject =
@@ -125,7 +127,7 @@ export const addFirestorePersonalProject =
       console.log(error.message);
     }
   };
-export const createFirestoreNewBlog = (title, description, sitioWeb, gitHub, video, image, textTop, textBottom, corteId, uid) => async (dispatch, getState) => {
+export const createFirestoreNewBlog = (title, description, sitioWeb, gitHub, video, image, textTop, textBottom, html, css, javascript, webpack, reactJs, reactHooks, redux, firebase, testing, corteId, uid) => async (dispatch, getState) => {
   const { photoURL, fullName, uid } = getState().auth;
   try {
     const data = {
@@ -137,6 +139,15 @@ export const createFirestoreNewBlog = (title, description, sitioWeb, gitHub, vid
       image,
       textTop,
       textBottom,
+      html,
+      css,
+      javascript,
+      webpack,
+      reactJs,
+      reactHooks,
+      redux,
+      firebase,
+      testing,
       corteId,
       uid,
       fullName,
@@ -156,6 +167,38 @@ export const createFirestoreNewBlog = (title, description, sitioWeb, gitHub, vid
   } catch (error) {
     toast.error('Algo sucedió');
     console.log(error.message);
+  }
+
+};
+export const deleteFirestoreBlog = (corteId, idBlog) => async (dispatch) => {
+  try {
+    await db
+      .collection('cortes')
+      .doc(corteId)
+      .collection('blogs')
+      .doc(idBlog)
+      .delete();
+    dispatch({ type: 'deleteFirestoreBlog', payload: idBlog });
+    toast.success('Se ha eliminado con exito');
+  } catch (error) {
+    toast.error('no se puedo eliminar el blog');
+    console.log(error);
+  }
+
+};
+export const deleteFirestoreNews = (corteId, idNews) => async (dispatch) => {
+  try {
+    await db
+      .collection('cortes')
+      .doc(corteId)
+      .collection('blogs')
+      .doc(idNews)
+      .delete();
+    dispatch({ type: 'deleteFirestoreBlog', payload: idNews });
+    toast.success('Se ha eliminado con exito');
+  } catch (error) {
+    toast.error('no se puedo eliminar el blog');
+    console.log(error);
   }
 
 };

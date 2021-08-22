@@ -85,9 +85,9 @@ export const loginEmailPassword = (email, password) => {
         dispatch(login(user.uid, user.displayName));
       })
       .catch((err) => {
-        if (err.message == 'The password is invalid or the user does not have a password.') {
+        if (err.message === 'The password is invalid or the user does not have a password.') {
           toast.error('contraseña incorrecta');
-          if (err.message == 'There is no user record corresponding to this identifier. The user may have been deleted.') {
+          if (err.message === 'There is no user record corresponding to this identifier. The user may have been deleted.') {
             toast.error('no existe un usuario con este correo');
           }
 

@@ -22,3 +22,4 @@ export const typeswakatime = {};
 export const typesgeekyPuntos = {};
 export const typesadmin = {};
 export const typesgraduated = {};
+

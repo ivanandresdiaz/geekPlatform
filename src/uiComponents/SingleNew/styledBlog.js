@@ -7,3 +7,8 @@ export const ImgBlog = styled.img`
   object-fit: cover;
   object-position: center;
 `;
+export const DivComments = styled.div`
+  div{
+    display:${(props) => (props.showComments ? 'block' : 'none')}
+  }
+`;

@@ -43,6 +43,9 @@ export const PostDate = styled.span`
 `;
 export const PostCenter = styled.div`
   margin: 20px 0;
+  a{
+    font-weight: 900;
+  }
 `;
 export const PostImg = styled.img`
   margin-top: 20px;

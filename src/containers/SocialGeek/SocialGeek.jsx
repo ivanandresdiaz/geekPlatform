@@ -25,7 +25,7 @@ const SocialGeek = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (userDataLogged) {
-      dispatch(getFirestoreNewsCategory(corteId, 'resources'));
+      dispatch(getFirestoreNewsCategoryBlogs(corteId));
     } else {
       toast.error('No estás autenticado');
     }
