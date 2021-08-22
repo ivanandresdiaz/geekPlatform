@@ -45,3 +45,14 @@ export const ProfileInfoDesc = styled.span`
 export const ProfileRightBottom = styled.div`
   display: flex;
 `;
+
+export const ContainerChart = styled.div`
+  width: auto;
+  margin: auto;
+  height: auto;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  background-color: "#FFFFFE";
+  margin-bottom: 20px;
+`;

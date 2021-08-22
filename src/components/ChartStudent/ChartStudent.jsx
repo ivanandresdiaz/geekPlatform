@@ -17,9 +17,7 @@ const ChartStudent = (props) => {
   const designThinkingAverage = Math.round(designThinking.reduce((a, b) => a + b, 0) / designThinking.length);
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-
-
+      <div style={{ display: 'flex', flexDirection: 'column', borderRadius: '10px', background: 'white', marginTop: '15px', padding: '21px' }}>
         <Radar
           data={{
             labels: [
