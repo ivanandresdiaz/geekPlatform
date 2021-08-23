@@ -22,7 +22,7 @@ const DeliverSprint = (props) => {
     if (isAlreadySent.length > 0) {
       return (
         <h1>
-          Ya enviaste este sprint
+          esta actividad de sprint ya lo enviaste
         </h1>
       );
     }
