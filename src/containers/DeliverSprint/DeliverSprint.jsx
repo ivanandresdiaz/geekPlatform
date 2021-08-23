@@ -12,7 +12,6 @@ const DeliverSprint = (props) => {
     linkDespliegue: '',
   });
   const { linkGithub, linkDespliegue } = formValues;
-
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(sendMySprint(sprintId, linkGithub, linkDespliegue));
